@@ -1,0 +1,21 @@
+.name {
+  text-transform: capitalize;
+}
+
+.birth-date span,
+.contact-number span,
+.email span,
+.skills span {
+  font-weight: 700;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.controls button {
+  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+}

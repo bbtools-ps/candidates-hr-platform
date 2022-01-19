@@ -1,0 +1,9 @@
+.candidates-list {
+  display: grid;
+}
+
+.candidates-list p,
+.candidates-list h2 {
+  padding: 0;
+  margin: 0;
+}
