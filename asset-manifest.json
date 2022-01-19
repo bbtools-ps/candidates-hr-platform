@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "//hr-candidates-platform/static/css/main.3eda4661.css",
-    "main.js": "//hr-candidates-platform/static/js/main.1f7b8648.js",
-    "static/js/787.4af9e9f4.chunk.js": "//hr-candidates-platform/static/js/787.4af9e9f4.chunk.js",
-    "index.html": "//hr-candidates-platform/index.html",
-    "main.3eda4661.css.map": "//hr-candidates-platform/static/css/main.3eda4661.css.map",
-    "main.1f7b8648.js.map": "//hr-candidates-platform/static/js/main.1f7b8648.js.map",
-    "787.4af9e9f4.chunk.js.map": "//hr-candidates-platform/static/js/787.4af9e9f4.chunk.js.map"
+    "main.css": "/hr-candidates-platform/static/css/main.3eda4661.css",
+    "main.js": "/hr-candidates-platform/static/js/main.9633aad4.js",
+    "static/js/787.4af9e9f4.chunk.js": "/hr-candidates-platform/static/js/787.4af9e9f4.chunk.js",
+    "index.html": "/hr-candidates-platform/index.html",
+    "main.3eda4661.css.map": "/hr-candidates-platform/static/css/main.3eda4661.css.map",
+    "main.9633aad4.js.map": "/hr-candidates-platform/static/js/main.9633aad4.js.map",
+    "787.4af9e9f4.chunk.js.map": "/hr-candidates-platform/static/js/787.4af9e9f4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3eda4661.css",
-    "static/js/main.1f7b8648.js"
+    "static/js/main.9633aad4.js"
   ]
 }
