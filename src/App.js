@@ -86,13 +86,18 @@ const candidatesReducer = (state, action) => {
         filteredCandidates: editedCandidates,
       };
     case "REMOVE_CANDIDATE":
-      const removedCandidates = state.allCandidates.filter((candidate) => {
+      const removedCandidatesAll = state.allCandidates.filter((candidate) => {
         return candidate.id !== action.id;
       });
+      const removedCandidatesFilter = state.filteredCandidates.filter(
+        (candidate) => {
+          return candidate.id !== action.id;
+        }
+      );
       return {
         ...state,
-        allCandidates: removedCandidates,
-        filteredCandidates: removedCandidates,
+        allCandidates: removedCandidatesAll,
+        filteredCandidates: removedCandidatesFilter,
       };
     case "FILTER_CANDIDATES":
       const filteredCandidates = state.filteredCandidates.filter(
