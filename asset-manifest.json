@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/candidates-hr-platform/static/css/main.3eda4661.css",
-    "main.js": "/candidates-hr-platform/static/js/main.831cc644.js",
+    "main.css": "/candidates-hr-platform/static/css/main.265b84c6.css",
+    "main.js": "/candidates-hr-platform/static/js/main.8901efa2.js",
     "static/js/787.4af9e9f4.chunk.js": "/candidates-hr-platform/static/js/787.4af9e9f4.chunk.js",
     "index.html": "/candidates-hr-platform/index.html",
-    "main.3eda4661.css.map": "/candidates-hr-platform/static/css/main.3eda4661.css.map",
-    "main.831cc644.js.map": "/candidates-hr-platform/static/js/main.831cc644.js.map",
+    "main.265b84c6.css.map": "/candidates-hr-platform/static/css/main.265b84c6.css.map",
+    "main.8901efa2.js.map": "/candidates-hr-platform/static/js/main.8901efa2.js.map",
     "787.4af9e9f4.chunk.js.map": "/candidates-hr-platform/static/js/787.4af9e9f4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3eda4661.css",
-    "static/js/main.831cc644.js"
+    "static/css/main.265b84c6.css",
+    "static/js/main.8901efa2.js"
   ]
 }
