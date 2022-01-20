@@ -1,5 +1,7 @@
 # Candidates - HR assistance platform
 
+Small web application for every HR professional. Some of the features: search candidate by name or by skill, add/remove/edit candidate, etc.
+
 This project uses [React.js](https://reactjs.org/), functional components and hooks (custom hooks and React hooks such as useState(), useReducer(), etc.).
 
 For now this project doesn't communicate with a database, everything is done in the current session of the page. If the page is reloaded (e.g. Logo is clicked, or F5 key on the keyboard is pressed) all data is lost and the application is back to it's initial state.
