@@ -1,6 +1,9 @@
 # Candidates - HR assistance platform
 
-Small web application for every HR professional. Some of the features: search candidate by name or by skill, add/remove/edit candidate, etc.
+Small web application for every HR professional. Some of the features:
+
+- Search candidate by name or by skill
+- Add/remove/edit candidate
 
 This project uses [React.js](https://reactjs.org/), functional components and hooks (custom hooks and React hooks such as useState(), useReducer(), etc.).
 
