@@ -4,6 +4,7 @@ import MainMenu from "./components/MainMenu";
 import NewCandidate from "./components/Candidate/NewCandidate";
 import EditCandidate from "./components/Candidate/EditCandidate";
 import CandidatesList from "./components/CandidatesList/CandidatesList";
+import Copyright from "./components/Copyright/Copyright";
 import "./App.css";
 
 const INITIAL_VALUES = {
@@ -207,6 +208,7 @@ function App() {
           />
         </>
       )}
+      <Copyright author="Bogdan Bogdanovic" />
     </div>
   );
 }
