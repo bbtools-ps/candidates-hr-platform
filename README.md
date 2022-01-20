@@ -22,4 +22,4 @@ To make the build type:
 
 ## Live demo
 
-[Click here for the live demo](https://27ged.csb.app/)
+[Click here for the live demo](https://bogdan-bogdanovic.com/candidates-hr-platform/)
