@@ -14,7 +14,6 @@ const Card = ({ className, display = "flex", children }) => {
         : setDisplayStyle(display);
     };
     window.addEventListener("resize", updateLayout);
-    updateLayout();
     return () => window.removeEventListener("resize", updateLayout);
   }, [display]);
 
