@@ -1,26 +1,14 @@
-import { useState, useEffect } from "react";
+import useMediaQuery from "../../hooks/use-media-query";
 import styles from "./Card.module.css";
 
 const Card = ({ className, display = "flex", children }) => {
-  // change display type if window is smaller than 625px
-  const [displayStyle, setDisplayStyle] = useState(
-    window.innerWidth < 625 ? "grid" : display
-  );
-
-  useEffect(() => {
-    const updateLayout = () => {
-      window.innerWidth < 625
-        ? setDisplayStyle("grid")
-        : setDisplayStyle(display);
-    };
-    window.addEventListener("resize", updateLayout);
-    return () => window.removeEventListener("resize", updateLayout);
-  }, [display]);
+  // add breakpoint for "min-width: 625px"
+  const isDesktop = useMediaQuery(625);
 
   return (
     <div
       className={`${className ? styles.card + " " + className : styles.card}`}
-      style={{ display: displayStyle }}
+      style={{ display: isDesktop ? display : "grid" }}
     >
       {children}
     </div>
