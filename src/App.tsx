@@ -48,6 +48,7 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         return {
           ...state,
           allCandidates: [payload.candidate, ...state.allCandidates],
+          filteredCandidates: [payload.candidate, ...state.filteredCandidates],
         };
       } else {
         return state;
