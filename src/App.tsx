@@ -110,7 +110,7 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         );
         return { ...state, filteredCandidates };
       } else {
-        return state;
+        return { ...state, filteredCandidates: [...state.allCandidates] };
       }
     case "RESET_CANDIDATES":
       return { ...state, filteredCandidates: [...state.allCandidates] };
@@ -134,6 +134,7 @@ const App = () => {
   const filterCandidatesHandler = (payload: string) => {
     // create array of search terms
     const searchTerms = payload.match(/\w+/g);
+    console.log(searchTerms);
     // loop through each search term
     dispatch({
       type: "SEARCH_CANDIDATES",
