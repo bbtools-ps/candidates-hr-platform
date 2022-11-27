@@ -1,12 +1,12 @@
 import { useReducer, useState } from "react";
 import "./App.css";
+import { Candidate } from "./common/models/Candidate";
 import CandidatesList from "./components/CandidatesList/CandidatesList";
 import Copyright from "./components/Copyright/Copyright";
 import EditCandidate from "./components/EditCandidate/EditCandidate";
 import MainMenu from "./components/MainMenu/MainMenu";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import { DUMMY_CANDIDATES } from "./data/data";
-import { Candidate } from "./models/Candidate";
 
 interface AppState {
   allCandidates: Candidate[];
@@ -26,12 +26,10 @@ interface AppAction {
     | "SHOW_ADD_CANDIDATE"
     | "SHOW_EDIT_CANDIDATE"
     | "SHOW_ALL_CANDIDATES";
-  payload?: {
-    id?: string;
-    candidate?: Candidate;
-    searchTermReg?: RegExp;
-    searchTerm?: string;
-  };
+  payload?:
+    | string
+    | { _TYPE: "Candidate"; candidate?: Candidate }
+    | { _TYPE: "RegExp"; searchTermReg?: RegExp };
 }
 
 const INITIAL_VALUES = {
@@ -46,46 +44,57 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
   const { type, payload } = action;
   switch (type) {
     case "ADD_CANDIDATE":
-      return {
-        ...state,
-        allCandidates: [payload.candidate, ...state.allCandidates],
-        filteredCandidates: [payload.candidate, ...state.allCandidates],
-      };
+      if (typeof payload !== "string" && payload._TYPE === "Candidate") {
+        return {
+          ...state,
+          allCandidates: [payload.candidate, ...state.allCandidates],
+          filteredCandidates: [payload.candidate, ...state.allCandidates],
+        };
+      } else {
+        return state;
+      }
     case "EDIT_CANDIDATE":
-      const editedCandidates = state.allCandidates.map((candidate) => {
-        return candidate.id === payload.candidate.id
-          ? payload.candidate
-          : candidate;
-      });
-      return {
-        ...state,
-        allCandidates: editedCandidates,
-        filteredCandidates: editedCandidates,
-      };
+      if (typeof payload !== "string" && payload._TYPE === "Candidate") {
+        const editedCandidates = state.allCandidates.map((candidate) => {
+          return candidate.id === payload.candidate.id
+            ? payload.candidate
+            : candidate;
+        });
+        return {
+          ...state,
+          allCandidates: editedCandidates,
+          filteredCandidates: editedCandidates,
+        };
+      } else {
+        return state;
+      }
     case "REMOVE_CANDIDATE":
-      const removedCandidatesAll = state.allCandidates.filter((candidate) => {
-        return candidate.id !== payload.id;
-      });
-      const removedCandidatesFilter = state.filteredCandidates.filter(
-        (candidate) => {
-          return candidate.id !== payload.id;
-        }
-      );
-      return {
-        ...state,
-        allCandidates: removedCandidatesAll,
-        filteredCandidates: removedCandidatesFilter,
-      };
+      if (typeof payload === "string") {
+        const removedCandidates = state.allCandidates.filter((candidate) => {
+          return candidate.id !== payload;
+        });
+        return {
+          ...state,
+          allCandidates: removedCandidates,
+          filteredCandidates: removedCandidates,
+        };
+      } else {
+        return state;
+      }
     case "SEARCH_CANDIDATES":
-      const filteredCandidates = [...state.allCandidates].filter(
-        (candidate) => {
-          return (
-            payload.searchTermReg.test(candidate.name) ||
-            payload.searchTermReg.test(candidate.skills)
-          );
-        }
-      );
-      return { ...state, searchTerm: payload.searchTerm, filteredCandidates };
+      if (typeof payload !== "string" && payload._TYPE === "RegExp") {
+        const filteredCandidates = [...state.allCandidates].filter(
+          (candidate) => {
+            return (
+              payload.searchTermReg.test(candidate.name) ||
+              payload.searchTermReg.test(candidate.skills)
+            );
+          }
+        );
+        return { ...state, filteredCandidates };
+      } else {
+        return state;
+      }
     case "RESET_CANDIDATES":
       return { ...state, filteredCandidates: [...state.allCandidates] };
     case "SHOW_ADD_CANDIDATE":
@@ -114,7 +123,7 @@ const App = () => {
       const searchTermReg = new RegExp(term, "i");
       dispatch({
         type: "SEARCH_CANDIDATES",
-        payload: { searchTermReg },
+        payload: { _TYPE: "RegExp", searchTermReg },
       });
     });
   };
@@ -136,7 +145,7 @@ const App = () => {
 
   // remove candidate
   const removeCandidateHandler = (id: string) => {
-    dispatch({ type: "REMOVE_CANDIDATE", payload: { id } });
+    dispatch({ type: "REMOVE_CANDIDATE", payload: id });
   };
 
   // show form for adding new candidate
@@ -157,13 +166,19 @@ const App = () => {
 
   // add candidate into the list
   const addHandler = (candidate: Candidate) => {
-    dispatch({ type: "ADD_CANDIDATE", payload: { candidate } });
+    dispatch({
+      type: "ADD_CANDIDATE",
+      payload: { _TYPE: "Candidate", candidate },
+    });
     dispatch({ type: "SHOW_ALL_CANDIDATES" });
   };
 
   // edit candidate from the list
   const editHandler = (candidate: Candidate) => {
-    dispatch({ type: "EDIT_CANDIDATE", payload: { candidate } });
+    dispatch({
+      type: "EDIT_CANDIDATE",
+      payload: { _TYPE: "Candidate", candidate },
+    });
     dispatch({ type: "SHOW_ALL_CANDIDATES" });
   };
 

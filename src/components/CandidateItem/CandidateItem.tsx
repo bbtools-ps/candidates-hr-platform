@@ -1,4 +1,4 @@
-import { Candidate } from "../../models/Candidate";
+import { Candidate } from "../../common/models/Candidate";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import classes from "./CandidateItem.module.css";

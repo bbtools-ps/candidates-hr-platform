@@ -1,5 +1,5 @@
 import uuid from "react-uuid";
-import { Candidate } from "../../models/Candidate";
+import { Candidate } from "../../common/models/Candidate";
 import CandidateForm from "../CandidateForm/CandidateForm";
 import Card from "../UI/Card/Card";
 

@@ -1,0 +1,22 @@
+.candidate-wrapper {
+  display: grid;
+  align-items: center;
+}
+
+@media screen and (min-height: 770px) {
+  .candidate-wrapper {
+    height: calc(100vh - 51px);
+  }
+}
+
+@media screen and (min-width: 735px) {
+  .candidate-wrapper {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 734px) {
+  .candidate-wrapper {
+    width: calc(100vw - 2rem);
+  }
+}

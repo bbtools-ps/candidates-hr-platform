@@ -1,4 +1,5 @@
-import { Candidate } from "../../models/Candidate";
+import { Candidate } from "../../common/models/Candidate";
+import classes from "../../common/styles/CandidateWrapper.module.css";
 import CandidateForm from "../CandidateForm/CandidateForm";
 import Card from "../UI/Card/Card";
 
@@ -14,15 +15,17 @@ const EditCandidate: React.FC<EditCandidateProps> = ({
   onSubmit,
 }) => {
   return (
-    <Card display="grid" styles={{ minWidth: "400px" }}>
-      <h2>Edit candidate</h2>
-      <CandidateForm
-        onCancel={onCancel}
-        onSubmit={onSubmit}
-        submitButtonText="Save"
-        candidate={candidate}
-      />
-    </Card>
+    <div className={classes["candidate-wrapper"]}>
+      <Card display="grid">
+        <h2>Edit candidate</h2>
+        <CandidateForm
+          onCancel={onCancel}
+          onSubmit={onSubmit}
+          submitButtonText="Save"
+          candidate={candidate}
+        />
+      </Card>
+    </div>
   );
 };
 

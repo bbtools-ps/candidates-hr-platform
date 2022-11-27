@@ -3,9 +3,10 @@ import {
   validateEmail,
   validateEmptyValue,
   validatePhoneNumber,
-} from "../../functions/utils";
-import useInputValidation from "../../hooks/use-input-validation";
-import { Candidate } from "../../models/Candidate";
+} from "../../common/functions/utils";
+import useInputValidation from "../../common/hooks/use-input-validation";
+import { Candidate } from "../../common/models/Candidate";
+
 import Button from "../UI/Button/Button";
 import InputField from "../UI/InputField/InputField";
 import classes from "./CandidateForm.module.css";
