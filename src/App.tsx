@@ -48,7 +48,6 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         return {
           ...state,
           allCandidates: [payload.candidate, ...state.allCandidates],
-          filteredCandidates: [payload.candidate, ...state.allCandidates],
         };
       } else {
         return state;
@@ -70,13 +69,18 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
       }
     case "REMOVE_CANDIDATE":
       if (typeof payload === "string") {
-        const removedCandidates = state.allCandidates.filter((candidate) => {
+        const removedCandidatesAll = state.allCandidates.filter((candidate) => {
           return candidate.id !== payload;
         });
+        const removedCandidatesFilter = state.filteredCandidates.filter(
+          (candidate) => {
+            return candidate.id !== payload;
+          }
+        );
         return {
           ...state,
-          allCandidates: removedCandidates,
-          filteredCandidates: removedCandidates,
+          allCandidates: removedCandidatesAll,
+          filteredCandidates: removedCandidatesFilter,
         };
       } else {
         return state;
