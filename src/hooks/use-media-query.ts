@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const useMediaQuery = (minWidth) => {
+const useMediaQuery = (minWidth: number) => {
   const [result, setResult] = useState(window.innerWidth >= minWidth);
 
   useEffect(() => {

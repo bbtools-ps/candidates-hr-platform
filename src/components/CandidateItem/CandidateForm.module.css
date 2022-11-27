@@ -1,16 +1,23 @@
+.candidate-form {
+  display: grid;
+  gap: 1rem;
+}
+
 .form-controls {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  margin-top: 1rem;
+}
+
+p.error {
+  color: red;
+  font-weight: 400;
+  margin-top: -0.8rem;
+  margin-bottom: 0;
 }
 
 .error input {
   border: 2px solid red;
   background-color: rgba(255, 0, 0, 0.25);
-}
-
-.error::after {
-  content: "Please fill out this field.";
-  color: red;
-  font-weight: 400;
 }

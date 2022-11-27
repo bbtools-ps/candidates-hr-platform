@@ -1,12 +1,23 @@
-import Candidate from "../Candidate/Candidate";
+import { Candidate } from "../../models/Candidate";
+import CandidateItem from "../CandidateItem/CandidateItem";
 import Card from "../UI/Card";
 import styles from "./CandidatesList.module.css";
 
-const CandidatesList = ({ candidates, removeCandidate, editCandidate }) => {
-  // create a list of candidates (array)
+interface CandidatesListProps {
+  candidates: Candidate[];
+  removeCandidate: (payload: string) => void;
+  editCandidate: (payload: Candidate) => void;
+}
+
+const CandidatesList: React.FC<CandidatesListProps> = ({
+  candidates,
+  removeCandidate,
+  editCandidate,
+}) => {
+  // create a list of candidates
   const listCandidates = candidates.map((candidate) => {
     return (
-      <Candidate
+      <CandidateItem
         candidate={candidate}
         key={candidate.id}
         removeCandidate={removeCandidate}

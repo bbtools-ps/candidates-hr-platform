@@ -1,11 +1,18 @@
-import Card from "../UI/Card";
+import { Candidate } from "../../models/Candidate";
 import Button from "../UI/Button";
+import Card from "../UI/Card";
 import styles from "./Candidate.module.css";
 
-const Candidate = ({
+interface CandidateItemProps {
+  candidate: Candidate;
+  removeCandidate: (payload: string) => void;
+  editCandidate: (payload: Candidate) => void;
+}
+
+const CandidateItem: React.FC<CandidateItemProps> = ({
   candidate,
-  removeCandidate = () => {},
-  editCandidate = () => {},
+  removeCandidate,
+  editCandidate,
 }) => {
   return (
     <Card display="grid">
@@ -42,4 +49,4 @@ const Candidate = ({
   );
 };
 
-export default Candidate;
+export default CandidateItem;

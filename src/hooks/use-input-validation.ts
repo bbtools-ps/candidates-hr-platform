@@ -1,12 +1,22 @@
 import { useState } from "react";
 
-const useInputValidation = (validateValue = () => {}, initialValue = "") => {
+interface UseInputValidationProps {
+  validators: ((payload: string) => boolean)[];
+  initialValue: string;
+}
+
+const useInputValidation = ({
+  validators,
+  initialValue = "",
+}: UseInputValidationProps) => {
   const [inputValue, setInputValue] = useState(initialValue);
   const [isTouched, setIsTouched] = useState(false);
-  const inputIsValid = validateValue ? validateValue(inputValue) : null;
+  const inputIsValid = validators.length
+    ? validators.every((validator) => validator(inputValue))
+    : null;
   const hasError = inputIsValid !== null ? !inputIsValid && isTouched : null;
 
-  const inputChangeHandler = (e) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 

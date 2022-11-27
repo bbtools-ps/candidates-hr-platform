@@ -1,23 +1,35 @@
 import styles from "./InputField.module.css";
 
-const InputField = ({
+interface InputFieldProps
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  label?: string;
+  name?: string;
+  id: string;
+}
+
+const InputField: React.FC<InputFieldProps> = ({
   label,
   type = "text",
   placeholder,
   value = "",
   className,
+  id,
+  name,
   onChange = () => {},
   onBlur = () => {},
 }) => {
   return (
-    <label
+    <div
       className={`${
         className
           ? styles["input-field"] + " " + className
           : styles["input-field"]
       }`}
     >
-      {label}
+      <label htmlFor={id}>{label}</label>
       <input
         type={type}
         placeholder={placeholder}
@@ -25,8 +37,10 @@ const InputField = ({
         className={label ? styles["with-label"] : null}
         onChange={onChange}
         onBlur={onBlur}
+        id={id}
+        name={name || id}
       />
-    </label>
+    </div>
   );
 };
 
