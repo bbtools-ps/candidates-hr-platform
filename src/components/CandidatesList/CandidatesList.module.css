@@ -45,6 +45,6 @@
 
 @media screen and (max-width: 500px) {
   .candidates-list-wrapper {
-    height: calc(100vh - (282px + 52px));
+    height: calc(100vh - (258px + 52px));
   }
 }
