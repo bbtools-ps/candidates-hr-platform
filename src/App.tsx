@@ -29,7 +29,7 @@ interface AppAction {
   payload?:
     | string
     | { _TYPE: "Candidate"; candidate?: Candidate }
-    | { _TYPE: "RegExp"; searchTermReg?: RegExp };
+    | { _TYPE: "Search"; searchTerms: string[] };
 }
 
 const INITIAL_VALUES = {
@@ -87,13 +87,25 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         return state;
       }
     case "SEARCH_CANDIDATES":
-      if (typeof payload !== "string" && payload._TYPE === "RegExp") {
+      if (
+        typeof payload !== "string" &&
+        payload._TYPE === "Search" &&
+        payload.searchTerms?.length
+      ) {
         const filteredCandidates = [...state.allCandidates].filter(
           (candidate) => {
-            return (
-              payload.searchTermReg.test(candidate.name) ||
-              payload.searchTermReg.test(candidate.skills)
-            );
+            if (
+              payload.searchTerms.some((term) => {
+                const termReg = new RegExp(term, "i");
+                return (
+                  termReg.test(candidate.name) || termReg.test(candidate.skills)
+                );
+              })
+            ) {
+              return candidate;
+            } else {
+              return undefined;
+            }
           }
         );
         return { ...state, filteredCandidates };
@@ -119,17 +131,13 @@ const App = () => {
   const [searchInput, setSearchInput] = useState<string>("");
 
   // filter candidates based on their name, skills
-  const filterCandidatesHandler = (filterValue: string) => {
+  const filterCandidatesHandler = (payload: string) => {
     // create array of search terms
-    const searchTerms = filterValue.trim().split(" ");
+    const searchTerms = payload.match(/\w+/g);
     // loop through each search term
-    searchTerms.forEach((term: string) => {
-      // create regex for each search term
-      const searchTermReg = new RegExp(term, "i");
-      dispatch({
-        type: "SEARCH_CANDIDATES",
-        payload: { _TYPE: "RegExp", searchTermReg },
-      });
+    dispatch({
+      type: "SEARCH_CANDIDATES",
+      payload: { _TYPE: "Search", searchTerms },
     });
   };
 
