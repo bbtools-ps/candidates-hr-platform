@@ -13,6 +13,7 @@ interface AppState {
   showAddCandidate: boolean;
   showEditCandidate: boolean;
   filteredCandidates: Candidate[];
+  searchTerm: string;
 }
 
 interface AppAction {
@@ -20,12 +21,17 @@ interface AppAction {
     | "ADD_CANDIDATE"
     | "EDIT_CANDIDATE"
     | "REMOVE_CANDIDATE"
-    | "FILTER_CANDIDATES"
+    | "SEARCH_CANDIDATES"
     | "RESET_CANDIDATES"
     | "SHOW_ADD_CANDIDATE"
     | "SHOW_EDIT_CANDIDATE"
     | "SHOW_ALL_CANDIDATES";
-  payload?: { id?: string; candidate?: Candidate; searchTerm?: RegExp };
+  payload?: {
+    id?: string;
+    candidate?: Candidate;
+    searchTermReg?: RegExp;
+    searchTerm?: string;
+  };
 }
 
 const INITIAL_VALUES = {
@@ -33,6 +39,7 @@ const INITIAL_VALUES = {
   showAddCandidate: false,
   showEditCandidate: false,
   filteredCandidates: [...DUMMY_CANDIDATES],
+  searchTerm: "",
 };
 
 const candidatesReducer = (state: AppState, action: AppAction) => {
@@ -69,16 +76,16 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         allCandidates: removedCandidatesAll,
         filteredCandidates: removedCandidatesFilter,
       };
-    case "FILTER_CANDIDATES":
+    case "SEARCH_CANDIDATES":
       const filteredCandidates = [...state.allCandidates].filter(
         (candidate) => {
           return (
-            payload.searchTerm.test(candidate.name) ||
-            payload.searchTerm.test(candidate.skills)
+            payload.searchTermReg.test(candidate.name) ||
+            payload.searchTermReg.test(candidate.skills)
           );
         }
       );
-      return { ...state, filteredCandidates };
+      return { ...state, searchTerm: payload.searchTerm, filteredCandidates };
     case "RESET_CANDIDATES":
       return { ...state, filteredCandidates: [...state.allCandidates] };
     case "SHOW_ADD_CANDIDATE":
@@ -93,11 +100,9 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
 };
 
 const App = () => {
-  const [candidates, dispatchCandidates] = useReducer(
-    candidatesReducer,
-    INITIAL_VALUES
-  );
+  const [state, dispatch] = useReducer(candidatesReducer, INITIAL_VALUES);
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate>();
+  const [searchInput, setSearchInput] = useState<string>("");
 
   // filter candidates based on their name, skills
   const filterCandidatesHandler = (filterValue: string) => {
@@ -106,57 +111,67 @@ const App = () => {
     // loop through each search term
     searchTerms.forEach((term: string) => {
       // create regex for each search term
-      const searchTerm = new RegExp(term, "i");
-      dispatchCandidates({
-        type: "FILTER_CANDIDATES",
-        payload: { searchTerm },
+      const searchTermReg = new RegExp(term, "i");
+      dispatch({
+        type: "SEARCH_CANDIDATES",
+        payload: { searchTermReg },
       });
     });
   };
 
   // reset candidates
   const resetCandidatesHandler = () => {
-    dispatchCandidates({ type: "RESET_CANDIDATES" });
+    dispatch({ type: "RESET_CANDIDATES" });
+  };
+
+  const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+    filterCandidatesHandler(e.target.value);
+  };
+
+  const resetHandler = () => {
+    setSearchInput("");
+    resetCandidatesHandler();
   };
 
   // remove candidate
   const removeCandidateHandler = (id: string) => {
-    dispatchCandidates({ type: "REMOVE_CANDIDATE", payload: { id } });
+    dispatch({ type: "REMOVE_CANDIDATE", payload: { id } });
   };
 
   // show form for adding new candidate
   const addNewCandidateHandler = () => {
-    dispatchCandidates({ type: "SHOW_ADD_CANDIDATE" });
+    dispatch({ type: "SHOW_ADD_CANDIDATE" });
   };
 
   // edit candidate
   const editCandidateHandler = (candidate: Candidate) => {
     setSelectedCandidate(candidate);
-    dispatchCandidates({ type: "SHOW_EDIT_CANDIDATE" });
+    dispatch({ type: "SHOW_EDIT_CANDIDATE" });
   };
 
   // show all candidates when pressing "Cancel" on the form
   const cancelHandler = () => {
-    dispatchCandidates({ type: "SHOW_ALL_CANDIDATES" });
+    dispatch({ type: "SHOW_ALL_CANDIDATES" });
   };
 
   // add candidate into the list
   const addHandler = (candidate: Candidate) => {
-    dispatchCandidates({ type: "ADD_CANDIDATE", payload: { candidate } });
-    dispatchCandidates({ type: "SHOW_ALL_CANDIDATES" });
+    dispatch({ type: "ADD_CANDIDATE", payload: { candidate } });
+    dispatch({ type: "SHOW_ALL_CANDIDATES" });
   };
 
   // edit candidate from the list
   const editHandler = (candidate: Candidate) => {
-    dispatchCandidates({ type: "EDIT_CANDIDATE", payload: { candidate } });
-    dispatchCandidates({ type: "SHOW_ALL_CANDIDATES" });
+    dispatch({ type: "EDIT_CANDIDATE", payload: { candidate } });
+    dispatch({ type: "SHOW_ALL_CANDIDATES" });
   };
 
   return (
     <div className="app">
-      {candidates.showAddCandidate ? (
+      {state.showAddCandidate ? (
         <NewCandidate onCancel={cancelHandler} onSubmit={addHandler} />
-      ) : candidates.showEditCandidate ? (
+      ) : state.showEditCandidate ? (
         <EditCandidate
           onCancel={cancelHandler}
           onSubmit={editHandler}
@@ -165,12 +180,13 @@ const App = () => {
       ) : (
         <>
           <MainMenu
-            filterCandidates={filterCandidatesHandler}
-            resetCandidates={resetCandidatesHandler}
+            resetCandidates={resetHandler}
             addNewCandidate={addNewCandidateHandler}
+            searchInput={searchInput}
+            onChange={changeInputHandler}
           />
           <CandidatesList
-            candidates={candidates.filteredCandidates}
+            candidates={state.filteredCandidates}
             removeCandidate={removeCandidateHandler}
             editCandidate={editCandidateHandler}
           />

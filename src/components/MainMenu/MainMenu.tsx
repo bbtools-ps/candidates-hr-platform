@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import ClearButton from "../UI/ClearButton/ClearButton";
@@ -6,23 +5,19 @@ import InputField from "../UI/InputField/InputField";
 import Logo from "../UI/Logo/Logo";
 import classes from "./MainMenu.module.css";
 
-const MainMenu = ({
-  filterCandidates = (payload: string) => {},
-  resetCandidates = () => {},
-  addNewCandidate = () => {},
+interface MainMenuProps {
+  resetCandidates: () => void;
+  addNewCandidate: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchInput: string;
+}
+
+const MainMenu: React.FC<MainMenuProps> = ({
+  resetCandidates,
+  addNewCandidate,
+  onChange,
+  searchInput,
 }) => {
-  const [searchInput, setSearchInput] = useState("");
-
-  const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-    filterCandidates(e.target.value);
-  };
-
-  const resetHandler = () => {
-    setSearchInput("");
-    resetCandidates();
-  };
-
   return (
     <div className={classes["main-menu-wrapper"]}>
       <Card className={classes["main-menu"]}>
@@ -32,13 +27,13 @@ const MainMenu = ({
             <InputField
               id="search-candidates"
               placeholder="Candidate name, skills"
-              onChange={changeInputHandler}
+              onChange={onChange}
               value={searchInput}
               inputClass={classes.input}
             />
             {searchInput.length > 0 && (
               <ClearButton
-                onClick={resetHandler}
+                onClick={resetCandidates}
                 className={classes["clear-button"]}
               />
             )}
