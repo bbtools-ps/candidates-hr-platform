@@ -123,11 +123,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
         value={name}
         id="candidate-name"
       />
-      {nameError && (
-        <p className={styles.error}>
-          Please fill out this field with valid value.
-        </p>
-      )}
+      {nameError && <p className={styles.error}>Please fill out this field.</p>}
       <InputField
         label="Date of birth"
         type="date"
@@ -138,9 +134,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
         id="candidate-date-of-birth"
       />
       {dateOfBirthError && (
-        <p className={styles.error}>
-          Please fill out this field with valid value.
-        </p>
+        <p className={styles.error}>Please fill out this field.</p>
       )}
       <InputField
         label="Contact number"
@@ -151,9 +145,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
         id="candidate-contact-number"
       />
       {contactNumberError && (
-        <p className={styles.error}>
-          Please fill out this field with valid value.
-        </p>
+        <p className={styles.error}>Please fill out this field.</p>
       )}
       <InputField
         label="E-mail"
