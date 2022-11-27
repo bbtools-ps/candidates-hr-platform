@@ -9,6 +9,10 @@
   color: var(--action-color);
 }
 
+.clear-button:hover {
+  cursor: pointer;
+}
+
 .clear-button:hover svg {
   color: var(--action-color-hover);
 }

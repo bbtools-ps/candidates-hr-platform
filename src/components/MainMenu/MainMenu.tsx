@@ -1,9 +1,9 @@
 import { useState } from "react";
+import Button from "../UI/Button/Button";
+import Card from "../UI/Card/Card";
+import ClearButton from "../UI/ClearButton/ClearButton";
+import InputField from "../UI/InputField/InputField";
 import classes from "./MainMenu.module.css";
-import Button from "./UI/Button/Button";
-import Card from "./UI/Card/Card";
-import ClearButton from "./UI/ClearButton/ClearButton";
-import InputField from "./UI/InputField/InputField";
 
 const MainMenu = ({
   filterCandidates = (payload: string) => {},
