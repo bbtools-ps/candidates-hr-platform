@@ -1,11 +1,11 @@
 import { useReducer, useState } from "react";
 import "./App.css";
-import EditCandidate from "./components/CandidateItem/EditCandidate";
-import NewCandidate from "./components/CandidateItem/NewCandidate";
 import CandidatesList from "./components/CandidatesList/CandidatesList";
 import Copyright from "./components/Copyright/Copyright";
+import EditCandidate from "./components/EditCandidate/EditCandidate";
 import MainMenu from "./components/MainMenu";
-import Logo from "./components/UI/Logo";
+import NewCandidate from "./components/NewCandidate/NewCandidate";
+import Logo from "./components/UI/Logo/Logo";
 import { DUMMY_CANDIDATES } from "./data/data";
 import { Candidate } from "./models/Candidate";
 
@@ -47,7 +47,9 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
       };
     case "EDIT_CANDIDATE":
       const editedCandidates = state.allCandidates.map((candidate) => {
-        return candidate.id === payload.id ? payload.candidate : candidate;
+        return candidate.id === payload.candidate.id
+          ? payload.candidate
+          : candidate;
       });
       return {
         ...state,

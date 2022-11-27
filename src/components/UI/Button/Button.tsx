@@ -5,7 +5,7 @@ import {
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./Button.module.css";
+import classes from "./Button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      className={styles.button}
+      className={classes.button}
       onClick={onClick}
       disabled={disabled}
     >

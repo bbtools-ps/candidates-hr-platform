@@ -1,7 +1,7 @@
 import { Candidate } from "../../models/Candidate";
 import CandidateItem from "../CandidateItem/CandidateItem";
-import Card from "../UI/Card";
-import styles from "./CandidatesList.module.css";
+import Card from "../UI/Card/Card";
+import classes from "./CandidatesList.module.css";
 
 interface CandidatesListProps {
   candidates: Candidate[];
@@ -27,7 +27,7 @@ const CandidatesList: React.FC<CandidatesListProps> = ({
   });
   // check if the list of candidates is empty and notify user
   return (
-    <div className={styles["candidates-list"]}>
+    <div className={classes["candidates-list"]}>
       {listCandidates.length > 0 ? (
         listCandidates
       ) : (

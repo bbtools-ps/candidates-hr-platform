@@ -1,8 +1,8 @@
-import styles from "./Logo.module.css";
+import classes from "./Logo.module.css";
 
 const Logo = () => {
   return (
-    <div className={styles.logo}>
+    <div className={classes.logo}>
       <h1>
         <a href="./">
           Candidates<span>HR assistance plaform</span>

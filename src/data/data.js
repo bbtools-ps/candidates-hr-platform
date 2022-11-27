@@ -1,7 +1,7 @@
 export const DUMMY_CANDIDATES = [
   {
     name: "Maggie Frank",
-    dateOfBirth: "12.3.1990.",
+    dateOfBirth: "03/12/1990",
     contactNumber: "+381662312123",
     email: "maggie.frank@gmail.com",
     skills: "PHP, MySql",
@@ -9,7 +9,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Ruby Elliott",
-    dateOfBirth: "18.6.1995.",
+    dateOfBirth: "06/18/1995",
     contactNumber: "+381662312123",
     email: "ruby.elliott@gmail.com",
     skills: "Adobe Photoshop, Adobe XD",
@@ -17,7 +17,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Raphael Ward",
-    dateOfBirth: "15.5.1989.",
+    dateOfBirth: "05/15/1989",
     contactNumber: "+381662312123",
     email: "raphael.ward@gmail.com",
     skills: "Adobe Illustrator",
@@ -25,7 +25,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Robbie Waters",
-    dateOfBirth: "31.12.1992",
+    dateOfBirth: "12/31/1992",
     contactNumber: "+381662312123",
     email: "robbie.waters@gmail.com",
     skills: "HTML, CSS",
@@ -33,7 +33,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Liam Kirk",
-    dateOfBirth: "7.8.1990",
+    dateOfBirth: "08/07/1990",
     contactNumber: "+381662312123",
     email: "liam.kirk@gmail.com",
     skills: "JavaScript",
@@ -41,7 +41,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Rob Frank",
-    dateOfBirth: "19.5.1985",
+    dateOfBirth: "05/19/1985",
     contactNumber: "+381662312123",
     email: "rob.frank@gmail.com",
     skills: "HTML, CSS, JavaScript",

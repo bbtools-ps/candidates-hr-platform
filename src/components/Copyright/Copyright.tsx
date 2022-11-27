@@ -1,5 +1,5 @@
 import { getCurrentYear } from "../../functions/utils";
-import styles from "./Copyright.module.css";
+import classes from "./Copyright.module.css";
 
 interface CopyrightProps {
   author: string;
@@ -8,8 +8,8 @@ interface CopyrightProps {
 const Copyright: React.FC<CopyrightProps> = ({ author }) => {
   return (
     <footer>
-      <p className={styles["copyright-text"]}>
-        © {getCurrentYear()}. <span className={styles.author}>{author}</span>
+      <p className={classes["copyright-text"]}>
+        © {getCurrentYear()}. <span className={classes.author}>{author}</span>
       </p>
     </footer>
   );

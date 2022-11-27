@@ -1,9 +1,14 @@
-import { validateEmail, validateEmptyValue } from "../../functions/utils";
+import {
+  validateDate,
+  validateEmail,
+  validateEmptyValue,
+  validatePhoneNumber,
+} from "../../functions/utils";
 import useInputValidation from "../../hooks/use-input-validation";
 import { Candidate } from "../../models/Candidate";
-import Button from "../UI/Button";
-import InputField from "../UI/InputField";
-import styles from "./CandidateForm.module.css";
+import Button from "../UI/Button/Button";
+import InputField from "../UI/InputField/InputField";
+import classes from "./CandidateForm.module.css";
 
 interface CandidateFormProps {
   candidate?: Candidate;
@@ -20,15 +25,12 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
   onCancel = () => {},
   onSubmit = () => {},
 }) => {
-  const convertedDate = candidate?.dateOfBirth
-    ? candidate.dateOfBirth
-        .match(/\d+/g)
-        .reverse()
-        .map((item) => {
-          return parseInt(item) < 10 ? (item = "0" + item) : item;
-        })
-        .join("-")
-    : "";
+  let convertedDate = "";
+  if (candidate?.dateOfBirth) {
+    const dateArr = candidate.dateOfBirth.match(/\d+/g);
+    convertedDate = `${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`;
+  }
+
   const {
     inputValue: name,
     inputChangeHandler: nameChangeHandler,
@@ -46,7 +48,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
     inputIsValid: dateofBirthIsValid,
     hasError: dateOfBirthError,
   } = useInputValidation({
-    validators: [validateEmptyValue],
+    validators: [validateDate],
     initialValue: convertedDate,
   });
   const {
@@ -56,7 +58,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
     inputIsValid: contactNumberIsValid,
     hasError: contactNumberError,
   } = useInputValidation({
-    validators: [validateEmptyValue],
+    validators: [validatePhoneNumber],
     initialValue: candidate?.contactNumber,
   });
   const {
@@ -92,11 +94,11 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
   }
 
   const setDateFormat = (selectedDate: string) => {
-    const date = new Date(selectedDate);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${day}.${month}.${year}`;
+    return new Date(selectedDate).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
   };
 
   const submitHandler = (e: React.MouseEvent<HTMLFormElement>) => {
@@ -114,64 +116,74 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
   };
 
   return (
-    <form onSubmit={submitHandler} className={styles["candidate-form"]}>
+    <form onSubmit={submitHandler} className={classes["candidate-form"]}>
       <InputField
+        id="candidate-name"
         label="Name"
-        className={nameError ? styles.error : ""}
+        className={nameError ? classes.error : ""}
         onChange={nameChangeHandler}
         onBlur={nameBlurHandler}
         value={name}
-        id="candidate-name"
+        isValid={nameIsValid}
       />
-      {nameError && <p className={styles.error}>Please fill out this field.</p>}
+      {nameError && (
+        <p className={classes.error}>Please fill out this field.</p>
+      )}
       <InputField
+        id="candidate-date-of-birth"
         label="Date of birth"
         type="date"
-        className={dateOfBirthError ? styles.error : ""}
+        className={dateOfBirthError ? classes.error : ""}
         onChange={dateOfBirthChangeHandler}
         onBlur={dateOfBirthBlurHandler}
         value={dateOfBirth}
-        id="candidate-date-of-birth"
+        isValid={dateofBirthIsValid}
+        checkmarkStyle={{ right: "3rem" }}
       />
       {dateOfBirthError && (
-        <p className={styles.error}>Please fill out this field.</p>
+        <p className={classes.error}>Please fill out this field.</p>
       )}
       <InputField
+        id="candidate-contact-number"
         label="Contact number"
-        className={contactNumberError ? styles.error : ""}
+        className={contactNumberError ? classes.error : ""}
         onChange={contactNumberChangeHandler}
         onBlur={contactNumberBlurHandler}
         value={contactNumber}
-        id="candidate-contact-number"
+        isValid={contactNumberIsValid}
       />
       {contactNumberError && (
-        <p className={styles.error}>Please fill out this field.</p>
-      )}
-      <InputField
-        label="E-mail"
-        className={emailError ? styles.error : ""}
-        onChange={emailChangeHandler}
-        onBlur={emailBlurHandler}
-        value={email}
-        id="candidate-email"
-      />
-      {emailError && (
-        <p className={styles.error}>
-          Please fill out this field with valid email.
+        <p className={classes.error}>
+          Please fill out this field with a valid phone number.
         </p>
       )}
       <InputField
+        id="candidate-email"
+        label="E-mail"
+        className={emailError ? classes.error : ""}
+        onChange={emailChangeHandler}
+        onBlur={emailBlurHandler}
+        value={email}
+        isValid={emailIsValid}
+      />
+      {emailError && (
+        <p className={classes.error}>
+          Please fill out this field with a valid email.
+        </p>
+      )}
+      <InputField
+        id="candidate-skills"
         label="Skills"
-        className={skillsError ? styles.error : ""}
+        className={skillsError ? classes.error : ""}
         onChange={skillsChangeHandler}
         onBlur={skillsBlurHandler}
         value={skills}
-        id="candidate-skills"
+        isValid={skillsIsValid}
       />
       {skillsError && (
-        <p className={styles.error}>Please fill out this field.</p>
+        <p className={classes.error}>Please fill out this field.</p>
       )}
-      <div className={styles["form-controls"]}>
+      <div className={classes["form-controls"]}>
         <Button type="submit" text={submitButtonText} disabled={!formIsValid} />
         <Button type="button" text="Cancel" onClick={onCancel} />
       </div>

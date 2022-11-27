@@ -1,7 +1,9 @@
 import { useState } from "react";
-import Button from "./UI/Button";
-import Card from "./UI/Card";
-import InputField from "./UI/InputField";
+import classes from "./MainMenu.module.css";
+import Button from "./UI/Button/Button";
+import Card from "./UI/Card/Card";
+import ClearButton from "./UI/ClearButton/ClearButton";
+import InputField from "./UI/InputField/InputField";
 
 const MainMenu = ({
   filterCandidates = (payload: string) => {},
@@ -22,13 +24,22 @@ const MainMenu = ({
 
   return (
     <Card>
-      <InputField
-        placeholder="Candidate name, skills"
-        onChange={changeInputHandler}
-        value={searchInput}
-        id="search-candidates"
-      />
-      <Button text="Reset" onClick={resetHandler} />
+      <div className={classes["search-bar"]}>
+        <InputField
+          id="search-candidates"
+          placeholder="Candidate name, skills"
+          onChange={changeInputHandler}
+          value={searchInput}
+          inputClass={classes.input}
+        />
+        {searchInput.length > 0 && (
+          <ClearButton
+            onClick={resetHandler}
+            className={classes["clear-button"]}
+          />
+        )}
+      </div>
+
       <Button text="Add Candidate" icon="add" onClick={addNewCandidate} />
     </Card>
   );

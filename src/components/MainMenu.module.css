@@ -1,0 +1,17 @@
+.search-bar {
+  position: relative;
+  width: 350px;
+}
+
+.search-bar .clear-button {
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0.3rem;
+  background-color: #fff;
+  outline: none;
+  border: 0;
+}
+
+.search-bar .input {
+  padding-right: 5rem;
+}
