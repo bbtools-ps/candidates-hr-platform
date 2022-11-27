@@ -55,33 +55,40 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
       }
     case "EDIT_CANDIDATE":
       if (typeof payload !== "string" && payload._TYPE === "Candidate") {
-        const editedCandidates = state.allCandidates.map((candidate) => {
+        const editedCandidateAll = state.allCandidates.map((candidate) => {
           return candidate.id === payload.candidate.id
             ? payload.candidate
             : candidate;
         });
+        const editedCandidateFilter = state.filteredCandidates.map(
+          (candidate) => {
+            return candidate.id === payload.candidate.id
+              ? payload.candidate
+              : candidate;
+          }
+        );
         return {
           ...state,
-          allCandidates: editedCandidates,
-          filteredCandidates: editedCandidates,
+          allCandidates: editedCandidateAll,
+          filteredCandidates: editedCandidateFilter,
         };
       } else {
         return state;
       }
     case "REMOVE_CANDIDATE":
       if (typeof payload === "string") {
-        const removedCandidatesAll = state.allCandidates.filter((candidate) => {
+        const removedCandidateAll = state.allCandidates.filter((candidate) => {
           return candidate.id !== payload;
         });
-        const removedCandidatesFilter = state.filteredCandidates.filter(
+        const removedCandidateFilter = state.filteredCandidates.filter(
           (candidate) => {
             return candidate.id !== payload;
           }
         );
         return {
           ...state,
-          allCandidates: removedCandidatesAll,
-          filteredCandidates: removedCandidatesFilter,
+          allCandidates: removedCandidateAll,
+          filteredCandidates: removedCandidateFilter,
         };
       } else {
         return state;
@@ -110,6 +117,7 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         );
         return { ...state, filteredCandidates };
       } else {
+        console.log("aaa");
         return { ...state, filteredCandidates: [...state.allCandidates] };
       }
     case "RESET_CANDIDATES":
@@ -134,7 +142,6 @@ const App = () => {
   const filterCandidatesHandler = (payload: string) => {
     // create array of search terms
     const searchTerms = payload.match(/\w+/g);
-    console.log(searchTerms);
     // loop through each search term
     dispatch({
       type: "SEARCH_CANDIDATES",
