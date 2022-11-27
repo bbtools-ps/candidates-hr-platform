@@ -2,13 +2,12 @@ import classes from "./Logo.module.css";
 
 const Logo = () => {
   return (
-    <div className={classes.logo}>
-      <h1>
-        <a href="./">
-          Candidates<span>HR assistance plaform</span>
-        </a>
-      </h1>
-      <a href="./" style={{ display: "flex", alignContent: "center" }}>
+    <div>
+      <a href="./" className={classes.logo}>
+        <div className={classes.text}>
+          <span className={classes.heading}>Candidates</span>
+          <span className={classes.subheading}>HR assistance plaform</span>
+        </div>
         <svg
           id="Layer_2"
           data-name="Layer 2"

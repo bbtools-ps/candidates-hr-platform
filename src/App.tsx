@@ -5,7 +5,6 @@ import Copyright from "./components/Copyright/Copyright";
 import EditCandidate from "./components/EditCandidate/EditCandidate";
 import MainMenu from "./components/MainMenu/MainMenu";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
-import Logo from "./components/UI/Logo/Logo";
 import { DUMMY_CANDIDATES } from "./data/data";
 import { Candidate } from "./models/Candidate";
 
@@ -155,7 +154,6 @@ const App = () => {
 
   return (
     <div className="app">
-      <Logo />
       {candidates.showAddCandidate ? (
         <NewCandidate onCancel={cancelHandler} onSubmit={addHandler} />
       ) : candidates.showEditCandidate ? (

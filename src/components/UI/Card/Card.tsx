@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({
   children,
 }) => {
   // add breakpoint for "min-width: 625px"
-  const isDesktop = useMediaQuery(625);
+  const isDesktop = useMediaQuery(735);
 
   return (
     <div

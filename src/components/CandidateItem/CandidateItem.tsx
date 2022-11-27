@@ -1,7 +1,7 @@
 import { Candidate } from "../../models/Candidate";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
-import classes from "./Candidate.module.css";
+import classes from "./CandidateItem.module.css";
 
 interface CandidateItemProps {
   candidate: Candidate;
@@ -15,7 +15,7 @@ const CandidateItem: React.FC<CandidateItemProps> = ({
   editCandidate,
 }) => {
   return (
-    <Card display="grid">
+    <Card display="grid" className={classes["candidate-wrapper"]}>
       <h2 className={classes.name}>{candidate.name}</h2>
       <p className={classes["birth-date"]}>
         Date of birth: <span>{candidate.dateOfBirth}</span>

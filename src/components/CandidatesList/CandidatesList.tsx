@@ -1,6 +1,5 @@
 import { Candidate } from "../../models/Candidate";
 import CandidateItem from "../CandidateItem/CandidateItem";
-import Card from "../UI/Card/Card";
 import classes from "./CandidatesList.module.css";
 
 interface CandidatesListProps {
@@ -27,12 +26,14 @@ const CandidatesList: React.FC<CandidatesListProps> = ({
   });
   // check if the list of candidates is empty and notify user
   return (
-    <div className={classes["candidates-list"]}>
-      {listCandidates.length > 0 ? (
-        listCandidates
-      ) : (
-        <Card>No candidates found.</Card>
-      )}
+    <div className={classes["candidates-list-wrapper"]}>
+      <div className={classes["candidates-list"]}>
+        {listCandidates.length > 0 ? (
+          listCandidates
+        ) : (
+          <div className={classes["no-results"]}>No candidates found</div>
+        )}
+      </div>
     </div>
   );
 };

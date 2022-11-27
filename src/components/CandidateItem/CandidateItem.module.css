@@ -19,3 +19,15 @@
   font-size: 1rem;
   padding: 0.7rem 1.2rem;
 }
+
+@media screen and (min-width: 735px) {
+  .candidate-wrapper {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 734px) {
+  .candidate-wrapper {
+    width: calc(100vw - 2rem);
+  }
+}

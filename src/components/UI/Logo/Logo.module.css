@@ -5,20 +5,27 @@
   align-content: center;
   padding: 1rem;
   cursor: default;
-}
-
-.logo a {
-  color: #fff;
   text-decoration: none;
+  color: #000;
 }
 
-.logo h1 span {
-  display: block;
-  font-size: 1rem;
-  font-weight: 400;
+.logo .text {
+  display: grid;
+}
+
+.logo .heading {
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .logo svg {
   width: 80px;
-  fill: #fff;
+  fill: #000;
+}
+
+.logo:hover,
+.logo:hover svg {
+  color: var(--action-color-hover);
+  fill: var(--action-color-hover);
+  cursor: pointer;
 }

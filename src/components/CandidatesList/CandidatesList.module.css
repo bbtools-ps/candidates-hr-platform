@@ -1,9 +1,49 @@
+.candidates-list-wrapper {
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+  align-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 .candidates-list {
   display: grid;
+  width: 100vw;
+  justify-content: center;
 }
 
 .candidates-list p,
 .candidates-list h2 {
   padding: 0;
   margin: 0;
+}
+
+.no-results {
+  color: #fff;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 735px) {
+  .candidates-list-wrapper {
+    height: calc(100vh - (122px + 52px));
+  }
+}
+
+@media screen and (max-width: 734px) {
+  .candidates-list-wrapper {
+    height: calc(100vh - (212px + 52px));
+  }
+}
+
+@media screen and (max-width: 588px) {
+  .candidates-list-wrapper {
+    height: calc(100vh - (230px + 52px));
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .candidates-list-wrapper {
+    height: calc(100vh - (282px + 52px));
+  }
 }
