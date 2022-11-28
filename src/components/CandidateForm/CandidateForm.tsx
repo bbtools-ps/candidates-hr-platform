@@ -142,7 +142,9 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
         checkmarkStyle={{ right: "3rem" }}
       />
       {dateOfBirthError && (
-        <p className={classes.error}>Please fill out this field.</p>
+        <p className={classes.error}>
+          Please fill out this field with a valid date.
+        </p>
       )}
       <InputField
         id="candidate-contact-number"

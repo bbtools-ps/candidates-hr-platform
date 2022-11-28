@@ -18,7 +18,9 @@ export const validatePhoneNumber = (value: string) => {
 };
 
 export const validateDate = (value: string) => {
-  return value && new Date(value) > new Date(new Date().setFullYear(1900))
+  return value &&
+    new Date(value) > new Date(new Date().setFullYear(1900)) &&
+    new Date(value) < new Date()
     ? true
     : false;
 };
