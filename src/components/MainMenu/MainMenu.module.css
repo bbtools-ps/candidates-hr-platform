@@ -33,6 +33,7 @@
 .search-bar .input {
   padding-right: 5rem;
   width: 100%;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 500px) {
@@ -50,5 +51,11 @@
   }
   .search-bar-wrapper {
     display: flex;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .search-bar .input {
+    width: 400px;
   }
 }

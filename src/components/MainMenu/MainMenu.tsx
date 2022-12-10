@@ -26,7 +26,7 @@ const MainMenu: React.FC<MainMenuProps> = ({
           <div className={classes["search-bar"]}>
             <InputField
               id="search-candidates"
-              placeholder="Candidate name, skills"
+              placeholder="Search candidate name, skills"
               onChange={onChange}
               value={searchInput}
               inputClass={classes.input}
