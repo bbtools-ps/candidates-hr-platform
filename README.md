@@ -27,4 +27,4 @@ To make the build type:
 
 ## Live demo
 
-[Click here for the live demo](https://bogdan-bogdanovic.com/candidates-hr-platform/)
+[Click here for the live demo](https://bbtools-ps.github.io/candidates-hr-platform/)
