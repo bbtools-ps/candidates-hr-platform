@@ -4,8 +4,8 @@ import {
   validateEmptyValue,
   validatePhoneNumber,
 } from "../../../common/functions/utils";
-import useInputValidation from "../../../common/hooks/use-input-validation";
 import { Candidate } from "../../../common/models/Candidate";
+import useInputValidation from "../../hooks/useInputValidation";
 
 import Button from "../UI/Button/Button";
 import InputField from "../UI/InputField/InputField";
