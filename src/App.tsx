@@ -1,4 +1,6 @@
 import { useReducer, useState } from "react";
+import { Route, useNavigate } from "react-router";
+import { Routes } from "react-router-dom";
 import "./App.css";
 import { Candidate } from "./common/models/Candidate";
 import CandidatesList from "./components/CandidatesList/CandidatesList";
@@ -6,6 +8,7 @@ import Copyright from "./components/Copyright/Copyright";
 import EditCandidate from "./components/EditCandidate/EditCandidate";
 import MainMenu from "./components/MainMenu/MainMenu";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
+import Protected from "./components/Protected";
 import { DUMMY_CANDIDATES } from "./data/data";
 
 interface AppState {
@@ -22,10 +25,7 @@ interface AppAction {
     | "EDIT_CANDIDATE"
     | "REMOVE_CANDIDATE"
     | "SEARCH_CANDIDATES"
-    | "RESET_CANDIDATES"
-    | "SHOW_ADD_CANDIDATE"
-    | "SHOW_EDIT_CANDIDATE"
-    | "SHOW_ALL_CANDIDATES";
+    | "RESET_CANDIDATES";
   payload?:
     | string
     | { _TYPE: "Candidate"; candidate?: Candidate }
@@ -117,17 +117,10 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         );
         return { ...state, filteredCandidates };
       } else {
-        console.log("aaa");
         return { ...state, filteredCandidates: [...state.allCandidates] };
       }
     case "RESET_CANDIDATES":
       return { ...state, filteredCandidates: [...state.allCandidates] };
-    case "SHOW_ADD_CANDIDATE":
-      return { ...state, showAddCandidate: true, showEditCandidate: false };
-    case "SHOW_EDIT_CANDIDATE":
-      return { ...state, showAddCandidate: false, showEditCandidate: true };
-    case "SHOW_ALL_CANDIDATES":
-      return { ...state, showAddCandidate: false, showEditCandidate: false };
     default:
       throw new Error();
   }
@@ -137,6 +130,8 @@ const App = () => {
   const [state, dispatch] = useReducer(candidatesReducer, INITIAL_VALUES);
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate>();
   const [searchInput, setSearchInput] = useState<string>("");
+  const [editCandidate, setEditCandidate] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // filter candidates based on their name, skills
   const filterCandidatesHandler = (payload: string) => {
@@ -171,18 +166,19 @@ const App = () => {
 
   // show form for adding new candidate
   const addNewCandidateHandler = () => {
-    dispatch({ type: "SHOW_ADD_CANDIDATE" });
+    navigate("/new-candidate");
   };
 
   // edit candidate
   const editCandidateHandler = (candidate: Candidate) => {
+    setEditCandidate(true);
     setSelectedCandidate(candidate);
-    dispatch({ type: "SHOW_EDIT_CANDIDATE" });
+    navigate("/edit-candidate");
   };
 
   // show all candidates when pressing "Cancel" on the form
   const cancelHandler = () => {
-    dispatch({ type: "SHOW_ALL_CANDIDATES" });
+    navigate("/");
   };
 
   // add candidate into the list
@@ -191,7 +187,7 @@ const App = () => {
       type: "ADD_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
     });
-    dispatch({ type: "SHOW_ALL_CANDIDATES" });
+    navigate("/");
   };
 
   // edit candidate from the list
@@ -200,34 +196,49 @@ const App = () => {
       type: "EDIT_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
     });
-    dispatch({ type: "SHOW_ALL_CANDIDATES" });
+    navigate("/");
   };
 
   return (
     <div className="app">
-      {state.showAddCandidate ? (
-        <NewCandidate onCancel={cancelHandler} onSubmit={addHandler} />
-      ) : state.showEditCandidate ? (
-        <EditCandidate
-          onCancel={cancelHandler}
-          onSubmit={editHandler}
-          candidate={selectedCandidate}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <MainMenu
+                resetCandidates={resetHandler}
+                addNewCandidate={addNewCandidateHandler}
+                searchInput={searchInput}
+                onChange={changeInputHandler}
+              />
+              <CandidatesList
+                candidates={state.filteredCandidates}
+                removeCandidate={removeCandidateHandler}
+                editCandidate={editCandidateHandler}
+              />
+            </>
+          }
         />
-      ) : (
-        <>
-          <MainMenu
-            resetCandidates={resetHandler}
-            addNewCandidate={addNewCandidateHandler}
-            searchInput={searchInput}
-            onChange={changeInputHandler}
-          />
-          <CandidatesList
-            candidates={state.filteredCandidates}
-            removeCandidate={removeCandidateHandler}
-            editCandidate={editCandidateHandler}
-          />
-        </>
-      )}
+        <Route
+          path="/new-candidate"
+          element={
+            <NewCandidate onCancel={cancelHandler} onSubmit={addHandler} />
+          }
+        />
+        <Route
+          path="/edit-candidate"
+          element={
+            <Protected condition={editCandidate}>
+              <EditCandidate
+                onCancel={cancelHandler}
+                onSubmit={editHandler}
+                candidate={selectedCandidate}
+              />
+            </Protected>
+          }
+        />
+      </Routes>
       <Copyright author="Bogdan Bogdanovic" />
     </div>
   );
