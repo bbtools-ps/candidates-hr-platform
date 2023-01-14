@@ -178,7 +178,7 @@ const App = () => {
 
   // show all candidates when pressing "Cancel" on the form
   const cancelHandler = () => {
-    navigate("/");
+    navigate("/candidates-hr-platform");
   };
 
   // add candidate into the list
@@ -187,7 +187,7 @@ const App = () => {
       type: "ADD_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
     });
-    navigate("/");
+    navigate("/candidates-hr-platform");
   };
 
   // edit candidate from the list
@@ -196,14 +196,14 @@ const App = () => {
       type: "EDIT_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
     });
-    navigate("/");
+    navigate("/candidates-hr-platform");
   };
 
   return (
     <div className="app">
       <Routes>
         <Route
-          path="/"
+          path="/candidates-hr-platform"
           element={
             <>
               <MainMenu
