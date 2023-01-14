@@ -2,14 +2,14 @@ import { useReducer, useState } from "react";
 import { Route, useNavigate } from "react-router";
 import { Routes } from "react-router-dom";
 import "./App.css";
+import Copyright from "./common/components/Copyright/Copyright";
+import MainMenu from "./common/components/MainMenu/MainMenu";
+import Protected from "./common/components/Protected";
 import { Candidate } from "./common/models/Candidate";
-import CandidatesList from "./components/CandidatesList/CandidatesList";
-import Copyright from "./components/Copyright/Copyright";
-import EditCandidate from "./components/EditCandidate/EditCandidate";
-import MainMenu from "./components/MainMenu/MainMenu";
-import NewCandidate from "./components/NewCandidate/NewCandidate";
-import Protected from "./components/Protected";
 import { DUMMY_CANDIDATES } from "./data/data";
+import EditCandidate from "./screens/edit-candidate/EditCandidate";
+import CandidatesList from "./screens/home/CandidatesList";
+import NewCandidate from "./screens/new-candidate/NewCandidate";
 
 interface AppState {
   allCandidates: Candidate[];

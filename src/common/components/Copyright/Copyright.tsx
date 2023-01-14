@@ -1,4 +1,4 @@
-import { getCurrentYear } from "../../common/functions/utils";
+import { getCurrentYear } from "../../../common/functions/utils";
 import classes from "./Copyright.module.css";
 
 interface CopyrightProps {

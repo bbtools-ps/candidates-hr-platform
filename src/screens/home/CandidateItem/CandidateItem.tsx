@@ -1,6 +1,6 @@
-import { Candidate } from "../../common/models/Candidate";
-import Button from "../UI/Button/Button";
-import Card from "../UI/Card/Card";
+import Button from "../../../common/components/UI/Button/Button";
+import Card from "../../../common/components/UI/Card/Card";
+import { Candidate } from "../../../common/models/Candidate";
 import classes from "./CandidateItem.module.css";
 
 interface CandidateItemProps {
