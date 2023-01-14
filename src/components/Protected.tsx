@@ -6,7 +6,7 @@ interface ProtectedProps {
 }
 
 const Protected: React.FC<ProtectedProps> = ({ condition, children }) => {
-  if (!condition) return <Navigate to="/candidates-hr-platform" replace />;
+  if (!condition) return <Navigate to="/" replace />;
   return <>{children}</>;
 };
 export default Protected;
