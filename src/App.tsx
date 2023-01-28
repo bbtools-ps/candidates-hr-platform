@@ -99,21 +99,14 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         payload._TYPE === "Search" &&
         payload.searchTerms?.length
       ) {
-        const filteredCandidates = [...state.allCandidates].filter(
-          (candidate) => {
-            if (
-              payload.searchTerms.some((term) => {
-                const termReg = new RegExp(term, "i");
-                return (
-                  termReg.test(candidate.name) || termReg.test(candidate.skills)
-                );
-              })
-            ) {
-              return candidate;
-            } else {
-              return undefined;
-            }
-          }
+        const filteredCandidates = state.allCandidates.filter(
+          (candidate) =>
+            payload.searchTerms.some((term) => {
+              const termReg = new RegExp(term, "i");
+              return (
+                termReg.test(candidate.name) || termReg.test(candidate.skills)
+              );
+            }) && candidate
         );
         return { ...state, filteredCandidates };
       } else {
