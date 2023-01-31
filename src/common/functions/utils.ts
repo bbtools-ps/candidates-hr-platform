@@ -10,7 +10,7 @@ export const validateEmptyValue = (value: string) => {
 };
 
 export const validateEmail = (value: string) => {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
+  return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
 };
 
 export const validatePhoneNumber = (value: string) => {
