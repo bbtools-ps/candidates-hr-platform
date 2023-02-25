@@ -1,8 +1,8 @@
-import Button from "../UI/Button/Button";
-import Card from "../UI/Card/Card";
-import ClearButton from "../UI/ClearButton/ClearButton";
-import InputField from "../UI/InputField/InputField";
-import Logo from "../UI/Logo/Logo";
+import Button from "../Button/Button";
+import Card from "../Card/Card";
+import ClearButton from "../ClearButton/ClearButton";
+import InputField from "../InputField/InputField";
+import Logo from "../Logo/Logo";
 import classes from "./MainMenu.module.css";
 
 interface MainMenuProps {

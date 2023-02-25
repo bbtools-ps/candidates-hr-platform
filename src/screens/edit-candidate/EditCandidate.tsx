@@ -1,5 +1,5 @@
 import CandidateForm from "../../common/components/CandidateForm/CandidateForm";
-import Card from "../../common/components/UI/Card/Card";
+import Card from "../../common/components/Card/Card";
 import { Candidate } from "../../common/models/Candidate";
 import classes from "../../common/styles/CandidateWrapper.module.css";
 

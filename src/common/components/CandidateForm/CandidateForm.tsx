@@ -7,8 +7,8 @@ import {
 } from "../../../common/functions/utils";
 import { Candidate } from "../../../common/models/Candidate";
 import useInputValidation from "../../hooks/useInputValidation";
-import Button from "../UI/Button/Button";
-import InputField from "../UI/InputField/InputField";
+import Button from "../Button/Button";
+import InputField from "../InputField/InputField";
 import classes from "./CandidateForm.module.css";
 import { convertDate } from "./utils";
 

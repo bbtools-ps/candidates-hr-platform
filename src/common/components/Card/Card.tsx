@@ -1,4 +1,4 @@
-import useMediaQuery from "../../../hooks/useMediaQuery";
+import useMediaQuery from "../../hooks/useMediaQuery";
 import classes from "./Card.module.css";
 
 interface CardProps {
