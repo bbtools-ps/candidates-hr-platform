@@ -1,3 +1,4 @@
+import uuid from "react-uuid";
 import {
   validateDate,
   validateEmail,
@@ -14,7 +15,6 @@ import { convertDate } from "./utils";
 interface CandidateFormProps {
   candidate?: Candidate;
   submitButtonText?: string;
-  newCandidateId?: string;
   onCancel: () => void;
   onSubmit: (payload: Candidate) => void;
 }
@@ -22,7 +22,6 @@ interface CandidateFormProps {
 const CandidateForm: React.FC<CandidateFormProps> = ({
   candidate,
   submitButtonText = "Add",
-  newCandidateId,
   onCancel,
   onSubmit,
 }) => {
@@ -96,8 +95,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
     });
   };
 
-  const submitHandler = (e: React.MouseEvent<HTMLFormElement>) => {
-    if (!candidate?.id) return;
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     const selectedDate = setDateFormat(dateOfBirth);
     const newCandidate = {
@@ -106,13 +104,13 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
       contactNumber,
       email,
       skills,
-      id: newCandidateId || candidate.id,
+      id: candidate?.id || uuid(),
     };
     onSubmit(newCandidate);
   };
 
   return (
-    <form onSubmit={submitHandler} className={classes["candidate-form"]}>
+    <form onSubmit={handleSubmit} className={classes["candidate-form"]}>
       <InputField
         id="candidate-name"
         label="Name"

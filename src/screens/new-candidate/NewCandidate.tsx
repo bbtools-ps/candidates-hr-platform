@@ -1,4 +1,3 @@
-import uuid from "react-uuid";
 import CandidateForm from "../../common/components/CandidateForm/CandidateForm";
 import Card from "../../common/components/UI/Card/Card";
 import { Candidate } from "../../common/models/Candidate";
@@ -14,11 +13,7 @@ const NewCandidate: React.FC<NewCandidateProps> = ({ onCancel, onSubmit }) => {
     <div className={classes["candidate-wrapper"]}>
       <Card display="grid">
         <h2>New candidate</h2>
-        <CandidateForm
-          onCancel={onCancel}
-          onSubmit={onSubmit}
-          newCandidateId={uuid()}
-        />
+        <CandidateForm onCancel={onCancel} onSubmit={onSubmit} />
       </Card>
     </div>
   );

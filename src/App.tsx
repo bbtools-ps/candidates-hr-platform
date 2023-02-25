@@ -170,12 +170,12 @@ const App = () => {
   };
 
   // show all candidates when pressing "Cancel" on the form
-  const cancelHandler = () => {
+  const handleCancel = () => {
     navigate("/");
   };
 
   // add candidate into the list
-  const addHandler = (candidate: Candidate) => {
+  const handleAddCandidate = (candidate: Candidate) => {
     dispatch({
       type: "ADD_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
@@ -184,7 +184,7 @@ const App = () => {
   };
 
   // edit candidate from the list
-  const editHandler = (candidate: Candidate) => {
+  const handleEditCandidate = (candidate: Candidate) => {
     dispatch({
       type: "EDIT_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
@@ -216,7 +216,10 @@ const App = () => {
         <Route
           path="/new-candidate"
           element={
-            <NewCandidate onCancel={cancelHandler} onSubmit={addHandler} />
+            <NewCandidate
+              onCancel={handleCancel}
+              onSubmit={handleAddCandidate}
+            />
           }
         />
         <Route
@@ -225,8 +228,8 @@ const App = () => {
             <Protected condition={editCandidate}>
               {selectedCandidate && (
                 <EditCandidate
-                  onCancel={cancelHandler}
-                  onSubmit={editHandler}
+                  onCancel={handleCancel}
+                  onSubmit={handleEditCandidate}
                   candidate={selectedCandidate}
                 />
               )}
