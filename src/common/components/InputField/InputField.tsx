@@ -44,6 +44,7 @@ const InputField: React.FC<InputFieldProps> = ({
         onBlur={onBlur}
         id={id}
         name={label}
+        aria-label={label}
       />
       {isValid !== undefined && isValid === true && (
         <FontAwesomeIcon

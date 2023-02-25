@@ -19,7 +19,7 @@ describe("convertDate()", () => {
   it("should throw an error if the arguments that are passed are not in appropriate string format MM/DD/YYYY", () => {
     const testDate1 = "AA";
     const testDate2 = "12312/3123/123";
-    const testDate3 = {};
+    const testDate3 = "12/12/12";
 
     const resultFn1 = () => convertDate(testDate1);
     const resultFn2 = () => convertDate(testDate2);
