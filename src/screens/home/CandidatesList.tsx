@@ -13,23 +13,18 @@ const CandidatesList: React.FC<CandidatesListProps> = ({
   removeCandidate,
   editCandidate,
 }) => {
-  // create a list of candidates
-  const listCandidates = candidates.map((candidate) => {
-    return (
-      <CandidateItem
-        candidate={candidate}
-        key={candidate.id}
-        removeCandidate={removeCandidate}
-        editCandidate={editCandidate}
-      />
-    );
-  });
-  // check if the list of candidates is empty and notify user
   return (
     <div className={classes["candidates-list-wrapper"]}>
       <div className={classes["candidates-list"]}>
-        {listCandidates.length > 0 ? (
-          listCandidates
+        {candidates.length > 0 ? (
+          candidates.map((candidate) => (
+            <CandidateItem
+              candidate={candidate}
+              key={candidate.id}
+              removeCandidate={removeCandidate}
+              editCandidate={editCandidate}
+            />
+          ))
         ) : (
           <div className={classes["no-results"]}>No candidates found</div>
         )}
