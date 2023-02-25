@@ -28,8 +28,8 @@ interface AppAction {
     | "RESET_CANDIDATES";
   payload?:
     | string
-    | { _TYPE: "Candidate"; candidate?: Candidate }
-    | { _TYPE: "Search"; searchTerms: string[] };
+    | { _TYPE: "Candidate"; candidate: Candidate }
+    | { _TYPE: "Search"; searchTerms: RegExpMatchArray | null };
 }
 
 const INITIAL_VALUES = {
@@ -44,7 +44,7 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
   const { type, payload } = action;
   switch (type) {
     case "ADD_CANDIDATE":
-      if (typeof payload !== "string" && payload._TYPE === "Candidate") {
+      if (typeof payload !== "string" && payload?._TYPE === "Candidate") {
         return {
           ...state,
           allCandidates: [payload.candidate, ...state.allCandidates],
@@ -54,15 +54,15 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
         return state;
       }
     case "EDIT_CANDIDATE":
-      if (typeof payload !== "string" && payload._TYPE === "Candidate") {
+      if (typeof payload !== "string" && payload?._TYPE === "Candidate") {
         const editedCandidateAll = state.allCandidates.map((candidate) => {
-          return candidate.id === payload.candidate.id
+          return candidate.id === payload.candidate?.id
             ? payload.candidate
             : candidate;
         });
         const editedCandidateFilter = state.filteredCandidates.map(
           (candidate) => {
-            return candidate.id === payload.candidate.id
+            return candidate.id === payload.candidate?.id
               ? payload.candidate
               : candidate;
           }
@@ -96,12 +96,12 @@ const candidatesReducer = (state: AppState, action: AppAction) => {
     case "SEARCH_CANDIDATES":
       if (
         typeof payload !== "string" &&
-        payload._TYPE === "Search" &&
+        payload?._TYPE === "Search" &&
         payload.searchTerms?.length
       ) {
         const filteredCandidates = state.allCandidates.filter(
           (candidate) =>
-            payload.searchTerms.some((term) => {
+            payload.searchTerms?.some((term) => {
               const termReg = new RegExp(term, "i");
               return (
                 termReg.test(candidate.name) || termReg.test(candidate.skills)
@@ -223,11 +223,13 @@ const App = () => {
           path="/edit-candidate"
           element={
             <Protected condition={editCandidate}>
-              <EditCandidate
-                onCancel={cancelHandler}
-                onSubmit={editHandler}
-                candidate={selectedCandidate}
-              />
+              {selectedCandidate && (
+                <EditCandidate
+                  onCancel={cancelHandler}
+                  onSubmit={editHandler}
+                  candidate={selectedCandidate}
+                />
+              )}
             </Protected>
           }
         />

@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   onClick = () => {},
 }) => {
-  let buttonIcon: IconDefinition;
+  let buttonIcon: IconDefinition | null = null;
 
   switch (icon) {
     case "add":
@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {icon && <FontAwesomeIcon icon={buttonIcon} />}
+      {icon && buttonIcon && <FontAwesomeIcon icon={buttonIcon} />}
       {text}
     </button>
   );

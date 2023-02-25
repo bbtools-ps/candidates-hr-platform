@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface UseInputValidationProps {
   validators: ((payload: string) => boolean)[];
-  initialValue: string;
+  initialValue?: string;
 }
 
 const useInputValidation = ({

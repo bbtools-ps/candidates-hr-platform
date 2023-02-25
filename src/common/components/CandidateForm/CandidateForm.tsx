@@ -6,10 +6,10 @@ import {
 } from "../../../common/functions/utils";
 import { Candidate } from "../../../common/models/Candidate";
 import useInputValidation from "../../hooks/useInputValidation";
-
 import Button from "../UI/Button/Button";
 import InputField from "../UI/InputField/InputField";
 import classes from "./CandidateForm.module.css";
+import { convertDate } from "./utils";
 
 interface CandidateFormProps {
   candidate?: Candidate;
@@ -23,15 +23,9 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
   candidate,
   submitButtonText = "Add",
   newCandidateId,
-  onCancel = () => {},
-  onSubmit = () => {},
+  onCancel,
+  onSubmit,
 }) => {
-  let convertedDate = "";
-  if (candidate?.dateOfBirth) {
-    const dateArr = candidate.dateOfBirth.match(/\d+/g);
-    convertedDate = `${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`;
-  }
-
   const {
     inputValue: name,
     inputChangeHandler: nameChangeHandler,
@@ -50,7 +44,7 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
     hasError: dateOfBirthError,
   } = useInputValidation({
     validators: [validateDate],
-    initialValue: convertedDate,
+    initialValue: convertDate(candidate?.dateOfBirth),
   });
   const {
     inputValue: contactNumber,
@@ -103,8 +97,9 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
   };
 
   const submitHandler = (e: React.MouseEvent<HTMLFormElement>) => {
-    const selectedDate = setDateFormat(dateOfBirth);
+    if (!candidate?.id) return;
     e.preventDefault();
+    const selectedDate = setDateFormat(dateOfBirth);
     const newCandidate = {
       name,
       dateOfBirth: selectedDate,
