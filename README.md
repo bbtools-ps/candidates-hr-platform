@@ -11,8 +11,6 @@ For now this project doesn't communicate with a database, everything is done in 
 
 ## Project setup
 
-Recommended IDE is [VS Code](https://code.visualstudio.com/).
-
 To install all dependencies type following inside Terminal:
 
 `npm install`
