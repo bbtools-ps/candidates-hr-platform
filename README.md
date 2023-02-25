@@ -23,6 +23,10 @@ To make the build type:
 
 `npm run build`
 
+To start tests type:
+
+`npm test`
+
 ## Live demo
 
 [Click here for the live demo](https://bbtools-ps.github.io/candidates-hr-platform/)
