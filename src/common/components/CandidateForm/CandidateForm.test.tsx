@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it } from "vitest";
+import { describe, it, vi } from "vitest";
 import CandidateForm from "./CandidateForm";
 
 describe("<CandidateForm/>", () => {
@@ -183,5 +183,64 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(screen.getByLabelText(/skills/i), "skills");
 
     expect(screen.getByRole("button", { name: /add/i })).toBeEnabled();
+  });
+  it("should call only the handler function for the Add button when clicking on it", async () => {
+    const testHandleOnSubmit = vi.fn();
+    const testHandleOnCancel = vi.fn();
+    render(
+      <CandidateForm
+        onCancel={testHandleOnCancel}
+        onSubmit={testHandleOnSubmit}
+      />
+    );
+
+    await userEvent.type(screen.getByLabelText(/name/i), "Name");
+    await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
+    await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
+    await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
+    await userEvent.type(screen.getByLabelText(/skills/i), "skills");
+
+    await userEvent.click(screen.getByRole("button", { name: /add/i }));
+
+    expect(testHandleOnSubmit).toHaveBeenCalled();
+    expect(testHandleOnCancel).not.toHaveBeenCalled();
+  });
+  it("should call only the handler function for the Cancel button when clicking on it", async () => {
+    const testHandleOnSubmit = vi.fn();
+    const testHandleOnCancel = vi.fn();
+    render(
+      <CandidateForm
+        onCancel={testHandleOnCancel}
+        onSubmit={testHandleOnSubmit}
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /cancel/i }));
+    expect(testHandleOnSubmit).not.toHaveBeenCalled();
+    expect(testHandleOnCancel).toHaveBeenCalled();
+  });
+  it("should show the text for the submit button as Add when adding new candidate", () => {
+    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
+    expect(() => screen.getByRole("button", { name: /edit/i })).toThrow();
+  });
+  it("should show the text for the submit button as Save when editing the existing candidate", () => {
+    const testCandidate = {
+      name: "Maggie Frank",
+      dateOfBirth: "03/12/1990",
+      contactNumber: "+381662312123",
+      email: "maggie.frank@gmail.com",
+      skills: "PHP, MySql",
+      id: "1",
+    };
+    render(
+      <CandidateForm
+        onCancel={() => {}}
+        onSubmit={() => {}}
+        candidate={testCandidate}
+      />
+    );
+    expect(() => screen.getByRole("button", { name: /add/i })).toThrow();
+    expect(screen.getByRole("button", { name: /save/i })).toBeInTheDocument();
   });
 });

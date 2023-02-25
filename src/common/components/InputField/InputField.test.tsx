@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { describe } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { describe, vi } from "vitest";
 import InputField from "./InputField";
 
 describe("<InputField/>", () => {
-  it("should render the label and the value that are comming from the props", () => {
+  it("should render the input, the label, and the value that are comming from the props", () => {
     const testLabel = "label";
     const testValue = "value";
     render(<InputField label={testLabel} value={testValue} />);
@@ -15,5 +16,13 @@ describe("<InputField/>", () => {
     expect(screen.getByRole("textbox", { name: testLabel })).toHaveValue(
       testValue
     );
+  });
+  it("should call the onChange handler function when typing into the input field", async () => {
+    const testFn = vi.fn();
+    render(<InputField onChange={testFn} />);
+
+    await userEvent.type(screen.getByRole("textbox"), "test");
+
+    expect(testFn).toHaveBeenCalled();
   });
 });

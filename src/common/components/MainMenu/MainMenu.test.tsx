@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { describe } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { describe, vi } from "vitest";
 import MainMenu from "./MainMenu";
 
 describe("<MainMenu/>", () => {
   it(
-    "should render Logo, Search input field and Add candidate button and not to display Clear button"
+    "should render Logo, Search input field and Add candidate button and not to display Clear/Reset button"
   );
   render(
     <MainMenu
@@ -39,7 +40,7 @@ describe("<MainMenu/>", () => {
       testValue
     );
   });
-  it("should show the clear button in the Search input field if the searchInput value is not empty", () => {
+  it("should show the Clear/Reset button in the Search input field if the searchInput value is not empty", () => {
     const testValue = "test";
     render(
       <MainMenu
@@ -51,5 +52,65 @@ describe("<MainMenu/>", () => {
     );
 
     expect(screen.getByRole("button", { name: /clear/i })).toBeInTheDocument();
+  });
+  it("should call the only the handler function for the Add button when clicking on it", async () => {
+    const testHandleReset = vi.fn();
+    const testHandleAdd = vi.fn();
+    const testHandleChange = vi.fn();
+    render(
+      <MainMenu
+        onResetCandidates={testHandleReset}
+        onAddNewCandidate={testHandleAdd}
+        onChange={testHandleChange}
+        searchInput=""
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /add/i }));
+
+    expect(testHandleAdd).toHaveBeenCalled();
+    expect(testHandleReset).not.toHaveBeenCalled();
+    expect(testHandleChange).not.toHaveBeenCalled();
+  });
+  it("should call only the handler function for the Clear/Reset button when clicking on it", async () => {
+    const testHandleReset = vi.fn();
+    const testHandleAdd = vi.fn();
+    const testHandleChange = vi.fn();
+    render(
+      <MainMenu
+        onResetCandidates={testHandleReset}
+        onAddNewCandidate={testHandleAdd}
+        onChange={testHandleChange}
+        searchInput="test"
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /clear/i }));
+
+    expect(testHandleAdd).not.toHaveBeenCalled();
+    expect(testHandleReset).toHaveBeenCalled();
+    expect(testHandleChange).not.toHaveBeenCalled();
+  });
+  it("should call the only the handler function for the Search input field when clicking on it", async () => {
+    const testHandleReset = vi.fn();
+    const testHandleAdd = vi.fn();
+    const testHandleChange = vi.fn();
+    render(
+      <MainMenu
+        onResetCandidates={testHandleReset}
+        onAddNewCandidate={testHandleAdd}
+        onChange={testHandleChange}
+        searchInput=""
+      />
+    );
+
+    await userEvent.type(
+      screen.getByPlaceholderText(/search candidate/i),
+      "test"
+    );
+
+    expect(testHandleAdd).not.toHaveBeenCalled();
+    expect(testHandleReset).not.toHaveBeenCalled();
+    expect(testHandleChange).toHaveBeenCalled();
   });
 });

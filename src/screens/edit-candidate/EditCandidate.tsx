@@ -21,7 +21,6 @@ const EditCandidate: React.FC<EditCandidateProps> = ({
         <CandidateForm
           onCancel={onCancel}
           onSubmit={onSubmit}
-          submitButtonText="Save"
           candidate={candidate}
         />
       </Card>

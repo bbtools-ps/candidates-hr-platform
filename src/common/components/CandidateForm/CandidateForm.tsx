@@ -14,14 +14,12 @@ import { convertDate } from "./utils";
 
 interface CandidateFormProps {
   candidate?: Candidate;
-  submitButtonText?: string;
   onCancel: () => void;
   onSubmit: (payload: Candidate) => void;
 }
 
 const CandidateForm: React.FC<CandidateFormProps> = ({
   candidate,
-  submitButtonText = "Add",
   onCancel,
   onSubmit,
 }) => {
@@ -180,7 +178,11 @@ const CandidateForm: React.FC<CandidateFormProps> = ({
         <p className={classes.error}>Please fill out this field.</p>
       )}
       <div className={classes["form-controls"]}>
-        <Button type="submit" text={submitButtonText} disabled={!formIsValid} />
+        <Button
+          type="submit"
+          text={candidate ? "Save" : "Add"}
+          disabled={!formIsValid}
+        />
         <Button type="button" text="Cancel" onClick={onCancel} />
       </div>
     </form>

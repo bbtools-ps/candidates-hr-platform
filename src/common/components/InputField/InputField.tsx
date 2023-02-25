@@ -23,8 +23,8 @@ const InputField: React.FC<InputFieldProps> = ({
   isValid,
   checkmarkStyle,
   inputClass,
-  onChange = () => {},
-  onBlur = () => {},
+  onChange,
+  onBlur,
 }) => {
   return (
     <div
