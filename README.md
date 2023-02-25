@@ -29,4 +29,4 @@ To start tests type:
 
 ## Live demo
 
-[Click here for the live demo](https://bbtools-ps.github.io/candidates-hr-platform/)
+[Click here for the live demo](https://bbtools-candidates.netlify.app/)
