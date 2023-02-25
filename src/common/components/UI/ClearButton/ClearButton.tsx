@@ -13,6 +13,7 @@ const ClearButton: React.FC<ClearButtonProps> = ({ onClick, className }) => {
     <button
       onClick={onClick}
       className={`${classes["clear-button"]} ${className}`}
+      aria-label="Clear"
     >
       <FontAwesomeIcon icon={faTimesCircle} />
     </button>

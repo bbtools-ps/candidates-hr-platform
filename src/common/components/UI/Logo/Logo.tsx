@@ -6,7 +6,7 @@ const Logo = () => {
       <a href="./" className={classes.logo}>
         <div className={classes.text}>
           <span className={classes.heading}>Candidates</span>
-          <span className={classes.subheading}>HR assistance plaform</span>
+          <span className={classes.subheading}>HR assistance platform</span>
         </div>
         <svg
           id="Layer_2"

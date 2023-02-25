@@ -16,11 +16,18 @@ describe("convertDate()", () => {
 
     expect(result).toBeUndefined();
   });
-  it("should throw an error if the arguments that are passed are not numeric strings", () => {
-    const testDate = "AA";
+  it("should throw an error if the arguments that are passed are not in appropriate string format MM/DD/YYYY", () => {
+    const testDate1 = "AA";
+    const testDate2 = "12312/3123/123";
+    const testDate3 = {};
 
-    const resultFn = () => convertDate(testDate);
+    const resultFn1 = () => convertDate(testDate1);
+    const resultFn2 = () => convertDate(testDate2);
+    // @ts-ignore
+    const resultFn3 = () => convertDate(testDate3);
 
-    expect(resultFn).toThrow();
+    expect(resultFn1).toThrow();
+    expect(resultFn2).toThrow();
+    expect(resultFn3).toThrow();
   });
 });

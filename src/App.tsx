@@ -126,10 +126,10 @@ const App = () => {
   const [editCandidate, setEditCandidate] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // filter candidates based on their name, skills
-  const filterCandidatesHandler = (payload: string) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
     // create array of search terms
-    const searchTerms = payload.match(/\w+/g);
+    const searchTerms = e.target.value.match(/\w+/g);
     // loop through each search term
     dispatch({
       type: "SEARCH_CANDIDATES",
@@ -137,33 +137,23 @@ const App = () => {
     });
   };
 
-  // reset candidates
-  const resetCandidatesHandler = () => {
+  const handleResetCandidates = () => {
+    setSearchInput("");
     dispatch({ type: "RESET_CANDIDATES" });
   };
 
-  const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-    filterCandidatesHandler(e.target.value);
-  };
-
-  const resetHandler = () => {
-    setSearchInput("");
-    resetCandidatesHandler();
-  };
-
   // remove candidate
-  const removeCandidateHandler = (id: string) => {
+  const handleRemoveCandidate = (id: string) => {
     dispatch({ type: "REMOVE_CANDIDATE", payload: id });
   };
 
-  // show form for adding new candidate
-  const addNewCandidateHandler = () => {
+  // show add new candidate form
+  const showNewCandidateForm = () => {
     navigate("/new-candidate");
   };
 
-  // edit candidate
-  const editCandidateHandler = (candidate: Candidate) => {
+  // show edit candidate from
+  const showEditCandidateForm = (candidate: Candidate) => {
     setEditCandidate(true);
     setSelectedCandidate(candidate);
     navigate("/edit-candidate");
@@ -200,15 +190,15 @@ const App = () => {
           element={
             <>
               <MainMenu
-                resetCandidates={resetHandler}
-                addNewCandidate={addNewCandidateHandler}
+                onResetCandidates={handleResetCandidates}
+                onAddNewCandidate={showNewCandidateForm}
                 searchInput={searchInput}
-                onChange={changeInputHandler}
+                onChange={handleInputChange}
               />
               <CandidatesList
                 candidates={state.filteredCandidates}
-                removeCandidate={removeCandidateHandler}
-                editCandidate={editCandidateHandler}
+                removeCandidate={handleRemoveCandidate}
+                editCandidate={showEditCandidateForm}
               />
             </>
           }

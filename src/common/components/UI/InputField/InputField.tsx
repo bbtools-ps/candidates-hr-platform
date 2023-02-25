@@ -8,8 +8,6 @@ interface InputFieldProps
     HTMLInputElement
   > {
   label?: string;
-  name?: string;
-  id: string;
   isValid?: boolean;
   checkmarkStyle?: React.CSSProperties;
   inputClass?: string;
@@ -22,7 +20,6 @@ const InputField: React.FC<InputFieldProps> = ({
   value = "",
   className,
   id,
-  name,
   isValid,
   checkmarkStyle,
   inputClass,
@@ -46,7 +43,7 @@ const InputField: React.FC<InputFieldProps> = ({
         onChange={onChange}
         onBlur={onBlur}
         id={id}
-        name={name || id}
+        name={label}
       />
       {isValid !== undefined && isValid === true && (
         <FontAwesomeIcon

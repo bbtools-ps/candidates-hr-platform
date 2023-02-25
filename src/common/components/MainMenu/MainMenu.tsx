@@ -6,15 +6,15 @@ import Logo from "../UI/Logo/Logo";
 import classes from "./MainMenu.module.css";
 
 interface MainMenuProps {
-  resetCandidates: () => void;
-  addNewCandidate: () => void;
+  onResetCandidates: () => void;
+  onAddNewCandidate: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchInput: string;
 }
 
 const MainMenu: React.FC<MainMenuProps> = ({
-  resetCandidates,
-  addNewCandidate,
+  onResetCandidates,
+  onAddNewCandidate,
   onChange,
   searchInput,
 }) => {
@@ -33,12 +33,12 @@ const MainMenu: React.FC<MainMenuProps> = ({
             />
             {searchInput.length > 0 && (
               <ClearButton
-                onClick={resetCandidates}
+                onClick={onResetCandidates}
                 className={classes["clear-button"]}
               />
             )}
           </div>
-          <Button text="Add Candidate" icon="add" onClick={addNewCandidate} />
+          <Button text="Add Candidate" icon="add" onClick={onAddNewCandidate} />
         </div>
       </Card>
     </div>
