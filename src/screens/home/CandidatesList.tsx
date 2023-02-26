@@ -26,7 +26,7 @@ const CandidatesList: React.FC<CandidatesListProps> = ({
             />
           ))
         ) : (
-          <div className={classes["no-results"]}>No candidates found</div>
+          <div className={classes["no-results"]}>No candidates found.</div>
         )}
       </div>
     </div>

@@ -170,6 +170,7 @@ const App = () => {
       type: "ADD_CANDIDATE",
       payload: { _TYPE: "Candidate", candidate },
     });
+    handleResetCandidates();
     navigate("/");
   };
 

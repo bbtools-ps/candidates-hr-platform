@@ -38,7 +38,7 @@ describe("<CandidatesList/>", () => {
       dummyCandidates.length
     );
   });
-  it('should show a message "No candidates found" if there are no candidates to be rendered', () => {
+  it("should show a message 'No candidates found'. if there are no candidates to be rendered", () => {
     render(
       <CandidatesList
         candidates={[]}
