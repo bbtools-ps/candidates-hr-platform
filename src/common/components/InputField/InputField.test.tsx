@@ -4,7 +4,7 @@ import { describe, vi } from "vitest";
 import InputField from "./InputField";
 
 describe("<InputField/>", () => {
-  it("should render the input, the label, and the value that are comming from the props", () => {
+  it("should render the the label and the value that are comming from the props", () => {
     const testLabel = "label";
     const testValue = "value";
     render(<InputField label={testLabel} value={testValue} />);

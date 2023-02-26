@@ -184,7 +184,7 @@ describe("<CandidateForm/>", () => {
 
     expect(screen.getByRole("button", { name: /add/i })).toBeEnabled();
   });
-  it("should call only the handler function for the Add button when clicking on it", async () => {
+  it("should call the handler function only for the 'Add' when clicking on the button", async () => {
     const testHandleOnSubmit = vi.fn();
     const testHandleOnCancel = vi.fn();
     render(
@@ -205,7 +205,7 @@ describe("<CandidateForm/>", () => {
     expect(testHandleOnSubmit).toHaveBeenCalled();
     expect(testHandleOnCancel).not.toHaveBeenCalled();
   });
-  it("should call only the handler function for the Cancel button when clicking on it", async () => {
+  it("should call the handler function only for the 'Cancel' when clicking on the button", async () => {
     const testHandleOnSubmit = vi.fn();
     const testHandleOnCancel = vi.fn();
     render(
@@ -216,6 +216,8 @@ describe("<CandidateForm/>", () => {
     );
 
     await userEvent.click(screen.getByRole("button", { name: /cancel/i }));
+    await userEvent.click(screen.getByRole("button", { name: /add/i }));
+
     expect(testHandleOnSubmit).not.toHaveBeenCalled();
     expect(testHandleOnCancel).toHaveBeenCalled();
   });
@@ -242,5 +244,25 @@ describe("<CandidateForm/>", () => {
     );
     expect(() => screen.getByRole("button", { name: /add/i })).toThrow();
     expect(screen.getByRole("button", { name: /save/i })).toBeInTheDocument();
+  });
+  it("should submit the candidate data when pressing Enter and all required fields are filled with valid data", async () => {
+    const testSubmitFn = vi.fn();
+    render(<CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} />);
+
+    await userEvent.type(screen.getByLabelText(/name/i), "Name");
+    await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
+    await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
+    await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
+    await userEvent.type(screen.getByLabelText(/skills/i), "skills{enter}");
+
+    expect(testSubmitFn).toHaveBeenCalled();
+  });
+  it("should not submit the candidate data when pressing Enter if not all required fields are filled", async () => {
+    const testSubmitFn = vi.fn();
+    render(<CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} />);
+
+    await userEvent.type(screen.getByLabelText(/name/i), "Name{enter}");
+
+    expect(testSubmitFn).not.toHaveBeenCalled();
   });
 });

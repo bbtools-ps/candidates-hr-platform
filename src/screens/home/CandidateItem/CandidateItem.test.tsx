@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { describe, it, vi } from "vitest";
 import CandidateItem from "./CandidateItem";
 
 const dummyCandidate = {
@@ -41,5 +42,37 @@ describe("<CandidateItem/>", () => {
     expect(screen.getByText(dummyCandidate.dateOfBirth)).toBeInTheDocument();
     expect(screen.getByText(dummyCandidate.email)).toBeInTheDocument();
     expect(screen.getByText(dummyCandidate.skills)).toBeInTheDocument();
+  });
+  it("should call the handler function only for the 'Edit' when clicking on the button", async () => {
+    const testEdit = vi.fn();
+    const testRemove = vi.fn();
+    render(
+      <CandidateItem
+        candidate={dummyCandidate}
+        editCandidate={testEdit}
+        removeCandidate={testRemove}
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /edit/i }));
+
+    expect(testEdit).toHaveBeenCalled();
+    expect(testRemove).not.toHaveBeenCalled();
+  });
+  it("should call the handler function only for the 'Remove' when clicking on the button", async () => {
+    const testEdit = vi.fn();
+    const testRemove = vi.fn();
+    render(
+      <CandidateItem
+        candidate={dummyCandidate}
+        editCandidate={testEdit}
+        removeCandidate={testRemove}
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /remove/i }));
+
+    expect(testEdit).not.toHaveBeenCalled();
+    expect(testRemove).toHaveBeenCalled();
   });
 });

@@ -53,7 +53,7 @@ describe("<MainMenu/>", () => {
 
     expect(screen.getByRole("button", { name: /clear/i })).toBeInTheDocument();
   });
-  it("should call the only the handler function for the Add button when clicking on it", async () => {
+  it("should call the handler function only for the 'Add' when clicking on the button", async () => {
     const testHandleReset = vi.fn();
     const testHandleAdd = vi.fn();
     const testHandleChange = vi.fn();
@@ -72,7 +72,7 @@ describe("<MainMenu/>", () => {
     expect(testHandleReset).not.toHaveBeenCalled();
     expect(testHandleChange).not.toHaveBeenCalled();
   });
-  it("should call only the handler function for the Clear/Reset button when clicking on it", async () => {
+  it("should call the handler function only for the 'Clear/Reset' when clicking on the button", async () => {
     const testHandleReset = vi.fn();
     const testHandleAdd = vi.fn();
     const testHandleChange = vi.fn();
@@ -91,7 +91,7 @@ describe("<MainMenu/>", () => {
     expect(testHandleReset).toHaveBeenCalled();
     expect(testHandleChange).not.toHaveBeenCalled();
   });
-  it("should call the only the handler function for the Search input field when clicking on it", async () => {
+  it("should call the handler function only for the 'Search' when typing inside the input field", async () => {
     const testHandleReset = vi.fn();
     const testHandleAdd = vi.fn();
     const testHandleChange = vi.fn();
