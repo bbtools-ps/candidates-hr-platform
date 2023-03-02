@@ -27,10 +27,15 @@ body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background-color);
   display: grid;
   align-items: center;
   justify-content: center;
+  background-color: #001228;
+  opacity: 1;
+  background-image: radial-gradient(#095aba 2px, transparent 2px),
+    radial-gradient(#095aba 2px, #001228 2px);
+  background-size: 80px 80px;
+  background-position: 0 0, 40px 40px;
 }
 
 code {
