@@ -41,3 +41,8 @@ code {
 h1 {
   color: #fff;
 }
+
+.app {
+  text-align: center;
+  display: grid;
+}

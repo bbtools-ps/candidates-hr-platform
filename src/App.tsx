@@ -1,7 +1,6 @@
 import { useReducer, useState } from "react";
 import { Route, useNavigate } from "react-router";
 import { Routes } from "react-router-dom";
-import "./App.css";
 import Copyright from "./common/components/Copyright/Copyright";
 import MainMenu from "./common/components/MainMenu/MainMenu";
 import Protected from "./common/components/Protected";
