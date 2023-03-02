@@ -1,8 +1,8 @@
 :root {
   --border-radius: 0.3rem;
   --background-color: #2c2c2c;
-  --action-color: #2680eb;
-  --action-color-hover: #095aba;
+  --action-color: #095aba;
+  --action-color-hover: #2680eb;
   --error-color: #e34850;
   --warning-color: #e68619;
   --ok-color: #2d9d78;
