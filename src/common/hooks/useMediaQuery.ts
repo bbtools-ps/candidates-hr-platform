@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 
-const useMediaQuery = (minWidth: number) => {
-  const [result, setResult] = useState(window.innerWidth >= minWidth);
+const useMediaQuery = (query: string) => {
+  const [isMatched, setIsMatched] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= minWidth) {
-        setResult(true);
-      } else {
-        setResult(false);
-      }
+    const updateTarget = (e: MediaQueryListEvent) => {
+      setIsMatched(e.matches);
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [minWidth]);
 
-  return result;
+    const media = window.matchMedia(query);
+    media.addEventListener("change", updateTarget);
+
+    // Initially set the state
+    setIsMatched(media.matches);
+
+    return () => {
+      media.removeEventListener("change", updateTarget);
+    };
+  }, [query]);
+
+  return isMatched;
 };
 
 export default useMediaQuery;
