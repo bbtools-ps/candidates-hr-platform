@@ -3,6 +3,7 @@ import { Route, useNavigate } from "react-router";
 import { Routes } from "react-router-dom";
 import Copyright from "./common/components/Copyright/Copyright";
 import MainMenu from "./common/components/MainMenu/MainMenu";
+import PageNotFound from "./common/components/PageNotFound/PageNotFound";
 import Protected from "./common/components/Protected";
 import { Candidate } from "./common/models/Candidate";
 import { DUMMY_CANDIDATES } from "./data/data";
@@ -226,6 +227,7 @@ const App = () => {
             </Protected>
           }
         />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Copyright author="Bogdan Bogdanovic" />
     </div>

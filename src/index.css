@@ -10,6 +10,7 @@
 
 html {
   box-sizing: border-box;
+  height: 100%;
 }
 
 *,
@@ -23,6 +24,7 @@ body * {
 }
 
 body {
+  min-height: 100%;
   margin: 0;
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -43,11 +45,29 @@ code {
     monospace;
 }
 
+a {
+  color: var(--action-color-hover);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  color: var(--action-color);
+}
+
 h1 {
   color: #fff;
 }
 
-.app {
+#root {
+  min-height: 100%;
   text-align: center;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
