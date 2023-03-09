@@ -1,19 +1,15 @@
-import { lazy, Suspense, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import { Route, useNavigate } from "react-router";
 import { Routes } from "react-router-dom";
 import Copyright from "./common/components/Footer/Footer";
-import Loading from "./common/components/Loading/Loading";
 import MainMenu from "./common/components/MainMenu/MainMenu";
 import PageNotFound from "./common/components/PageNotFound/PageNotFound";
 import Protected from "./common/components/Protected";
 import { Candidate } from "./common/models/Candidate";
 import { DUMMY_CANDIDATES } from "./data/data";
+import EditCandidate from "./screens/edit-candidate/EditCandidate";
 import CandidatesList from "./screens/home/CandidatesList";
-
-const NewCandidate = lazy(() => import("./screens/new-candidate/NewCandidate"));
-const EditCandidate = lazy(
-  () => import("./screens/edit-candidate/EditCandidate")
-);
+import NewCandidate from "./screens/new-candidate/NewCandidate";
 
 interface AppState {
   allCandidates: Candidate[];
@@ -213,12 +209,10 @@ const App = () => {
         <Route
           path="/new-candidate"
           element={
-            <Suspense fallback={<Loading />}>
-              <NewCandidate
-                onCancel={handleCancel}
-                onSubmit={handleAddCandidate}
-              />
-            </Suspense>
+            <NewCandidate
+              onCancel={handleCancel}
+              onSubmit={handleAddCandidate}
+            />
           }
         />
         <Route
@@ -226,13 +220,11 @@ const App = () => {
           element={
             <Protected condition={editCandidate}>
               {selectedCandidate && (
-                <Suspense fallback={<Loading />}>
-                  <EditCandidate
-                    onCancel={handleCancel}
-                    onSubmit={handleEditCandidate}
-                    candidate={selectedCandidate}
-                  />
-                </Suspense>
+                <EditCandidate
+                  onCancel={handleCancel}
+                  onSubmit={handleEditCandidate}
+                  candidate={selectedCandidate}
+                />
               )}
             </Protected>
           }
