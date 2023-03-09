@@ -13,7 +13,6 @@ export const validateEmail = (value: string) =>
 export const validatePhoneNumber = (value: string) => /^[+]?\d+$/.test(value);
 
 export const validateDate = (value: string) => {
-  console.log(value);
   return value &&
     new Date(value) > new Date(new Date().setFullYear(1900)) &&
     new Date(value) < new Date()

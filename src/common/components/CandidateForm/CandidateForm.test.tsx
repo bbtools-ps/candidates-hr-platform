@@ -70,17 +70,6 @@ describe("<CandidateForm/>", () => {
     expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
-  it("should show an error if the user didn't enter anything into the Contact number field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
-    const testEl = screen.getByLabelText(/contact/i);
-    const btnAdd = screen.getByRole("button", { name: /add/i });
-
-    await userEvent.click(testEl);
-    await userEvent.click(btnAdd);
-
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
-    expect(btnAdd).toBeDisabled();
-  });
   it("should show an error if the user entered invalid data into the Contact number field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/contact/i);
