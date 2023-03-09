@@ -9,6 +9,7 @@
   color: #fff;
 }
 
-.author {
+.label {
+  margin-left: 0.5rem;
   text-transform: capitalize;
 }

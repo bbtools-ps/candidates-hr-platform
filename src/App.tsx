@@ -1,7 +1,7 @@
 import { useReducer, useState } from "react";
 import { Route, useNavigate } from "react-router";
 import { Routes } from "react-router-dom";
-import Copyright from "./common/components/Copyright/Copyright";
+import Copyright from "./common/components/Footer/Footer";
 import MainMenu from "./common/components/MainMenu/MainMenu";
 import PageNotFound from "./common/components/PageNotFound/PageNotFound";
 import Protected from "./common/components/Protected";
@@ -231,7 +231,7 @@ const App = () => {
         />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Copyright author="Bogdan Bogdanovic" />
+      <Copyright copyrightLabel="Bogdan Bogdanovic" />
     </div>
   );
 };
