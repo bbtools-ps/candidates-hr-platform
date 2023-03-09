@@ -162,6 +162,7 @@ const App = () => {
   // show all candidates when pressing "Cancel" on the form
   const handleCancel = () => {
     navigate("/");
+    setEditCandidate(false);
   };
 
   // add candidate into the list
@@ -181,6 +182,7 @@ const App = () => {
       payload: { _TYPE: "Candidate", candidate },
     });
     navigate("/");
+    setEditCandidate(false);
   };
 
   return (
