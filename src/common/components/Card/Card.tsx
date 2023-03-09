@@ -5,12 +5,12 @@ interface CardProps {
   className?: string;
   display?: "flex" | "grid";
   children: React.ReactNode;
-  styles?: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
 const Card: React.FC<CardProps> = ({
   className,
-  styles,
+  style,
   display = "flex",
   children,
 }) => {
@@ -19,7 +19,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <div
       className={`${className ? classes.card + " " + className : classes.card}`}
-      style={{ ...styles, display: isDesktop ? display : "grid" }}
+      style={{ ...style, display: isDesktop ? display : "grid" }}
     >
       {children}
     </div>

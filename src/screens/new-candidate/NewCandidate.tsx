@@ -11,7 +11,7 @@ interface NewCandidateProps {
 const NewCandidate: React.FC<NewCandidateProps> = ({ onCancel, onSubmit }) => {
   return (
     <div className={classes["candidate-wrapper"]}>
-      <Card display="grid">
+      <Card display="grid" style={{ marginTop: "1rem" }}>
         <h2>New candidate</h2>
         <CandidateForm onCancel={onCancel} onSubmit={onSubmit} />
       </Card>

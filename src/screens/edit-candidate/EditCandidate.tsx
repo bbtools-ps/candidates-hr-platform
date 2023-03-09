@@ -16,7 +16,7 @@ const EditCandidate: React.FC<EditCandidateProps> = ({
 }) => {
   return (
     <div className={classes["candidate-wrapper"]}>
-      <Card display="grid">
+      <Card display="grid" style={{ marginTop: "1rem" }}>
         <h2>Edit candidate</h2>
         <CandidateForm
           onCancel={onCancel}
