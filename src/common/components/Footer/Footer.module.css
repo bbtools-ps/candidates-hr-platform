@@ -1,15 +1,8 @@
 .footer {
-  position: fixed;
-  bottom: 0;
   text-align: center;
-  width: 100vw;
-}
-
-.copyright-text {
   color: #fff;
 }
 
 .label {
   margin-left: 0.5rem;
-  text-transform: capitalize;
 }

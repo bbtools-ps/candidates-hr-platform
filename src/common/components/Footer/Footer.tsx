@@ -7,10 +7,12 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ copyrightLabel }) => {
   return (
-    <footer>
-      <p className={classes["copyright-text"]}>
+    <footer className={classes.footer}>
+      <p>
         © {getCurrentYear()}.
-        <span className={classes.label}>{copyrightLabel}</span>
+        <a className={classes.label} href="https://bogdan-bogdanovic.com/">
+          {copyrightLabel}
+        </a>
       </p>
     </footer>
   );
