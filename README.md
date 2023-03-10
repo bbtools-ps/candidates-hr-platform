@@ -11,19 +11,19 @@ For now this project doesn't communicate with a database, everything is done in 
 
 ## Project setup
 
-To install all dependencies type following inside Terminal:
+To install all dependencies:
 
 `npm install`
 
-To run the project in development mode type:
+To start the project in the local development mode:
 
 `npm start`
 
-To make the build type:
+To make the build:
 
 `npm run build`
 
-To start tests type:
+To start the tests:
 
 `npm test`
 
