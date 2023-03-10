@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { describe } from "vitest";
 import App from "./App";
 
@@ -9,11 +9,7 @@ describe("<App/>", () => {
     window.history.pushState({}, "home page", "/");
   });
   it("should render the main menu, candidates list and footer components", () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     expect(screen.getByText(/candidates/i)).toBeInTheDocument();
     expect(screen.getByText(/hr assistance platform/i)).toBeInTheDocument();
     expect(
@@ -26,11 +22,7 @@ describe("<App/>", () => {
     expect(screen.getByText(/©/)).toBeInTheDocument();
   });
   it("should filter the candidates list when typing into the Search input field", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
 
     await userEvent.type(
       screen.getByPlaceholderText(/search candidate/i),
@@ -41,11 +33,7 @@ describe("<App/>", () => {
     expect(() => screen.getByText(/no candidates found/i)).toThrow();
   });
   it("should show the message 'No candidates found.' when trying to search for non existing candidate", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
 
     await userEvent.type(
       screen.getByPlaceholderText(/search candidate/i),
@@ -55,11 +43,7 @@ describe("<App/>", () => {
     expect(screen.getByText(/no candidates found/i)).toBeInTheDocument();
   });
   it("should reset the candidates search query when clicking on the Clear/Reset button", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const searchField = screen.getByPlaceholderText(/search candidate/i);
 
     await userEvent.type(searchField, "aaaaaaaa");
@@ -69,11 +53,7 @@ describe("<App/>", () => {
     expect(() => screen.getByText(/no candidates found/i)).toThrow();
   });
   it("should remove the candidate from the list when clicking on the 'Remove' button", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const totalCandidates = screen.getAllByText(/date of birth/i).length;
 
     await userEvent.click(
@@ -85,11 +65,7 @@ describe("<App/>", () => {
     );
   });
   it("should go to the 'New candidate' page when clicking on the 'Add candidate' button", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
 
     await userEvent.click(
       screen.getByRole("button", { name: /add candidate/i })
@@ -98,11 +74,7 @@ describe("<App/>", () => {
     expect(screen.getByText(/new candidate/i)).toBeInTheDocument();
   });
   it("should go back to the 'Home' page when clicking on 'Cancel' button on the 'New candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
 
     await userEvent.click(
       screen.getByRole("button", { name: /add candidate/i })
@@ -114,11 +86,7 @@ describe("<App/>", () => {
     ).toBeInTheDocument();
   });
   it("should add new candidate to the candidates list when clicking 'Add' button on the 'New candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const totalCandidates = screen.getAllByText(/date of birth/i).length;
 
     await userEvent.click(
@@ -136,11 +104,7 @@ describe("<App/>", () => {
     );
   });
   it("should keep the search query on the 'Home' page when clicking on the 'Cancel' button on the 'New candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "maggie";
 
     await userEvent.type(
@@ -157,11 +121,7 @@ describe("<App/>", () => {
     );
   });
   it("should reset the search query on the 'Home' page when clicking on the 'Add' button on the 'New candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "maggie";
 
     await userEvent.type(
@@ -181,22 +141,14 @@ describe("<App/>", () => {
     expect(screen.getByPlaceholderText(/search candidate/i)).toHaveValue("");
   });
   it("should go to the 'Edit candidate' page when clicking on the 'Edit' button", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
 
     expect(screen.getByText(/edit candidate/i)).toBeInTheDocument();
   });
   it("should go back to the 'Home' page when clicking on 'Cancel' button on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
     await userEvent.click(screen.getByRole("button", { name: /cancel/i }));
@@ -206,11 +158,7 @@ describe("<App/>", () => {
     ).toBeInTheDocument();
   });
   it("should update the candidate 'Name' when chaning it on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "test name";
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
@@ -223,11 +171,7 @@ describe("<App/>", () => {
     );
   });
   it("should update the candidate 'Date of birth' when chaning it on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "2000-03-03";
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
@@ -238,11 +182,7 @@ describe("<App/>", () => {
     expect(screen.getByText("03/03/2000")).toBeInTheDocument();
   });
   it("should update the candidate 'Contact number' when chaning it on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "+381123123";
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
@@ -253,11 +193,7 @@ describe("<App/>", () => {
     expect(screen.getByText(testValue)).toBeInTheDocument();
   });
   it("should update the candidate 'E-mail' when chaning it on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "test@test.com";
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
@@ -268,11 +204,7 @@ describe("<App/>", () => {
     expect(screen.getByText(testValue)).toBeInTheDocument();
   });
   it("should update the candidate 'Skills' when chaning it on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "test skill";
 
     await userEvent.click(screen.getAllByRole("button", { name: /edit/i })[0]);
@@ -283,11 +215,7 @@ describe("<App/>", () => {
     expect(screen.getByText(testValue)).toBeInTheDocument();
   });
   it("should keep the search query on the 'Home' page when clicking on the 'Cancel' button on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "maggie";
 
     await userEvent.type(
@@ -302,11 +230,7 @@ describe("<App/>", () => {
     );
   });
   it("should keep the search query on the 'Home' page when clicking on the 'Save' button on the 'Edit candidate' page", async () => {
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
+    render(<App />, { wrapper: BrowserRouter });
     const testValue = "maggie";
 
     await userEvent.type(
