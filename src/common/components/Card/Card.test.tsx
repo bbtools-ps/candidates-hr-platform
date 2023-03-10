@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it } from "vitest";
-import "../../../test/matchMedia.mock";
 import Card from "./Card";
 
 describe("<Card/>", () => {

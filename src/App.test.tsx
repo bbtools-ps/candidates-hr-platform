@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { HashRouter } from "react-router-dom";
 import { describe } from "vitest";
 import App from "./App";
-import "./test/matchMedia.mock";
 
 describe("<App/>", () => {
   beforeEach(() => {
