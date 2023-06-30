@@ -2,7 +2,6 @@ import {
   faEdit,
   faUserMinus,
   faUserPlus,
-  IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./Button.module.css";
@@ -19,21 +18,11 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   onClick = () => {},
 }) => {
-  let buttonIcon: IconDefinition | null = null;
-
-  switch (icon) {
-    case "add":
-      buttonIcon = faUserPlus;
-      break;
-    case "edit":
-      buttonIcon = faEdit;
-      break;
-    case "remove":
-      buttonIcon = faUserMinus;
-      break;
-    default:
-      break;
-  }
+  const buttonIcon = {
+    add: faUserPlus,
+    edit: faEdit,
+    remove: faUserMinus,
+  };
 
   return (
     <button
@@ -42,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {icon && buttonIcon && <FontAwesomeIcon icon={buttonIcon} />}
+      {icon && buttonIcon[icon] && <FontAwesomeIcon icon={buttonIcon[icon]} />}
       {text}
     </button>
   );
