@@ -1,15 +1,15 @@
-import CandidateForm from "../../common/components/CandidateForm/CandidateForm";
-import Card from "../../common/components/Card/Card";
-import { Candidate } from "../../common/models/Candidate";
-import classes from "../../common/styles/CandidateWrapper.module.css";
+import CandidateForm from "@/common/components/CandidateForm/CandidateForm";
+import Card from "@/common/components/Card/Card";
+import { Candidate } from "@/common/models";
+import classes from "@/common/styles/CandidateWrapper.module.css";
 
-interface EditCandidateProps {
+interface IEditCandidateProps {
   candidate: Candidate;
   onCancel: () => void;
   onSubmit: (payload: Candidate) => void;
 }
 
-const EditCandidate: React.FC<EditCandidateProps> = ({
+const EditCandidate: React.FC<IEditCandidateProps> = ({
   candidate,
   onCancel,
   onSubmit,

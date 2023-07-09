@@ -2,7 +2,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./InputField.module.css";
 
-interface InputFieldProps
+interface IInputFieldProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -13,7 +13,7 @@ interface InputFieldProps
   inputClass?: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputField: React.FC<IInputFieldProps> = ({
   label,
   type = "text",
   placeholder,

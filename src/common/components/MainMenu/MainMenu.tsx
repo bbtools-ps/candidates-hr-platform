@@ -5,14 +5,14 @@ import InputField from "../InputField/InputField";
 import Logo from "../Logo/Logo";
 import classes from "./MainMenu.module.css";
 
-interface MainMenuProps {
+interface IMainMenuProps {
   onResetCandidates: () => void;
   onAddNewCandidate: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchInput: string;
 }
 
-const MainMenu: React.FC<MainMenuProps> = ({
+const MainMenu: React.FC<IMainMenuProps> = ({
   onResetCandidates,
   onAddNewCandidate,
   onChange,

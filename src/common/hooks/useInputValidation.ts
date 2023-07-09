@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface UseInputValidationProps {
+interface IUseInputValidation {
   validators: ((payload: string) => boolean)[];
   initialValue?: string;
 }
@@ -8,7 +8,7 @@ interface UseInputValidationProps {
 const useInputValidation = ({
   validators,
   initialValue = "",
-}: UseInputValidationProps) => {
+}: IUseInputValidation) => {
   const [inputValue, setInputValue] = useState(initialValue);
   const [isTouched, setIsTouched] = useState(false);
   const inputIsValid = validators.length

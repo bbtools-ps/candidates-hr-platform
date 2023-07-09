@@ -1,24 +1,24 @@
-import { v4 as uuid } from "uuid";
+import useInputValidation from "@/common/hooks/useInputValidation";
+import { Candidate } from "@/common/models";
 import {
+  convertDate,
   validateDate,
   validateEmail,
   validateEmptyValue,
   validatePhoneNumber,
-} from "../../../common/functions/utils";
-import { Candidate } from "../../../common/models/Candidate";
-import useInputValidation from "../../hooks/useInputValidation";
+} from "@/common/utils";
+import { v4 as uuid } from "uuid";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import classes from "./CandidateForm.module.css";
-import { convertDate } from "./utils";
 
-interface CandidateFormProps {
+interface ICandidateFormProps {
   candidate?: Candidate;
   onCancel: () => void;
   onSubmit: (payload: Candidate) => void;
 }
 
-const CandidateForm: React.FC<CandidateFormProps> = ({
+const CandidateForm: React.FC<ICandidateFormProps> = ({
   candidate,
   onCancel,
   onSubmit,

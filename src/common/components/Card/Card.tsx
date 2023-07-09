@@ -1,14 +1,14 @@
-import useMediaQuery from "../../hooks/useMediaQuery";
+import useMediaQuery from "@/common/hooks/useMediaQuery";
 import classes from "./Card.module.css";
 
-interface CardProps {
+interface ICardProps {
   className?: string;
   display?: "flex" | "grid";
   children: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-const Card: React.FC<CardProps> = ({
+const Card: React.FC<ICardProps> = ({
   className,
   style,
   display = "flex",

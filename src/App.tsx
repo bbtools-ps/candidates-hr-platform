@@ -4,33 +4,18 @@ import { Routes } from "react-router-dom";
 import Copyright from "./common/components/Footer/Footer";
 import MainMenu from "./common/components/MainMenu/MainMenu";
 import Protected from "./common/components/Protected";
-import { Candidate } from "./common/models/Candidate";
+import {
+  Candidate,
+  IAppAction,
+  IAppActionType,
+  IAppState,
+} from "./common/models";
 import { DUMMY_CANDIDATES } from "./data/data";
 import PageNotFound from "./screens/404/PageNotFound";
 import EditCandidate from "./screens/edit-candidate/EditCandidate";
 import CandidatesList from "./screens/home/CandidatesList";
 import NewCandidate from "./screens/new-candidate/NewCandidate";
-
-interface AppState {
-  allCandidates: Candidate[];
-  showAddCandidate: boolean;
-  showEditCandidate: boolean;
-  filteredCandidates: Candidate[];
-  searchTerm: string;
-}
-
-interface AppAction {
-  type:
-    | "ADD_CANDIDATE"
-    | "EDIT_CANDIDATE"
-    | "REMOVE_CANDIDATE"
-    | "SEARCH_CANDIDATES"
-    | "RESET_CANDIDATES";
-  payload?:
-    | string
-    | { _TYPE: "Candidate"; candidate: Candidate }
-    | { _TYPE: "Search"; searchTerms: RegExpMatchArray | null };
-}
+import CandidatesListContextProvider from "./store/candidates-list-context";
 
 const INITIAL_VALUES = {
   allCandidates: DUMMY_CANDIDATES,
@@ -40,79 +25,74 @@ const INITIAL_VALUES = {
   searchTerm: "",
 };
 
-const candidatesReducer = (state: AppState, action: AppAction) => {
+const candidatesReducer = (state: IAppState, action: IAppAction) => {
   const { type, payload } = action;
   switch (type) {
-    case "ADD_CANDIDATE":
-      if (typeof payload !== "string" && payload?._TYPE === "Candidate") {
-        return {
-          ...state,
-          allCandidates: [payload.candidate, ...state.allCandidates],
-          filteredCandidates: [payload.candidate, ...state.filteredCandidates],
-        };
-      } else {
-        return state;
-      }
-    case "EDIT_CANDIDATE":
-      if (typeof payload !== "string" && payload?._TYPE === "Candidate") {
-        const editedCandidateAll = state.allCandidates.map((candidate) => {
+    case IAppActionType.ADD_CANDIDATE:
+      if (payload?._TYPE !== IAppActionType.ADD_CANDIDATE) return state;
+
+      return {
+        ...state,
+        allCandidates: [payload.candidate, ...state.allCandidates],
+        filteredCandidates: [payload.candidate, ...state.filteredCandidates],
+      };
+    case IAppActionType.EDIT_CANDIDATE:
+      if (payload?._TYPE !== IAppActionType.EDIT_CANDIDATE) return state;
+
+      const editedCandidateAll = state.allCandidates.map((candidate) => {
+        return candidate.id === payload.candidate?.id
+          ? payload.candidate
+          : candidate;
+      });
+      const editedCandidateFilter = state.filteredCandidates.map(
+        (candidate) => {
           return candidate.id === payload.candidate?.id
             ? payload.candidate
             : candidate;
-        });
-        const editedCandidateFilter = state.filteredCandidates.map(
-          (candidate) => {
-            return candidate.id === payload.candidate?.id
-              ? payload.candidate
-              : candidate;
-          }
-        );
-        return {
-          ...state,
-          allCandidates: editedCandidateAll,
-          filteredCandidates: editedCandidateFilter,
-        };
-      } else {
-        return state;
-      }
-    case "REMOVE_CANDIDATE":
-      if (typeof payload === "string") {
-        const removedCandidateAll = state.allCandidates.filter((candidate) => {
-          return candidate.id !== payload;
-        });
-        const removedCandidateFilter = state.filteredCandidates.filter(
-          (candidate) => {
-            return candidate.id !== payload;
-          }
-        );
-        return {
-          ...state,
-          allCandidates: removedCandidateAll,
-          filteredCandidates: removedCandidateFilter,
-        };
-      } else {
-        return state;
-      }
-    case "SEARCH_CANDIDATES":
+        }
+      );
+
+      return {
+        ...state,
+        allCandidates: editedCandidateAll,
+        filteredCandidates: editedCandidateFilter,
+      };
+    case IAppActionType.REMOVE_CANDIDATE:
+      if (payload?._TYPE !== IAppActionType.REMOVE_CANDIDATE) return state;
+
+      const removedCandidateAll = state.allCandidates.filter((candidate) => {
+        return candidate.id !== payload.id;
+      });
+      const removedCandidateFilter = state.filteredCandidates.filter(
+        (candidate) => {
+          return candidate.id !== payload.id;
+        }
+      );
+
+      return {
+        ...state,
+        allCandidates: removedCandidateAll,
+        filteredCandidates: removedCandidateFilter,
+      };
+    case IAppActionType.SEARCH_CANDIDATES:
       if (
-        typeof payload !== "string" &&
-        payload?._TYPE === "Search" &&
-        payload.searchTerms?.length
-      ) {
-        const filteredCandidates = state.allCandidates.filter(
-          (candidate) =>
-            payload.searchTerms?.some((term) => {
-              const termReg = new RegExp(term, "i");
-              return (
-                termReg.test(candidate.name) || termReg.test(candidate.skills)
-              );
-            }) && candidate
-        );
-        return { ...state, filteredCandidates };
-      } else {
+        payload?._TYPE !== IAppActionType.SEARCH_CANDIDATES ||
+        !payload.searchTerms?.length
+      )
         return { ...state, filteredCandidates: [...state.allCandidates] };
-      }
-    case "RESET_CANDIDATES":
+
+      const filteredCandidates = state.allCandidates.filter(
+        (candidate) =>
+          payload.searchTerms?.some((term) => {
+            const termReg = new RegExp(term, "i");
+            return (
+              termReg.test(candidate.name) || termReg.test(candidate.skills)
+            );
+          }) && candidate
+      );
+
+      return { ...state, filteredCandidates };
+    case IAppActionType.RESET_CANDIDATES:
       return { ...state, filteredCandidates: [...state.allCandidates] };
     default:
       throw new Error();
@@ -132,19 +112,22 @@ const App = () => {
     const searchTerms = e.target.value.match(/\w+/g);
     // loop through each search term
     dispatch({
-      type: "SEARCH_CANDIDATES",
-      payload: { _TYPE: "Search", searchTerms },
+      type: IAppActionType.SEARCH_CANDIDATES,
+      payload: { _TYPE: IAppActionType.SEARCH_CANDIDATES, searchTerms },
     });
   };
 
   const handleResetCandidates = () => {
     setSearchInput("");
-    dispatch({ type: "RESET_CANDIDATES" });
+    dispatch({ type: IAppActionType.RESET_CANDIDATES });
   };
 
   // remove candidate
   const handleRemoveCandidate = (id: string) => {
-    dispatch({ type: "REMOVE_CANDIDATE", payload: id });
+    dispatch({
+      type: IAppActionType.REMOVE_CANDIDATE,
+      payload: { _TYPE: IAppActionType.REMOVE_CANDIDATE, id },
+    });
   };
 
   // show add new candidate form
@@ -168,8 +151,8 @@ const App = () => {
   // add candidate into the list
   const handleAddCandidate = (candidate: Candidate) => {
     dispatch({
-      type: "ADD_CANDIDATE",
-      payload: { _TYPE: "Candidate", candidate },
+      type: IAppActionType.ADD_CANDIDATE,
+      payload: { _TYPE: IAppActionType.ADD_CANDIDATE, candidate },
     });
     handleResetCandidates();
     navigate("/");
@@ -178,61 +161,63 @@ const App = () => {
   // edit candidate from the list
   const handleEditCandidate = (candidate: Candidate) => {
     dispatch({
-      type: "EDIT_CANDIDATE",
-      payload: { _TYPE: "Candidate", candidate },
+      type: IAppActionType.EDIT_CANDIDATE,
+      payload: { _TYPE: IAppActionType.EDIT_CANDIDATE, candidate },
     });
     navigate("/");
     setEditCandidate(false);
   };
 
   return (
-    <div className="app">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <MainMenu
-                onResetCandidates={handleResetCandidates}
-                onAddNewCandidate={showNewCandidateForm}
-                searchInput={searchInput}
-                onChange={handleInputChange}
-              />
-              <CandidatesList
-                candidates={state.filteredCandidates}
-                removeCandidate={handleRemoveCandidate}
-                editCandidate={showEditCandidateForm}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/new-candidate"
-          element={
-            <NewCandidate
-              onCancel={handleCancel}
-              onSubmit={handleAddCandidate}
-            />
-          }
-        />
-        <Route
-          path="/edit-candidate"
-          element={
-            <Protected condition={editCandidate}>
-              {selectedCandidate && (
-                <EditCandidate
-                  onCancel={handleCancel}
-                  onSubmit={handleEditCandidate}
-                  candidate={selectedCandidate}
+    <CandidatesListContextProvider>
+      <div className="app">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <MainMenu
+                  onResetCandidates={handleResetCandidates}
+                  onAddNewCandidate={showNewCandidateForm}
+                  searchInput={searchInput}
+                  onChange={handleInputChange}
                 />
-              )}
-            </Protected>
-          }
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-      <Copyright copyrightLabel="Bogdan Bogdanovic" />
-    </div>
+                <CandidatesList
+                  candidates={state.filteredCandidates}
+                  removeCandidate={handleRemoveCandidate}
+                  editCandidate={showEditCandidateForm}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/new-candidate"
+            element={
+              <NewCandidate
+                onCancel={handleCancel}
+                onSubmit={handleAddCandidate}
+              />
+            }
+          />
+          <Route
+            path="/edit-candidate"
+            element={
+              <Protected condition={editCandidate}>
+                {selectedCandidate && (
+                  <EditCandidate
+                    onCancel={handleCancel}
+                    onSubmit={handleEditCandidate}
+                    candidate={selectedCandidate}
+                  />
+                )}
+              </Protected>
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Copyright copyrightLabel="Bogdan Bogdanovic" />
+      </div>
+    </CandidatesListContextProvider>
   );
 };
 

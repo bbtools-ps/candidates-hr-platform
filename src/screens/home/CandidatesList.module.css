@@ -1,17 +1,12 @@
 .candidates-list-wrapper {
-  width: 100vw;
-  display: grid;
   justify-content: center;
   align-content: flex-start;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
+  width: 100%;
 }
 
 .candidates-list {
-  display: grid;
-  width: 100vw;
   justify-content: center;
-  padding-top: 0.5rem;
 }
 
 .candidates-list p,

@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
 
-interface ProtectedProps {
+interface IProtectedProps {
   condition: boolean;
   children: React.ReactNode;
 }
 
-const Protected: React.FC<ProtectedProps> = ({ condition, children }) => {
+const Protected: React.FC<IProtectedProps> = ({ condition, children }) => {
   if (!condition) return <Navigate to="/" replace />;
   return <>{children}</>;
 };

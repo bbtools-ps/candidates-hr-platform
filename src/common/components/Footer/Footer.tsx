@@ -1,11 +1,11 @@
-import { getCurrentYear } from "../../../common/functions/utils";
+import { getCurrentYear } from "@/common/utils";
 import classes from "./Footer.module.css";
 
-interface FooterProps {
+interface IFooterProps {
   copyrightLabel: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ copyrightLabel }) => {
+const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
   return (
     <footer className={classes.footer}>
       <p>

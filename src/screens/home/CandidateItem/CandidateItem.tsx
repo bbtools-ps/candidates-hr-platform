@@ -1,15 +1,15 @@
-import Button from "../../../common/components/Button/Button";
-import Card from "../../../common/components/Card/Card";
-import { Candidate } from "../../../common/models/Candidate";
+import Button from "@/common/components/Button/Button";
+import Card from "@/common/components/Card/Card";
+import { Candidate } from "@/common/models";
 import classes from "./CandidateItem.module.css";
 
-interface CandidateItemProps {
+interface ICandidateItemProps {
   candidate: Candidate;
   removeCandidate: (payload: string) => void;
   editCandidate: (payload: Candidate) => void;
 }
 
-const CandidateItem: React.FC<CandidateItemProps> = ({
+const CandidateItem: React.FC<ICandidateItemProps> = ({
   candidate,
   removeCandidate,
   editCandidate,

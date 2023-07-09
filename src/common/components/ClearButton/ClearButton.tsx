@@ -2,13 +2,13 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./ClearButton.module.css";
 
-interface ClearButtonProps
+interface IClearButtonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {}
 
-const ClearButton: React.FC<ClearButtonProps> = ({ onClick, className }) => {
+const ClearButton: React.FC<IClearButtonProps> = ({ onClick, className }) => {
   return (
     <button
       onClick={onClick}

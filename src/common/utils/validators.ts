@@ -1,10 +1,3 @@
-export const getCurrentYear = () => {
-  const date = new Date();
-  return date.getFullYear();
-};
-
-// VALIDATORS
-
 export const validateEmptyValue = (value: string) => value.trim() !== "";
 
 export const validateEmail = (value: string) =>
