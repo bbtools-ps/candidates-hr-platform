@@ -21,4 +21,11 @@ const matchMediaMock = vi.fn((query: unknown) => ({
   dispatchEvent: vi.fn(),
 }));
 
+const resizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
 vi.stubGlobal("matchMedia", matchMediaMock);
+vi.stubGlobal("ResizeObserver", resizeObserver);

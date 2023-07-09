@@ -54,14 +54,13 @@ describe("<App/>", () => {
   });
   it("should remove the candidate from the list when clicking on the 'Remove' button", async () => {
     render(<App />, { wrapper: BrowserRouter });
-    const totalCandidates = screen.getAllByText(/date of birth/i).length;
 
     await userEvent.click(
       screen.getAllByRole("button", { name: /remove/i })[0]
     );
 
-    expect(screen.getAllByText(/date of birth/i).length).toBe(
-      totalCandidates - 1
+    expect(screen.getAllByText(/date of birth/i)[0]).toHaveTextContent(
+      "06/18/1995"
     );
   });
   it("should go to the 'New candidate' page when clicking on the 'Add candidate' button", async () => {
@@ -87,7 +86,6 @@ describe("<App/>", () => {
   });
   it("should add new candidate to the candidates list when clicking 'Add' button on the 'New candidate' page", async () => {
     render(<App />, { wrapper: BrowserRouter });
-    const totalCandidates = screen.getAllByText(/date of birth/i).length;
 
     await userEvent.click(
       screen.getByRole("button", { name: /add candidate/i })
@@ -99,8 +97,8 @@ describe("<App/>", () => {
     await userEvent.type(screen.getByLabelText(/skills/i), "skills");
     await userEvent.click(screen.getByRole("button", { name: /add/i }));
 
-    expect(screen.getAllByText(/date of birth/i)).toHaveLength(
-      totalCandidates + 1
+    expect(screen.getAllByText(/date of birth/i)[0]).toHaveTextContent(
+      "03/03/2000"
     );
   });
   it("should keep the search query on the 'Home' page when clicking on the 'Cancel' button on the 'New candidate' page", async () => {
