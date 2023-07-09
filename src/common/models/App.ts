@@ -20,8 +20,10 @@ export interface IAppAction {
   type: IAppActionType;
   payload?:
     | { _TYPE: IAppActionType.REMOVE_CANDIDATE; id: string }
-    | { _TYPE: IAppActionType.ADD_CANDIDATE; candidate: Candidate }
-    | { _TYPE: IAppActionType.EDIT_CANDIDATE; candidate: Candidate }
+    | {
+        _TYPE: IAppActionType.ADD_CANDIDATE | IAppActionType.EDIT_CANDIDATE;
+        candidate: Candidate;
+      }
     | {
         _TYPE: IAppActionType.SEARCH_CANDIDATES;
         searchTerms: RegExpMatchArray | null;

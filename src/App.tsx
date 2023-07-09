@@ -95,7 +95,7 @@ const candidatesReducer = (state: IAppState, action: IAppAction) => {
     case IAppActionType.RESET_CANDIDATES:
       return { ...state, filteredCandidates: [...state.allCandidates] };
     default:
-      throw new Error();
+      return state;
   }
 };
 
