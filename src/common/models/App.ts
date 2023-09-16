@@ -26,6 +26,6 @@ export interface IAppAction {
       }
     | {
         _TYPE: IAppActionType.SEARCH_CANDIDATES;
-        searchTerms: RegExpMatchArray | null;
+        searchTerms: RegExp[] | null;
       };
 }

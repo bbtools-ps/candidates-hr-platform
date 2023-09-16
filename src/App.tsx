@@ -83,11 +83,8 @@ const candidatesReducer = (state: IAppState, action: IAppAction) => {
 
       const filteredCandidates = state.allCandidates.filter(
         (candidate) =>
-          payload.searchTerms?.some((term) => {
-            const termReg = new RegExp(term, "i");
-            return (
-              termReg.test(candidate.name) || termReg.test(candidate.skills)
-            );
+          payload.searchTerms?.every((term) => {
+            return term.test(candidate.name) || term.test(candidate.skills);
           }) && candidate
       );
 
@@ -109,7 +106,10 @@ const App = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
     // create array of search terms
-    const searchTerms = e.target.value.match(/\w+/g);
+    const searchTerms = e.target.value
+      .replace(/\s+/g, " ")
+      .split(" ")
+      .map((term) => new RegExp(term, "i"));
     // loop through each search term
     dispatch({
       type: IAppActionType.SEARCH_CANDIDATES,
