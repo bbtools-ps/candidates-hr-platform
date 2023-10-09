@@ -84,7 +84,13 @@ const candidatesReducer = (state: IAppState, action: IAppAction) => {
       const searchTerms = payload.searchTerms
         .replace(/\s+/g, " ")
         .split(" ")
-        .map((term) => new RegExp(term, "i"));
+        .map((term) => {
+          const escapedSearchInput = term.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+          );
+          return new RegExp(escapedSearchInput, "i");
+        });
 
       const filteredCandidates = state.allCandidates.filter(
         (candidate) =>
