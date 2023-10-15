@@ -6,14 +6,17 @@
 
 .main-menu {
   border-radius: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
   margin: 0;
 }
 
 .search-bar-wrapper {
-  gap: 1rem;
+  display: flex;
   align-items: flex-start;
+  gap: 1rem;
 }
 
 .search-bar {
@@ -42,7 +45,7 @@
     gap: 0.5rem;
   }
   .search-bar-wrapper {
-    display: grid;
+    flex-direction: column;
   }
 }
 
@@ -51,7 +54,7 @@
     gap: 2rem;
   }
   .search-bar-wrapper {
-    display: flex;
+    flex-direction: row;
   }
 }
 

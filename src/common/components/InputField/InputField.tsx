@@ -27,13 +27,7 @@ const InputField: React.FC<IInputFieldProps> = ({
   onBlur,
 }) => {
   return (
-    <div
-      className={`${
-        className
-          ? classes["input-field"] + " " + className
-          : classes["input-field"]
-      }`}
-    >
+    <div className={`${classes["input-field"]} ${className || ""}}`}>
       <label htmlFor={id}>{label}</label>
       <input
         type={type}

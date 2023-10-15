@@ -1,26 +1,14 @@
-import useMediaQuery from "@/common/hooks/useMediaQuery";
 import classes from "./Card.module.css";
 
 interface ICardProps {
   className?: string;
-  display?: "flex" | "grid";
   children: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-const Card: React.FC<ICardProps> = ({
-  className,
-  style,
-  display = "flex",
-  children,
-}) => {
-  const isDesktop = useMediaQuery("(min-width: 735px)");
-
+const Card: React.FC<ICardProps> = ({ className, style, children }) => {
   return (
-    <div
-      className={`${className ? classes.card + " " + className : classes.card}`}
-      style={{ ...style, display: isDesktop ? display : "grid" }}
-    >
+    <div className={`${classes.card} ${className || ""}`} style={style}>
       {children}
     </div>
   );

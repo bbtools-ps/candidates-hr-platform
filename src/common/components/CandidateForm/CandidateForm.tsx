@@ -10,6 +10,7 @@ import {
 import { v4 as uuid } from "uuid";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
+import TagsInput from "../TagsInput/TagsInput";
 import classes from "./CandidateForm.module.css";
 
 interface ICandidateFormProps {
@@ -165,7 +166,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
           Please fill out this field with a valid email.
         </p>
       )}
-      <InputField
+      {/* <InputField
         id="candidate-skills"
         label="Skills"
         className={skillsError ? classes.error : ""}
@@ -176,7 +177,12 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
       />
       {skillsError && (
         <p className={classes.error}>Please fill out this field.</p>
-      )}
+      )} */}
+      <TagsInput
+        id="candidate-skills"
+        label="Skills"
+        placeholder="Press comma to add skills"
+      />
       <div className={classes["form-controls"]}>
         <Button
           type="submit"

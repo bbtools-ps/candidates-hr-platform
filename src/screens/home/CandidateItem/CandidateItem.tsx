@@ -15,20 +15,24 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
   editCandidate,
 }) => {
   return (
-    <Card display="grid" className={classes["candidate-wrapper"]}>
-      <h2 className={classes.name}>{candidate.name}</h2>
-      <p className={classes["birth-date"]}>
-        Date of birth: <span>{candidate.dateOfBirth}</span>
-      </p>
-      <p className={classes["contact-number"]}>
-        Contact number: <span>{candidate.contactNumber}</span>
-      </p>
-      <p className={classes.email}>
-        E-mail: <span>{candidate.email}</span>
-      </p>
-      <p className={classes.skills}>
-        Skills: <span>{candidate.skills}</span>
-      </p>
+    <Card className={classes["candidate-wrapper"]}>
+      <h2 className={classes.name} style={{ marginTop: "0.5rem" }}>
+        {candidate.name}
+      </h2>
+      <div className={classes.description}>
+        <p className={classes["birth-date"]}>
+          Date of birth: <span>{candidate.dateOfBirth}</span>
+        </p>
+        <p className={classes["contact-number"]}>
+          Contact number: <span>{candidate.contactNumber}</span>
+        </p>
+        <p className={classes.email}>
+          E-mail: <span>{candidate.email}</span>
+        </p>
+        <p className={classes.skills}>
+          Skills: <span>{candidate.skills}</span>
+        </p>
+      </div>
       <div className={classes.controls}>
         <Button
           text="Edit"

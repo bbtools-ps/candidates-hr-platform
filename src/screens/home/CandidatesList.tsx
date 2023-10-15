@@ -32,8 +32,8 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
     ({ index, style }: ListChildComponentProps) => (
       <div style={{ ...style, display: "flex", justifyContent: "center" }}>
         <CandidateItem
-          candidate={candidates[index]}
           key={candidates[index].id}
+          candidate={candidates[index]}
           removeCandidate={removeCandidate}
           editCandidate={editCandidate}
         />
