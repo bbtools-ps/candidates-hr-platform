@@ -19,6 +19,14 @@
   font-weight: 700;
 }
 
+.skill {
+  color: var(--action-color);
+  border: 1px solid var(--action-color);
+  margin-right: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
 .controls {
   display: flex;
   gap: 1rem;

@@ -8,7 +8,7 @@ const dummyCandidate = {
   dateOfBirth: "03/12/1990",
   contactNumber: "+381662312123",
   email: "maggie.frank@gmail.com",
-  skills: "PHP, MySql",
+  skills: ["PHP", "MySql"],
   id: "1",
 };
 

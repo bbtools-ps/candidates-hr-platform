@@ -30,7 +30,12 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
           E-mail: <span>{candidate.email}</span>
         </p>
         <p className={classes.skills}>
-          Skills: <span>{candidate.skills}</span>
+          {`Skills: `}
+          {candidate.skills.map((item, index) => (
+            <span key={index} className={classes.skill}>
+              {item}
+            </span>
+          ))}
         </p>
       </div>
       <div className={classes.controls}>

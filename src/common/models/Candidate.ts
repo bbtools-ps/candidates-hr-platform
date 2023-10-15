@@ -1,8 +1,8 @@
-export interface Candidate {
+export type Candidate = {
   name: string;
   dateOfBirth: string;
   contactNumber: string;
   email: string;
-  skills: string;
+  skills: string[];
   id: string;
-}
+};

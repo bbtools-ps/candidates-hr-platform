@@ -95,7 +95,10 @@ const candidatesReducer = (state: IAppState, action: IAppAction) => {
       const filteredCandidates = state.allCandidates.filter(
         (candidate) =>
           searchTerms.every((term) => {
-            return term.test(candidate.name) || term.test(candidate.skills);
+            return (
+              term.test(candidate.name) ||
+              candidate.skills.find((skill) => term.test(skill))
+            );
           }) && candidate
       );
 

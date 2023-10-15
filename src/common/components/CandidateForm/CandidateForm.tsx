@@ -64,24 +64,13 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     validators: [validateEmptyValue, validateEmail],
     initialValue: candidate?.email,
   });
-  const {
-    inputValue: skills,
-    inputChangeHandler: skillsChangeHandler,
-    inputBlurHandler: skillsBlurHandler,
-    inputIsValid: skillsIsValid,
-    hasError: skillsError,
-  } = useInputValidation({
-    validators: [validateEmptyValue],
-    initialValue: candidate?.skills,
-  });
   let formIsValid = false;
 
   if (
     nameIsValid &&
     dateofBirthIsValid &&
     contactNumberIsValid &&
-    emailIsValid &&
-    skillsIsValid
+    emailIsValid
   ) {
     formIsValid = true;
   }
@@ -102,7 +91,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
       dateOfBirth: selectedDate,
       contactNumber,
       email,
-      skills,
+      skills: [],
       id: candidate?.id || uuid(),
     };
     onSubmit(newCandidate);
