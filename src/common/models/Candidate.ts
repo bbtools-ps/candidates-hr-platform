@@ -3,6 +3,6 @@ export type Candidate = {
   dateOfBirth: string;
   contactNumber: string;
   email: string;
-  skills: string[];
+  skills: { id: string; value: string }[];
   id: string;
 };

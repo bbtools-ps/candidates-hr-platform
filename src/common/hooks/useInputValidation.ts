@@ -5,7 +5,7 @@ interface IUseInputValidation {
   initialValue?: string;
 }
 
-const useInputValidation = ({
+export const useInputValidation = ({
   validators,
   initialValue = "",
 }: IUseInputValidation) => {
@@ -38,5 +38,3 @@ const useInputValidation = ({
     ...(hasError !== null && { hasError }),
   };
 };
-
-export default useInputValidation;

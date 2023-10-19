@@ -6,26 +6,40 @@
 
 .name {
   text-transform: capitalize;
+  width: 100%;
 }
 
 .description {
-  align-self: flex-start;
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 1rem;
+  overflow: auto;
+  width: 100%;
 }
 
 .description span {
   font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+.description p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .skill {
   color: var(--action-color);
   border: 1px solid var(--action-color);
-  margin-right: 0.5rem;
   padding: 0.2rem 0.5rem;
   border-radius: 6px;
+  margin: 0.25rem 0 0.25rem 0.5rem;
 }
+
+/* .skill:first-child {
+  margin: 0 0 0 0.5rem;
+} */
 
 .controls {
   display: flex;

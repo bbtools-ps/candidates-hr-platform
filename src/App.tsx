@@ -21,7 +21,10 @@ const INITIAL_VALUES = {
   allCandidates: DUMMY_CANDIDATES,
   showAddCandidate: false,
   showEditCandidate: false,
-  filteredCandidates: [...DUMMY_CANDIDATES],
+  filteredCandidates: DUMMY_CANDIDATES.map((candidate) => ({
+    ...candidate,
+    skills: candidate.skills.map((skill) => ({ ...skill })),
+  })),
   searchTerm: "",
 };
 
@@ -97,7 +100,7 @@ const candidatesReducer = (state: IAppState, action: IAppAction) => {
           searchTerms.every((term) => {
             return (
               term.test(candidate.name) ||
-              candidate.skills.find((skill) => term.test(skill))
+              candidate.skills.find((skill) => term.test(skill.value))
             );
           }) && candidate
       );

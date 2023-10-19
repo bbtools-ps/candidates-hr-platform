@@ -31,9 +31,9 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
         </p>
         <p className={classes.skills}>
           {`Skills: `}
-          {candidate.skills.map((item, index) => (
-            <span key={index} className={classes.skill}>
-              {item}
+          {candidate.skills.map(({ value, id }) => (
+            <span key={id} className={classes.skill}>
+              {value}
             </span>
           ))}
         </p>

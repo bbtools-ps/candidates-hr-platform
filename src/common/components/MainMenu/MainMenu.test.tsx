@@ -24,7 +24,9 @@ describe("<MainMenu/>", () => {
   expect(
     screen.getByRole("button", { name: /add candidate/i })
   ).toBeInTheDocument();
-  expect(() => screen.getByRole("button", { name: /clear/i })).toThrow();
+  expect(
+    screen.queryByRole("button", { name: /clear/i })
+  ).not.toBeInTheDocument();
   it("should display value in the Search input field that is comming from the props", () => {
     const testValue = "test";
     render(

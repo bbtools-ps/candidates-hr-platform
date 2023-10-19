@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { debounce } from "../utils";
 
-const useElementSize = (elementRef: React.RefObject<HTMLElement>) => {
+export const useElementSize = (elementRef: React.RefObject<HTMLElement>) => {
   const [elementSize, setElementSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -27,5 +27,3 @@ const useElementSize = (elementRef: React.RefObject<HTMLElement>) => {
 
   return elementSize;
 };
-
-export default useElementSize;

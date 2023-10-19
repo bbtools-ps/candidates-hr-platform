@@ -7,7 +7,10 @@ const dummyCandidates = [
     dateOfBirth: "03/12/1990",
     contactNumber: "+381662312123",
     email: "maggie.frank@gmail.com",
-    skills: ["PHP", "MySql"],
+    skills: [
+      { id: "1", value: "PHP" },
+      { id: "2", value: "MySql" },
+    ],
     id: "1",
   },
   {
@@ -15,7 +18,10 @@ const dummyCandidates = [
     dateOfBirth: "06/18/1995",
     contactNumber: "+381662312123",
     email: "ruby.elliott@gmail.com",
-    skills: ["Adobe Photoshop, Adobe XD"],
+    skills: [
+      { id: "3", value: "Adobe Photoshop" },
+      { id: "4", value: "Adobe XD" },
+    ],
     id: "2",
   },
 ];

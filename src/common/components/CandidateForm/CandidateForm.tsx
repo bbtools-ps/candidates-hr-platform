@@ -1,4 +1,4 @@
-import useInputValidation from "@/common/hooks/useInputValidation";
+import { useInputValidation, useTagsInput } from "@/common/hooks";
 import { Candidate } from "@/common/models";
 import {
   convertDate,
@@ -64,13 +64,22 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     validators: [validateEmptyValue, validateEmail],
     initialValue: candidate?.email,
   });
+  const {
+    tags: skills,
+    value: skill,
+    handleBlur: skillBlurHandler,
+    handleKeyUp: skillKeyUpHandler,
+    handleChange: skillChangeHandler,
+    removeTags,
+  } = useTagsInput(candidate?.skills);
   let formIsValid = false;
 
   if (
     nameIsValid &&
     dateofBirthIsValid &&
     contactNumberIsValid &&
-    emailIsValid
+    emailIsValid &&
+    skills.length
   ) {
     formIsValid = true;
   }
@@ -91,7 +100,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
       dateOfBirth: selectedDate,
       contactNumber,
       email,
-      skills: [],
+      skills,
       id: candidate?.id || uuid(),
     };
     onSubmit(newCandidate);
@@ -155,22 +164,16 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
           Please fill out this field with a valid email.
         </p>
       )}
-      {/* <InputField
-        id="candidate-skills"
-        label="Skills"
-        className={skillsError ? classes.error : ""}
-        onChange={skillsChangeHandler}
-        onBlur={skillsBlurHandler}
-        value={skills}
-        isValid={skillsIsValid}
-      />
-      {skillsError && (
-        <p className={classes.error}>Please fill out this field.</p>
-      )} */}
       <TagsInput
         id="candidate-skills"
         label="Skills"
         placeholder="Press comma to add skills"
+        tags={skills}
+        value={skill}
+        onChange={skillChangeHandler}
+        onBlur={skillBlurHandler}
+        onKeyUp={skillKeyUpHandler}
+        onRemoveTags={removeTags}
       />
       <div className={classes["form-controls"]}>
         <Button

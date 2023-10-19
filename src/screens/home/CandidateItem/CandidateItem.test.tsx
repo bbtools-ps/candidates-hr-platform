@@ -8,7 +8,10 @@ const dummyCandidate = {
   dateOfBirth: "03/12/1990",
   contactNumber: "+381662312123",
   email: "maggie.frank@gmail.com",
-  skills: ["PHP", "MySql"],
+  skills: [
+    { id: "1", value: "PHP" },
+    { id: "2", value: "MySql" },
+  ],
   id: "1",
 };
 
@@ -42,7 +45,7 @@ describe("<CandidateItem/>", () => {
     expect(screen.getByText(dummyCandidate.dateOfBirth)).toBeInTheDocument();
     expect(screen.getByText(dummyCandidate.email)).toBeInTheDocument();
     for (const skill of dummyCandidate.skills) {
-      expect(screen.getByText(skill)).toBeInTheDocument();
+      expect(screen.getByText(skill.value)).toBeInTheDocument();
     }
   });
   it("should call the handler function only for the 'Edit' when clicking on the button", async () => {

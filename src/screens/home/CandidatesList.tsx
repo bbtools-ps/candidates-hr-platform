@@ -1,4 +1,4 @@
-import useElementSize from "@/common/hooks/useElementSize";
+import { useElementSize } from "@/common/hooks";
 import { Candidate } from "@/common/models";
 import { CandidatesListContext } from "@/store/candidates-list-context";
 import { useCallback, useContext, useEffect, useRef } from "react";

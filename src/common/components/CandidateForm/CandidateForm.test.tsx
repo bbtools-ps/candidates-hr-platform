@@ -123,7 +123,9 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(testEl, testValue);
     await userEvent.click(btnAdd);
 
-    expect(() => screen.getByText(/please fill out this field/i)).toThrow();
+    expect(
+      screen.queryByText(/please fill out this field/i)
+    ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
   it("should still keep the button disabled if the user just entered valid data into the Contact number field", async () => {
@@ -135,7 +137,9 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(testEl, testValue);
     await userEvent.click(btnAdd);
 
-    expect(() => screen.getByText(/please fill out this field/i)).toThrow();
+    expect(
+      screen.queryByText(/please fill out this field/i)
+    ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
   it("should still keep the button disabled if the user just entered valid data into the E-mail field", async () => {
@@ -147,7 +151,9 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(testEl, testValue);
     await userEvent.click(btnAdd);
 
-    expect(() => screen.getByText(/please fill out this field/i)).toThrow();
+    expect(
+      screen.queryByText(/please fill out this field/i)
+    ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
   it("should still keep the button disabled if the user just entered valid data into the Skills field", async () => {
@@ -159,7 +165,9 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(testEl, testValue);
     await userEvent.click(btnAdd);
 
-    expect(() => screen.getByText(/please fill out this field/i)).toThrow();
+    expect(
+      screen.queryByText(/please fill out this field/i)
+    ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
   it("should enable the Add button if the user entered all valid values", async () => {
@@ -169,7 +177,7 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
     await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
     await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
-    await userEvent.type(screen.getByLabelText(/skills/i), "skills");
+    await userEvent.type(screen.getByLabelText(/skills/i), "skills,");
 
     expect(screen.getByRole("button", { name: /add/i })).toBeEnabled();
   });
@@ -213,15 +221,20 @@ describe("<CandidateForm/>", () => {
   it("should show the text for the submit button as Add when adding new candidate", () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
-    expect(() => screen.getByRole("button", { name: /edit/i })).toThrow();
+    expect(
+      screen.queryByRole("button", { name: /edit/i })
+    ).not.toBeInTheDocument();
   });
-  it("should show the text for the submit button as Save when editing the existing candidate", () => {
+  it("should show the values for existing candidate, Save button when editing the existing candidate", () => {
     const testCandidate = {
       name: "Maggie Frank",
       dateOfBirth: "03/12/1990",
       contactNumber: "+381662312123",
       email: "maggie.frank@gmail.com",
-      skills: ["PHP", "MySql"],
+      skills: [
+        { id: "1", value: "PHP" },
+        { id: "2", value: "MySql" },
+      ],
       id: "1",
     };
     render(
@@ -231,7 +244,9 @@ describe("<CandidateForm/>", () => {
         candidate={testCandidate}
       />
     );
-    expect(() => screen.getByRole("button", { name: /add/i })).toThrow();
+    expect(
+      screen.queryByRole("button", { name: /add/i })
+    ).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: /save/i })).toBeInTheDocument();
   });
   it("should submit the candidate data when pressing Enter and all required fields are filled with valid data", async () => {
@@ -242,7 +257,7 @@ describe("<CandidateForm/>", () => {
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
     await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
     await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
-    await userEvent.type(screen.getByLabelText(/skills/i), "skills{enter}");
+    await userEvent.type(screen.getByLabelText(/skills/i), "skills,{enter}");
 
     expect(testSubmitFn).toHaveBeenCalled();
   });
