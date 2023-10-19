@@ -43,6 +43,7 @@
 @media screen and (max-width: 500px) {
   .main-menu {
     gap: 0.5rem;
+    flex-direction: column;
   }
   .search-bar-wrapper {
     flex-direction: column;

@@ -21,21 +21,3 @@
   color: #fff;
   margin-top: 2rem;
 }
-
-@media screen and (max-width: 734px) {
-  .candidates-list-wrapper {
-    height: calc(100vh - (212px + 52px));
-  }
-}
-
-@media screen and (max-width: 588px) {
-  .candidates-list-wrapper {
-    height: calc(100vh - (230px + 52px));
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .candidates-list-wrapper {
-    height: calc(100vh - (258px + 52px));
-  }
-}
