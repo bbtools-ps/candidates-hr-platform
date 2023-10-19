@@ -24,12 +24,6 @@ export const useTagsInput = (initialTags: Tag[] | undefined) => {
     if (e.key === ",") {
       addTags(e.currentTarget.value);
     }
-
-    if (e.key.toLowerCase() === "backspace") {
-      setTags((prevState) =>
-        prevState.length === 1 ? [] : prevState.slice(-1)
-      );
-    }
   };
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
