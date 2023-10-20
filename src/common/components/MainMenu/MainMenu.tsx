@@ -30,11 +30,13 @@ const MainMenu: React.FC<IMainMenuProps> = ({
               onChange={onChange}
               value={searchInput}
               inputClass={classes.input}
+              data-cy="search-candidates"
             />
             {searchInput.length > 0 && (
               <ClearButton
                 onClick={onResetCandidates}
                 className={classes["clear-button"]}
+                data-cy="clear-btn"
               />
             )}
           </div>

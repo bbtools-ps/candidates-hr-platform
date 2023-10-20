@@ -20,8 +20,8 @@ describe("<CandidateItem/>", () => {
     render(
       <CandidateItem
         candidate={dummyCandidate}
-        editCandidate={() => {}}
-        removeCandidate={() => {}}
+        onEditCandidate={() => {}}
+        onRemoveCandidate={() => {}}
       />
     );
 
@@ -35,8 +35,8 @@ describe("<CandidateItem/>", () => {
     render(
       <CandidateItem
         candidate={dummyCandidate}
-        editCandidate={() => {}}
-        removeCandidate={() => {}}
+        onEditCandidate={() => {}}
+        onRemoveCandidate={() => {}}
       />
     );
 
@@ -54,8 +54,8 @@ describe("<CandidateItem/>", () => {
     render(
       <CandidateItem
         candidate={dummyCandidate}
-        editCandidate={testEdit}
-        removeCandidate={testRemove}
+        onEditCandidate={testEdit}
+        onRemoveCandidate={testRemove}
       />
     );
 
@@ -70,8 +70,8 @@ describe("<CandidateItem/>", () => {
     render(
       <CandidateItem
         candidate={dummyCandidate}
-        editCandidate={testEdit}
-        removeCandidate={testRemove}
+        onEditCandidate={testEdit}
+        onRemoveCandidate={testRemove}
       />
     );
 

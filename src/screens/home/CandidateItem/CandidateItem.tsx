@@ -5,14 +5,14 @@ import classes from "./CandidateItem.module.css";
 
 interface ICandidateItemProps {
   candidate: Candidate;
-  removeCandidate: (payload: string) => void;
-  editCandidate: (payload: Candidate) => void;
+  onRemoveCandidate: (payload: string) => void;
+  onEditCandidate: (payload: Candidate) => void;
 }
 
 const CandidateItem: React.FC<ICandidateItemProps> = ({
   candidate,
-  removeCandidate,
-  editCandidate,
+  onRemoveCandidate,
+  onEditCandidate,
 }) => {
   return (
     <Card className={classes["candidate-wrapper"]} data-cy={candidate.name}>
@@ -43,7 +43,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
           text="Edit"
           icon="edit"
           onClick={() => {
-            editCandidate(candidate);
+            onEditCandidate(candidate);
           }}
           data-cy="edit-candidate-btn"
         />
@@ -51,7 +51,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
           text="Remove"
           icon="remove"
           onClick={() => {
-            removeCandidate(candidate.id);
+            onRemoveCandidate(candidate.id);
           }}
           data-cy="remove-candidate-btn"
         />

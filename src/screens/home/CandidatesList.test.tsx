@@ -31,8 +31,8 @@ describe("<CandidatesList/>", () => {
     render(
       <CandidatesList
         candidates={dummyCandidates}
-        editCandidate={() => {}}
-        removeCandidate={() => {}}
+        onEditCandidate={() => {}}
+        onRemoveCandidate={() => {}}
       />
     );
 
@@ -43,12 +43,13 @@ describe("<CandidatesList/>", () => {
       dummyCandidates.length
     );
   });
+
   it("should show a message 'No candidates found'. if there are no candidates to be rendered", () => {
     render(
       <CandidatesList
         candidates={[]}
-        editCandidate={() => {}}
-        removeCandidate={() => {}}
+        onEditCandidate={() => {}}
+        onRemoveCandidate={() => {}}
       />
     );
 

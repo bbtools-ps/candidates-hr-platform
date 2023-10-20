@@ -10,7 +10,6 @@ import eslint from "vite-plugin-eslint";
 export default defineConfig({
   plugins: [react(), eslint()],
   build: { outDir: "build" },
-  server: { open: true },
   test: {
     globals: true,
     environment: "jsdom",
@@ -19,6 +18,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/common": path.resolve(__dirname, "./src/common"),
+      "@/data": path.resolve(__dirname, "./src/data"),
       "@/screens": path.resolve(__dirname, "./src/screens"),
       "@/store": path.resolve(__dirname, "./src/store"),
     },

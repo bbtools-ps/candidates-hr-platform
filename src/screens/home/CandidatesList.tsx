@@ -8,14 +8,14 @@ import classes from "./CandidatesList.module.css";
 
 interface ICandidatesListProps {
   candidates: Candidate[];
-  removeCandidate: (payload: string) => void;
-  editCandidate: (payload: Candidate) => void;
+  onRemoveCandidate: (candidateId: string) => void;
+  onEditCandidate: (candidate: Candidate) => void;
 }
 
 const CandidatesList: React.FC<ICandidatesListProps> = ({
   candidates,
-  removeCandidate,
-  editCandidate,
+  onRemoveCandidate,
+  onEditCandidate,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -34,16 +34,20 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
         <CandidateItem
           key={candidates[index].id}
           candidate={candidates[index]}
-          removeCandidate={removeCandidate}
-          editCandidate={editCandidate}
+          onRemoveCandidate={onRemoveCandidate}
+          onEditCandidate={onEditCandidate}
         />
       </div>
     ),
-    [candidates, editCandidate, removeCandidate]
+    [candidates, onEditCandidate, onRemoveCandidate]
   );
 
   if (!candidates.length)
-    return <div className={classes["no-results"]}>No candidates found.</div>;
+    return (
+      <div className={classes["no-results"]} data-cy="no-results">
+        No candidates found.
+      </div>
+    );
 
   return (
     <div className={classes["candidates-list-wrapper"]} ref={containerRef}>

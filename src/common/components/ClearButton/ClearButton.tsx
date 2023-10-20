@@ -8,10 +8,10 @@ interface IClearButtonProps
     HTMLButtonElement
   > {}
 
-const ClearButton: React.FC<IClearButtonProps> = ({ onClick, className }) => {
+const ClearButton: React.FC<IClearButtonProps> = ({ className, ...rest }) => {
   return (
     <button
-      onClick={onClick}
+      {...rest}
       className={`${classes["clear-button"]} ${className}`}
       aria-label="Clear"
     >

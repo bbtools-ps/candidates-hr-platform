@@ -1,27 +1,28 @@
 import CandidateForm from "@/common/components/CandidateForm/CandidateForm";
 import Card from "@/common/components/Card/Card";
-import { Candidate } from "@/common/models";
 import classes from "@/common/styles/CandidateWrapper.module.css";
+import { useCandidatesStore } from "@/store/candidates";
+import { useLocation, useNavigate } from "react-router-dom";
 
-interface IEditCandidateProps {
-  candidate: Candidate;
-  onCancel: () => void;
-  onSubmit: (payload: Candidate) => void;
-}
+const EditCandidate = () => {
+  const { editCandidate } = useCandidatesStore();
 
-const EditCandidate: React.FC<IEditCandidateProps> = ({
-  candidate,
-  onCancel,
-  onSubmit,
-}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div className={classes["candidate-wrapper"]}>
       <Card style={{ marginTop: "1rem", width: "100%" }}>
         <h2>Edit candidate</h2>
         <CandidateForm
-          onCancel={onCancel}
-          onSubmit={onSubmit}
-          candidate={candidate}
+          onCancel={() => {
+            navigate(-1);
+          }}
+          onSubmit={(candidate) => {
+            editCandidate(candidate);
+            navigate(-1);
+          }}
+          candidate={location.state}
         />
       </Card>
     </div>
