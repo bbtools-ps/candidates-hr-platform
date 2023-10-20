@@ -3,7 +3,11 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./TagsInput.module.css";
 
-interface ITagsInputProps {
+interface ITagsInputProps
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   id: string;
   label: string;
   tags: Tag[];
@@ -25,6 +29,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
   onKeyUp,
   onBlur,
   onRemoveTags,
+  ...rest
 }) => {
   return (
     <div className={classes["outer-container"]}>
@@ -41,6 +46,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
           ))}
         </ul>
         <input
+          {...rest}
           id={id}
           type="text"
           placeholder={placeholder}

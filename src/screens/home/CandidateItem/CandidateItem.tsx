@@ -15,7 +15,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
   editCandidate,
 }) => {
   return (
-    <Card className={classes["candidate-wrapper"]}>
+    <Card className={classes["candidate-wrapper"]} data-cy={candidate.name}>
       <h2 className={classes.name} style={{ marginTop: "0.5rem" }}>
         {candidate.name}
       </h2>
@@ -45,6 +45,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
           onClick={() => {
             editCandidate(candidate);
           }}
+          data-cy="edit-candidate-btn"
         />
         <Button
           text="Remove"
@@ -52,6 +53,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
           onClick={() => {
             removeCandidate(candidate.id);
           }}
+          data-cy="remove-candidate-btn"
         />
       </div>
     </Card>

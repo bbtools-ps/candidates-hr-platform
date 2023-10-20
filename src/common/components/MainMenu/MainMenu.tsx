@@ -38,7 +38,12 @@ const MainMenu: React.FC<IMainMenuProps> = ({
               />
             )}
           </div>
-          <Button text="Add Candidate" icon="add" onClick={onAddNewCandidate} />
+          <Button
+            text="Add Candidate"
+            icon="add"
+            onClick={onAddNewCandidate}
+            data-cy="add-candidate-btn"
+          />
         </div>
       </Card>
     </div>

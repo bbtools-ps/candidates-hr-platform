@@ -116,6 +116,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         onBlur={nameBlurHandler}
         value={name}
         isValid={nameIsValid}
+        data-cy="candidate-name"
       />
       {nameError && (
         <p className={classes.error}>Please fill out this field.</p>
@@ -130,6 +131,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         value={dateOfBirth}
         isValid={dateofBirthIsValid}
         checkmarkStyle={{ right: "3rem" }}
+        data-cy="candidate-date-of-birth"
       />
       {dateOfBirthError && (
         <p className={classes.error}>
@@ -144,6 +146,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         onBlur={contactNumberBlurHandler}
         value={contactNumber}
         isValid={contactNumberIsValid}
+        data-cy="candidate-contact-number"
       />
       {contactNumberError && (
         <p className={classes.error}>
@@ -158,6 +161,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         onBlur={emailBlurHandler}
         value={email}
         isValid={emailIsValid}
+        data-cy="candidate-email"
       />
       {emailError && (
         <p className={classes.error}>
@@ -174,14 +178,21 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         onBlur={skillBlurHandler}
         onKeyUp={skillKeyUpHandler}
         onRemoveTags={removeTags}
+        data-cy="candidate-skills"
       />
       <div className={classes["form-controls"]}>
         <Button
           type="submit"
           text={candidate ? "Save" : "Add"}
           disabled={!formIsValid}
+          data-cy="submit-btn"
         />
-        <Button type="button" text="Cancel" onClick={onCancel} />
+        <Button
+          type="button"
+          text="Cancel"
+          onClick={onCancel}
+          data-cy="cancel-btn"
+        />
       </div>
     </form>
   );

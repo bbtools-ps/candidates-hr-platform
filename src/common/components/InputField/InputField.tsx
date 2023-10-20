@@ -16,7 +16,6 @@ interface IInputFieldProps
 const InputField: React.FC<IInputFieldProps> = ({
   label,
   type = "text",
-  placeholder,
   value = "",
   className,
   id,
@@ -25,13 +24,14 @@ const InputField: React.FC<IInputFieldProps> = ({
   inputClass,
   onChange,
   onBlur,
+  ...rest
 }) => {
   return (
     <div className={`${classes["input-field"]} ${className || ""}}`}>
       <label htmlFor={id}>{label}</label>
       <input
+        {...rest}
         type={type}
-        placeholder={placeholder}
         value={value}
         className={`${label ? classes["with-label"] : ""} ${inputClass}`}
         onChange={onChange}

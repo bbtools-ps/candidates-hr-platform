@@ -15,8 +15,7 @@ const Button: React.FC<IButtonProps> = ({
   type = "button",
   text = "button",
   icon,
-  disabled = false,
-  onClick = () => {},
+  ...rest
 }) => {
   const buttonIcon = {
     add: faUserPlus,
@@ -25,12 +24,7 @@ const Button: React.FC<IButtonProps> = ({
   };
 
   return (
-    <button
-      type={type}
-      className={classes.button}
-      onClick={onClick}
-      disabled={disabled}
-    >
+    <button {...rest} type={type} className={classes.button}>
       {icon && buttonIcon[icon] && <FontAwesomeIcon icon={buttonIcon[icon]} />}
       {text}
     </button>
