@@ -25,7 +25,12 @@ To make the build:
 
 To start the tests:
 
-`npm test`
+`npm test:unit`
+
+`npm test:e2e`
+
+Cypress studio
+`npm test:cypress`
 
 ## Live demo
 
