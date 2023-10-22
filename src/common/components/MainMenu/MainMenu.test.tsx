@@ -27,6 +27,7 @@ describe("<MainMenu/>", () => {
   expect(
     screen.queryByRole("button", { name: /clear/i })
   ).not.toBeInTheDocument();
+
   it("should display value in the Search input field that is comming from the props", () => {
     const testValue = "test";
     render(
@@ -42,6 +43,7 @@ describe("<MainMenu/>", () => {
       testValue
     );
   });
+
   it("should show the Clear/Reset button in the Search input field if the searchInput value is not empty", () => {
     const testValue = "test";
     render(
@@ -55,6 +57,7 @@ describe("<MainMenu/>", () => {
 
     expect(screen.getByRole("button", { name: /clear/i })).toBeInTheDocument();
   });
+
   it("should call the handler function only for the 'Add' when clicking on the button", async () => {
     const testHandleReset = vi.fn();
     const testHandleAdd = vi.fn();
@@ -74,6 +77,7 @@ describe("<MainMenu/>", () => {
     expect(testHandleReset).not.toHaveBeenCalled();
     expect(testHandleChange).not.toHaveBeenCalled();
   });
+
   it("should call the handler function only for the 'Clear/Reset' when clicking on the button", async () => {
     const testHandleReset = vi.fn();
     const testHandleAdd = vi.fn();
@@ -93,6 +97,7 @@ describe("<MainMenu/>", () => {
     expect(testHandleReset).toHaveBeenCalled();
     expect(testHandleChange).not.toHaveBeenCalled();
   });
+
   it("should call the handler function only for the 'Search' when typing inside the input field", async () => {
     const testHandleReset = vi.fn();
     const testHandleAdd = vi.fn();

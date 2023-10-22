@@ -14,7 +14,7 @@ const NewCandidate = () => {
     <Protected condition={!!allCandidates.length}>
       <div className={classes["candidate-wrapper"]}>
         <Card style={{ marginTop: "1rem", width: "100%" }}>
-          <h2>New candidate</h2>
+          <h2 data-cy="heading">New candidate</h2>
           <CandidateForm
             onCancel={() => {
               navigate(-1);

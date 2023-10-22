@@ -14,6 +14,7 @@ describe("validateEmptyValue()", () => {
 
     expect(result).toBe(false);
   });
+
   it("should be return true if non-empty string value is passed", () => {
     const testValue = "test";
 
@@ -31,6 +32,7 @@ describe("validateEmail()", () => {
 
     expect(result).toBe(true);
   });
+
   it("should return false if invalid e-mail is passed", () => {
     const testValue1 = "test";
     const testValue2 = "test@";
@@ -57,6 +59,7 @@ describe("validatePhoneNumber()", () => {
     expect(result1).toBe(true);
     expect(result2).toBe(true);
   });
+
   it("should return false if invalid phone number is passed", () => {
     const testValue1 = "+aa";
     const testValue2 = "aa";
@@ -88,6 +91,7 @@ describe("validateDate()", () => {
     expect(result1).toBe(true);
     expect(result2).toBe(true);
   });
+
   it("should return false if invalid date is passed", () => {
     const mockDate = new Date(2022, 0, 1);
     vi.setSystemTime(mockDate);

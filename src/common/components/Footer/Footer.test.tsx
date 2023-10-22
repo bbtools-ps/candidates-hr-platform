@@ -9,6 +9,7 @@ describe("<Footer/>", () => {
   afterEach(() => {
     vi.useRealTimers();
   });
+
   it("should render the current year and the label value (string)", () => {
     const mockDate = new Date(2022, 0, 1);
     vi.setSystemTime(mockDate);

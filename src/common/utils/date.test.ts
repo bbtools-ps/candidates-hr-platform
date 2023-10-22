@@ -8,6 +8,7 @@ describe("getCurrentYear()", () => {
   afterEach(() => {
     vi.useRealTimers();
   });
+
   it("should return the current year", () => {
     const mockDate = new Date(2022, 0, 1);
     vi.setSystemTime(mockDate);
@@ -26,6 +27,7 @@ describe("convertDate()", () => {
 
     expect(result).toBe("1990-03-12");
   });
+
   it("should return undefined if the arguments that are passed are undefined", () => {
     const testDate = undefined;
 
@@ -33,6 +35,7 @@ describe("convertDate()", () => {
 
     expect(result).toBeUndefined();
   });
+
   it("should throw an error if the arguments that are passed are not in appropriate string format MM/DD/YYYY", () => {
     const testDate1 = "AA";
     const testDate2 = "12312/3123/123";

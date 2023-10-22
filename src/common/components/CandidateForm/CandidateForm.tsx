@@ -71,18 +71,8 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     handleKeyUp: skillKeyUpHandler,
     handleChange: skillChangeHandler,
     removeTags,
+    isValid: skillsIsValid,
   } = useTagsInput(candidate?.skills);
-  let formIsValid = false;
-
-  if (
-    nameIsValid &&
-    dateofBirthIsValid &&
-    contactNumberIsValid &&
-    emailIsValid &&
-    skills.length
-  ) {
-    formIsValid = true;
-  }
 
   const setDateFormat = (selectedDate: string) => {
     return new Date(selectedDate).toLocaleDateString("en-US", {
@@ -119,7 +109,9 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         data-cy="candidate-name"
       />
       {nameError && (
-        <p className={classes.error}>Please fill out this field.</p>
+        <p className={classes.error} data-cy="invalid-name">
+          Please add a name.
+        </p>
       )}
       <InputField
         id="candidate-date-of-birth"
@@ -134,8 +126,8 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         data-cy="candidate-date-of-birth"
       />
       {dateOfBirthError && (
-        <p className={classes.error}>
-          Please fill out this field with a valid date.
+        <p className={classes.error} data-cy="invalid-date">
+          Please add a valid date.
         </p>
       )}
       <InputField
@@ -149,8 +141,8 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         data-cy="candidate-contact-number"
       />
       {contactNumberError && (
-        <p className={classes.error}>
-          Please fill out this field with a valid phone number.
+        <p className={classes.error} data-cy="invalid-phone">
+          Please add a valid phone number.
         </p>
       )}
       <InputField
@@ -164,8 +156,8 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         data-cy="candidate-email"
       />
       {emailError && (
-        <p className={classes.error}>
-          Please fill out this field with a valid email.
+        <p className={classes.error} data-cy="invalid-email">
+          Please add a valid email.
         </p>
       )}
       <TagsInput
@@ -180,11 +172,22 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         onRemoveTags={removeTags}
         data-cy="candidate-skills"
       />
+      {!skillsIsValid && (
+        <p className={classes.error} data-cy="invalid-skills">
+          Please add skills.
+        </p>
+      )}
       <div className={classes["form-controls"]}>
         <Button
           type="submit"
           text={candidate ? "Save" : "Add"}
-          disabled={!formIsValid}
+          disabled={
+            !nameIsValid ||
+            !dateofBirthIsValid ||
+            !contactNumberIsValid ||
+            !emailIsValid ||
+            !skills.length
+          }
           data-cy="submit-btn"
         />
         <Button

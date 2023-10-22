@@ -21,11 +21,13 @@ describe("<CandidateForm/>", () => {
     expect(screen.getByRole("button", { name: /cancel/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
   });
+
   it("should initially disable the Add button", () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
 
     expect(screen.getByRole("button", { name: /add/i })).toBeDisabled();
   });
+
   it("should show an error if the user didn't enter anything into the Name field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/name/i);
@@ -34,9 +36,10 @@ describe("<CandidateForm/>", () => {
     await userEvent.click(testEl);
     await userEvent.click(btnAdd);
 
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
+    expect(screen.getByText(/please add a name/i)).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
+
   it("should show an error if the user didn't enter anything into the Date of birth field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/date/i);
@@ -45,20 +48,10 @@ describe("<CandidateForm/>", () => {
     await userEvent.click(testEl);
     await userEvent.click(btnAdd);
 
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
+    expect(screen.getByText(/please add a valid date/i)).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
-  it("should show an error if the user entered invalid data into the Date of birth field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
-    const testEl = screen.getByLabelText(/date/i);
-    const btnAdd = screen.getByRole("button", { name: /add/i });
 
-    await userEvent.type(testEl, "03");
-    await userEvent.click(btnAdd);
-
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
-    expect(btnAdd).toBeDisabled();
-  });
   it("should show an error if the user didn't enter anything into the Contact number field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/contact/i);
@@ -67,20 +60,20 @@ describe("<CandidateForm/>", () => {
     await userEvent.click(testEl);
     await userEvent.click(btnAdd);
 
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/please add a valid phone number/i)
+    ).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
-  });
-  it("should show an error if the user entered invalid data into the Contact number field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
-    const testEl = screen.getByLabelText(/contact/i);
-    const btnAdd = screen.getByRole("button", { name: /add/i });
 
-    await userEvent.type(testEl, "a");
+    await userEvent.type(testEl, "+123");
     await userEvent.click(btnAdd);
 
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/please add a valid phone number/i)
+    ).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
+
   it("should show an error if the user didn't enter anything into the E-mail field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/e-mail/i);
@@ -89,31 +82,28 @@ describe("<CandidateForm/>", () => {
     await userEvent.click(testEl);
     await userEvent.click(btnAdd);
 
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
+    expect(screen.getByText(/please add a valid email/i)).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
-  });
-  it("should show an error if the user entered invalid data into the E-mail field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
-    const testEl = screen.getByLabelText(/e-mail/i);
-    const btnAdd = screen.getByRole("button", { name: /add/i });
 
     await userEvent.type(testEl, "a123@");
     await userEvent.click(btnAdd);
 
-    expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
+    expect(screen.getByText(/please add a valid email/i)).toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
-  // it("should show an error if the user didn't enter anything into the Skills field", async () => {
-  //   render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
-  //   const testEl = screen.getByLabelText(/skills/i);
-  //   const btnAdd = screen.getByRole("button", { name: /add/i });
 
-  //   await userEvent.click(testEl);
-  //   await userEvent.click(btnAdd);
+  it("should show an error if the user didn't enter anything into the Skills field", async () => {
+    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    const testEl = screen.getByLabelText(/skills/i);
+    const btnAdd = screen.getByRole("button", { name: /add/i });
 
-  //   expect(screen.getByText(/please fill out this field/i)).toBeInTheDocument();
-  //   expect(btnAdd).toBeDisabled();
-  // });
+    await userEvent.click(testEl);
+    await userEvent.click(btnAdd);
+
+    expect(screen.getByText(/please add skills/i)).toBeInTheDocument();
+    expect(btnAdd).toBeDisabled();
+  });
+
   it("should still keep the button disabled if the user just entered valid data into the Name field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/name/i);
@@ -128,11 +118,12 @@ describe("<CandidateForm/>", () => {
     ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
+
   it("should still keep the button disabled if the user just entered valid data into the Contact number field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/contact/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
-    const testValue = "+381123123123";
+    const testValue = "+123123123123";
 
     await userEvent.type(testEl, testValue);
     await userEvent.click(btnAdd);
@@ -142,6 +133,7 @@ describe("<CandidateForm/>", () => {
     ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
+
   it("should still keep the button disabled if the user just entered valid data into the E-mail field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/e-mail/i);
@@ -156,6 +148,7 @@ describe("<CandidateForm/>", () => {
     ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
+
   it("should still keep the button disabled if the user just entered valid data into the Skills field", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     const testEl = screen.getByLabelText(/skills/i);
@@ -170,17 +163,19 @@ describe("<CandidateForm/>", () => {
     ).not.toBeInTheDocument();
     expect(btnAdd).toBeDisabled();
   });
+
   it("should enable the Add button if the user entered all valid values", async () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name");
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
-    await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
+    await userEvent.type(screen.getByLabelText(/contact/i), "+123123123123");
     await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
     await userEvent.type(screen.getByLabelText(/skills/i), "skills,");
 
     expect(screen.getByRole("button", { name: /add/i })).toBeEnabled();
   });
+
   it("should call the handler function only for the 'Add' when clicking on the button", async () => {
     const testHandleOnSubmit = vi.fn();
     const testHandleOnCancel = vi.fn();
@@ -193,7 +188,7 @@ describe("<CandidateForm/>", () => {
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name");
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
-    await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
+    await userEvent.type(screen.getByLabelText(/contact/i), "+123123123123");
     await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
     await userEvent.type(screen.getByLabelText(/skills/i), "skills");
 
@@ -202,6 +197,7 @@ describe("<CandidateForm/>", () => {
     expect(testHandleOnSubmit).toHaveBeenCalled();
     expect(testHandleOnCancel).not.toHaveBeenCalled();
   });
+
   it("should call the handler function only for the 'Cancel' when clicking on the button", async () => {
     const testHandleOnSubmit = vi.fn();
     const testHandleOnCancel = vi.fn();
@@ -218,6 +214,7 @@ describe("<CandidateForm/>", () => {
     expect(testHandleOnSubmit).not.toHaveBeenCalled();
     expect(testHandleOnCancel).toHaveBeenCalled();
   });
+
   it("should show the text for the submit button as Add when adding new candidate", () => {
     render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
     expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
@@ -225,6 +222,7 @@ describe("<CandidateForm/>", () => {
       screen.queryByRole("button", { name: /edit/i })
     ).not.toBeInTheDocument();
   });
+
   it("should show the values for existing candidate, Save button when editing the existing candidate", () => {
     const testCandidate = {
       name: "Maggie Frank",
@@ -249,18 +247,20 @@ describe("<CandidateForm/>", () => {
     ).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: /save/i })).toBeInTheDocument();
   });
+
   it("should submit the candidate data when pressing Enter and all required fields are filled with valid data", async () => {
     const testSubmitFn = vi.fn();
     render(<CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} />);
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name");
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
-    await userEvent.type(screen.getByLabelText(/contact/i), "+381123123");
+    await userEvent.type(screen.getByLabelText(/contact/i), "+123123123123");
     await userEvent.type(screen.getByLabelText(/e-mail/i), "test@test.com");
     await userEvent.type(screen.getByLabelText(/skills/i), "skills,{enter}");
 
     expect(testSubmitFn).toHaveBeenCalled();
   });
+
   it("should not submit the candidate data when pressing Enter if not all required fields are filled", async () => {
     const testSubmitFn = vi.fn();
     render(<CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} />);

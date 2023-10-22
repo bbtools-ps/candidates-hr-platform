@@ -9,6 +9,7 @@ describe("<Button/>", () => {
     render(<Button text={testValue} />);
     expect(screen.getByRole("button", { name: testValue })).toBeInTheDocument();
   });
+
   it("should call the handler function when clicking on the button", async () => {
     const testFn = vi.fn();
     render(<Button text="test" onClick={testFn} />);

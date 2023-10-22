@@ -15,7 +15,7 @@ const EditCandidate = () => {
     <Protected condition={location.state && !!allCandidates.length}>
       <div className={classes["candidate-wrapper"]}>
         <Card style={{ marginTop: "1rem", width: "100%" }}>
-          <h2>Edit candidate</h2>
+          <h2 data-cy="heading">Edit candidate</h2>
           <CandidateForm
             onCancel={() => {
               navigate(-1);

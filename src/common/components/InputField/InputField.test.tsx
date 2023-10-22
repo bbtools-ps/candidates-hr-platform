@@ -17,6 +17,7 @@ describe("<InputField/>", () => {
       testValue
     );
   });
+
   it("should call the onChange handler function when typing into the input field", async () => {
     const testFn = vi.fn();
     render(<InputField onChange={testFn} />);

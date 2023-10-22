@@ -31,6 +31,7 @@ describe("<CandidateItem/>", () => {
     expect(screen.getByRole("button", { name: /edit/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /remove/i })).toBeInTheDocument();
   });
+
   it("should render the values from the props into the appropriate text fields for Name, Date of birth, Contact number, E-mail, and Skills", () => {
     render(
       <CandidateItem
@@ -48,6 +49,7 @@ describe("<CandidateItem/>", () => {
       expect(screen.getByText(skill.value)).toBeInTheDocument();
     }
   });
+
   it("should call the handler function only for the 'Edit' when clicking on the button", async () => {
     const testEdit = vi.fn();
     const testRemove = vi.fn();
@@ -64,6 +66,7 @@ describe("<CandidateItem/>", () => {
     expect(testEdit).toHaveBeenCalled();
     expect(testRemove).not.toHaveBeenCalled();
   });
+
   it("should call the handler function only for the 'Remove' when clicking on the button", async () => {
     const testEdit = vi.fn();
     const testRemove = vi.fn();
