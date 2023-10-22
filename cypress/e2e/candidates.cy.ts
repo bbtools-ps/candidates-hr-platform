@@ -3,18 +3,24 @@
 describe("candidates", () => {
   it("should add/edit/remove a candidate", () => {
     cy.visit("/");
-    cy.get('[data-cy="candidates-logo"]').should("exist");
+    cy.get('[data-cy="candidates-logo"]').as("candidatesLogo");
 
     // Add
     cy.get('[data-cy="add-candidate-btn"]').click();
+    cy.get('[data-cy="heading"').as("heading");
     cy.get('[data-cy="submit-btn"]').as("submitButton");
-    cy.get("@submitButton").should("be.disabled");
-    cy.get('[data-cy="heading"').should("exist");
     cy.get('[data-cy="candidate-name"]').as("candidateName");
+    cy.get("@candidatesLogo").should("not.exist");
+    cy.get("@submitButton").should("be.disabled");
+    cy.get("@heading").should("contain", "New candidate");
     cy.get("@candidateName").type("John Doe");
+    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-date-of-birth"]').type("2000-12-12");
+    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-contact-number"]').type("+123123123123");
+    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-email"]').type("test@example.com");
+    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-skills"]').type("Photoshop,");
     cy.get("@submitButton").should("be.enabled");
     cy.get("@submitButton").click();
@@ -22,7 +28,8 @@ describe("candidates", () => {
 
     // Edit
     cy.get('[data-cy="John Doe"] [data-cy="edit-candidate-btn"]').click();
-    cy.get('[data-cy="heading"').should("exist");
+    cy.get("@candidatesLogo").should("not.exist");
+    cy.get("@heading").should("contain", "Edit candidate");
     cy.get("@submitButton").should("be.enabled");
     cy.get("@candidateName").clear();
     cy.get("@submitButton").should("be.disabled");
