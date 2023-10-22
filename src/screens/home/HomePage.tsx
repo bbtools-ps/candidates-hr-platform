@@ -4,7 +4,11 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CandidatesList from "./CandidatesList";
 
-const HomePage = () => {
+interface IHomePageProps {
+  isLoading: boolean;
+}
+
+const HomePage: React.FC<IHomePageProps> = ({ isLoading }) => {
   const {
     reset,
     searchCandidate,
@@ -18,11 +22,11 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!initialRender.current || !searchTerm) return;
+    if (!initialRender.current || !searchTerm || isLoading) return;
 
     searchCandidate(searchTerm);
     initialRender.current = false;
-  }, [searchCandidate, searchTerm]);
+  }, [searchCandidate, searchTerm, isLoading]);
 
   return (
     <>
@@ -36,13 +40,16 @@ const HomePage = () => {
         }}
         onResetCandidates={reset}
       />
-      <CandidatesList
-        candidates={filteredCandidates}
-        onRemoveCandidate={removeCandidate}
-        onEditCandidate={(candidate) =>
-          navigate("/edit-candidate", { state: candidate })
-        }
-      />
+      {!isLoading && (
+        <CandidatesList
+          candidates={filteredCandidates}
+          onRemoveCandidate={removeCandidate}
+          onEditCandidate={(candidate) =>
+            navigate("/edit-candidate", { state: candidate })
+          }
+        />
+      )}
+      {isLoading && <p style={{ color: "#fff" }}>Loading...</p>}
     </>
   );
 };

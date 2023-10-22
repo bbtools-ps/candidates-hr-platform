@@ -1,5 +1,4 @@
 import { Candidate } from "@/common/models";
-import { DUMMY_CANDIDATES } from "@/data/data";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
@@ -10,6 +9,7 @@ type State = {
 };
 
 type Actions = {
+  setCandidates: (candidates: Candidate[]) => void;
   addCandidate: (candidate: Candidate) => void;
   editCandidate: (candidate: Candidate) => void;
   removeCandidate: (candidateId: string) => void;
@@ -20,15 +20,20 @@ type Actions = {
 export const useCandidatesStore = create<State & Actions>()(
   devtools(
     (set) => ({
-      allCandidates: DUMMY_CANDIDATES.map((item) => ({
-        ...item,
-        skills: item.skills.map((item) => ({ ...item })),
-      })),
-      filteredCandidates: DUMMY_CANDIDATES.map((item) => ({
-        ...item,
-        skills: item.skills.map((item) => ({ ...item })),
-      })),
+      allCandidates: [],
+      filteredCandidates: [],
       searchTerm: "",
+      setCandidates: (candidates) =>
+        set({
+          allCandidates: candidates.map((item) => ({
+            ...item,
+            skills: item.skills.map((item) => ({ ...item })),
+          })),
+          filteredCandidates: candidates.map((item) => ({
+            ...item,
+            skills: item.skills.map((item) => ({ ...item })),
+          })),
+        }),
       addCandidate: (candidate) =>
         set((state) => {
           return {
@@ -116,13 +121,13 @@ export const useCandidatesStore = create<State & Actions>()(
           return { filteredCandidates, searchTerm };
         }),
       reset: () =>
-        set(() => {
+        set((state) => {
           return {
-            allCandidates: DUMMY_CANDIDATES.map((item) => ({
+            allCandidates: state.allCandidates.map((item) => ({
               ...item,
               skills: item.skills.map((item) => ({ ...item })),
             })),
-            filteredCandidates: DUMMY_CANDIDATES.map((item) => ({
+            filteredCandidates: state.allCandidates.map((item) => ({
               ...item,
               skills: item.skills.map((item) => ({ ...item })),
             })),
