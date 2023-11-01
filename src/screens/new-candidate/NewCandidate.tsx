@@ -17,11 +17,11 @@ const NewCandidate = () => {
           <h2 data-cy="heading">New candidate</h2>
           <CandidateForm
             onCancel={() => {
-              navigate(-1);
+              navigate("..");
             }}
             onSubmit={(candidate) => {
               addCandidate(candidate);
-              navigate(-1);
+              navigate("..");
             }}
           />
         </Card>

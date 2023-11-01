@@ -18,11 +18,11 @@ const EditCandidate = () => {
           <h2 data-cy="heading">Edit candidate</h2>
           <CandidateForm
             onCancel={() => {
-              navigate(-1);
+              navigate("..");
             }}
             onSubmit={(candidate) => {
               editCandidate(candidate);
-              navigate(-1);
+              navigate("..");
             }}
             candidate={location.state}
           />
