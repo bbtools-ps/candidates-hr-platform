@@ -1,6 +1,5 @@
 import { Suspense, lazy, useEffect, useState } from "react";
-import { Route } from "react-router";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Copyright from "./common/components/Footer/Footer";
 import Loading from "./common/components/Loading/Loading";
 import { DUMMY_CANDIDATES } from "./data/data";
@@ -35,23 +34,24 @@ const App = () => {
                 <HomePage isLoading={isLoading} />
               </Suspense>
             }
-          />
-          <Route
-            path="/new-candidate"
-            element={
-              <Suspense fallback={<Loading />}>
-                <NewCandidate />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/edit-candidate"
-            element={
-              <Suspense fallback={<Loading />}>
-                <EditCandidate />
-              </Suspense>
-            }
-          />
+          >
+            <Route
+              path="/new-candidate"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewCandidate />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/edit-candidate"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EditCandidate />
+                </Suspense>
+              }
+            />
+          </Route>
           <Route
             path="*"
             element={

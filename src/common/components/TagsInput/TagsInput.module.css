@@ -16,6 +16,8 @@
   border-radius: var(--border-radius);
   width: 100%;
   margin-top: 0.5rem;
+  overflow: auto;
+  max-height: 7rem;
 }
 
 .inner-container:hover {
