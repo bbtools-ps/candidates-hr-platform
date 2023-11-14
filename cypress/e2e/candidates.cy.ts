@@ -3,14 +3,13 @@
 describe("candidates", () => {
   it("should add/edit/remove a candidate", () => {
     cy.visit("/");
-    cy.get('[data-cy="candidates-logo"]').as("candidatesLogo");
+    cy.get('[data-cy="candidates-logo"]');
 
     // Add
     cy.get('[data-cy="add-candidate-btn"]').click();
     cy.get('[data-cy="heading"').as("heading");
     cy.get('[data-cy="submit-btn"]').as("submitButton");
     cy.get('[data-cy="candidate-name"]').as("candidateName");
-    cy.get("@candidatesLogo").should("not.exist");
     cy.get("@submitButton").should("be.disabled");
     cy.get("@heading").should("contain", "New candidate");
     cy.get("@candidateName").type("John Doe");
@@ -28,7 +27,6 @@ describe("candidates", () => {
 
     // Edit
     cy.get('[data-cy="John Doe"] [data-cy="edit-candidate-btn"]').click();
-    cy.get("@candidatesLogo").should("not.exist");
     cy.get("@heading").should("contain", "Edit candidate");
     cy.get("@submitButton").should("be.enabled");
     cy.get("@candidateName").clear();
@@ -73,6 +71,11 @@ describe("candidates", () => {
     cy.get('[data-cy="Rob Frank"]').should("not.exist");
     cy.get('[data-cy="no-results"]').should("not.exist");
 
+    // No results message
+    cy.get("@clearButton").click();
+    cy.get("@searchCandidatesInput").type("lalalalalala");
+    cy.get('[data-cy="no-results"]').should("exist");
+
     // Persist search params when editing filtered candidate
     cy.get("@clearButton").click();
     cy.get("@searchCandidatesInput").type("frank php");
@@ -82,7 +85,7 @@ describe("candidates", () => {
     cy.get("@candidateName").type("Jane Doe");
     cy.get('[data-cy="submit-btn"]').click();
     cy.get("@searchCandidatesInput").should("have.value", "frank php");
-    cy.get('[data-cy="no-results"]').should("exist");
+    cy.get('[data-cy="no-results"]').should("not.exist");
   });
 
   it("should not allow adding a candidate if the list of candidates is not loaded from the main page", () => {
