@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
 import ClearButton from "../ClearButton/ClearButton";
@@ -32,13 +33,15 @@ const MainMenu: React.FC<IMainMenuProps> = ({
               inputClass={classes.input}
               data-cy="search-candidates"
             />
-            {searchInput.length > 0 && (
-              <ClearButton
-                onClick={onResetCandidates}
-                className={classes["clear-button"]}
-                data-cy="clear-btn"
-              />
-            )}
+            <AnimatePresence>
+              {searchInput.length > 0 && (
+                <ClearButton
+                  onClick={onResetCandidates}
+                  className={classes["clear-button"]}
+                  data-cy="clear-btn"
+                />
+              )}
+            </AnimatePresence>
           </div>
           <Button
             text="Add Candidate"

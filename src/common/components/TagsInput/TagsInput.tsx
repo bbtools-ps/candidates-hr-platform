@@ -1,6 +1,7 @@
 import { Tag } from "@/common/models";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 import classes from "./TagsInput.module.css";
 
 interface ITagsInputProps
@@ -35,16 +36,37 @@ const TagsInput: React.FC<ITagsInputProps> = ({
     <div className={classes["outer-container"]}>
       <label htmlFor={id}>{label}</label>
       <div className={classes["inner-container"]}>
-        <ul className={classes.tags}>
+        <motion.ul
+          variants={{
+            hidden: { opacity: 0, scale: 0.5 },
+            show: {
+              opacity: 1,
+              scale: 1,
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
+          }}
+          initial="hidden"
+          animate="show"
+          className={classes.tags}
+        >
           {tags.map(({ id, value }) => (
-            <li key={id} className={classes.tag}>
+            <motion.li
+              key={id}
+              variants={{
+                hidden: { opacity: 0, scale: 0.5 },
+                show: { opacity: 1, scale: 1 },
+              }}
+              className={classes.tag}
+            >
               <span>{value}</span>
               <button type="button" onClick={() => onRemoveTags(id)}>
                 <FontAwesomeIcon icon={faClose} />
               </button>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
         <input
           {...rest}
           id={id}
