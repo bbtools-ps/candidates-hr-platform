@@ -18,6 +18,7 @@ const ClearButton: React.FC<IClearButtonProps> = ({ className, ...rest }) => {
       exit={{ scale: 0.5, opacity: 0 }}
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
       className={`${classes["clear-button"]} ${className}`}
+      aria-label="clear"
     >
       <FontAwesomeIcon icon={faTimesCircle} />
     </motion.button>
