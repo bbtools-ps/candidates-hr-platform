@@ -1,4 +1,3 @@
-import { getCurrentYear } from "@/common/utils";
 import classes from "./Footer.module.css";
 
 interface IFooterProps {
@@ -6,6 +5,11 @@ interface IFooterProps {
 }
 
 const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
+  const getCurrentYear = () => {
+    const date = new Date();
+    return date.getFullYear();
+  };
+
   return (
     <footer className={classes.footer}>
       <p>

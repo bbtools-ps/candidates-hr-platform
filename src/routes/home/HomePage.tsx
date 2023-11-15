@@ -29,16 +29,14 @@ const HomePage = () => {
 
   return (
     <>
-      {!isLoading && (
-        <CandidatesList
-          candidates={filteredCandidates}
-          onRemoveCandidate={removeCandidate}
-          onEditCandidate={(candidate) =>
-            navigate("/edit-candidate", { state: candidate })
-          }
-        />
-      )}
-      {isLoading && <p style={{ color: "#fff" }}>Loading...</p>}
+      <CandidatesList
+        candidates={filteredCandidates}
+        onRemoveCandidate={removeCandidate}
+        onEditCandidate={(candidate) =>
+          navigate("/edit-candidate", { state: candidate })
+        }
+        isLoading={isLoading}
+      />
       <Outlet />
     </>
   );

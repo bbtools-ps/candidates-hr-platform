@@ -1,8 +1,3 @@
-export const getCurrentYear = () => {
-  const date = new Date();
-  return date.getFullYear();
-};
-
 /**
  * Converts the dateString format from MM/DD/YYYY to YYYY-MM-DD
  * @param dateStr string

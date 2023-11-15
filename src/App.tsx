@@ -2,7 +2,6 @@ import { Suspense, lazy } from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import Loading from "./common/components/Loading/Loading";
 import RootLayout from "./routes/RootLayout";
-import CandidatesListContextProvider from "./store/candidates-list-context";
 
 const HomePage = lazy(() => import("./routes/home/HomePage"));
 const NewCandidate = lazy(() => import("./routes/new-candidate/NewCandidate"));
@@ -52,11 +51,7 @@ const router = createHashRouter([
 ]);
 
 const App = () => {
-  return (
-    <CandidatesListContextProvider>
-      <RouterProvider router={router} />
-    </CandidatesListContextProvider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

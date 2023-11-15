@@ -1,3 +1,4 @@
+import Footer from "@/common/components/Footer/Footer";
 import MainMenu from "@/common/components/MainMenu/MainMenu";
 import { useCandidatesStore } from "@/store/candidates";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ const RootLayout = () => {
         onResetCandidates={reset}
       />
       <Outlet />
+      <Footer copyrightLabel="Bogdan Bogdanovic" />
     </>
   );
 };
