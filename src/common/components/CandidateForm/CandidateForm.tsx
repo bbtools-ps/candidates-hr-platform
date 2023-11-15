@@ -7,23 +7,30 @@ import {
   validateEmptyValue,
   validatePhoneNumber,
 } from "@/common/utils";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import Button from "../Button/Button";
+import Card from "../Card/Card";
 import InputField from "../InputField/InputField";
 import TagsInput from "../TagsInput/TagsInput";
 import classes from "./CandidateForm.module.css";
 
 interface ICandidateFormProps {
+  title: string;
   candidate?: Candidate;
-  onCancel: () => void;
+  onCancel?: () => void;
   onSubmit: (payload: Candidate) => void;
 }
 
 const CandidateForm: React.FC<ICandidateFormProps> = ({
+  title,
   candidate,
   onCancel,
   onSubmit,
 }) => {
+  const navigate = useNavigate();
+
   const {
     inputValue: name,
     inputChangeHandler: nameChangeHandler,
@@ -97,107 +104,136 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className={classes["candidate-form"]}>
-      <InputField
-        id="candidate-name"
-        label="Name"
-        className={nameError ? classes.error : ""}
-        onChange={nameChangeHandler}
-        onBlur={nameBlurHandler}
-        value={name}
-        isValid={nameIsValid}
-        data-cy="candidate-name"
+    <div className={classes["candidate-wrapper"]}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={classes["backdrop"]}
+        onClick={() => {
+          navigate("..");
+        }}
       />
-      {nameError && (
-        <p className={classes.error} data-cy="invalid-name">
-          Please add a name.
-        </p>
-      )}
-      <InputField
-        id="candidate-date-of-birth"
-        label="Date of birth"
-        type="date"
-        className={dateOfBirthError ? classes.error : ""}
-        onChange={dateOfBirthChangeHandler}
-        onBlur={dateOfBirthBlurHandler}
-        value={dateOfBirth}
-        isValid={dateofBirthIsValid}
-        checkmarkStyle={{ right: "3rem" }}
-        data-cy="candidate-date-of-birth"
-      />
-      {dateOfBirthError && (
-        <p className={classes.error} data-cy="invalid-date">
-          Please add a valid date.
-        </p>
-      )}
-      <InputField
-        id="candidate-contact-number"
-        label="Contact number"
-        className={contactNumberError ? classes.error : ""}
-        onChange={contactNumberChangeHandler}
-        onBlur={contactNumberBlurHandler}
-        value={contactNumber}
-        isValid={contactNumberIsValid}
-        data-cy="candidate-contact-number"
-      />
-      {contactNumberError && (
-        <p className={classes.error} data-cy="invalid-phone">
-          Please add a valid phone number.
-        </p>
-      )}
-      <InputField
-        id="candidate-email"
-        label="E-mail"
-        className={emailError ? classes.error : ""}
-        onChange={emailChangeHandler}
-        onBlur={emailBlurHandler}
-        value={email}
-        isValid={emailIsValid}
-        data-cy="candidate-email"
-      />
-      {emailError && (
-        <p className={classes.error} data-cy="invalid-email">
-          Please add a valid email.
-        </p>
-      )}
-      <TagsInput
-        id="candidate-skills"
-        label="Skills"
-        placeholder="Press comma to add skills"
-        tags={skills}
-        value={skill}
-        onChange={skillChangeHandler}
-        onBlur={skillBlurHandler}
-        onKeyUp={skillKeyUpHandler}
-        onRemoveTags={removeTags}
-        data-cy="candidate-skills"
-      />
-      {!skillsIsValid && (
-        <p className={classes.error} data-cy="invalid-skills">
-          Please add skills.
-        </p>
-      )}
-      <div className={classes["form-controls"]}>
-        <Button
-          type="submit"
-          text={candidate ? "Save" : "Add"}
-          disabled={
-            !nameIsValid ||
-            !dateofBirthIsValid ||
-            !contactNumberIsValid ||
-            !emailIsValid ||
-            !skills.length
-          }
-          data-cy="submit-btn"
-        />
-        <Button
-          type="button"
-          text="Cancel"
-          onClick={onCancel}
-          data-cy="cancel-btn"
-        />
-      </div>
-    </form>
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -30 }}
+        style={{ zIndex: 3 }}
+      >
+        <div className={classes.card}>
+          <Card>
+            <h2 data-cy="heading">{title}</h2>
+            <form onSubmit={handleSubmit} className={classes["candidate-form"]}>
+              <InputField
+                id="candidate-name"
+                label="Name"
+                className={nameError ? classes.error : ""}
+                onChange={nameChangeHandler}
+                onBlur={nameBlurHandler}
+                value={name}
+                isValid={nameIsValid}
+                data-cy="candidate-name"
+              />
+              {nameError && (
+                <p className={classes.error} data-cy="invalid-name">
+                  Please add a name.
+                </p>
+              )}
+              <InputField
+                id="candidate-date-of-birth"
+                label="Date of birth"
+                type="date"
+                className={dateOfBirthError ? classes.error : ""}
+                onChange={dateOfBirthChangeHandler}
+                onBlur={dateOfBirthBlurHandler}
+                value={dateOfBirth}
+                isValid={dateofBirthIsValid}
+                checkmarkStyle={{ right: "3rem" }}
+                data-cy="candidate-date-of-birth"
+              />
+              {dateOfBirthError && (
+                <p className={classes.error} data-cy="invalid-date">
+                  Please add a valid date.
+                </p>
+              )}
+              <InputField
+                id="candidate-contact-number"
+                label="Contact number"
+                className={contactNumberError ? classes.error : ""}
+                onChange={contactNumberChangeHandler}
+                onBlur={contactNumberBlurHandler}
+                value={contactNumber}
+                isValid={contactNumberIsValid}
+                data-cy="candidate-contact-number"
+              />
+              {contactNumberError && (
+                <p className={classes.error} data-cy="invalid-phone">
+                  Please add a valid phone number.
+                </p>
+              )}
+              <InputField
+                id="candidate-email"
+                label="E-mail"
+                className={emailError ? classes.error : ""}
+                onChange={emailChangeHandler}
+                onBlur={emailBlurHandler}
+                value={email}
+                isValid={emailIsValid}
+                data-cy="candidate-email"
+              />
+              {emailError && (
+                <p className={classes.error} data-cy="invalid-email">
+                  Please add a valid email.
+                </p>
+              )}
+              <TagsInput
+                id="candidate-skills"
+                label="Skills"
+                placeholder="Press comma to add skills"
+                tags={skills}
+                value={skill}
+                onChange={skillChangeHandler}
+                onBlur={skillBlurHandler}
+                onKeyUp={skillKeyUpHandler}
+                onRemoveTags={removeTags}
+                data-cy="candidate-skills"
+              />
+              {!skillsIsValid && (
+                <p className={classes.error} data-cy="invalid-skills">
+                  Please add skills.
+                </p>
+              )}
+              <div className={classes["form-controls"]}>
+                <Button
+                  type="submit"
+                  text={candidate ? "Save" : "Add"}
+                  disabled={
+                    !nameIsValid ||
+                    !dateofBirthIsValid ||
+                    !contactNumberIsValid ||
+                    !emailIsValid ||
+                    !skills.length
+                  }
+                  data-cy="submit-btn"
+                />
+                <Button
+                  type="button"
+                  text="Cancel"
+                  onClick={() => {
+                    if (onCancel) {
+                      onCancel();
+                    } else {
+                      navigate("..");
+                    }
+                  }}
+                  data-cy="cancel-btn"
+                />
+              </div>
+            </form>
+          </Card>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

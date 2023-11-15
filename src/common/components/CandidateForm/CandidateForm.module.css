@@ -25,3 +25,37 @@ p.error {
   border: 2px solid red;
   background-color: rgba(255, 0, 0, 0.25);
 }
+
+.candidate-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  overflow: auto;
+}
+
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.card {
+  width: 500px;
+}
+
+@media screen and (max-width: 500px) {
+  .card {
+    width: calc(100vw - 50px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
