@@ -39,9 +39,10 @@ export const useTagsInput = (initialTags: Tag[] | undefined) => {
 
     if (value) {
       addTags(value);
+    } else {
+      setValue("");
     }
 
-    setValue(value);
     setIsTouched(true);
   };
 
