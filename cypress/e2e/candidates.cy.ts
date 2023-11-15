@@ -7,7 +7,7 @@ describe("candidates", () => {
 
     // Add
     cy.get('[data-cy="add-candidate-btn"]').click();
-    cy.get('[data-cy="heading"').as("heading");
+    cy.get('[data-cy="heading"]').as("heading");
     cy.get('[data-cy="submit-btn"]').as("submitButton");
     cy.get('[data-cy="candidate-name"]').as("candidateName");
     cy.get("@submitButton").should("be.disabled");

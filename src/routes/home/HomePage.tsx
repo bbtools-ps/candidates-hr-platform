@@ -1,21 +1,20 @@
-import MainMenu from "@/common/components/MainMenu/MainMenu";
+import { DUMMY_CANDIDATES } from "@/data/data";
 import { useCandidatesStore } from "@/store/candidates";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import CandidatesList from "./CandidatesList";
 
-interface IHomePageProps {
-  isLoading: boolean;
-}
+const HomePage = () => {
+  const { searchCandidate, searchTerm, filteredCandidates, removeCandidate } =
+    useCandidatesStore();
 
-const HomePage: React.FC<IHomePageProps> = ({ isLoading }) => {
-  const {
-    reset,
-    searchCandidate,
-    searchTerm,
-    filteredCandidates,
-    removeCandidate,
-  } = useCandidatesStore();
+  const [isLoading, setIsLoading] = useState(true);
+  const { setCandidates } = useCandidatesStore();
+
+  useEffect(() => {
+    setCandidates(DUMMY_CANDIDATES);
+    setIsLoading(false);
+  }, [setCandidates]);
 
   const initialRender = useRef(true);
 
@@ -30,16 +29,6 @@ const HomePage: React.FC<IHomePageProps> = ({ isLoading }) => {
 
   return (
     <>
-      <MainMenu
-        searchInput={searchTerm}
-        onChange={(e) => {
-          searchCandidate(e.target.value);
-        }}
-        onAddNewCandidate={() => {
-          navigate("/new-candidate");
-        }}
-        onResetCandidates={reset}
-      />
       {!isLoading && (
         <CandidatesList
           candidates={filteredCandidates}

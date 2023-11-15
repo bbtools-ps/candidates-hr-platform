@@ -1,68 +1,60 @@
-import { Suspense, lazy, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Copyright from "./common/components/Footer/Footer";
+import { Suspense, lazy } from "react";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import Loading from "./common/components/Loading/Loading";
-import { DUMMY_CANDIDATES } from "./data/data";
-
-import { useCandidatesStore } from "./store/candidates";
+import RootLayout from "./routes/RootLayout";
 import CandidatesListContextProvider from "./store/candidates-list-context";
 
-const HomePage = lazy(() => import("./screens/home/HomePage"));
-const NewCandidate = lazy(() => import("./screens/new-candidate/NewCandidate"));
+const HomePage = lazy(() => import("./routes/home/HomePage"));
+const NewCandidate = lazy(() => import("./routes/new-candidate/NewCandidate"));
 const EditCandidate = lazy(
-  () => import("./screens/edit-candidate/EditCandidate")
+  () => import("./routes/edit-candidate/EditCandidate")
 );
-const PageNotFound = lazy(() => import("./screens/404/PageNotFound"));
+const PageNotFound = lazy(() => import("./routes/404/PageNotFound"));
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: (
+      <Suspense fallback={<Loading />}>
+        <PageNotFound />
+      </Suspense>
+    ),
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <HomePage />
+          </Suspense>
+        ),
+        children: [
+          {
+            path: "/new-candidate",
+            element: (
+              <Suspense fallback={<Loading />}>
+                <NewCandidate />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/edit-candidate",
+            element: (
+              <Suspense fallback={<Loading />}>
+                <EditCandidate />
+              </Suspense>
+            ),
+          },
+        ],
+      },
+    ],
+  },
+]);
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const { setCandidates } = useCandidatesStore();
-
-  useEffect(() => {
-    setCandidates(DUMMY_CANDIDATES);
-    setIsLoading(false);
-  }, [setCandidates]);
-
   return (
     <CandidatesListContextProvider>
-      <div className="app">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<Loading />}>
-                <HomePage isLoading={isLoading} />
-              </Suspense>
-            }
-          >
-            <Route
-              path="/new-candidate"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <NewCandidate />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/edit-candidate"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <EditCandidate />
-                </Suspense>
-              }
-            />
-          </Route>
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<Loading />}>
-                <PageNotFound />
-              </Suspense>
-            }
-          />
-        </Routes>
-        <Copyright copyrightLabel="Bogdan Bogdanovic" />
-      </div>
+      <RouterProvider router={router} />
     </CandidatesListContextProvider>
   );
 };
