@@ -1,11 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import CandidateForm from "./CandidateForm";
 
 describe("<CandidateForm/>", () => {
-  it("should render all required fields: Name, Date of birth, Contact number, E-mail, Skills and buttons Cancel and Add", () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+  it("should render all required fields: Name, Date of birth, Contact number, E-mail, Skills, Cancel button, Add button, and title", () => {
+    render(
+      <BrowserRouter>
+        <CandidateForm
+          onCancel={() => {}}
+          onSubmit={() => {}}
+          title="New candidate"
+        />
+      </BrowserRouter>
+    );
 
     expect(screen.getByRole("textbox", { name: /name/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/date/i)).toBeInTheDocument();
@@ -20,16 +29,28 @@ describe("<CandidateForm/>", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /cancel/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
+
+    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
+      /new candidate/i
+    );
   });
 
   it("should initially disable the Add button", () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
 
     expect(screen.getByRole("button", { name: /add/i })).toBeDisabled();
   });
 
   it("should show an error if the user didn't enter anything into the Name field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/name/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
 
@@ -41,7 +62,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should show an error if the user didn't enter anything into the Date of birth field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/date/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
 
@@ -53,7 +78,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should show an error if the user didn't enter anything into the Contact number field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/contact/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
 
@@ -75,7 +104,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should show an error if the user didn't enter anything into the E-mail field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/e-mail/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
 
@@ -93,7 +126,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should show an error if the user didn't enter anything into the Skills field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/skills/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
 
@@ -105,7 +142,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should still keep the button disabled if the user just entered valid data into the Name field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/name/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
     const testValue = "Name";
@@ -120,7 +161,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should still keep the button disabled if the user just entered valid data into the Contact number field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/contact/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
     const testValue = "+123123123123";
@@ -135,7 +180,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should still keep the button disabled if the user just entered valid data into the E-mail field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/e-mail/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
     const testValue = "test@test.com";
@@ -150,7 +199,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should still keep the button disabled if the user just entered valid data into the Skills field", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     const testEl = screen.getByLabelText(/skills/i);
     const btnAdd = screen.getByRole("button", { name: /add/i });
     const testValue = "skill";
@@ -165,7 +218,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should enable the Add button if the user entered all valid values", async () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name");
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
@@ -180,10 +237,13 @@ describe("<CandidateForm/>", () => {
     const testHandleOnSubmit = vi.fn();
     const testHandleOnCancel = vi.fn();
     render(
-      <CandidateForm
-        onCancel={testHandleOnCancel}
-        onSubmit={testHandleOnSubmit}
-      />
+      <BrowserRouter>
+        <CandidateForm
+          onCancel={testHandleOnCancel}
+          onSubmit={testHandleOnSubmit}
+          title=""
+        />
+      </BrowserRouter>
     );
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name");
@@ -202,10 +262,13 @@ describe("<CandidateForm/>", () => {
     const testHandleOnSubmit = vi.fn();
     const testHandleOnCancel = vi.fn();
     render(
-      <CandidateForm
-        onCancel={testHandleOnCancel}
-        onSubmit={testHandleOnSubmit}
-      />
+      <BrowserRouter>
+        <CandidateForm
+          onCancel={testHandleOnCancel}
+          onSubmit={testHandleOnSubmit}
+          title=""
+        />
+      </BrowserRouter>
     );
 
     await userEvent.click(screen.getByRole("button", { name: /cancel/i }));
@@ -216,7 +279,11 @@ describe("<CandidateForm/>", () => {
   });
 
   it("should show the text for the submit button as Add when adding new candidate", () => {
-    render(<CandidateForm onCancel={() => {}} onSubmit={() => {}} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={() => {}} title="" />
+      </BrowserRouter>
+    );
     expect(screen.getByRole("button", { name: /add/i })).toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: /edit/i })
@@ -236,11 +303,14 @@ describe("<CandidateForm/>", () => {
       id: "1",
     };
     render(
-      <CandidateForm
-        onCancel={() => {}}
-        onSubmit={() => {}}
-        candidate={testCandidate}
-      />
+      <BrowserRouter>
+        <CandidateForm
+          onCancel={() => {}}
+          onSubmit={() => {}}
+          candidate={testCandidate}
+          title=""
+        />
+      </BrowserRouter>
     );
     expect(
       screen.queryByRole("button", { name: /add/i })
@@ -250,7 +320,11 @@ describe("<CandidateForm/>", () => {
 
   it("should submit the candidate data when pressing Enter and all required fields are filled with valid data", async () => {
     const testSubmitFn = vi.fn();
-    render(<CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} title="" />
+      </BrowserRouter>
+    );
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name");
     await userEvent.type(screen.getByLabelText(/date/i), "2000-03-03");
@@ -263,7 +337,11 @@ describe("<CandidateForm/>", () => {
 
   it("should not submit the candidate data when pressing Enter if not all required fields are filled", async () => {
     const testSubmitFn = vi.fn();
-    render(<CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} />);
+    render(
+      <BrowserRouter>
+        <CandidateForm onCancel={() => {}} onSubmit={testSubmitFn} title="" />
+      </BrowserRouter>
+    );
 
     await userEvent.type(screen.getByLabelText(/name/i), "Name{enter}");
 
