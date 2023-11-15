@@ -33,6 +33,7 @@ describe("<CandidatesList/>", () => {
         candidates={dummyCandidates}
         onEditCandidate={() => {}}
         onRemoveCandidate={() => {}}
+        isLoading={false}
       />
     );
 
@@ -50,6 +51,7 @@ describe("<CandidatesList/>", () => {
         candidates={[]}
         onEditCandidate={() => {}}
         onRemoveCandidate={() => {}}
+        isLoading={false}
       />
     );
 
