@@ -15,7 +15,6 @@ interface ITagsInputProps
   placeholder?: string;
   value: string;
   onChange: (payload: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyUp: (payload: React.KeyboardEvent<HTMLInputElement>) => void;
   onBlur: (payload: React.ChangeEvent<HTMLInputElement>) => void;
   onRemoveTags: (id: string) => void;
 }
@@ -30,12 +29,13 @@ const TagsInput: React.FC<ITagsInputProps> = ({
   onKeyUp,
   onBlur,
   onRemoveTags,
+  className,
   ...rest
 }) => {
   return (
     <div className={classes["outer-container"]}>
       <label htmlFor={id}>{label}</label>
-      <div className={classes["inner-container"]}>
+      <div className={`${classes["inner-container"]} ${className}`}>
         <motion.ul
           variants={{
             hidden: { opacity: 0, scale: 0.5 },
@@ -76,6 +76,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
           onChange={onChange}
           onKeyUp={onKeyUp}
           onBlur={onBlur}
+          className={className}
         />
       </div>
     </div>

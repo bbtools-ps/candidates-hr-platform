@@ -1,40 +1,48 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { Tag } from "../models";
 
 export const useTagsInput = (initialTags: Tag[] | undefined) => {
   const [value, setValue] = useState("");
   const [tags, setTags] = useState<Tag[]>(initialTags || []);
-  const [isValid, setIsValid] = useState(true);
+  const [isTouched, setIsTouched] = useState(false);
+  const hasError = isTouched && !tags.length && !value;
+
+  const addTags = useCallback((value: string) => {
+    setTags((prevState) => {
+      if (prevState.find((item) => item.value === value)) {
+        return prevState;
+      } else {
+        return [...prevState, { id: uuid(), value }];
+      }
+    });
+    setValue("");
+  }, []);
+
+  useEffect(() => {
+    const transformedValue = value.replace(",", "");
+
+    if (transformedValue.trim().length && value.at(-1) === ",") {
+      addTags(transformedValue);
+    } else {
+      setValue(transformedValue);
+    }
+  }, [addTags, value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setValue(value);
-    setIsValid(true);
-  };
-
-  const addTags = (inputValue: string) => {
-    const value = inputValue.trim().replace(",", "");
-
-    if (!value) return;
-
-    setTags((prevState) => [...prevState, { id: uuid(), value }]);
-    setValue("");
-  };
-
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === ",") {
-      addTags(e.currentTarget.value);
-    }
   };
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (!value && !tags.length) {
-      setIsValid(false);
-      return;
+    const value = e.target.value.trim();
+
+    if (value) {
+      addTags(value);
     }
-    addTags(value);
+
+    setValue(value);
+    setIsTouched(true);
   };
 
   const removeTags = (id: string) => {
@@ -45,9 +53,8 @@ export const useTagsInput = (initialTags: Tag[] | undefined) => {
     value,
     tags,
     handleChange,
-    handleKeyUp,
     removeTags,
     handleBlur,
-    isValid,
+    hasError,
   };
 };

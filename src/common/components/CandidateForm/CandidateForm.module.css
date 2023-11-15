@@ -19,11 +19,11 @@ p.error {
   font-weight: 400;
   margin-top: -0.8rem;
   margin-bottom: 0;
+  background-color: transparent;
 }
 
-.error input {
-  border: 2px solid red;
-  background-color: rgba(255, 0, 0, 0.25);
+.error {
+  background-color: #ffaeae;
 }
 
 .candidate-wrapper {

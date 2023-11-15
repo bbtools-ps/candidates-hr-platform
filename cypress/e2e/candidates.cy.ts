@@ -90,13 +90,13 @@ describe("candidates", () => {
 
   it("should not allow adding a candidate if the list of candidates is not loaded from the main page", () => {
     cy.visit("/#/new-candidate");
-    cy.get('[data-cy="heading"').should("not.exist");
+    cy.get('[data-cy="heading"]').should("not.exist");
     cy.get('[data-cy="candidates-logo"]').should("exist");
   });
 
   it("should not allow editing a candidate if candidate is not selected from the main page", () => {
     cy.visit("/#/edit-candidate");
-    cy.get('[data-cy="heading"').should("not.exist");
+    cy.get('[data-cy="heading"]').should("not.exist");
     cy.get('[data-cy="candidates-logo"]').should("exist");
   });
 

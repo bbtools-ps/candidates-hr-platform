@@ -12,7 +12,7 @@ describe("navigation", () => {
     // Cancel button
     cy.get("@addCandidateButton").click();
     cy.get('[data-cy="cancel-btn"]').as("cancelButton");
-    cy.get('[data-cy="heading"').as("heading");
+    cy.get('[data-cy="heading"]').as("heading");
     cy.get("@heading").should("contain", "New candidate");
     cy.get("@cancelButton").click();
 

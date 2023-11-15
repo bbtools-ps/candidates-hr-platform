@@ -75,10 +75,9 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     tags: skills,
     value: skill,
     handleBlur: skillBlurHandler,
-    handleKeyUp: skillKeyUpHandler,
     handleChange: skillChangeHandler,
     removeTags,
-    isValid: skillsIsValid,
+    hasError: tagsError,
   } = useTagsInput(candidate?.skills);
 
   const setDateFormat = (selectedDate: string) => {
@@ -127,7 +126,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
               <InputField
                 id="candidate-name"
                 label="Name"
-                className={nameError ? classes.error : ""}
+                inputClass={nameError ? classes.error : ""}
                 onChange={nameChangeHandler}
                 onBlur={nameBlurHandler}
                 value={name}
@@ -143,7 +142,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
                 id="candidate-date-of-birth"
                 label="Date of birth"
                 type="date"
-                className={dateOfBirthError ? classes.error : ""}
+                inputClass={dateOfBirthError ? classes.error : ""}
                 onChange={dateOfBirthChangeHandler}
                 onBlur={dateOfBirthBlurHandler}
                 value={dateOfBirth}
@@ -159,7 +158,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
               <InputField
                 id="candidate-contact-number"
                 label="Contact number"
-                className={contactNumberError ? classes.error : ""}
+                inputClass={contactNumberError ? classes.error : ""}
                 onChange={contactNumberChangeHandler}
                 onBlur={contactNumberBlurHandler}
                 value={contactNumber}
@@ -174,7 +173,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
               <InputField
                 id="candidate-email"
                 label="E-mail"
-                className={emailError ? classes.error : ""}
+                inputClass={emailError ? classes.error : ""}
                 onChange={emailChangeHandler}
                 onBlur={emailBlurHandler}
                 value={email}
@@ -194,11 +193,11 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
                 value={skill}
                 onChange={skillChangeHandler}
                 onBlur={skillBlurHandler}
-                onKeyUp={skillKeyUpHandler}
                 onRemoveTags={removeTags}
                 data-cy="candidate-skills"
+                className={tagsError ? classes.error : ""}
               />
-              {!skillsIsValid && (
+              {tagsError && (
                 <p className={classes.error} data-cy="invalid-skills">
                   Please add skills.
                 </p>
