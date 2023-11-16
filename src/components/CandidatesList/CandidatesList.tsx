@@ -1,4 +1,5 @@
 import { Candidate } from "@/common/models";
+import { motion } from "framer-motion";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import CandidateItem from "./CandidateItem";
@@ -39,15 +40,18 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
     [candidates, onEditCandidate, onRemoveCandidate]
   );
 
-  console.log(listHeight);
-
   return (
     <div className={classes["candidates-list-wrapper"]} ref={containerRef}>
       {isLoading && <p>Loading...</p>}
       {candidates.length === 0 && (
-        <div className={classes["no-results"]} data-cy="no-results">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={classes["no-results"]}
+          data-cy="no-results"
+        >
           No candidates found.
-        </div>
+        </motion.div>
       )}
       {candidates.length && (
         <div className={classes["candidates-list"]}>

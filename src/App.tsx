@@ -2,21 +2,17 @@ import { Suspense, lazy } from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import Loading from "./common/components/Loading/Loading";
 import RootLayout from "./routes/RootLayout";
+import ErrorPage from "./routes/error/ErrorPage";
 
 const HomePage = lazy(() => import("./routes"));
 const NewCandidate = lazy(() => import("./routes/new-candidate"));
 const EditCandidate = lazy(() => import("./routes/edit-candidate"));
-const ErrorPage = lazy(() => import("./routes/error/ErrorPage"));
 
 const router = createHashRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: (
-      <Suspense fallback={<Loading />}>
-        <ErrorPage />
-      </Suspense>
-    ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

@@ -20,7 +20,8 @@
       "@/common/*": ["common/*"],
       "@/data/*": ["data/*"],
       "@/screens/*": ["screens/*"],
-      "@/store/*": ["store/*"]
+      "@/store/*": ["store/*"],
+      "@/routes/*": ["routes/*"]
     }
   },
   "include": ["src"],

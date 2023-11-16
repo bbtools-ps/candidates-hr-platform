@@ -3,4 +3,23 @@
   flex: 1;
   flex-direction: column;
   justify-content: center;
+  color: #fff;
+}
+
+.container span {
+  margin-right: 1rem;
+}
+
+.details {
+  margin-bottom: 2rem;
+}
+
+.link {
+  align-self: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--action-color-hover);
+  border-radius: var(--border-radius);
+  &:hover {
+    border-color: var(--action-color);
+  }
 }
