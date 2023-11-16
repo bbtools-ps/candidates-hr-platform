@@ -1,8 +1,14 @@
+import { motion } from "framer-motion";
 import classes from "./Logo.module.css";
 
 const Logo = () => {
   return (
-    <a href="./" className={classes.logo} data-cy="candidates-logo">
+    <motion.a
+      variants={{ hidden: { opacity: 0, y: -30 }, show: { opacity: 1, y: 0 } }}
+      href="./"
+      className={classes.logo}
+      data-cy="candidates-logo"
+    >
       <div className={classes.text}>
         <span className={classes.heading}>Candidates</span>
         <span className={classes.subheading}>HR assistance platform</span>
@@ -33,7 +39,7 @@ const Logo = () => {
           transform="translate(0)"
         />
       </svg>
-    </a>
+    </motion.a>
   );
 };
 

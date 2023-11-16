@@ -1,4 +1,4 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
 import ClearButton from "../ClearButton/ClearButton";
@@ -20,10 +20,24 @@ const MainMenu: React.FC<IMainMenuProps> = ({
   searchInput,
 }) => {
   return (
-    <div className={classes["main-menu-wrapper"]}>
+    <motion.div
+      variants={{
+        hidden: { opacity: 1 },
+        show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+      }}
+      initial="hidden"
+      animate="show"
+      className={classes["main-menu-wrapper"]}
+    >
       <Card className={classes["main-menu"]}>
         <Logo />
-        <div className={classes["search-bar-wrapper"]}>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: -30 },
+            show: { opacity: 1, y: 0 },
+          }}
+          className={classes["search-bar-wrapper"]}
+        >
           <div className={classes["search-bar"]}>
             <InputField
               id="search-candidates"
@@ -49,9 +63,9 @@ const MainMenu: React.FC<IMainMenuProps> = ({
             onClick={onAddNewCandidate}
             data-cy="add-candidate-btn"
           />
-        </div>
+        </motion.div>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 

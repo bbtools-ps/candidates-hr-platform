@@ -17,7 +17,7 @@ import TagsInput from "../TagsInput/TagsInput";
 import classes from "./CandidateForm.module.css";
 
 interface ICandidateFormProps {
-  title: string;
+  title: React.ReactNode;
   candidate?: Candidate;
   onCancel?: () => void;
   onSubmit: (payload: Candidate) => void;

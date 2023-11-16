@@ -38,12 +38,11 @@ const TagsInput: React.FC<ITagsInputProps> = ({
       <div className={`${classes["inner-container"]} ${className}`}>
         <motion.ul
           variants={{
-            hidden: { opacity: 0, scale: 0.5 },
+            hidden: { opacity: 0 },
             show: {
               opacity: 1,
-              scale: 1,
               transition: {
-                staggerChildren: 0.2,
+                staggerChildren: 0.1,
               },
             },
           }}
