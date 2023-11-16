@@ -5,11 +5,18 @@
  */
 export const convertDate = (dateStr: string | undefined) => {
   if (!dateStr) return;
+
   const dateArr = dateStr.match(/\d+/g);
-  if (!dateArr || dateArr.length !== 3)
+
+  if (!dateArr || dateArr.length !== 3) {
     throw new Error("No numbers found in date string.");
+  }
+
   const [month, day, year] = dateArr;
-  if (year.length !== 4 || month.length !== 2 || day.length !== 2)
+
+  if (year.length !== 4 || month.length !== 2 || day.length !== 2) {
     throw new Error("Not appropriate number format MM/DD/YYYY");
+  }
+
   return `${year}-${month}-${day}`;
 };

@@ -1,7 +1,7 @@
 import { Candidate } from "@/common/models";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
-import CandidateItem from "./CandidateItem/CandidateItem";
+import CandidateItem from "./CandidateItem";
 import classes from "./CandidatesList.module.css";
 
 interface ICandidatesListProps {

@@ -3,12 +3,10 @@ import { RouterProvider, createHashRouter } from "react-router-dom";
 import Loading from "./common/components/Loading/Loading";
 import RootLayout from "./routes/RootLayout";
 
-const HomePage = lazy(() => import("./routes/home/HomePage"));
-const NewCandidate = lazy(() => import("./routes/new-candidate/NewCandidate"));
-const EditCandidate = lazy(
-  () => import("./routes/edit-candidate/EditCandidate")
-);
-const PageNotFound = lazy(() => import("./routes/404/PageNotFound"));
+const HomePage = lazy(() => import("./routes"));
+const NewCandidate = lazy(() => import("./routes/new-candidate"));
+const EditCandidate = lazy(() => import("./routes/edit-candidate"));
+const ErrorPage = lazy(() => import("./routes/error/ErrorPage"));
 
 const router = createHashRouter([
   {
@@ -16,7 +14,7 @@ const router = createHashRouter([
     element: <RootLayout />,
     errorElement: (
       <Suspense fallback={<Loading />}>
-        <PageNotFound />
+        <ErrorPage />
       </Suspense>
     ),
     children: [

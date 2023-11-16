@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import classes from "./PageNotFound.module.css";
+import classes from "./ErrorPage.module.css";
 
-const PageNotFound = () => {
+const ErrorPage = () => {
   return (
     <div className={classes.container}>
-      <h1>Page not found</h1>
+      <h1>Error occured.</h1>
       <Link to="/">Go back home</Link>
     </div>
   );
 };
 
-export default PageNotFound;
+export default ErrorPage;
