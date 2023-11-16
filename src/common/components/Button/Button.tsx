@@ -4,6 +4,8 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MotionProps, motion } from "framer-motion";
+import { ButtonHTMLAttributes } from "react";
 import classes from "./Button.module.css";
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,10 +26,16 @@ const Button: React.FC<IButtonProps> = ({
   };
 
   return (
-    <button {...rest} type={type} className={classes.button}>
+    <motion.button
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      type={type}
+      className={classes.button}
+    >
       {icon && buttonIcon[icon] && <FontAwesomeIcon icon={buttonIcon[icon]} />}
       {text}
-    </button>
+    </motion.button>
   );
 };
 
