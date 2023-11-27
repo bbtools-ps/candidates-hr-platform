@@ -19,7 +19,7 @@ const router = createHashRouter([
           },
           {
             path: "edit-candidate",
-            lazy: () => import("./routes/new-candidate"),
+            lazy: () => import("./routes/edit-candidate"),
           },
         ],
       },
