@@ -4,7 +4,7 @@ import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 
-const NewCandidate = () => {
+export function Component() {
   const { addCandidate } = useCandidatesStore();
 
   const navigate = useNavigate();
@@ -25,6 +25,6 @@ const NewCandidate = () => {
       }}
     />
   );
-};
+}
 
-export default NewCandidate;
+Component.displayName = "NewCandidate";

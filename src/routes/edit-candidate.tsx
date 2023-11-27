@@ -5,7 +5,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const EditCandidate = () => {
+export function Component() {
   const { allCandidates, editCandidate } = useCandidatesStore();
 
   const navigate = useNavigate();
@@ -30,6 +30,6 @@ const EditCandidate = () => {
       />
     </Protected>
   );
-};
+}
 
-export default EditCandidate;
+Component.displayName = "EditCandidate";
