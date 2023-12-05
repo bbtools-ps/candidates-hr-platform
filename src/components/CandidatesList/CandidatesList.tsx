@@ -1,6 +1,7 @@
+import { useElementSize } from "@/common/hooks/useElementSize";
 import { Candidate } from "@/common/models";
 import { motion } from "framer-motion";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useCallback } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import CandidateItem from "./CandidateItem";
 import classes from "./CandidatesList.module.css";
@@ -18,13 +19,7 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
   onRemoveCandidate,
   onEditCandidate,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const [listHeight, setListHeight] = useState(0);
-
-  useLayoutEffect(() => {
-    setListHeight(containerRef.current?.clientHeight || 0);
-  }, []);
+  const { ref, height } = useElementSize();
 
   const renderRow = useCallback(
     ({ index, style }: ListChildComponentProps) => (
@@ -39,8 +34,10 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
     [candidates, onEditCandidate, onRemoveCandidate]
   );
 
+  console.log(height);
+
   return (
-    <div className={classes["candidates-list-wrapper"]} ref={containerRef}>
+    <div className={classes["candidates-list-wrapper"]} ref={ref}>
       {isLoading && <p>Loading...</p>}
       {candidates.length === 0 && (
         <motion.div
@@ -55,7 +52,7 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
       {candidates.length && (
         <div className={classes["candidates-list"]}>
           <FixedSizeList
-            height={listHeight}
+            height={height}
             itemCount={candidates.length}
             itemSize={280}
             width="100%"
