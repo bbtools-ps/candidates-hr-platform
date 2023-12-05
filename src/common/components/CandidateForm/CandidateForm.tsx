@@ -1,4 +1,4 @@
-import { useInputValidation, useTagsInput } from "@/common/hooks";
+import { useInput, useTagsInput } from "@/common/hooks";
 import { Candidate } from "@/common/models";
 import {
   convertDate,
@@ -32,50 +32,50 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
   const navigate = useNavigate();
 
   const {
-    inputValue: name,
-    inputChangeHandler: nameChangeHandler,
-    inputBlurHandler: nameBlurHandler,
-    inputIsValid: nameIsValid,
+    value: name,
+    onChange: nameChangeHandler,
+    onBlur: nameBlurHandler,
+    isValid: nameIsValid,
     hasError: nameError,
-  } = useInputValidation({
-    validators: [validateEmptyValue],
+  } = useInput({
     initialValue: candidate?.name,
+    validationFn: (value) => validateEmptyValue(value),
   });
   const {
-    inputValue: dateOfBirth,
-    inputChangeHandler: dateOfBirthChangeHandler,
-    inputBlurHandler: dateOfBirthBlurHandler,
-    inputIsValid: dateofBirthIsValid,
+    value: dateOfBirth,
+    onChange: dateOfBirthChangeHandler,
+    onBlur: dateOfBirthBlurHandler,
+    isValid: dateofBirthIsValid,
     hasError: dateOfBirthError,
-  } = useInputValidation({
-    validators: [validateDate],
+  } = useInput({
     initialValue: convertDate(candidate?.dateOfBirth),
+    validationFn: (value) => validateDate(value),
   });
   const {
-    inputValue: contactNumber,
-    inputChangeHandler: contactNumberChangeHandler,
-    inputBlurHandler: contactNumberBlurHandler,
-    inputIsValid: contactNumberIsValid,
+    value: contactNumber,
+    onChange: contactNumberChangeHandler,
+    onBlur: contactNumberBlurHandler,
+    isValid: contactNumberIsValid,
     hasError: contactNumberError,
-  } = useInputValidation({
-    validators: [validatePhoneNumber],
+  } = useInput({
     initialValue: candidate?.contactNumber,
+    validationFn: (value) => validatePhoneNumber(value),
   });
   const {
-    inputValue: email,
-    inputChangeHandler: emailChangeHandler,
-    inputBlurHandler: emailBlurHandler,
-    inputIsValid: emailIsValid,
+    value: email,
+    onChange: emailChangeHandler,
+    onBlur: emailBlurHandler,
+    isValid: emailIsValid,
     hasError: emailError,
-  } = useInputValidation({
-    validators: [validateEmptyValue, validateEmail],
+  } = useInput({
     initialValue: candidate?.email,
+    validationFn: (value) => validateEmptyValue(value) && validateEmail(value),
   });
   const {
     tags: skills,
     value: skill,
-    handleBlur: skillBlurHandler,
-    handleChange: skillChangeHandler,
+    onChange: skillChangeHandler,
+    onBlur: skillBlurHandler,
     removeTags,
     hasError: tagsError,
   } = useTagsInput(candidate?.skills);

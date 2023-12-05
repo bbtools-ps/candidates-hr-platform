@@ -1,2 +1,2 @@
-export * from "./useInputValidation";
+export * from "./useInput";
 export * from "./useTagsInput";

@@ -29,12 +29,12 @@ export const useTagsInput = (initialTags: Tag[] | undefined) => {
     }
   }, [addTags, value]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setValue(value);
   };
 
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
 
     if (value) {
@@ -53,9 +53,9 @@ export const useTagsInput = (initialTags: Tag[] | undefined) => {
   return {
     value,
     tags,
-    handleChange,
+    onChange,
+    onBlur,
     removeTags,
-    handleBlur,
     hasError,
   };
 };
