@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useCallback } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import CandidateItem from "./CandidateItem";
-import classes from "./CandidatesList.module.css";
 
 interface ICandidatesListProps {
   candidates: Candidate[];
@@ -31,35 +30,31 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
         />
       </div>
     ),
-    [candidates, onEditCandidate, onRemoveCandidate]
+    [candidates, onEditCandidate, onRemoveCandidate],
   );
 
-  console.log(height);
-
   return (
-    <div className={classes["candidates-list-wrapper"]} ref={ref}>
+    <div className="flex flex-1 flex-col" ref={ref}>
       {isLoading && <p>Loading...</p>}
       {candidates.length === 0 && (
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          className={classes["no-results"]}
+          className="text-white flex flex-1 items-center justify-center text-2xl"
           data-cy="no-results"
         >
           No candidates found.
         </motion.div>
       )}
       {candidates.length && (
-        <div className={classes["candidates-list"]}>
-          <FixedSizeList
-            height={height}
-            itemCount={candidates.length}
-            itemSize={280}
-            width="100%"
-          >
-            {renderRow}
-          </FixedSizeList>
-        </div>
+        <FixedSizeList
+          height={height}
+          itemCount={candidates.length}
+          itemSize={280}
+          width="100%"
+        >
+          {renderRow}
+        </FixedSizeList>
       )}
     </div>
   );

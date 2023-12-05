@@ -1,23 +1,19 @@
 import { motion } from "framer-motion";
-import classes from "./Logo.module.css";
 
 const Logo = () => {
   return (
     <motion.a
       variants={{ hidden: { opacity: 0, y: -30 }, show: { opacity: 1, y: 0 } }}
       href="./"
-      className={classes.logo}
+      className="group hidden md:flex"
       data-cy="candidates-logo"
     >
-      <div className={classes.text}>
-        <span className={classes.heading}>Candidates</span>
-        <span className={classes.subheading}>HR assistance platform</span>
-      </div>
       <svg
         id="Layer_2"
         data-name="Layer 2"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 293.71 202.57"
+        className="mr-2 w-[50px] duration-100 group-hover:fill-blue"
       >
         <circle cx="146.72" cy="56.97" r="29.19" />
         <path
@@ -39,6 +35,10 @@ const Logo = () => {
           transform="translate(0)"
         />
       </svg>
+      <div className="hidden flex-col duration-100 group-hover:text-blue md:flex">
+        <p className="text-3xl font-bold uppercase">Candidates</p>
+        <p className="text-base">HR assistance platform</p>
+      </div>
     </motion.a>
   );
 };

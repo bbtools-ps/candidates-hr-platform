@@ -1,6 +1,5 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classes from "./InputField.module.css";
 
 interface IInputFieldProps
   extends React.DetailedHTMLProps<
@@ -9,44 +8,45 @@ interface IInputFieldProps
   > {
   label?: string;
   isValid?: boolean;
-  checkmarkStyle?: React.CSSProperties;
-  inputClass?: string;
+  error?: string;
 }
 
 const InputField: React.FC<IInputFieldProps> = ({
+  id,
   label,
   type = "text",
   value = "",
   className,
-  id,
   isValid,
-  checkmarkStyle,
-  inputClass,
-  onChange,
-  onBlur,
+  error,
   ...rest
 }) => {
   return (
-    <div className={`${classes["input-field"]} ${className || ""}}`}>
+    <div className="flex flex-col gap-2">
       <label htmlFor={id}>{label}</label>
-      <input
-        {...rest}
-        type={type}
-        value={value}
-        className={`${label ? classes["with-label"] : ""} ${inputClass}`}
-        onChange={onChange}
-        onBlur={onBlur}
-        id={id}
-        name={label}
-        aria-label={label}
-      />
-      {isValid !== undefined && isValid === true && (
-        <FontAwesomeIcon
-          icon={faCheck}
-          className={classes.checkmark}
-          style={checkmarkStyle}
+      <div className="relative flex flex-col">
+        <input
+          {...rest}
+          id={id}
+          type={type}
+          value={value}
+          className={`border-gray flex-1 truncate rounded border-2 border-solid py-2 pl-4 pr-10 text-base duration-100 hover:border-blue focus:outline-blue ${
+            label ? "" : ""
+          } ${error ? "bg-rose-300 border-red" : ""}`}
+          name={label}
+          aria-label={label}
         />
-      )}
+        {isValid && (
+          <span className="absolute right-4 flex h-full items-center text-green">
+            <FontAwesomeIcon icon={faCheck} />
+          </span>
+        )}
+        {error && (
+          <p className="text-red" data-cy="invalid-phone">
+            {error}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

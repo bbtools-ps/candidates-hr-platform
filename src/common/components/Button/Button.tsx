@@ -6,16 +6,24 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MotionProps, motion } from "framer-motion";
 import { ButtonHTMLAttributes } from "react";
-import classes from "./Button.module.css";
+
+const buttonVariant = {
+  default: "bg-blue text-white",
+  outlined: "border-blue border-2 border-solid text-blue",
+  red: "bg-red text-white",
+  green: "bg-green text-white",
+} as const;
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
+  children: React.ReactNode;
   icon?: "add" | "remove" | "edit";
+  variant?: keyof typeof buttonVariant;
 }
 
 const Button: React.FC<IButtonProps> = ({
+  children,
   type = "button",
-  text = "button",
+  variant = "default",
   icon,
   ...rest
 }) => {
@@ -27,14 +35,17 @@ const Button: React.FC<IButtonProps> = ({
 
   return (
     <motion.button
-      {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       type={type}
-      className={classes.button}
+      aria-label={children?.toString()}
+      className={`disabled:bg-gray flex items-center gap-2 rounded-full px-6 py-2 text-base font-bold uppercase duration-100 hover:opacity-80 ${buttonVariant[variant]}`}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
     >
       {icon && buttonIcon[icon] && <FontAwesomeIcon icon={buttonIcon[icon]} />}
-      {text}
+      <span className={icon ? "hidden sm:inline-block" : undefined}>
+        {children}
+      </span>
     </motion.button>
   );
 };

@@ -2,7 +2,6 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MotionProps, motion } from "framer-motion";
 import { ButtonHTMLAttributes } from "react";
-import classes from "./ClearButton.module.css";
 
 interface IClearButtonProps
   extends React.DetailedHTMLProps<
@@ -16,9 +15,9 @@ const ClearButton: React.FC<IClearButtonProps> = ({ className, ...rest }) => {
       animate={{ scale: [0.5, 1] }}
       transition={{ duration: 0.2, type: "spring" }}
       exit={{ scale: 0.5, opacity: 0 }}
-      {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
-      className={`${classes["clear-button"]} ${className}`}
+      className="rounded-full text-2xl text-blue"
       aria-label="clear"
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
     >
       <FontAwesomeIcon icon={faTimesCircle} />
     </motion.button>

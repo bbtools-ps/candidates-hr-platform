@@ -8,13 +8,13 @@ import {
   validatePhoneNumber,
 } from "@/common/utils";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import Button from "../Button/Button";
-import Card from "../Card/Card";
 import InputField from "../InputField/InputField";
 import TagsInput from "../TagsInput/TagsInput";
-import classes from "./CandidateForm.module.css";
 
 interface ICandidateFormProps {
   title: React.ReactNode;
@@ -30,6 +30,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
   onSubmit,
 }) => {
   const navigate = useNavigate();
+  const ref = useRef<HTMLDialogElement>(null);
 
   const {
     value: name,
@@ -80,6 +81,10 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     hasError: tagsError,
   } = useTagsInput(candidate?.skills);
 
+  useEffect(() => {
+    ref.current?.showModal();
+  }, []);
+
   const setDateFormat = (selectedDate: string) => {
     return new Date(selectedDate).toLocaleDateString("en-US", {
       year: "numeric",
@@ -88,7 +93,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     });
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const selectedDate = setDateFormat(dateOfBirth);
     const newCandidate = {
@@ -102,137 +107,105 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     onSubmit(newCandidate);
   };
 
-  return (
-    <div className={classes["candidate-wrapper"]}>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className={classes["backdrop"]}
-        onClick={() => {
-          navigate("..");
-        }}
-      />
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -30 }}
-        style={{ zIndex: 3 }}
-      >
-        <div className={classes.card}>
-          <Card>
-            <h2 data-cy="heading">{title}</h2>
-            <form onSubmit={handleSubmit} className={classes["candidate-form"]}>
-              <InputField
-                id="candidate-name"
-                label="Name"
-                inputClass={nameError ? classes.error : ""}
-                onChange={nameChangeHandler}
-                onBlur={nameBlurHandler}
-                value={name}
-                isValid={nameIsValid}
-                data-cy="candidate-name"
-              />
-              {nameError && (
-                <p className={classes.error} data-cy="invalid-name">
-                  Please add a name.
-                </p>
-              )}
-              <InputField
-                id="candidate-date-of-birth"
-                label="Date of birth"
-                type="date"
-                inputClass={dateOfBirthError ? classes.error : ""}
-                onChange={dateOfBirthChangeHandler}
-                onBlur={dateOfBirthBlurHandler}
-                value={dateOfBirth}
-                isValid={dateofBirthIsValid}
-                checkmarkStyle={{ right: "3rem" }}
-                data-cy="candidate-date-of-birth"
-              />
-              {dateOfBirthError && (
-                <p className={classes.error} data-cy="invalid-date">
-                  Please add a valid date.
-                </p>
-              )}
-              <InputField
-                id="candidate-contact-number"
-                label="Contact number"
-                inputClass={contactNumberError ? classes.error : ""}
-                onChange={contactNumberChangeHandler}
-                onBlur={contactNumberBlurHandler}
-                value={contactNumber}
-                isValid={contactNumberIsValid}
-                data-cy="candidate-contact-number"
-              />
-              {contactNumberError && (
-                <p className={classes.error} data-cy="invalid-phone">
-                  Please add a valid phone number.
-                </p>
-              )}
-              <InputField
-                id="candidate-email"
-                label="E-mail"
-                inputClass={emailError ? classes.error : ""}
-                onChange={emailChangeHandler}
-                onBlur={emailBlurHandler}
-                value={email}
-                isValid={emailIsValid}
-                data-cy="candidate-email"
-              />
-              {emailError && (
-                <p className={classes.error} data-cy="invalid-email">
-                  Please add a valid email.
-                </p>
-              )}
-              <TagsInput
-                id="candidate-skills"
-                label="Skills"
-                placeholder="Press comma to add skills"
-                tags={skills}
-                value={skill}
-                onChange={skillChangeHandler}
-                onBlur={skillBlurHandler}
-                onRemoveTags={removeTags}
-                data-cy="candidate-skills"
-                className={tagsError ? classes.error : ""}
-              />
-              {tagsError && (
-                <p className={classes.error} data-cy="invalid-skills">
-                  Please add skills.
-                </p>
-              )}
-              <div className={classes["form-controls"]}>
-                <Button
-                  type="submit"
-                  text={candidate ? "Save" : "Add"}
-                  disabled={
-                    !nameIsValid ||
-                    !dateofBirthIsValid ||
-                    !contactNumberIsValid ||
-                    !emailIsValid ||
-                    !skills.length
-                  }
-                  data-cy="submit-btn"
-                />
-                <Button
-                  type="button"
-                  text="Cancel"
-                  onClick={() => {
-                    if (onCancel) {
-                      onCancel();
-                    } else {
-                      navigate("..");
-                    }
-                  }}
-                  data-cy="cancel-btn"
-                />
-              </div>
-            </form>
-          </Card>
+  return createPortal(
+    <motion.dialog
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      ref={ref}
+      className="backdrop:bg-slate-800/70 w-full rounded p-6 shadow-sm md:w-1/2 lg:w-1/3"
+      onClose={() => {
+        navigate("..");
+      }}
+    >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <h2 data-cy="heading">{title}</h2>
+        <InputField
+          id="candidate-name"
+          label="Name"
+          error={nameError ? "Please add a name." : undefined}
+          onChange={nameChangeHandler}
+          onBlur={nameBlurHandler}
+          value={name}
+          isValid={nameIsValid}
+          data-cy="candidate-name"
+        />
+        <InputField
+          id="candidate-date-of-birth"
+          label="Date of birth"
+          type="date"
+          error={dateOfBirthError ? "Please add a valid date." : undefined}
+          onChange={dateOfBirthChangeHandler}
+          onBlur={dateOfBirthBlurHandler}
+          value={dateOfBirth}
+          isValid={dateofBirthIsValid}
+          data-cy="candidate-date-of-birth"
+        />
+        <InputField
+          id="candidate-contact-number"
+          label="Contact number"
+          error={
+            contactNumberError ? "Please add a valid phone number." : undefined
+          }
+          onChange={contactNumberChangeHandler}
+          onBlur={contactNumberBlurHandler}
+          value={contactNumber}
+          isValid={contactNumberIsValid}
+          data-cy="candidate-contact-number"
+        />
+        <InputField
+          id="candidate-email"
+          label="E-mail"
+          error={emailError ? "Please add a valid email." : undefined}
+          onChange={emailChangeHandler}
+          onBlur={emailBlurHandler}
+          value={email}
+          isValid={emailIsValid}
+          data-cy="candidate-email"
+        />
+        <TagsInput
+          id="candidate-skills"
+          label="Skills"
+          placeholder="Press comma to add skills"
+          tags={skills}
+          value={skill}
+          onChange={skillChangeHandler}
+          onBlur={skillBlurHandler}
+          onRemoveTags={removeTags}
+          error={tagsError ? "Please add skills." : undefined}
+          data-cy="candidate-skills"
+        />
+        <div className="flex justify-center gap-4">
+          <Button
+            type="submit"
+            disabled={
+              !nameIsValid ||
+              !dateofBirthIsValid ||
+              !contactNumberIsValid ||
+              !emailIsValid ||
+              !skills.length
+            }
+            data-cy="submit-btn"
+          >
+            {candidate ? "Save" : "Add"}
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              if (onCancel) {
+                onCancel();
+              } else {
+                navigate("..");
+              }
+            }}
+            data-cy="cancel-btn"
+            variant="outlined"
+          >
+            Cancel
+          </Button>
         </div>
-      </motion.div>
-    </div>
+      </form>
+    </motion.dialog>,
+    document.getElementById("dialogs") as HTMLElement,
   );
 };
 

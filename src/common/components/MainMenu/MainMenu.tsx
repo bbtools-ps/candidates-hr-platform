@@ -1,20 +1,16 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 import Button from "../Button/Button";
-import Card from "../Card/Card";
-import ClearButton from "../ClearButton/ClearButton";
-import InputField from "../InputField/InputField";
 import Logo from "../Logo/Logo";
-import classes from "./MainMenu.module.css";
 
 interface IMainMenuProps {
-  onResetCandidates: () => void;
   onAddNewCandidate: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchInput: string;
 }
 
 const MainMenu: React.FC<IMainMenuProps> = ({
-  onResetCandidates,
   onAddNewCandidate,
   onChange,
   searchInput,
@@ -27,44 +23,37 @@ const MainMenu: React.FC<IMainMenuProps> = ({
       }}
       initial="hidden"
       animate="show"
-      className={classes["main-menu-wrapper"]}
+      className="bg-white z-10 flex w-full items-center justify-center gap-6 px-6 py-4 shadow-md"
     >
-      <Card className={classes["main-menu"]}>
-        <Logo />
-        <motion.div
-          variants={{
-            hidden: { opacity: 0, y: -30 },
-            show: { opacity: 1, y: 0 },
-          }}
-          className={classes["search-bar-wrapper"]}
-        >
-          <div className={classes["search-bar"]}>
-            <InputField
-              id="search-candidates"
-              placeholder="Search candidate name, skills"
-              onChange={onChange}
-              value={searchInput}
-              inputClass={classes.input}
-              data-cy="search-candidates"
-            />
-            <AnimatePresence>
-              {searchInput.length > 0 && (
-                <ClearButton
-                  onClick={onResetCandidates}
-                  className={classes["clear-button"]}
-                  data-cy="clear-btn"
-                />
-              )}
-            </AnimatePresence>
-          </div>
-          <Button
-            text="Add Candidate"
-            icon="add"
-            onClick={onAddNewCandidate}
-            data-cy="add-candidate-btn"
+      <Logo />
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: -30 },
+          show: { opacity: 1, y: 0 },
+        }}
+        className="flex flex-1 justify-between gap-4"
+      >
+        <div className="relative flex-1">
+          <span className="text-gray absolute left-4 flex h-full items-center">
+            <FontAwesomeIcon icon={faSearch} />
+          </span>
+          <input
+            id="search-candidates"
+            className="border-gray w-full truncate rounded-full border-2 border-solid py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full focus:outline-blue xl:w-1/2"
+            placeholder="Search candidate name, skills"
+            data-cy="search-candidates"
+            onChange={onChange}
+            value={searchInput}
           />
-        </motion.div>
-      </Card>
+        </div>
+        <Button
+          icon="add"
+          onClick={onAddNewCandidate}
+          data-cy="add-candidate-btn"
+        >
+          Add Candidate
+        </Button>
+      </motion.div>
     </motion.div>
   );
 };

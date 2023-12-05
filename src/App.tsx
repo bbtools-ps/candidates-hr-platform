@@ -1,7 +1,7 @@
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import HomePage from "./routes";
+import ErrorPage from "./routes/ErrorPage";
 import RootLayout from "./routes/RootLayout";
-import ErrorPage from "./routes/error/ErrorPage";
 
 const router = createHashRouter([
   {

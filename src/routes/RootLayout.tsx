@@ -4,7 +4,7 @@ import { useCandidatesStore } from "@/store/candidates";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const RootLayout = () => {
-  const { searchTerm, searchCandidate, reset } = useCandidatesStore();
+  const { searchTerm, searchCandidate } = useCandidatesStore();
 
   const navigate = useNavigate();
   return (
@@ -17,7 +17,6 @@ const RootLayout = () => {
         onAddNewCandidate={() => {
           navigate("/new-candidate");
         }}
-        onResetCandidates={reset}
       />
       <Outlet />
       <Footer copyrightLabel="Bogdan Bogdanovic" />
