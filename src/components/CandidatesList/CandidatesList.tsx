@@ -40,7 +40,7 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-white flex flex-1 items-center justify-center text-2xl"
+          className="flex flex-1 items-center justify-center text-2xl text-white"
           data-cy="no-results"
         >
           No candidates found.
