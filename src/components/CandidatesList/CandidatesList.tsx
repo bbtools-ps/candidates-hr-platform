@@ -46,16 +46,18 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
           No candidates found.
         </motion.div>
       )}
-      {candidates.length && (
-        <FixedSizeList
-          height={height}
-          itemCount={candidates.length}
-          itemSize={280}
-          width="100%"
-        >
-          {renderRow}
-        </FixedSizeList>
-      )}
+      <div className="h-0">
+        {candidates.length && (
+          <FixedSizeList
+            height={height}
+            itemCount={candidates.length}
+            itemSize={280}
+            width="100%"
+          >
+            {renderRow}
+          </FixedSizeList>
+        )}
+      </div>
     </div>
   );
 };
