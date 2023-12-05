@@ -22,19 +22,19 @@ const InputField: React.FC<IInputFieldProps> = ({
   ...rest
 }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       <label htmlFor={id}>{label}</label>
       <div className="relative flex flex-col">
         <input
-          {...rest}
           id={id}
           type={type}
           value={value}
-          className={`border-gray flex-1 truncate rounded border-2 border-solid py-2 pl-4 pr-10 text-base duration-100 hover:border-blue focus:outline-blue ${
+          className={`w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue focus:outline-blue ${
             label ? "" : ""
-          } ${error ? "bg-rose-300 border-red" : ""}`}
+          } ${error ? "border-red bg-rose-300" : ""}`}
           name={label}
           aria-label={label}
+          {...rest}
         />
         {isValid && (
           <span className="absolute right-4 flex h-full items-center text-green">
@@ -42,7 +42,7 @@ const InputField: React.FC<IInputFieldProps> = ({
           </span>
         )}
         {error && (
-          <p className="text-red" data-cy="invalid-phone">
+          <p className="text-red" data-cy={`invalid-${id}`}>
             {error}
           </p>
         )}

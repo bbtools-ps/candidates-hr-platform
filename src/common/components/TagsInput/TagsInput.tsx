@@ -32,7 +32,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
     <div className="w-full">
       <label htmlFor={id}>{label}</label>
       <div
-        className={`border-gray mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid p-2 duration-100 hover:outline-blue ${
+        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 hover:outline-blue ${
           error ? "bg-rose-300" : ""
         }`}
       >
@@ -57,7 +57,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
                 hidden: { opacity: 0, scale: 0.5 },
                 show: { opacity: 1, scale: 1 },
               }}
-              className="text-white group flex items-center justify-center rounded bg-blue px-2 py-1 text-base font-bold"
+              className="group flex items-center justify-center rounded bg-blue px-2 py-1 text-base font-bold text-white"
             >
               <span>{value}</span>
               <button
@@ -74,14 +74,14 @@ const TagsInput: React.FC<ITagsInputProps> = ({
           id={id}
           type="text"
           placeholder={placeholder}
-          {...rest}
-          className={`bg-transparent flex-1 p-2 focus:outline-none ${
+          className={`flex-1 bg-transparent p-2 focus:outline-none ${
             error ? "placeholder:text-black" : ""
           }`}
+          {...rest}
         />
       </div>
       {error && (
-        <p className="text-red" data-cy="invalid-phone">
+        <p className="text-red" data-cy={`invalid-${id}`}>
           {error}
         </p>
       )}
