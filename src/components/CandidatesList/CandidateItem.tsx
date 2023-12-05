@@ -14,7 +14,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
 }) => {
   return (
     <div
-      className="bg-white text-black m-2 flex w-full flex-col rounded p-4 shadow-sm md:w-1/2 lg:w-1/3"
+      className="m-2 flex w-full flex-col rounded bg-white p-4 text-black shadow-sm md:w-1/2 xl:w-1/3"
       data-cy={candidate.name}
     >
       <h2 className="mb-4">{candidate.name}</h2>
