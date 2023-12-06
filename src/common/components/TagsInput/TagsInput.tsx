@@ -32,7 +32,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
     <div className="w-full">
       <label htmlFor={id}>{label}</label>
       <div
-        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 hover:outline-blue ${
+        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100  hover:border-blue ${
           error ? "bg-rose-300" : ""
         }`}
       >
