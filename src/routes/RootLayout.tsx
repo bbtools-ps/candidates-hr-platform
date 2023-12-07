@@ -7,6 +7,7 @@ const RootLayout = () => {
   const { searchTerm, searchCandidate } = useCandidatesStore();
 
   const navigate = useNavigate();
+
   return (
     <>
       <header className="z-10 shadow-md">
