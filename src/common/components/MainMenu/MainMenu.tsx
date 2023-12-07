@@ -24,7 +24,7 @@ const MainMenu: React.FC<IMainMenuProps> = ({
       }}
       initial="hidden"
       animate="show"
-      className="z-10 flex w-full items-center justify-center gap-4 bg-white px-4 py-4 shadow-md dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900 lg:gap-6 lg:px-6"
+      className="flex w-full items-center justify-center gap-4 bg-white px-4 py-4 dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900 lg:gap-6 lg:px-6"
     >
       <Logo />
       <motion.div

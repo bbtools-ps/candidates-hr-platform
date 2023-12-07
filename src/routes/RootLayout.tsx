@@ -9,7 +9,7 @@ const RootLayout = () => {
   const navigate = useNavigate();
   return (
     <>
-      <header>
+      <header className="z-10 shadow-md">
         <MainMenu
           searchInput={searchTerm}
           onChange={(e) => {
