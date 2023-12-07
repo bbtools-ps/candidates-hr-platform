@@ -24,7 +24,7 @@ const MainMenu: React.FC<IMainMenuProps> = ({
       }}
       initial="hidden"
       animate="show"
-      className="z-10 flex w-full items-center justify-center gap-6 bg-white px-6 py-4 shadow-md dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900"
+      className="z-10 flex w-full items-center justify-center gap-4 bg-white px-4 py-4 shadow-md dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900 lg:gap-6 lg:px-6"
     >
       <Logo />
       <motion.div
@@ -32,7 +32,7 @@ const MainMenu: React.FC<IMainMenuProps> = ({
           hidden: { opacity: 0, y: -30 },
           show: { opacity: 1, y: 0 },
         }}
-        className="flex flex-1 items-center justify-between gap-4"
+        className="flex flex-1 items-center justify-between gap-2 md:gap-4"
       >
         <div className="relative flex-1">
           <span className="absolute left-4 flex h-full items-center text-gray">
