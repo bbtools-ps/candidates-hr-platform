@@ -20,8 +20,8 @@ export default defineConfig({
       "@/common": path.resolve(__dirname, "./src/common"),
       "@/components": path.resolve(__dirname, "./src/components"),
       "@/data": path.resolve(__dirname, "./src/data"),
-      "@/store": path.resolve(__dirname, "./src/store"),
       "@/routes": path.resolve(__dirname, "./src/routes"),
+      "@/store": path.resolve(__dirname, "./src/store"),
     },
   },
 });
