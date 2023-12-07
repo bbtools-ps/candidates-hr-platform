@@ -42,7 +42,7 @@ const ThemeSwitch = () => {
     <div className="relative flex h-8 w-8">
       <label
         htmlFor="theme-switch"
-        className="absolute z-10 flex h-full w-full items-center justify-center rounded-full border-2 border-solid border-blue duration-100 hover:cursor-pointer hover:bg-slate-300 dark:bg-blue"
+        className="absolute z-10 flex h-full w-full items-center justify-center rounded-full border-2 border-solid border-blue duration-100 hover:cursor-pointer hover:bg-slate-200 dark:bg-blue dark:hover:opacity-80"
       >
         <FontAwesomeIcon
           className="text-blue dark:text-white"
