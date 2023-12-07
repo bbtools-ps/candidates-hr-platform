@@ -40,7 +40,7 @@ const MainMenu: React.FC<IMainMenuProps> = ({
           </span>
           <input
             id="search-candidates"
-            className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full focus:outline-blue dark:text-white dark:focus:outline-blue xl:w-1/2"
+            className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-blue xl:w-1/2"
             placeholder="Search candidate name, skills"
             data-cy="search-candidates"
             onChange={onChange}
