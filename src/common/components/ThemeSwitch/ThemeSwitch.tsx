@@ -48,13 +48,13 @@ const ThemeSwitch = () => {
           className="text-blue dark:text-white"
           icon={isDark ? faSun : faMoon}
         />
+        <span className="sr-only">Theme Switch</span>
       </label>
       <input
         id="theme-switch"
         className="opacity-0"
         type="checkbox"
         checked={isDark}
-        aria-label="theme switch"
         onChange={handleChange}
       />
     </div>

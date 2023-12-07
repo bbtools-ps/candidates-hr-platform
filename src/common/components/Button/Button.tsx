@@ -10,7 +10,7 @@ import { ButtonHTMLAttributes } from "react";
 const buttonVariant = {
   default: "bg-blue text-white hover:opacity-80",
   outlined:
-    "border-blue border-2 border-solid text-blue dark:border-sky-600 dark:bg-transparent dark:text-sky-600 hover:bg-slate-200 dark:hover:opacity-80",
+    "border-blue border-2 border-solid text-blue dark:border-sky-400 dark:bg-transparent dark:text-sky-400 hover:bg-slate-200 dark:hover:opacity-80",
   red: "bg-red text-white hover:opacity-80",
   green: "bg-green text-white hover:opacity-80",
 } as const;

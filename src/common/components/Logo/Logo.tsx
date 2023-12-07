@@ -36,9 +36,9 @@ const Logo = () => {
         />
       </svg>
       <div className="hidden flex-col duration-100 group-hover:text-blue dark:text-white md:flex">
-        <p className="hidden text-3xl font-bold uppercase lg:block">
+        <h2 className="hidden text-3xl font-bold uppercase lg:block">
           Candidates
-        </p>
+        </h2>
         <p className="hidden text-base lg:block">HR assistance platform</p>
       </div>
     </motion.a>

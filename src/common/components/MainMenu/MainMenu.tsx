@@ -38,6 +38,9 @@ const MainMenu: React.FC<IMainMenuProps> = ({
           <span className="absolute left-4 flex h-full items-center text-gray">
             <FontAwesomeIcon icon={faSearch} />
           </span>
+          <label className="sr-only" htmlFor="search-candidates">
+            Search Candidates
+          </label>
           <input
             id="search-candidates"
             className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-blue xl:w-1/2"
