@@ -20,7 +20,6 @@
       "@/common/*": ["common/*"],
       "@/components/*": ["components/*"],
       "@/data/*": ["data/*"],
-      "@/screens/*": ["screens/*"],
       "@/store/*": ["store/*"],
       "@/routes/*": ["routes/*"]
     }
