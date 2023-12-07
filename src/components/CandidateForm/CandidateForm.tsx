@@ -1,3 +1,7 @@
+import Button from "@/common/components/Button/Button";
+import Dialog, { DialogActions } from "@/common/components/Dialog/Dialog";
+import InputField from "@/common/components/InputField/InputField";
+import TagsInput from "@/common/components/TagsInput/TagsInput";
 import { useInput, useTagsInput } from "@/common/hooks";
 import { Candidate } from "@/common/models";
 import {
@@ -7,14 +11,9 @@ import {
   validateEmptyValue,
   validatePhoneNumber,
 } from "@/common/utils";
-import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import Button from "../Button/Button";
-import InputField from "../InputField/InputField";
-import TagsInput from "../TagsInput/TagsInput";
 
 interface ICandidateFormProps {
   title: React.ReactNode;
@@ -30,7 +29,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
   onSubmit,
 }) => {
   const navigate = useNavigate();
-  const ref = useRef<HTMLDialogElement>(null);
+  const dialog = useRef<DialogActions>(null);
 
   const {
     value: name,
@@ -82,7 +81,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
   } = useTagsInput(candidate?.skills);
 
   useEffect(() => {
-    ref.current?.showModal();
+    dialog.current?.open();
   }, []);
 
   const setDateFormat = (selectedDate: string) => {
@@ -107,12 +106,9 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     onSubmit(newCandidate);
   };
 
-  return createPortal(
-    <motion.dialog
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ opacity: 1, y: 0 }}
-      ref={ref}
-      className="backdrop:bg-slate-800/70 w-full rounded p-6 shadow-sm md:w-1/2 lg:w-1/3"
+  return (
+    <Dialog
+      ref={dialog}
       onClose={() => {
         navigate("..");
       }}
@@ -204,8 +200,7 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
           </Button>
         </div>
       </form>
-    </motion.dialog>,
-    document.getElementById("dialogs") as HTMLElement,
+    </Dialog>
   );
 };
 
