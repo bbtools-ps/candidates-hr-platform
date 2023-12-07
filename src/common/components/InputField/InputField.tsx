@@ -29,7 +29,7 @@ const InputField: React.FC<IInputFieldProps> = ({
           id={id}
           type={type}
           value={value}
-          className={`w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue focus:outline-blue ${
+          className={`w-full flex-1 truncate rounded border-2 border-solid border-gray bg-transparent py-2 pl-4 pr-10 text-base duration-100 hover:border-blue focus:outline-blue ${
             label ? "" : ""
           } ${error ? "border-red bg-rose-300" : ""}`}
           name={label}

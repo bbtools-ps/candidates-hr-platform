@@ -13,7 +13,7 @@ const Logo = () => {
         data-name="Layer 2"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 293.71 202.57"
-        className="mr-2 w-[50px] duration-100 group-hover:fill-blue"
+        className="mr-2 w-[50px] duration-100 group-hover:fill-blue dark:fill-white"
       >
         <circle cx="146.72" cy="56.97" r="29.19" />
         <path
@@ -35,7 +35,7 @@ const Logo = () => {
           transform="translate(0)"
         />
       </svg>
-      <div className="hidden flex-col duration-100 group-hover:text-blue md:flex">
+      <div className="hidden flex-col duration-100 group-hover:text-blue dark:text-white md:flex">
         <p className="hidden text-3xl font-bold uppercase lg:block">
           Candidates
         </p>

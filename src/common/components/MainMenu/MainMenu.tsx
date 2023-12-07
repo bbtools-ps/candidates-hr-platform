@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
+import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 
 interface IMainMenuProps {
   onAddNewCandidate: () => void;
@@ -23,7 +24,7 @@ const MainMenu: React.FC<IMainMenuProps> = ({
       }}
       initial="hidden"
       animate="show"
-      className="bg-white z-10 flex w-full items-center justify-center gap-6 px-6 py-4 shadow-md"
+      className="z-10 flex w-full items-center justify-center gap-6 bg-white px-6 py-4 shadow-md dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900"
     >
       <Logo />
       <motion.div
@@ -31,15 +32,15 @@ const MainMenu: React.FC<IMainMenuProps> = ({
           hidden: { opacity: 0, y: -30 },
           show: { opacity: 1, y: 0 },
         }}
-        className="flex flex-1 justify-between gap-4"
+        className="flex flex-1 items-center justify-between gap-4"
       >
         <div className="relative flex-1">
-          <span className="text-gray absolute left-4 flex h-full items-center">
+          <span className="absolute left-4 flex h-full items-center text-gray">
             <FontAwesomeIcon icon={faSearch} />
           </span>
           <input
             id="search-candidates"
-            className="border-gray w-full truncate rounded-full border-2 border-solid py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full focus:outline-blue xl:w-1/2"
+            className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full focus:outline-blue dark:text-white dark:focus:outline-blue xl:w-1/2"
             placeholder="Search candidate name, skills"
             data-cy="search-candidates"
             onChange={onChange}
@@ -53,6 +54,7 @@ const MainMenu: React.FC<IMainMenuProps> = ({
         >
           Add Candidate
         </Button>
+        <ThemeSwitch />
       </motion.div>
     </motion.div>
   );
