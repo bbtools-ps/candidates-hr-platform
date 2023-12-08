@@ -13,7 +13,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
   onEditCandidate,
 }) => {
   return (
-    <div
+    <article
       className="m-2 flex w-full flex-col rounded bg-white p-4 text-black shadow-sm dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-900 dark:text-white md:w-1/2 xl:w-1/3"
       data-cy={candidate.name}
     >
@@ -65,7 +65,7 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
           Remove
         </Button>
       </div>
-    </div>
+    </article>
   );
 };
 
