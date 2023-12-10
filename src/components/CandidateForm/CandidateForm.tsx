@@ -5,7 +5,6 @@ import TagsInput from "@/common/components/TagsInput/TagsInput";
 import { useInput, useTagsInput } from "@/common/hooks";
 import { Candidate } from "@/common/models";
 import {
-  convertDate,
   validateDate,
   validateEmail,
   validateEmptyValue,
@@ -48,7 +47,9 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     isValid: dateofBirthIsValid,
     hasError: dateOfBirthError,
   } = useInput({
-    initialValue: convertDate(candidate?.dateOfBirth),
+    initialValue: new Date(candidate?.dateOfBirth || "")
+      .toISOString()
+      .slice(0, 10),
     validationFn: (value) => validateDate(value),
   });
   const {
