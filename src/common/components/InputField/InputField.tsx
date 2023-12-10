@@ -1,4 +1,4 @@
-import { converToKebabCase } from "@/common/utils";
+import { convertToKebabCase } from "@/common/utils";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -27,8 +27,8 @@ const InputField: React.FC<IInputFieldProps> = ({
       <label htmlFor={id}>{label}</label>
       <div className="relative flex flex-col">
         <input
-          id={id || converToKebabCase(label)}
-          name={name || converToKebabCase(label)}
+          id={id || convertToKebabCase(label)}
+          name={name || convertToKebabCase(label)}
           type={type}
           className={`w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue dark:border-slate-600 dark:hover:border-blue ${
             label ? "" : ""
