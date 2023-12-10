@@ -47,9 +47,9 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
     isValid: dateofBirthIsValid,
     hasError: dateOfBirthError,
   } = useInput({
-    initialValue: new Date(candidate?.dateOfBirth || "")
-      .toISOString()
-      .slice(0, 10),
+    initialValue: candidate?.dateOfBirth
+      ? new Date(candidate?.dateOfBirth)?.toISOString().slice(0, 10)
+      : "",
     validationFn: (value) => validateDate(value),
   });
   const {
