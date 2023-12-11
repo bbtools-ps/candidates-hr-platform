@@ -18,10 +18,10 @@
     "baseUrl": "./src",
     "paths": {
       "@/common/*": ["common/*"],
+      "@/components/*": ["components/*"],
       "@/data/*": ["data/*"],
-      "@/screens/*": ["screens/*"],
-      "@/store/*": ["store/*"],
-      "@/routes/*": ["routes/*"]
+      "@/routes/*": ["routes/*"],
+      "@/store/*": ["store/*"]
     }
   },
   "include": ["src"],

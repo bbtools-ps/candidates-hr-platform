@@ -32,7 +32,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
     <div className="w-full">
       <label htmlFor={id}>{label}</label>
       <div
-        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100  hover:border-blue ${
+        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-blue ${
           error ? "bg-rose-300" : ""
         }`}
       >
@@ -81,7 +81,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
         />
       </div>
       {error && (
-        <p className="text-red" data-cy={`invalid-${id}`}>
+        <p className="text-red dark:text-rose-400" data-cy={`invalid-${id}`}>
           {error}
         </p>
       )}

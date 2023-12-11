@@ -7,19 +7,26 @@ const RootLayout = () => {
   const { searchTerm, searchCandidate } = useCandidatesStore();
 
   const navigate = useNavigate();
+
   return (
     <>
-      <MainMenu
-        searchInput={searchTerm}
-        onChange={(e) => {
-          searchCandidate(e.target.value);
-        }}
-        onAddNewCandidate={() => {
-          navigate("/new-candidate");
-        }}
-      />
-      <Outlet />
-      <Footer copyrightLabel="Bogdan Bogdanovic" />
+      <header className="z-10 shadow-md">
+        <MainMenu
+          searchInput={searchTerm}
+          onChange={(e) => {
+            searchCandidate(e.target.value);
+          }}
+          onAddNewCandidate={() => {
+            navigate("/new-candidate");
+          }}
+        />
+      </header>
+      <main className="flex flex-1 flex-col">
+        <Outlet />
+      </main>
+      <footer className="flex justify-center py-4 text-white">
+        <Footer copyrightLabel="Bogdan Bogdanovic" />
+      </footer>
     </>
   );
 };

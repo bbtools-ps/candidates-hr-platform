@@ -1,4 +1,4 @@
-import CandidateForm from "@/common/components/CandidateForm/CandidateForm";
+import CandidateForm from "@/components/CandidateForm/CandidateForm";
 import { useCandidatesStore } from "@/store/candidates";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -8,10 +8,11 @@ import { MotionProps, motion } from "framer-motion";
 import { ButtonHTMLAttributes } from "react";
 
 const buttonVariant = {
-  default: "bg-blue text-white",
-  outlined: "border-blue border-2 border-solid text-blue",
-  red: "bg-red text-white",
-  green: "bg-green text-white",
+  default: "bg-blue text-white hover:opacity-80",
+  outlined:
+    "border-blue border-2 border-solid text-blue dark:border-sky-400 dark:bg-transparent dark:text-sky-400 hover:bg-slate-200 dark:hover:opacity-80",
+  red: "bg-red text-white hover:opacity-80",
+  green: "bg-green text-white hover:opacity-80",
 } as const;
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,7 +40,7 @@ const Button: React.FC<IButtonProps> = ({
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       type={type}
       aria-label={children?.toString()}
-      className={`disabled:bg-gray flex items-center gap-2 rounded-full px-6 py-2 text-base font-bold uppercase duration-100 hover:opacity-80 ${buttonVariant[variant]}`}
+      className={`flex items-center gap-2 rounded-full px-6 py-2 text-base font-bold uppercase duration-100 disabled:bg-gray ${buttonVariant[variant]}`}
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
     >
       {icon && buttonIcon[icon] && <FontAwesomeIcon icon={buttonIcon[icon]} />}
