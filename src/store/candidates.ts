@@ -101,21 +101,19 @@ export const useCandidatesStore = create<State & Actions>()(
             return { filteredCandidates: state.allCandidates, searchTerm };
           }
 
-          const searchTerms = searchTerm.replace(/\s+/g, " ").split(" ");
-
-          const searchTermsWithoutDuplicates = [...new Set(searchTerms)].map(
-            (term) => {
-              const escapedSearchInput = term.replace(
-                /[.*+?^${}()|[\]\\]/g,
-                "\\$&",
-              );
-              return new RegExp(escapedSearchInput, "i");
-            },
-          );
+          const searchTerms = [
+            ...new Set(searchTerm.replace(/\s+/g, " ").split(" ")),
+          ].map((term) => {
+            const escapedSearchInput = term.replace(
+              /[.*+?^${}()|[\]\\]/g,
+              "\\$&",
+            );
+            return new RegExp(escapedSearchInput, "i");
+          });
 
           const filteredCandidates = state.allCandidates.filter(
             (candidate) =>
-              searchTermsWithoutDuplicates.every((term) => {
+              searchTerms.every((term) => {
                 return (
                   term.test(candidate.name) ||
                   candidate.skills.find((skill) => term.test(skill.value))
