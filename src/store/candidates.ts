@@ -82,12 +82,12 @@ export const useCandidatesStore = create<State & Actions>()(
           const removedCandidateAll = state.allCandidates.filter(
             (candidate) => {
               return candidate.id !== candidateId;
-            }
+            },
           );
           const removedCandidateFilter = state.filteredCandidates.filter(
             (candidate) => {
               return candidate.id !== candidateId;
-            }
+            },
           );
 
           return {
@@ -97,25 +97,30 @@ export const useCandidatesStore = create<State & Actions>()(
         }),
       searchCandidate: (searchTerm) =>
         set((state) => {
-          const searchTerms = searchTerm
-            .replace(/\s+/g, " ")
-            .split(" ")
-            .map((term) => {
+          if (!searchTerm.trim().length) {
+            return { filteredCandidates: state.allCandidates, searchTerm };
+          }
+
+          const searchTerms = searchTerm.replace(/\s+/g, " ").split(" ");
+
+          const searchTermsWithoutDuplicates = [...new Set(searchTerms)].map(
+            (term) => {
               const escapedSearchInput = term.replace(
                 /[.*+?^${}()|[\]\\]/g,
-                "\\$&"
+                "\\$&",
               );
               return new RegExp(escapedSearchInput, "i");
-            });
+            },
+          );
 
           const filteredCandidates = state.allCandidates.filter(
             (candidate) =>
-              searchTerms.every((term) => {
+              searchTermsWithoutDuplicates.every((term) => {
                 return (
                   term.test(candidate.name) ||
                   candidate.skills.find((skill) => term.test(skill.value))
                 );
-              }) && candidate
+              }) && candidate,
           );
 
           return { filteredCandidates, searchTerm };
@@ -135,6 +140,6 @@ export const useCandidatesStore = create<State & Actions>()(
           };
         }),
     }),
-    { name: "candidates" }
-  )
+    { name: "candidates" },
+  ),
 );
