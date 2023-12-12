@@ -5,8 +5,8 @@ interface IProtectedProps {
   children: React.ReactNode;
 }
 
-const Protected: React.FC<IProtectedProps> = ({ condition, children }) => {
+export default function Protected({ condition, children }: IProtectedProps) {
   if (!condition) return <Navigate to="/" replace />;
+
   return <>{children}</>;
-};
-export default Protected;
+}

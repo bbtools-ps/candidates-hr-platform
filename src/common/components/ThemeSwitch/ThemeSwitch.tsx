@@ -2,7 +2,7 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 
-const ThemeSwitch = () => {
+export default function ThemeSwitch() {
   const [isDark, setIsDark] = useState(false);
   const initialRender = useRef(true);
 
@@ -59,6 +59,4 @@ const ThemeSwitch = () => {
       />
     </div>
   );
-};
-
-export default ThemeSwitch;
+}

@@ -19,7 +19,7 @@ interface ITagsInputProps
   onRemoveTags: (id: string) => void;
 }
 
-const TagsInput: React.FC<ITagsInputProps> = ({
+export default function TagsInput({
   id,
   label,
   tags,
@@ -27,7 +27,7 @@ const TagsInput: React.FC<ITagsInputProps> = ({
   onRemoveTags,
   error,
   ...rest
-}) => {
+}: ITagsInputProps) {
   return (
     <div className="w-full">
       <label htmlFor={id}>{label}</label>
@@ -87,6 +87,4 @@ const TagsInput: React.FC<ITagsInputProps> = ({
       )}
     </div>
   );
-};
-
-export default TagsInput;
+}

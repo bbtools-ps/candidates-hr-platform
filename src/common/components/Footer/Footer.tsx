@@ -2,7 +2,7 @@ interface IFooterProps {
   copyrightLabel: string;
 }
 
-const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
+export default function Footer({ copyrightLabel }: IFooterProps) {
   const getCurrentYear = () => {
     const date = new Date();
     return date.getFullYear();
@@ -19,6 +19,4 @@ const Footer: React.FC<IFooterProps> = ({ copyrightLabel }) => {
       </a>
     </p>
   );
-};
-
-export default Footer;
+}

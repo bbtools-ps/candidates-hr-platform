@@ -12,7 +12,7 @@ interface IInputFieldProps
   error?: string;
 }
 
-const InputField: React.FC<IInputFieldProps> = ({
+export default function InputField({
   id,
   label,
   name,
@@ -21,7 +21,7 @@ const InputField: React.FC<IInputFieldProps> = ({
   isValid,
   error,
   ...rest
-}) => {
+}: IInputFieldProps) {
   return (
     <div className="flex w-full flex-col gap-2">
       <label htmlFor={id}>{label}</label>
@@ -49,6 +49,4 @@ const InputField: React.FC<IInputFieldProps> = ({
       </div>
     </div>
   );
-};
-
-export default InputField;
+}

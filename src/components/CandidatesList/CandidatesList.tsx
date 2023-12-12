@@ -12,12 +12,12 @@ interface ICandidatesListProps {
   onEditCandidate: (candidate: Candidate) => void;
 }
 
-const CandidatesList: React.FC<ICandidatesListProps> = ({
+export default function CandidatesList({
   candidates,
   isLoading,
   onRemoveCandidate,
   onEditCandidate,
-}) => {
+}: ICandidatesListProps) {
   const { ref, height } = useElementSize();
 
   const renderRow = useCallback(
@@ -60,6 +60,4 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
       </div>
     </div>
   );
-};
-
-export default CandidatesList;
+}

@@ -21,12 +21,12 @@ interface ICandidateFormProps {
   onSubmit: (payload: Candidate) => void;
 }
 
-const CandidateForm: React.FC<ICandidateFormProps> = ({
+export default function CandidateForm({
   title,
   candidate,
   onCancel,
   onSubmit,
-}) => {
+}: ICandidateFormProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
 
@@ -203,6 +203,4 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
       </form>
     </Dialog>
   );
-};
-
-export default CandidateForm;
+}
