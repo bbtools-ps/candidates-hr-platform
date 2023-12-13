@@ -114,8 +114,8 @@ export default function CandidateForm({
         navigate("..");
       }}
     >
+      <h2 data-cy="heading">{title}</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <h2 data-cy="heading">{title}</h2>
         <InputField
           id="candidate-name"
           label="Name"
