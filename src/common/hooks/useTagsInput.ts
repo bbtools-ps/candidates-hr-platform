@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { Tag } from "../models";
 
@@ -19,19 +19,14 @@ export const useTagsInput = (initialTags: Tag[] | undefined) => {
     setValue("");
   }, []);
 
-  useEffect(() => {
-    const transformedValue = value.replace(",", "");
-
-    if (transformedValue.trim().length && value.at(-1) === ",") {
-      addTags(transformedValue);
-    } else {
-      setValue(transformedValue);
-    }
-  }, [addTags, value]);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setValue(value);
+
+    if (value.includes(",")) {
+      addTags(value.slice(0, -1));
+    } else {
+      setValue(value);
+    }
   };
 
   const onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
