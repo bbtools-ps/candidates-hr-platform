@@ -24,7 +24,7 @@ export default function InputField({
 }: IInputFieldProps) {
   return (
     <div className="flex w-full flex-col gap-2">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id || convertToKebabCase(label)}>{label}</label>
       <div className="relative flex flex-col">
         <input
           id={id || convertToKebabCase(label)}
