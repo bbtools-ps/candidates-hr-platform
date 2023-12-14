@@ -20,7 +20,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />
+      />,
     );
 
     for (const { value } of testTags) {
@@ -39,10 +39,10 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />
+      />,
     );
 
-    expect(screen.getByRole("textbox")).toHaveValue("test");
+    expect(screen.getByTestId("tags-input")).toHaveValue("test");
   });
 
   it("should render the label that is passed as a prop", () => {
@@ -56,7 +56,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />
+      />,
     );
 
     expect(screen.getByText("test label")).toBeInTheDocument();
@@ -74,10 +74,10 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />
+      />,
     );
 
-    await userEvent.click(screen.getByRole("textbox"));
+    await userEvent.click(screen.getByTestId("tags-input"));
     await userEvent.tab();
 
     expect(blurHandler).toHaveBeenCalled();
@@ -95,10 +95,10 @@ describe("<TagsInput />", () => {
         onChange={changeHandler}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />
+      />,
     );
 
-    await userEvent.type(screen.getByRole("textbox"), "test");
+    await userEvent.type(screen.getByTestId("tags-input"), "test");
 
     expect(changeHandler).toHaveBeenCalled();
   });
@@ -115,7 +115,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={removeHandler}
-      />
+      />,
     );
 
     await userEvent.click(screen.getAllByRole("button")[0]);

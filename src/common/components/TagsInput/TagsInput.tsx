@@ -1,36 +1,34 @@
 import { Tag } from "@/common/models";
+import { convertToKebabCase } from "@/common/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
-interface ITagsInputProps
+export interface ITagsInputProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  id: string;
   label: string;
   tags: Tag[];
-  placeholder?: string;
-  value: string;
   error?: string;
-  onChange: (payload: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (payload: React.ChangeEvent<HTMLInputElement>) => void;
   onRemoveTags: (id: string) => void;
 }
 
 export default function TagsInput({
   id,
   label,
+  value,
   tags,
   placeholder = "Press comma to add tags",
   onRemoveTags,
   error,
+  name,
   ...rest
 }: ITagsInputProps) {
   return (
     <div className="w-full">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id || convertToKebabCase(label)}>{label}</label>
       <div
         className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-blue ${
           error ? "bg-rose-300" : ""
@@ -71,13 +69,24 @@ export default function TagsInput({
           ))}
         </motion.ul>
         <input
-          id={id}
+          id={id || convertToKebabCase(label)}
           type="text"
           placeholder={placeholder}
           className={`flex-1 bg-transparent p-2 focus:outline-none ${
             error ? "placeholder:text-black" : ""
           }`}
+          value={value}
           {...rest}
+          data-testid="tags-input"
+        />
+        <input
+          className="hidden"
+          value={
+            tags
+              .reduce((acc, curr) => acc + curr.value + ",", "")
+              .slice(0, -1) || value
+          }
+          name={name || convertToKebabCase(label)}
         />
       </div>
       {error && (

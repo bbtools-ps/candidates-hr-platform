@@ -47,7 +47,7 @@ export default function CandidatesList({
         </motion.div>
       )}
       <div className="h-0">
-        {candidates.length && (
+        {candidates.length > 0 && (
           <FixedSizeList
             height={height}
             itemCount={candidates.length}
