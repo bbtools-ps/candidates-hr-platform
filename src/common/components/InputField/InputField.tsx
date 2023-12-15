@@ -24,15 +24,17 @@ export default function InputField({
 }: IInputFieldProps) {
   return (
     <div className="flex w-full flex-col gap-2">
-      <label htmlFor={id || convertToKebabCase(label)}>{label}</label>
+      {label && (
+        <label htmlFor={id || convertToKebabCase(label)}>{label}</label>
+      )}
       <div className="relative flex flex-col">
         <input
           id={id || convertToKebabCase(label)}
-          name={name || convertToKebabCase(label)}
           type={type}
           className={`w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue dark:border-slate-600 dark:hover:border-blue ${
             label ? "" : ""
           } ${error ? "border-red bg-rose-300" : "bg-transparent"}`}
+          name={name || convertToKebabCase(label)}
           aria-label={label}
           {...rest}
         />

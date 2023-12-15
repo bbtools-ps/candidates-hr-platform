@@ -28,7 +28,9 @@ export default function TagsInput({
 }: ITagsInputProps) {
   return (
     <div className="w-full">
-      <label htmlFor={id || convertToKebabCase(label)}>{label}</label>
+      {label && (
+        <label htmlFor={id || convertToKebabCase(label)}>{label}</label>
+      )}
       <div
         className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-blue ${
           error ? "bg-rose-300" : ""
@@ -87,6 +89,7 @@ export default function TagsInput({
               .slice(0, -1) || value
           }
           name={name || convertToKebabCase(label)}
+          readOnly
         />
       </div>
       {error && (
