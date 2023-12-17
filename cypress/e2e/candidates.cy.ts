@@ -118,11 +118,11 @@ describe("candidates", () => {
     cy.get("@candidateSkills").focus().blur();
 
     // // Validation errors
-    cy.get('[data-cy="invalid-candidate-name"]').as("invalidName");
-    cy.get('[data-cy="invalid-candidate-date-of-birth"]').as("invalidDate");
-    cy.get('[data-cy="invalid-candidate-contact-number"]').as("invalidPhone");
-    cy.get('[data-cy="invalid-candidate-email"]').as("invalidEmail");
-    cy.get('[data-cy="invalid-candidate-skills"]').as("invalidSkills");
+    cy.get('[data-cy="candidate-name-error"]').as("invalidName");
+    cy.get('[data-cy="candidate-date-of-birth-error"]').as("invalidDate");
+    cy.get('[data-cy="candidate-contact-number-error"]').as("invalidPhone");
+    cy.get('[data-cy="candidate-email-error"]').as("invalidEmail");
+    cy.get('[data-cy="candidate-skills-error"]').as("invalidSkills");
     cy.get("@invalidName").should("contain", "Please add a name.");
     cy.get("@invalidDate").should("contain", "Please add a valid date.");
     cy.get("@invalidPhone").should(
