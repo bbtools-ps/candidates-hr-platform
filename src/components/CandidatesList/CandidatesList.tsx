@@ -1,4 +1,4 @@
-import { useElementSize } from "@/hooks/useElementSize";
+import { useElementSize } from "@/hooks";
 import { Candidate } from "@/models";
 import { motion } from "framer-motion";
 import { useCallback } from "react";
