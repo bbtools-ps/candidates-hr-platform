@@ -1,5 +1,5 @@
-import { useElementSize } from "@/common/hooks/useElementSize";
-import { Candidate } from "@/common/models";
+import { useElementSize } from "@/hooks/useElementSize";
+import { Candidate } from "@/models";
 import { motion } from "framer-motion";
 import { useCallback } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";

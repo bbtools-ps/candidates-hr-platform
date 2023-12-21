@@ -1,4 +1,4 @@
-import { convertToKebabCase } from "@/common/utils";
+import { convertToKebabCase } from "@/utils";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

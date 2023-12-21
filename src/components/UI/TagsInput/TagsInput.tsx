@@ -1,5 +1,5 @@
-import { Tag } from "@/common/models";
-import { convertToKebabCase } from "@/common/utils";
+import { Tag } from "@/models";
+import { convertToKebabCase } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";

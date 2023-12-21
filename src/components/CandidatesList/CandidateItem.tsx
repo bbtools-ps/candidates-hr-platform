@@ -1,5 +1,5 @@
-import Button from "@/common/components/Button/Button";
-import { Candidate } from "@/common/models";
+import { Candidate } from "@/models";
+import Button from "../UI/Button/Button";
 
 interface ICandidateItemProps {
   candidate: Candidate;
