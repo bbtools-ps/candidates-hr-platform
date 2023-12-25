@@ -1,4 +1,4 @@
-import { convertToKebabCase } from "@/common/utils";
+import { convertToKebabCase } from "@/utils";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,27 +12,30 @@ interface IInputFieldProps
   error?: string;
 }
 
-const InputField: React.FC<IInputFieldProps> = ({
-  id,
+export default function InputField({
   label,
-  name,
+  id: idProp,
+  name: nameProp,
   type = "text",
   className,
   isValid,
   error,
   ...rest
-}) => {
+}: IInputFieldProps) {
+  const id = idProp || convertToKebabCase(label);
+  const name = nameProp || convertToKebabCase(label);
+
   return (
     <div className="flex w-full flex-col gap-2">
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={id}>{label}</label>}
       <div className="relative flex flex-col">
         <input
-          id={id || convertToKebabCase(label)}
-          name={name || convertToKebabCase(label)}
+          id={id}
           type={type}
           className={`w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue dark:border-slate-600 dark:hover:border-blue ${
             label ? "" : ""
           } ${error ? "border-red bg-rose-300" : "bg-transparent"}`}
+          name={name}
           aria-label={label}
           {...rest}
         />
@@ -42,13 +45,11 @@ const InputField: React.FC<IInputFieldProps> = ({
           </span>
         )}
         {error && (
-          <p className="text-red dark:text-rose-400" data-cy={`invalid-${id}`}>
+          <p className="text-red dark:text-rose-400" data-cy={`${id}-error`}>
             {error}
           </p>
         )}
       </div>
     </div>
   );
-};
-
-export default InputField;
+}

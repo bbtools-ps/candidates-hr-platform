@@ -1,18 +1,18 @@
-import Button from "@/common/components/Button/Button";
-import Dialog, { DialogActions } from "@/common/components/Dialog/Dialog";
-import InputField from "@/common/components/InputField/InputField";
-import TagsInput from "@/common/components/TagsInput/TagsInput";
-import { useInput, useTagsInput } from "@/common/hooks";
-import { Candidate } from "@/common/models";
+import { useInput, useTagsInput } from "@/hooks";
+import { Candidate } from "@/models";
 import {
   validateDate,
   validateEmail,
   validateEmptyValue,
   validatePhoneNumber,
-} from "@/common/utils";
+} from "@/utils";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import Button from "../UI/Button/Button";
+import Dialog, { DialogActions } from "../UI/Dialog/Dialog";
+import InputField from "../UI/InputField/InputField";
+import TagsInput from "../UI/TagsInput/TagsInput";
 
 interface ICandidateFormProps {
   title: React.ReactNode;
@@ -21,12 +21,12 @@ interface ICandidateFormProps {
   onSubmit: (payload: Candidate) => void;
 }
 
-const CandidateForm: React.FC<ICandidateFormProps> = ({
+export default function CandidateForm({
   title,
   candidate,
   onCancel,
   onSubmit,
-}) => {
+}: ICandidateFormProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
 
@@ -114,8 +114,8 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
         navigate("..");
       }}
     >
+      <h2 data-cy="heading">{title}</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <h2 data-cy="heading">{title}</h2>
         <InputField
           id="candidate-name"
           label="Name"
@@ -203,6 +203,4 @@ const CandidateForm: React.FC<ICandidateFormProps> = ({
       </form>
     </Dialog>
   );
-};
-
-export default CandidateForm;
+}

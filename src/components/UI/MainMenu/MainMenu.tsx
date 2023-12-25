@@ -11,11 +11,11 @@ interface IMainMenuProps {
   searchInput: string;
 }
 
-const MainMenu: React.FC<IMainMenuProps> = ({
+export default function MainMenu({
   onAddNewCandidate,
   onChange,
   searchInput,
-}) => {
+}: IMainMenuProps) {
   return (
     <motion.div
       variants={{
@@ -61,6 +61,4 @@ const MainMenu: React.FC<IMainMenuProps> = ({
       </motion.div>
     </motion.div>
   );
-};
-
-export default MainMenu;
+}

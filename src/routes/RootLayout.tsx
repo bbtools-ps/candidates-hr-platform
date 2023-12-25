@@ -1,5 +1,5 @@
-import Footer from "@/common/components/Footer/Footer";
-import MainMenu from "@/common/components/MainMenu/MainMenu";
+import Footer from "@/components/UI/Footer/Footer";
+import MainMenu from "@/components/UI/MainMenu/MainMenu";
 import { useCandidatesStore } from "@/store/candidates";
 import { Outlet, useNavigate } from "react-router-dom";
 

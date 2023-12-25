@@ -1,5 +1,5 @@
-import Button from "@/common/components/Button/Button";
-import { Candidate } from "@/common/models";
+import { Candidate } from "@/models";
+import Button from "../UI/Button/Button";
 
 interface ICandidateItemProps {
   candidate: Candidate;
@@ -7,11 +7,11 @@ interface ICandidateItemProps {
   onEditCandidate: (payload: Candidate) => void;
 }
 
-const CandidateItem: React.FC<ICandidateItemProps> = ({
+export default function CandidateItem({
   candidate,
   onRemoveCandidate,
   onEditCandidate,
-}) => {
+}: ICandidateItemProps) {
   return (
     <article
       className="m-2 flex w-full flex-col rounded bg-white p-4 text-black shadow-sm dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-900 dark:text-white md:w-1/2 xl:w-1/3"
@@ -67,6 +67,4 @@ const CandidateItem: React.FC<ICandidateItemProps> = ({
       </div>
     </article>
   );
-};
-
-export default CandidateItem;
+}

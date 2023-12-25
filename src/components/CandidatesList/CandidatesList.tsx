@@ -1,5 +1,5 @@
-import { useElementSize } from "@/common/hooks/useElementSize";
-import { Candidate } from "@/common/models";
+import { useElementSize } from "@/hooks";
+import { Candidate } from "@/models";
 import { motion } from "framer-motion";
 import { useCallback } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
@@ -12,12 +12,12 @@ interface ICandidatesListProps {
   onEditCandidate: (candidate: Candidate) => void;
 }
 
-const CandidatesList: React.FC<ICandidatesListProps> = ({
+export default function CandidatesList({
   candidates,
   isLoading,
   onRemoveCandidate,
   onEditCandidate,
-}) => {
+}: ICandidatesListProps) {
   const { ref, height } = useElementSize();
 
   const renderRow = useCallback(
@@ -47,7 +47,7 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
         </motion.div>
       )}
       <div className="h-0">
-        {candidates.length && (
+        {candidates.length > 0 && (
           <FixedSizeList
             height={height}
             itemCount={candidates.length}
@@ -60,6 +60,4 @@ const CandidatesList: React.FC<ICandidatesListProps> = ({
       </div>
     </div>
   );
-};
-
-export default CandidatesList;
+}

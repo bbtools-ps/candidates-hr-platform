@@ -1,4 +1,4 @@
-import Button from "@/common/components/Button/Button";
+import Button from "@/components/UI/Button/Button";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, isRouteErrorResponse, useRouteError } from "react-router-dom";
@@ -7,7 +7,7 @@ const ErrorPage = () => {
   const error = useRouteError();
 
   return (
-    <div className="text-white flex flex-1 flex-col items-center justify-center gap-6">
+    <div className="flex flex-1 flex-col items-center justify-center gap-6 text-white">
       <h1 className="flex gap-4">
         <span>
           <FontAwesomeIcon icon={faTriangleExclamation} />
@@ -22,7 +22,7 @@ const ErrorPage = () => {
       )}
       {isRouteErrorResponse(error) ? (
         <Link
-          className="text-white rounded-full bg-blue px-4 py-2 font-bold duration-100 hover:opacity-80"
+          className="rounded-full bg-blue px-4 py-2 font-bold text-white duration-100 hover:opacity-80"
           to="/"
         >
           Go back home

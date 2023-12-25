@@ -1,5 +1,5 @@
-import Protected from "@/common/components/Protected";
 import CandidateForm from "@/components/CandidateForm/CandidateForm";
+import Protected from "@/components/Protected";
 import { useCandidatesStore } from "@/store/candidates";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -21,13 +21,13 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof buttonVariant;
 }
 
-const Button: React.FC<IButtonProps> = ({
+export default function Button({
   children,
   type = "button",
   variant = "default",
   icon,
   ...rest
-}) => {
+}: IButtonProps) {
   const buttonIcon = {
     add: faUserPlus,
     edit: faEdit,
@@ -49,6 +49,4 @@ const Button: React.FC<IButtonProps> = ({
       </span>
     </motion.button>
   );
-};
-
-export default Button;
+}

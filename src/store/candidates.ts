@@ -1,4 +1,4 @@
-import { Candidate } from "@/common/models";
+import { Candidate } from "@/models";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
