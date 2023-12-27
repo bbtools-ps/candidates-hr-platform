@@ -3,7 +3,7 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, isRouteErrorResponse, useRouteError } from "react-router-dom";
 
-const ErrorPage = () => {
+export default function ErrorPage() {
   const error = useRouteError();
 
   return (
@@ -38,6 +38,4 @@ const ErrorPage = () => {
       )}
     </div>
   );
-};
-
-export default ErrorPage;
+}

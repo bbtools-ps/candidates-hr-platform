@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import CandidatesList from "../components/CandidatesList/CandidatesList";
 
-const HomePage = () => {
+export default function HomePage() {
   const { searchCandidate, searchTerm, filteredCandidates, removeCandidate } =
     useCandidatesStore();
 
@@ -40,6 +40,4 @@ const HomePage = () => {
       <Outlet />
     </>
   );
-};
-
-export default HomePage;
+}
