@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import CandidateItem from "./CandidateItem";
 
-interface ICandidatesListProps {
+interface IProps {
   candidates: Candidate[];
   isLoading: boolean;
   onRemoveCandidate: (candidateId: string) => void;
@@ -17,7 +17,7 @@ export default function CandidatesList({
   isLoading,
   onRemoveCandidate,
   onEditCandidate,
-}: ICandidatesListProps) {
+}: IProps) {
   const { ref, height } = useElementSize();
 
   const renderRow = useCallback(

@@ -1,7 +1,7 @@
 import { Candidate } from "@/models";
 import Button from "../UI/Button/Button";
 
-interface ICandidateItemProps {
+interface IProps {
   candidate: Candidate;
   onRemoveCandidate: (payload: string) => void;
   onEditCandidate: (payload: Candidate) => void;
@@ -11,7 +11,7 @@ export default function CandidateItem({
   candidate,
   onRemoveCandidate,
   onEditCandidate,
-}: ICandidateItemProps) {
+}: IProps) {
   return (
     <article
       className="m-2 flex w-full flex-col rounded bg-white p-4 text-black shadow-sm dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-900 dark:text-white md:w-1/2 xl:w-1/3"

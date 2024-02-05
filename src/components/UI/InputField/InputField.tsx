@@ -2,7 +2,7 @@ import { convertToKebabCase } from "@/utils";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface IInputFieldProps
+interface IProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -21,7 +21,7 @@ export default function InputField({
   isValid,
   error,
   ...rest
-}: IInputFieldProps) {
+}: IProps) {
   const id = idProp || convertToKebabCase(label);
   const name = nameProp || convertToKebabCase(label);
 

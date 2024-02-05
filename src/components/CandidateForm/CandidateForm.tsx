@@ -14,7 +14,7 @@ import Dialog, { DialogActions } from "../UI/Dialog/Dialog";
 import InputField from "../UI/InputField/InputField";
 import TagsInput from "../UI/TagsInput/TagsInput";
 
-interface ICandidateFormProps {
+interface IProps {
   title: React.ReactNode;
   candidate?: Candidate;
   onCancel?: () => void;
@@ -26,7 +26,7 @@ export default function CandidateForm({
   candidate,
   onCancel,
   onSubmit,
-}: ICandidateFormProps) {
+}: IProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
 
