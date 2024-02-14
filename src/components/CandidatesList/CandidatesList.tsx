@@ -1,8 +1,7 @@
 import { useElementSize } from "@/hooks";
 import { Candidate } from "@/models";
 import { motion } from "framer-motion";
-import { useCallback } from "react";
-import { FixedSizeList, ListChildComponentProps } from "react-window";
+import { Virtuoso } from "react-virtuoso";
 import CandidateItem from "./CandidateItem";
 
 interface IProps {
@@ -20,19 +19,6 @@ export default function CandidatesList({
 }: IProps) {
   const { ref, height } = useElementSize();
 
-  const renderRow = useCallback(
-    ({ index, style }: ListChildComponentProps) => (
-      <div style={{ ...style, display: "flex", justifyContent: "center" }}>
-        <CandidateItem
-          candidate={candidates[index]}
-          onRemoveCandidate={onRemoveCandidate}
-          onEditCandidate={onEditCandidate}
-        />
-      </div>
-    ),
-    [candidates, onEditCandidate, onRemoveCandidate],
-  );
-
   return (
     <div className="flex flex-1 flex-col" ref={ref}>
       {isLoading && <p>Loading...</p>}
@@ -46,18 +32,27 @@ export default function CandidatesList({
           No candidates found.
         </motion.div>
       )}
-      <div className="h-0">
-        {candidates.length > 0 && (
-          <FixedSizeList
-            height={height}
-            itemCount={candidates.length}
-            itemSize={280}
-            width="100%"
-          >
-            {renderRow}
-          </FixedSizeList>
-        )}
-      </div>
+      {candidates.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="h-0"
+        >
+          <Virtuoso
+            style={{ height }}
+            data={candidates}
+            itemContent={(index, item) => (
+              <div className="flex justify-center">
+                <CandidateItem
+                  candidate={item}
+                  onRemoveCandidate={onRemoveCandidate}
+                  onEditCandidate={onEditCandidate}
+                />
+              </div>
+            )}
+          />
+        </motion.div>
+      )}
     </div>
   );
 }
