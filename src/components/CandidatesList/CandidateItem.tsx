@@ -18,7 +18,7 @@ export default function CandidateItem({
       data-cy={candidate.name}
     >
       <h2 className="mb-4">{candidate.name}</h2>
-      <div className="flex flex-1 flex-col gap-2">
+      <div className="mb-2 flex flex-1 flex-col gap-2">
         <p>
           <strong className="mr-2 dark:text-sky-400">Date of birth:</strong>
           <span>{candidate.dateOfBirth}</span>
@@ -31,7 +31,7 @@ export default function CandidateItem({
           <strong className="mr-2 dark:text-sky-400">E-mail:</strong>
           <span>{candidate.email}</span>
         </p>
-        <p className="mb-2 flex flex-wrap gap-2">
+        <p className="flex flex-wrap gap-2">
           <strong className="dark:text-sky-400">Skills:</strong>
           {candidate.skills.map(({ value, id }) => (
             <span
