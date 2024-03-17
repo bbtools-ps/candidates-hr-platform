@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
-import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
 interface IProps {
   onAddNewCandidate: () => void;
@@ -57,7 +57,7 @@ export default function MainMenu({
         >
           Add Candidate
         </Button>
-        <ThemeSwitch />
+        <ThemeSwitcher />
       </motion.div>
     </motion.div>
   );
