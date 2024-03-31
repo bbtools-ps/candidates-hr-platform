@@ -20,7 +20,7 @@ export default function CandidatesList({
   const { ref, height } = useElementSize();
 
   return (
-    <div className="flex flex-1 flex-col" ref={ref}>
+    <section className="flex flex-1 flex-col" ref={ref}>
       {isLoading && <p>Loading...</p>}
       {candidates.length === 0 && (
         <motion.div
@@ -53,6 +53,6 @@ export default function CandidatesList({
           />
         </motion.div>
       )}
-    </div>
+    </section>
   );
 }
