@@ -173,19 +173,6 @@ export default function CandidateForm({
         />
         <div className="flex justify-center gap-4">
           <Button
-            type="submit"
-            disabled={
-              !nameIsValid ||
-              !dateofBirthIsValid ||
-              !contactNumberIsValid ||
-              !emailIsValid ||
-              !skills.length
-            }
-            data-cy="submit-btn"
-          >
-            {candidate ? "Save" : "Add"}
-          </Button>
-          <Button
             type="button"
             onClick={() => {
               if (onCancel) {
@@ -198,6 +185,19 @@ export default function CandidateForm({
             variant="outlined"
           >
             Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={
+              !nameIsValid ||
+              !dateofBirthIsValid ||
+              !contactNumberIsValid ||
+              !emailIsValid ||
+              !skills.length
+            }
+            data-cy="submit-btn"
+          >
+            {candidate ? "Save" : "Add"}
           </Button>
         </div>
       </form>
