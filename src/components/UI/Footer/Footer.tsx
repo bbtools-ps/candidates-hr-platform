@@ -10,7 +10,7 @@ export default function Footer({ copyrightLabel }: IProps) {
 
   return (
     <p className="flex gap-2">
-      © {getCurrentYear()}.
+      &copy; {getCurrentYear()}.
       <a
         className="font-bold text-gray duration-100 hover:text-blue"
         href="https://bogdan-bogdanovic.com/"
