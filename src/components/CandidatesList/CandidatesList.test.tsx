@@ -39,14 +39,14 @@ describe("<CandidatesList/>", () => {
           onRemoveCandidate={() => {}}
           isLoading={false}
         />
-      </VirtuosoMockContext.Provider>,
+      </VirtuosoMockContext.Provider>
     );
 
     expect(screen.getAllByRole("button", { name: /edit/i })).toHaveLength(
-      dummyCandidates.length,
+      dummyCandidates.length
     );
     expect(screen.getAllByRole("button", { name: /remove/i })).toHaveLength(
-      dummyCandidates.length,
+      dummyCandidates.length
     );
   });
 
@@ -61,7 +61,7 @@ describe("<CandidatesList/>", () => {
           onRemoveCandidate={() => {}}
           isLoading={false}
         />
-      </VirtuosoMockContext.Provider>,
+      </VirtuosoMockContext.Provider>
     );
 
     expect(screen.getByText(/No candidates found/i)).toBeInTheDocument();
