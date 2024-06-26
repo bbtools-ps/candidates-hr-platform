@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
-import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
-interface IMainMenuProps {
+interface IProps {
   onAddNewCandidate: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchInput: string;
@@ -15,7 +15,7 @@ export default function MainMenu({
   onAddNewCandidate,
   onChange,
   searchInput,
-}: IMainMenuProps) {
+}: IProps) {
   return (
     <motion.div
       variants={{
@@ -38,17 +38,17 @@ export default function MainMenu({
           <span className="absolute left-4 flex h-full items-center text-gray">
             <FontAwesomeIcon icon={faSearch} />
           </span>
-          <label className="sr-only" htmlFor="search-candidates">
-            Search Candidates
-          </label>
-          <input
-            id="search-candidates"
-            className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-blue xl:w-1/2"
-            placeholder="Search candidate name, skills"
-            data-cy="search-candidates"
-            onChange={onChange}
-            value={searchInput}
-          />
+          <form role="search" aria-label="Candidates">
+            <input
+              aria-label="Candidates"
+              id="search-candidates"
+              className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-blue xl:w-1/2"
+              placeholder="Search candidate name, skills"
+              data-cy="search-candidates"
+              onChange={onChange}
+              value={searchInput}
+            />
+          </form>
         </div>
         <Button
           icon="add"
@@ -57,7 +57,7 @@ export default function MainMenu({
         >
           Add Candidate
         </Button>
-        <ThemeSwitch />
+        <ThemeSwitcher />
       </motion.div>
     </motion.div>
   );

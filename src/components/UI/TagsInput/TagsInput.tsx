@@ -4,7 +4,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
-export interface ITagsInputProps
+export interface IProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -25,7 +25,7 @@ export default function TagsInput({
   onRemoveTags,
   error,
   ...rest
-}: ITagsInputProps) {
+}: IProps) {
   const id = idProp || convertToKebabCase(label);
   const name = nameProp || convertToKebabCase(label);
 

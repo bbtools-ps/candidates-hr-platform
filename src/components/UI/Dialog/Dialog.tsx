@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 
-interface IDialogProps
+interface IProps
   extends React.DetailedHTMLProps<
     React.DialogHTMLAttributes<HTMLDialogElement>,
     HTMLDialogElement
@@ -20,7 +20,7 @@ export type DialogActions = {
   close: () => void;
 };
 
-const Dialog = forwardRef<DialogActions, IDialogProps>(function Dialog(
+const Dialog = forwardRef<DialogActions, IProps>(function Dialog(
   { children, ...rest },
   ref
 ) {

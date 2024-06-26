@@ -1,40 +1,30 @@
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ThemeSwitch() {
-  const [isDark, setIsDark] = useState(false);
-  const initialRender = useRef(true);
+export default function ThemeSwitcher() {
+  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const isDarkTheme = theme === "dark";
 
   useEffect(() => {
-    if (!initialRender.current) return;
-
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.documentElement.classList.add("dark");
-      setIsDark(true);
+      setTheme("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-
-    initialRender.current = false;
   }, []);
 
-  useEffect(() => {
-    if (initialRender.current) return;
-
-    if (isDark) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDark]);
-
   const handleChange = () => {
-    setIsDark((prevState) => !prevState);
+    setTheme((prevTheme) => {
+      const result = prevTheme === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", result);
+      return result;
+    });
     document.documentElement.classList.toggle("dark");
   };
 
@@ -46,7 +36,7 @@ export default function ThemeSwitch() {
       >
         <FontAwesomeIcon
           className="text-blue dark:text-white"
-          icon={isDark ? faSun : faMoon}
+          icon={isDarkTheme ? faSun : faMoon}
         />
         <span className="sr-only">Theme Switch</span>
       </label>
@@ -54,7 +44,7 @@ export default function ThemeSwitch() {
         id="theme-switch"
         className="opacity-0"
         type="checkbox"
-        checked={isDark}
+        checked={isDarkTheme}
         onChange={handleChange}
       />
     </div>

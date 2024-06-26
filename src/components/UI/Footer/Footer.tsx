@@ -1,8 +1,8 @@
-interface IFooterProps {
+interface IProps {
   copyrightLabel: string;
 }
 
-export default function Footer({ copyrightLabel }: IFooterProps) {
+export default function Footer({ copyrightLabel }: IProps) {
   const getCurrentYear = () => {
     const date = new Date();
     return date.getFullYear();
@@ -10,7 +10,7 @@ export default function Footer({ copyrightLabel }: IFooterProps) {
 
   return (
     <p className="flex gap-2">
-      © {getCurrentYear()}.
+      &copy; {getCurrentYear()}.
       <a
         className="font-bold text-gray duration-100 hover:text-blue"
         href="https://bogdan-bogdanovic.com/"

@@ -3,7 +3,7 @@ import MainMenu from "@/components/UI/MainMenu/MainMenu";
 import { useCandidatesStore } from "@/store/candidates";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const RootLayout = () => {
+export default function RootLayout() {
   const { searchTerm, searchCandidate } = useCandidatesStore();
 
   const navigate = useNavigate();
@@ -29,6 +29,4 @@ const RootLayout = () => {
       </footer>
     </>
   );
-};
-
-export default RootLayout;
+}

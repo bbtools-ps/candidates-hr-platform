@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { VirtuosoMockContext } from "react-virtuoso";
 import CandidatesList from "./CandidatesList";
 
 const dummyCandidates = [
@@ -29,30 +30,38 @@ const dummyCandidates = [
 describe("<CandidatesList/>", () => {
   it("should render the list of candidates so that each candidate is in separate card and have same options to Edit and Remove", () => {
     render(
-      <CandidatesList
-        candidates={dummyCandidates}
-        onEditCandidate={() => {}}
-        onRemoveCandidate={() => {}}
-        isLoading={false}
-      />
+      <VirtuosoMockContext.Provider
+        value={{ viewportHeight: 300, itemHeight: 100 }}
+      >
+        <CandidatesList
+          candidates={dummyCandidates}
+          onEditCandidate={() => {}}
+          onRemoveCandidate={() => {}}
+          isLoading={false}
+        />
+      </VirtuosoMockContext.Provider>,
     );
 
     expect(screen.getAllByRole("button", { name: /edit/i })).toHaveLength(
-      dummyCandidates.length
+      dummyCandidates.length,
     );
     expect(screen.getAllByRole("button", { name: /remove/i })).toHaveLength(
-      dummyCandidates.length
+      dummyCandidates.length,
     );
   });
 
   it("should show a message 'No candidates found'. if there are no candidates to be rendered", () => {
     render(
-      <CandidatesList
-        candidates={[]}
-        onEditCandidate={() => {}}
-        onRemoveCandidate={() => {}}
-        isLoading={false}
-      />
+      <VirtuosoMockContext.Provider
+        value={{ viewportHeight: 300, itemHeight: 100 }}
+      >
+        <CandidatesList
+          candidates={[]}
+          onEditCandidate={() => {}}
+          onRemoveCandidate={() => {}}
+          isLoading={false}
+        />
+      </VirtuosoMockContext.Provider>,
     );
 
     expect(screen.getByText(/No candidates found/i)).toBeInTheDocument();

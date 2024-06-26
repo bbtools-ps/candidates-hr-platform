@@ -14,7 +14,7 @@ import Dialog, { DialogActions } from "../UI/Dialog/Dialog";
 import InputField from "../UI/InputField/InputField";
 import TagsInput from "../UI/TagsInput/TagsInput";
 
-interface ICandidateFormProps {
+interface IProps {
   title: React.ReactNode;
   candidate?: Candidate;
   onCancel?: () => void;
@@ -26,7 +26,7 @@ export default function CandidateForm({
   candidate,
   onCancel,
   onSubmit,
-}: ICandidateFormProps) {
+}: IProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
 
@@ -173,19 +173,6 @@ export default function CandidateForm({
         />
         <div className="flex justify-center gap-4">
           <Button
-            type="submit"
-            disabled={
-              !nameIsValid ||
-              !dateofBirthIsValid ||
-              !contactNumberIsValid ||
-              !emailIsValid ||
-              !skills.length
-            }
-            data-cy="submit-btn"
-          >
-            {candidate ? "Save" : "Add"}
-          </Button>
-          <Button
             type="button"
             onClick={() => {
               if (onCancel) {
@@ -198,6 +185,19 @@ export default function CandidateForm({
             variant="outlined"
           >
             Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={
+              !nameIsValid ||
+              !dateofBirthIsValid ||
+              !contactNumberIsValid ||
+              !emailIsValid ||
+              !skills.length
+            }
+            data-cy="submit-btn"
+          >
+            {candidate ? "Save" : "Add"}
           </Button>
         </div>
       </form>
