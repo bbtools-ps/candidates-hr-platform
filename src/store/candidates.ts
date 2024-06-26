@@ -82,12 +82,12 @@ export const useCandidatesStore = create<State & Actions>()(
           const removedCandidateAll = state.allCandidates.filter(
             (candidate) => {
               return candidate.id !== candidateId;
-            },
+            }
           );
           const removedCandidateFilter = state.filteredCandidates.filter(
             (candidate) => {
               return candidate.id !== candidateId;
-            },
+            }
           );
 
           return {
@@ -106,7 +106,7 @@ export const useCandidatesStore = create<State & Actions>()(
           ].map((term) => {
             const escapedSearchInput = term.replace(
               /[.*+?^${}()|[\]\\]/g,
-              "\\$&",
+              "\\$&"
             );
             return new RegExp(escapedSearchInput, "i");
           });
@@ -118,7 +118,7 @@ export const useCandidatesStore = create<State & Actions>()(
                   term.test(candidate.name) ||
                   candidate.skills.find((skill) => term.test(skill.value))
                 );
-              }) && candidate,
+              }) && candidate
           );
 
           return { filteredCandidates, searchTerm };
@@ -138,6 +138,6 @@ export const useCandidatesStore = create<State & Actions>()(
           };
         }),
     }),
-    { name: "candidates" },
-  ),
+    { name: "candidates" }
+  )
 );

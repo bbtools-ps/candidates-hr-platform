@@ -22,7 +22,7 @@ export type DialogActions = {
 
 const Dialog = forwardRef<DialogActions, IDialogProps>(function Dialog(
   { children, ...rest },
-  ref,
+  ref
 ) {
   const dialog = useRef<HTMLDialogElement>(null);
 
@@ -45,7 +45,7 @@ const Dialog = forwardRef<DialogActions, IDialogProps>(function Dialog(
     >
       {children}
     </motion.dialog>,
-    document.getElementById("dialogs") as HTMLDivElement,
+    document.getElementById("dialogs") as HTMLDivElement
   );
 });
 

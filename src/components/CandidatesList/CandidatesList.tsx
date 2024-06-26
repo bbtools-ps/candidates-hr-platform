@@ -30,7 +30,7 @@ export default function CandidatesList({
         />
       </div>
     ),
-    [candidates, onEditCandidate, onRemoveCandidate],
+    [candidates, onEditCandidate, onRemoveCandidate]
   );
 
   return (

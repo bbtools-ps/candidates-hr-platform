@@ -127,7 +127,7 @@ describe("candidates", () => {
     cy.get("@invalidDate").should("contain", "Please add a valid date.");
     cy.get("@invalidPhone").should(
       "contain",
-      "Please add a valid phone number.",
+      "Please add a valid phone number."
     );
     cy.get("@invalidEmail").should("contain", "Please add a valid email.");
     cy.get("@invalidSkills").should("contain", "Please add skills.");

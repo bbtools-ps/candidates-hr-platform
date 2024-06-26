@@ -20,7 +20,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />,
+      />
     );
 
     for (const { value } of testTags) {
@@ -39,7 +39,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />,
+      />
     );
 
     expect(screen.getByTestId("tags-input")).toHaveValue("test");
@@ -56,7 +56,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />,
+      />
     );
 
     expect(screen.getByText("test label")).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />,
+      />
     );
 
     await userEvent.click(screen.getByTestId("tags-input"));
@@ -95,7 +95,7 @@ describe("<TagsInput />", () => {
         onChange={changeHandler}
         onKeyUp={() => {}}
         onRemoveTags={() => {}}
-      />,
+      />
     );
 
     await userEvent.type(screen.getByTestId("tags-input"), "test");
@@ -115,7 +115,7 @@ describe("<TagsInput />", () => {
         onChange={() => {}}
         onKeyUp={() => {}}
         onRemoveTags={removeHandler}
-      />,
+      />
     );
 
     await userEvent.click(screen.getAllByRole("button")[0]);
