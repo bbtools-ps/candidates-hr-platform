@@ -33,7 +33,7 @@ export default function TagsInput({
     <div className="w-full">
       {label && <label htmlFor={id}>{label}</label>}
       <div
-        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-blue ${
+        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400 ${
           error ? "bg-rose-300" : ""
         }`}
       >
