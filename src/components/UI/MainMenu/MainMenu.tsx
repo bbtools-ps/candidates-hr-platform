@@ -42,7 +42,7 @@ export default function MainMenu({
             <input
               aria-label="Candidates"
               id="search-candidates"
-              className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-blue xl:w-1/2"
+              className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-sky-400 xl:w-1/2"
               placeholder="Search candidate name, skills"
               data-cy="search-candidates"
               onChange={onChange}
