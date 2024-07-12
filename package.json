@@ -15,7 +15,7 @@
     "zustand": "^4.4.6"
   },
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "tsc && vitest run --reporter=verbose && vite build",
     "preview": "vite preview",
     "test:unit": "vitest --reporter=verbose",

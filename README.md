@@ -18,7 +18,7 @@ To install all dependencies:
 
 To start the project in the local development mode:
 
-`npm start`
+`npm run dev`
 
 To make the build:
 
