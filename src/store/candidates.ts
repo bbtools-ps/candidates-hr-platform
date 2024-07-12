@@ -1,4 +1,4 @@
-import { Candidate } from "@/models";
+import type { Candidate } from "@/models";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 

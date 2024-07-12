@@ -1,4 +1,4 @@
-import { Tag } from "@/models";
+import type { Tag } from "@/models";
 import { convertToKebabCase } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

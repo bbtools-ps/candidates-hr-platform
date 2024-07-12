@@ -1,5 +1,5 @@
 import { useInput, useTagsInput } from "@/hooks";
-import { Candidate } from "@/models";
+import type { Candidate } from "@/models";
 import {
   validateDate,
   validateEmail,

@@ -4,8 +4,8 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MotionProps, motion } from "framer-motion";
-import { ButtonHTMLAttributes } from "react";
+import { type MotionProps, motion } from "framer-motion";
+import { type ButtonHTMLAttributes } from "react";
 
 const buttonVariant = {
   default: "bg-blue text-white hover:opacity-80",

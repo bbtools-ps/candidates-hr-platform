@@ -1,4 +1,4 @@
-import { Candidate } from "@/models";
+import type { Candidate } from "@/models";
 import Button from "../UI/Button/Button";
 
 interface IProps {

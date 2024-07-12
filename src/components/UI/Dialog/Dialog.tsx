@@ -1,6 +1,6 @@
-import { MotionProps, motion } from "framer-motion";
-import React, {
-  DialogHTMLAttributes,
+import { type MotionProps, motion } from "framer-motion";
+import {
+  type DialogHTMLAttributes,
   forwardRef,
   useImperativeHandle,
   useRef,
