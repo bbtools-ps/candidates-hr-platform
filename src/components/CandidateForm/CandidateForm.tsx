@@ -10,7 +10,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import Button from "../UI/Button/Button";
-import Dialog, { DialogActions } from "../UI/Dialog/Dialog";
+import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";
 import InputField from "../UI/InputField/InputField";
 import TagsInput from "../UI/TagsInput/TagsInput";
 
