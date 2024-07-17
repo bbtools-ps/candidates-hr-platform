@@ -171,7 +171,7 @@ export default function CandidateForm({
           error={tagsError ? "Please add skills." : undefined}
           data-cy="candidate-skills"
         />
-        <div className="flex justify-center gap-4">
+        <div className="mt-4 flex justify-center gap-4">
           <Button
             type="button"
             onClick={() => {
