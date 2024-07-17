@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { Tag } from "../models";
+import type { Tag } from "../models";
 
 export const useTagsInput = (initialTags: Tag[] | undefined) => {
   const [value, setValue] = useState("");
