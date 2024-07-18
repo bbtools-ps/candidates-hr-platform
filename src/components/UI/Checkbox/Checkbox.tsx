@@ -7,7 +7,7 @@ interface IProps
       InputHTMLAttributes<HTMLInputElement>,
       HTMLInputElement
     >,
-    "type" | "ref"
+    "type" | "ref" | "value" | "defaultValue"
   > {
   label?: string;
 }
