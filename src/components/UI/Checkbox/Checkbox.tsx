@@ -17,8 +17,8 @@ export default function Checkbox({ label, id: idProp, ...rest }: IProps) {
 
   return (
     <div className="flex gap-3">
-      {label && <label htmlFor={id}>{label}</label>}
       <input type="checkbox" id={id} {...rest} />
+      {label && <label htmlFor={id}>{label}</label>}
     </div>
   );
 }
