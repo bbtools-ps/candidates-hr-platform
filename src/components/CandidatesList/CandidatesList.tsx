@@ -41,7 +41,7 @@ export default function CandidatesList({
           <Virtuoso
             style={{ height }}
             data={candidates}
-            itemContent={(index, item) => (
+            itemContent={(_, item) => (
               <div className="flex justify-center">
                 <CandidateItem
                   candidate={item}
