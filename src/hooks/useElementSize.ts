@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type ObserverRect = Omit<DOMRectReadOnly, "toJSON">;
