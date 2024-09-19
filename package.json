@@ -21,7 +21,8 @@
     "test:unit": "vitest --reporter=verbose",
     "test:cypress": "concurrently \"vite\" \"npx cypress open\"",
     "test:e2e": "concurrently \"vite\" \"npx cypress run\"",
-    "format": "prettier --write '**/*.{js,ts,tsx,jsx}'"
+    "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
+    "fix": "eslint --fix src"
   },
   "browserslist": {
     "production": [

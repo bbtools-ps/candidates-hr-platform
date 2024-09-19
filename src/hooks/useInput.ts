@@ -20,7 +20,7 @@ export const useInput = ({ initialValue, validationFn }: IUseInput) => {
     setValue(e.target.value);
   };
 
-  const onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onBlur = () => {
     setIsTouched(true);
   };
 

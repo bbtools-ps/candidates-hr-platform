@@ -17,7 +17,6 @@ export default function InputField({
   id: idProp,
   name: nameProp,
   type = "text",
-  className,
   isValid,
   error,
   ...rest
