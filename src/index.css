@@ -70,5 +70,5 @@ input[type="date"] {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
-  right: 5px;
+  right: 0.3rem;
 }
