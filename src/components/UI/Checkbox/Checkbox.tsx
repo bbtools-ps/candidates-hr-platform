@@ -1,13 +1,10 @@
 import { convertToKebabCase } from "@/utils";
-import { type InputHTMLAttributes } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 interface IProps
   extends Omit<
-    React.DetailedHTMLProps<
-      InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >,
-    "type" | "ref" | "value" | "defaultValue"
+    ComponentPropsWithoutRef<"input">,
+    "type" | "value" | "defaultValue"
   > {
   label?: string;
 }

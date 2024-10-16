@@ -3,12 +3,9 @@ import { convertToKebabCase } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
+import type { ComponentPropsWithoutRef } from "react";
 
-export interface IProps
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+export interface IProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   tags: Tag[];
   error?: string;

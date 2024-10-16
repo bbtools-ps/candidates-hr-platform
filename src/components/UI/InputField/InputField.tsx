@@ -1,12 +1,9 @@
 import { convertToKebabCase } from "@/utils";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { ComponentPropsWithoutRef } from "react";
 
-interface IProps
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+interface IProps extends ComponentPropsWithoutRef<"input"> {
   label?: string;
   isValid?: boolean;
   error?: string;
