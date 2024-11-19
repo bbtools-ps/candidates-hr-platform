@@ -1,6 +1,6 @@
 import { useElementSize } from "@/hooks";
 import type { Candidate } from "@/models";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Virtuoso } from "react-virtuoso";
 import CandidateItem from "./CandidateItem";
 

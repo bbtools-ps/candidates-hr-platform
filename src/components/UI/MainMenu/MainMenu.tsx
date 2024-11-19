@@ -1,6 +1,6 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";

@@ -4,7 +4,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type MotionProps, motion } from "framer-motion";
+import { type MotionProps, motion } from "motion/react";
 import { type ButtonHTMLAttributes } from "react";
 
 const buttonVariant = {

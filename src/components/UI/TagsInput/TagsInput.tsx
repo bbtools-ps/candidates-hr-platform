@@ -2,7 +2,7 @@ import type { Tag } from "@/models";
 import { convertToKebabCase } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import type { ComponentPropsWithoutRef } from "react";
 
 export interface IProps extends ComponentPropsWithoutRef<"input"> {

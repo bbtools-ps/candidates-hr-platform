@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import CandidatesLogoIcon from "../Icons/CandidatesLogoIcon";
 
 export default function Logo() {
