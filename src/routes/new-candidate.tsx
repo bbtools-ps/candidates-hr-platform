@@ -2,7 +2,7 @@ import CandidateForm from "@/components/CandidateForm/CandidateForm";
 import { useCandidatesStore } from "@/store/candidates";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export function Component() {
   const { addCandidate } = useCandidatesStore();

@@ -7,7 +7,7 @@ import {
   validatePhoneNumber,
 } from "@/utils";
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
 import Button from "../UI/Button/Button";
 import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";

@@ -1,7 +1,7 @@
 import { DUMMY_CANDIDATES } from "@/data/data";
 import { useCandidatesStore } from "@/store/candidates";
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router";
 import CandidatesList from "../components/CandidatesList/CandidatesList";
 
 export default function HomePage() {
