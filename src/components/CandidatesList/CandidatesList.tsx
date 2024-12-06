@@ -1,4 +1,3 @@
-import { useElementSize } from "@/hooks";
 import type { Candidate } from "@/models";
 import { motion } from "motion/react";
 import { Virtuoso } from "react-virtuoso";
@@ -17,10 +16,8 @@ export default function CandidatesList({
   onRemoveCandidate,
   onEditCandidate,
 }: IProps) {
-  const { ref, height } = useElementSize();
-
   return (
-    <section className="flex flex-1 flex-col" ref={ref}>
+    <section className="flex flex-1 flex-col">
       {isLoading && <p>Loading...</p>}
       {candidates.length === 0 && (
         <motion.div
@@ -36,10 +33,10 @@ export default function CandidatesList({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="h-0"
+          className="flex-1"
         >
           <Virtuoso
-            style={{ height }}
+            height="100%"
             data={candidates}
             itemContent={(_, item) => (
               <div className="flex justify-center">
