@@ -36,7 +36,7 @@ export default function CandidatesList({
           className="flex-1"
         >
           <Virtuoso
-            height="100%"
+            style={{ height: "100%" }}
             data={candidates}
             itemContent={(_, item) => (
               <div className="flex justify-center">
