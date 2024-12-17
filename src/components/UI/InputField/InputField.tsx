@@ -1,4 +1,5 @@
 import { convertToKebabCase } from "@/utils";
+import { cn } from "@/utils/cn";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { ComponentPropsWithoutRef } from "react";
@@ -28,9 +29,10 @@ export default function InputField({
         <input
           id={id}
           type={type}
-          className={`w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue dark:border-slate-600 dark:hover:border-sky-400 ${
-            label ? "" : ""
-          } ${error ? "border-red bg-rose-300" : "bg-transparent"}`}
+          className={cn(
+            "w-full flex-1 truncate rounded border-2 border-solid border-gray py-2 pl-4 pr-10 text-base duration-100 hover:border-blue dark:border-slate-600 dark:hover:border-sky-400",
+            error ? "border-red bg-rose-300" : "bg-transparent"
+          )}
           name={name}
           aria-label={label}
           {...rest}

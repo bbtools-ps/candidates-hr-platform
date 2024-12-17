@@ -1,5 +1,6 @@
 import type { Tag } from "@/models";
 import { convertToKebabCase } from "@/utils";
+import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
@@ -30,9 +31,10 @@ export default function TagsInput({
     <div className="w-full">
       {label && <label htmlFor={id}>{label}</label>}
       <div
-        className={`mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400 ${
-          error ? "bg-rose-300" : ""
-        }`}
+        className={cn(
+          "mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400",
+          error && "bg-rose-300"
+        )}
       >
         <motion.ul
           variants={{
@@ -72,9 +74,10 @@ export default function TagsInput({
           id={id}
           type="text"
           placeholder={placeholder}
-          className={`flex-1 bg-transparent p-2 focus:outline-none ${
-            error ? "placeholder:text-black" : ""
-          }`}
+          className={cn(
+            "flex-1 bg-transparent p-2 focus:outline-none",
+            error && "placeholder:text-black"
+          )}
           value={value}
           {...rest}
           data-testid="tags-input"
