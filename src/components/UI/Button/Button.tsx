@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import {
   faEdit,
   faUserMinus,
@@ -40,7 +41,10 @@ export default function Button({
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       type={type}
       aria-label={children?.toString()}
-      className={`flex items-center gap-2 rounded-full px-6 py-2 text-base font-bold uppercase duration-100 disabled:bg-gray ${buttonVariant[variant]}`}
+      className={cn(
+        "flex items-center gap-2 rounded-full px-6 py-2 text-base font-bold uppercase duration-100 disabled:bg-gray",
+        buttonVariant[variant]
+      )}
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
     >
       {icon && buttonIcon[icon] && <FontAwesomeIcon icon={buttonIcon[icon]} />}
