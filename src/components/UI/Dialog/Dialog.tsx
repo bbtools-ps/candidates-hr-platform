@@ -17,14 +17,18 @@ const Dialog = forwardRef<DialogActions, ComponentPropsWithoutRef<"dialog">>(
   function Dialog({ children, ...rest }, ref) {
     const dialog = useRef<HTMLDialogElement>(null);
 
-    useImperativeHandle(ref, () => ({
-      open() {
-        dialog.current?.showModal();
-      },
-      close() {
-        dialog.current?.close();
-      },
-    }));
+    useImperativeHandle(
+      ref,
+      () => ({
+        open() {
+          dialog.current?.showModal();
+        },
+        close() {
+          dialog.current?.close();
+        },
+      }),
+      []
+    );
 
     return createPortal(
       <motion.dialog
