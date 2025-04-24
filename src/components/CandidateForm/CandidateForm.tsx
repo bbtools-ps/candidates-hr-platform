@@ -84,7 +84,11 @@ export default function CandidateForm({
             <InputField
               id="candidate-name"
               label="Name"
-              error={field.state.meta.errors?.[0]?.message}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors?.[0]?.message
+                  : undefined
+              }
               value={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.name instanceof z.ZodOptional)
@@ -100,7 +104,11 @@ export default function CandidateForm({
               id="candidate-date-of-birth"
               label="Date of birth"
               type="date"
-              error={field.state.meta.errors?.[0]?.message}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors?.[0]?.message
+                  : undefined
+              }
               value={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.dateOfBirth instanceof z.ZodOptional)
@@ -115,7 +123,11 @@ export default function CandidateForm({
             <InputField
               id="candidate-contact-number"
               label="Contact number"
-              error={field.state.meta.errors?.[0]?.message}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors?.[0]?.message
+                  : undefined
+              }
               value={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.contactNumber instanceof z.ZodOptional)
@@ -130,7 +142,11 @@ export default function CandidateForm({
             <InputField
               id="candidate-email"
               label="E-mail"
-              error={field.state.meta.errors?.[0]?.message}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors?.[0]?.message
+                  : undefined
+              }
               value={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.email instanceof z.ZodOptional)
@@ -145,7 +161,11 @@ export default function CandidateForm({
             <TagsInput
               id="candidate-skills"
               label="Skills"
-              error={field.state.meta.errors?.[0]?.message}
+              error={
+                field.state.meta.isTouched
+                  ? field.state.meta.errors?.[0]?.message
+                  : undefined
+              }
               tags={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.skills instanceof z.ZodOptional)
