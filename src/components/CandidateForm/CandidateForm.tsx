@@ -151,7 +151,14 @@ export default function CandidateForm({
                 !(CandidateSchema.shape.skills instanceof z.ZodOptional)
               }
               onRemove={field.removeValue}
-              onAdd={field.pushValue}
+              onAdd={(value) => {
+                if (
+                  field.state.value.some((tag) => tag.value === value.value)
+                ) {
+                  return;
+                }
+                field.pushValue(value);
+              }}
               data-cy="candidate-skills"
             />
           )}
