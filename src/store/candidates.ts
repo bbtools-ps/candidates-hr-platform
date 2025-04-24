@@ -27,11 +27,11 @@ export const useCandidatesStore = create<State & Actions>()(
         set({
           allCandidates: candidates.map((item) => ({
             ...item,
-            skills: item.skills.map((item) => ({ ...item })),
+            skills: item.skills?.map((item) => ({ ...item })),
           })),
           filteredCandidates: candidates.map((item) => ({
             ...item,
-            skills: item.skills.map((item) => ({ ...item })),
+            skills: item.skills?.map((item) => ({ ...item })),
           })),
         }),
       addCandidate: (candidate) =>
@@ -41,14 +41,14 @@ export const useCandidatesStore = create<State & Actions>()(
               candidate,
               ...state.allCandidates.map((item) => ({
                 ...item,
-                skills: item.skills.map((item) => ({ ...item })),
+                skills: item.skills?.map((item) => ({ ...item })),
               })),
             ],
             filteredCandidates: [
               candidate,
               ...state.filteredCandidates.map((item) => ({
                 ...item,
-                skills: item.skills.map((item) => ({ ...item })),
+                skills: item.skills?.map((item) => ({ ...item })),
               })),
             ],
           };
@@ -59,17 +59,17 @@ export const useCandidatesStore = create<State & Actions>()(
             return item.id === candidate.id
               ? {
                   ...candidate,
-                  skills: candidate.skills.map((item) => ({ ...item })),
+                  skills: candidate.skills?.map((item) => ({ ...item })),
                 }
-              : { ...item, skills: item.skills.map((item) => ({ ...item })) };
+              : { ...item, skills: item.skills?.map((item) => ({ ...item })) };
           });
           const editedCandidateFilter = state.filteredCandidates.map((item) => {
             return item.id === candidate.id
               ? {
                   ...candidate,
-                  skills: candidate.skills.map((item) => ({ ...item })),
+                  skills: candidate.skills?.map((item) => ({ ...item })),
                 }
-              : { ...item, item: item.skills.map((item) => ({ ...item })) };
+              : { ...item, item: item.skills?.map((item) => ({ ...item })) };
           });
 
           return {
@@ -115,8 +115,8 @@ export const useCandidatesStore = create<State & Actions>()(
             (candidate) =>
               searchTerms.every((term) => {
                 return (
-                  term.test(candidate.name) ||
-                  candidate.skills.find((skill) => term.test(skill.value))
+                  term.test(candidate.name ?? "") ||
+                  candidate.skills?.find((skill) => term.test(skill.value))
                 );
               }) && candidate
           );
@@ -128,11 +128,11 @@ export const useCandidatesStore = create<State & Actions>()(
           return {
             allCandidates: state.allCandidates.map((item) => ({
               ...item,
-              skills: item.skills.map((item) => ({ ...item })),
+              skills: item.skills?.map((item) => ({ ...item })),
             })),
             filteredCandidates: state.allCandidates.map((item) => ({
               ...item,
-              skills: item.skills.map((item) => ({ ...item })),
+              skills: item.skills?.map((item) => ({ ...item })),
             })),
             searchTerm: "",
           };

@@ -1,14 +1,9 @@
-import { useInput, useTagsInput } from "@/hooks";
 import type { Candidate } from "@/models";
-import {
-  validateDate,
-  validateEmail,
-  validateEmptyValue,
-  validatePhoneNumber,
-} from "@/utils";
+import { useForm } from "@tanstack/react-form";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
+import { z } from "zod";
 import Button from "../UI/Button/Button";
 import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";
 import InputField from "../UI/InputField/InputField";
@@ -21,90 +16,58 @@ interface IProps {
   onSubmit: (payload: Candidate) => void;
 }
 
+const CandidateSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  dateOfBirth: z.string().min(1, { message: "Date of birth is required" }),
+  contactNumber: z.string().min(1, { message: "Contact number is required" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+  skills: z
+    .array(
+      z.object({
+        id: z.string(),
+        value: z.string(),
+      })
+    )
+    .min(1, { message: "Skills are required" }),
+});
+
 export default function CandidateForm({
   title,
   candidate,
   onCancel,
-  onSubmit,
+  onSubmit: onSubmitProp,
 }: IProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
 
-  const {
-    value: name,
-    onChange: nameChangeHandler,
-    onBlur: nameBlurHandler,
-    isValid: nameIsValid,
-    hasError: nameError,
-  } = useInput({
-    initialValue: candidate?.name,
-    validationFn: (value) => validateEmptyValue(value),
+  const form = useForm({
+    defaultValues: {
+      name: candidate?.name || "",
+      dateOfBirth: candidate?.dateOfBirth
+        ? new Date(candidate?.dateOfBirth)?.toISOString().slice(0, 10)
+        : "",
+      contactNumber: candidate?.contactNumber || "",
+      email: candidate?.email || "",
+      skills: candidate?.skills || [],
+    },
+    validators: { onSubmit: CandidateSchema },
+    onSubmit: (values) => {
+      onSubmitProp({ ...values.value, id: candidate?.id || uuid() });
+    },
   });
-  const {
-    value: dateOfBirth,
-    onChange: dateOfBirthChangeHandler,
-    onBlur: dateOfBirthBlurHandler,
-    isValid: dateofBirthIsValid,
-    hasError: dateOfBirthError,
-  } = useInput({
-    initialValue: candidate?.dateOfBirth
-      ? new Date(candidate?.dateOfBirth)?.toISOString().slice(0, 10)
-      : "",
-    validationFn: (value) => validateDate(value),
-  });
-  const {
-    value: contactNumber,
-    onChange: contactNumberChangeHandler,
-    onBlur: contactNumberBlurHandler,
-    isValid: contactNumberIsValid,
-    hasError: contactNumberError,
-  } = useInput({
-    initialValue: candidate?.contactNumber,
-    validationFn: (value) => validatePhoneNumber(value),
-  });
-  const {
-    value: email,
-    onChange: emailChangeHandler,
-    onBlur: emailBlurHandler,
-    isValid: emailIsValid,
-    hasError: emailError,
-  } = useInput({
-    initialValue: candidate?.email,
-    validationFn: (value) => validateEmptyValue(value) && validateEmail(value),
-  });
-  const {
-    tags: skills,
-    value: skill,
-    onChange: skillChangeHandler,
-    onBlur: skillBlurHandler,
-    removeTags,
-    hasError: tagsError,
-  } = useTagsInput(candidate?.skills);
 
   useEffect(() => {
     dialog.current?.open();
   }, []);
 
-  const setDateFormat = (selectedDate: string) => {
-    return new Date(selectedDate).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const selectedDate = setDateFormat(dateOfBirth);
-    const newCandidate = {
-      name,
-      dateOfBirth: selectedDate,
-      contactNumber,
-      email,
-      skills,
-      id: candidate?.id || uuid(),
-    };
-    onSubmit(newCandidate);
+    e.stopPropagation();
+
+    form.handleSubmit();
   };
 
   return (
@@ -116,61 +79,83 @@ export default function CandidateForm({
     >
       <h2 data-cy="heading">{title}</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <InputField
-          id="candidate-name"
-          label="Name"
-          error={nameError ? "Please add a name." : undefined}
-          onChange={nameChangeHandler}
-          onBlur={nameBlurHandler}
-          value={name}
-          isValid={nameIsValid}
-          data-cy="candidate-name"
-        />
-        <InputField
-          id="candidate-date-of-birth"
-          label="Date of birth"
-          type="date"
-          error={dateOfBirthError ? "Please add a valid date." : undefined}
-          onChange={dateOfBirthChangeHandler}
-          onBlur={dateOfBirthBlurHandler}
-          value={dateOfBirth}
-          isValid={dateofBirthIsValid}
-          data-cy="candidate-date-of-birth"
-        />
-        <InputField
-          id="candidate-contact-number"
-          label="Contact number"
-          error={
-            contactNumberError ? "Please add a valid phone number." : undefined
-          }
-          onChange={contactNumberChangeHandler}
-          onBlur={contactNumberBlurHandler}
-          value={contactNumber}
-          isValid={contactNumberIsValid}
-          data-cy="candidate-contact-number"
-        />
-        <InputField
-          id="candidate-email"
-          label="E-mail"
-          error={emailError ? "Please add a valid email." : undefined}
-          onChange={emailChangeHandler}
-          onBlur={emailBlurHandler}
-          value={email}
-          isValid={emailIsValid}
-          data-cy="candidate-email"
-        />
-        <TagsInput
-          id="candidate-skills"
-          label="Skills"
-          placeholder="Press comma to add skills"
-          tags={skills}
-          value={skill}
-          onChange={skillChangeHandler}
-          onBlur={skillBlurHandler}
-          onRemoveTags={removeTags}
-          error={tagsError ? "Please add skills." : undefined}
-          data-cy="candidate-skills"
-        />
+        <form.Field name="name">
+          {(field) => (
+            <InputField
+              id="candidate-name"
+              label="Name"
+              error={field.state.meta.errors?.[0]?.message}
+              value={field.state.value}
+              isRequired={
+                !(CandidateSchema.shape.name instanceof z.ZodOptional)
+              }
+              onChange={(e) => field.handleChange(e.target.value)}
+              data-cy="candidate-name"
+            />
+          )}
+        </form.Field>
+        <form.Field name="dateOfBirth">
+          {(field) => (
+            <InputField
+              id="candidate-date-of-birth"
+              label="Date of birth"
+              type="date"
+              error={field.state.meta.errors?.[0]?.message}
+              value={field.state.value}
+              isRequired={
+                !(CandidateSchema.shape.dateOfBirth instanceof z.ZodOptional)
+              }
+              onChange={(e) => field.handleChange(e.target.value)}
+              data-cy="candidate-date-of-birth"
+            />
+          )}
+        </form.Field>
+        <form.Field name="contactNumber">
+          {(field) => (
+            <InputField
+              id="candidate-contact-number"
+              label="Contact number"
+              error={field.state.meta.errors?.[0]?.message}
+              value={field.state.value}
+              isRequired={
+                !(CandidateSchema.shape.contactNumber instanceof z.ZodOptional)
+              }
+              onChange={(e) => field.handleChange(e.target.value)}
+              data-cy="candidate-contact-number"
+            />
+          )}
+        </form.Field>
+        <form.Field name="email">
+          {(field) => (
+            <InputField
+              id="candidate-email"
+              label="E-mail"
+              error={field.state.meta.errors?.[0]?.message}
+              value={field.state.value}
+              isRequired={
+                !(CandidateSchema.shape.email instanceof z.ZodOptional)
+              }
+              onChange={(e) => field.handleChange(e.target.value)}
+              data-cy="candidate-email"
+            />
+          )}
+        </form.Field>
+        <form.Field name="skills">
+          {(field) => (
+            <TagsInput
+              id="candidate-skills"
+              label="Skills"
+              error={field.state.meta.errors?.[0]?.message}
+              tags={field.state.value}
+              isRequired={
+                !(CandidateSchema.shape.skills instanceof z.ZodOptional)
+              }
+              onRemove={field.removeValue}
+              onAdd={field.pushValue}
+              data-cy="candidate-skills"
+            />
+          )}
+        </form.Field>
         <div className="mt-4 flex justify-center gap-4">
           <Button
             type="button"
@@ -186,19 +171,25 @@ export default function CandidateForm({
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            disabled={
-              !nameIsValid ||
-              !dateofBirthIsValid ||
-              !contactNumberIsValid ||
-              !emailIsValid ||
-              !skills.length
-            }
-            data-cy="submit-btn"
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
-            {candidate ? "Save" : "Add"}
-          </Button>
+            {([canSubmit, isSubmitting]) => (
+              <Button
+                type="submit"
+                disabled={!canSubmit || isSubmitting}
+                data-cy="submit-btn"
+              >
+                {isSubmitting
+                  ? candidate
+                    ? "Saving..."
+                    : "Adding..."
+                  : candidate
+                    ? "Save"
+                    : "Add"}
+              </Button>
+            )}
+          </form.Subscribe>
         </div>
       </form>
     </Dialog>

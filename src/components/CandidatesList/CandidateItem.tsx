@@ -33,7 +33,7 @@ export default function CandidateItem({
         </p>
         <p className="flex flex-wrap gap-2">
           <strong className="dark:text-sky-400">Skills:</strong>
-          {candidate.skills.map(({ value, id }) => (
+          {candidate.skills?.map(({ value, id }) => (
             <span
               key={id}
               className="rounded border border-solid border-blue px-2 py-1 dark:border-sky-600"
@@ -57,6 +57,8 @@ export default function CandidateItem({
         <Button
           icon="remove"
           onClick={() => {
+            if (!candidate.id) return;
+
             onRemoveCandidate(candidate.id);
           }}
           data-cy="remove-candidate-btn"

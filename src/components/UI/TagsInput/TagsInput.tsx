@@ -4,32 +4,78 @@ import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
-import type { ComponentPropsWithoutRef } from "react";
+import { useCallback, useState } from "react";
+import { v4 as uuid } from "uuid";
 
-export interface IProps extends ComponentPropsWithoutRef<"input"> {
+interface IProps {
+  id?: string;
+  placeholder?: string;
   label: string;
-  tags: Tag[];
+  tags: Tag[] | undefined;
   error?: string;
-  onRemoveTags: (id: string) => void;
+  isRequired?: boolean;
+  onAdd: (value: Tag) => void;
+  onRemove: (index: number) => void;
 }
 
 export default function TagsInput({
   label,
   id: idProp,
-  name: nameProp,
-  value,
   tags,
   placeholder = "Press comma to add tags",
-  onRemoveTags,
   error,
-  ...rest
+  isRequired,
+  onAdd,
+  onRemove,
 }: IProps) {
   const id = idProp || convertToKebabCase(label);
-  const name = nameProp || convertToKebabCase(label);
+
+  const [value, setValue] = useState("");
+
+  const addTag = useCallback(
+    (value: string) => {
+      setValue("");
+      onAdd({ id: uuid(), value });
+    },
+    [onAdd]
+  );
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (value.includes(",")) {
+      addTag(value.slice(0, -1));
+    } else {
+      setValue(value);
+    }
+  };
+
+  const onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim();
+
+    if (value) {
+      addTag(value);
+    } else {
+      setValue("");
+    }
+  };
+
+  const removeTag = (id: string) => {
+    onRemove(tags?.findIndex((item) => item.id === id) || -1);
+  };
 
   return (
     <div className="w-full">
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && (
+        <label htmlFor={id}>
+          {label}
+          {isRequired && (
+            <span aria-hidden="true" className="ml-1">
+              *
+            </span>
+          )}
+        </label>
+      )}
       <div
         className={cn(
           "mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400",
@@ -50,7 +96,7 @@ export default function TagsInput({
           animate="show"
           className="flex list-none flex-wrap gap-2"
         >
-          {tags.map(({ id, value }) => (
+          {tags?.map(({ id, value }) => (
             <motion.li
               key={id}
               variants={{
@@ -62,7 +108,7 @@ export default function TagsInput({
               <span>{value}</span>
               <button
                 type="button"
-                onClick={() => onRemoveTags(id)}
+                onClick={removeTag.bind(null, id)}
                 className="px-2"
               >
                 <FontAwesomeIcon icon={faClose} />
@@ -79,17 +125,17 @@ export default function TagsInput({
             error && "placeholder:text-black"
           )}
           value={value}
-          {...rest}
+          onChange={onChange}
+          onBlur={onBlur}
           data-testid="tags-input"
         />
         <input
           className="hidden"
           value={
             tags
-              .reduce((acc, curr) => acc + curr.value + ",", "")
+              ?.reduce((acc, curr) => acc + curr.value + ",", "")
               .slice(0, -1) || value
           }
-          name={name}
           readOnly
         />
       </div>

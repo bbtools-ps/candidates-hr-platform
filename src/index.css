@@ -40,7 +40,8 @@ body {
   justify-content: center;
   background-color: #001228;
   opacity: 1;
-  background-image: radial-gradient(#095aba 2px, transparent 2px),
+  background-image:
+    radial-gradient(#095aba 2px, transparent 2px),
     radial-gradient(#095aba 2px, #001228 2px);
   background-size: 5rem 5rem;
   background-position:
@@ -71,4 +72,13 @@ input[type="date"] {
 input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   right: 0.3rem;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+  cursor: pointer;
+}
+
+.dark .date-input::-webkit-calendar-picker-indicator {
+  filter: invert();
 }

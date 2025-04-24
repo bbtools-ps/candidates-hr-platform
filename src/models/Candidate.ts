@@ -1,8 +1,8 @@
 export type Candidate = {
-  name: string;
-  dateOfBirth: string;
-  contactNumber: string;
-  email: string;
-  skills: { id: string; value: string }[];
-  id: string;
+  name: string | undefined;
+  dateOfBirth: string | undefined;
+  contactNumber: string | undefined;
+  email: string | undefined;
+  skills: { id: string; value: string }[] | undefined;
+  id: string | undefined;
 };
