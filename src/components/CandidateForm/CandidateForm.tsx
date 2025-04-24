@@ -54,8 +54,8 @@ export default function CandidateForm({
       skills: candidate?.skills || [],
     },
     validators: { onSubmit: CandidateSchema },
-    onSubmit: (values) => {
-      onSubmitProp({ ...values.value, id: candidate?.id || uuid() });
+    onSubmit: ({ value }) => {
+      onSubmitProp({ ...value, id: candidate?.id || uuid() });
     },
   });
 
