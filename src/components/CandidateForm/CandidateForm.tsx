@@ -12,7 +12,6 @@ import TagsInput from "../UI/TagsInput/TagsInput";
 interface IProps {
   title: React.ReactNode;
   candidate?: Candidate;
-  onCancel?: () => void;
   onSubmit: (payload: Candidate) => void;
 }
 
@@ -37,7 +36,6 @@ const CandidateSchema = z.object({
 export default function CandidateForm({
   title,
   candidate,
-  onCancel,
   onSubmit: onSubmitProp,
 }: IProps) {
   const navigate = useNavigate();
@@ -187,11 +185,7 @@ export default function CandidateForm({
           <Button
             type="button"
             onClick={() => {
-              if (onCancel) {
-                onCancel();
-              } else {
-                navigate("..");
-              }
+              navigate("..");
             }}
             data-cy="cancel-btn"
             variant="outlined"
