@@ -1,11 +1,11 @@
-import { createHashRouter } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import Fallback from "./components/Fallback";
 import HomePage from "./routes";
 import ErrorPage from "./routes/ErrorPage";
 import RootLayout from "./routes/RootLayout";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
