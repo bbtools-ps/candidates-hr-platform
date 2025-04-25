@@ -1,15 +1,13 @@
 import type { Candidate } from "@/models";
-import { useForm } from "@tanstack/react-form";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
 import { z } from "zod";
+import { useAppForm } from "../Form/hooks";
 import Button from "../UI/Button/Button";
 import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";
-import InputField from "../UI/InputField/InputField";
-import TagsInput from "../UI/TagsInput/TagsInput";
 
-interface IProps {
+interface CandidateFormProps {
   title: React.ReactNode;
   candidate?: Candidate;
   onSubmit: (payload: Candidate) => void;
@@ -44,11 +42,11 @@ export default function CandidateForm({
   title,
   candidate,
   onSubmit: onSubmitProp,
-}: IProps) {
+}: CandidateFormProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       name: candidate?.name || "",
       dateOfBirth: candidate?.dateOfBirth
@@ -84,110 +82,66 @@ export default function CandidateForm({
     >
       <h2 data-cy="heading">{title}</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <form.Field name="name">
+        <form.AppField name="name">
           {(field) => (
-            <InputField
+            <field.InputField
               id="candidate-name"
               label="Name"
-              error={
-                field.state.meta.isTouched
-                  ? field.state.meta.errors?.[0]?.message
-                  : undefined
-              }
-              value={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.name instanceof z.ZodOptional)
               }
-              onChange={(e) => field.handleChange(e.target.value)}
               data-cy="candidate-name"
             />
           )}
-        </form.Field>
-        <form.Field name="dateOfBirth">
+        </form.AppField>
+        <form.AppField name="dateOfBirth">
           {(field) => (
-            <InputField
+            <field.InputField
               id="candidate-date-of-birth"
               label="Date of birth"
               type="date"
-              error={
-                field.state.meta.isTouched
-                  ? field.state.meta.errors?.[0]?.message
-                  : undefined
-              }
-              value={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.dateOfBirth instanceof z.ZodOptional)
               }
-              onChange={(e) => field.handleChange(e.target.value)}
               data-cy="candidate-date-of-birth"
             />
           )}
-        </form.Field>
-        <form.Field name="contactNumber">
+        </form.AppField>
+        <form.AppField name="contactNumber">
           {(field) => (
-            <InputField
+            <field.InputField
               id="candidate-contact-number"
               label="Contact number"
-              error={
-                field.state.meta.isTouched
-                  ? field.state.meta.errors?.[0]?.message
-                  : undefined
-              }
-              value={field.state.value}
+              data-cy="candidate-contact-number"
               isRequired={
                 !(CandidateSchema.shape.contactNumber instanceof z.ZodOptional)
               }
-              onChange={(e) => field.handleChange(e.target.value)}
-              data-cy="candidate-contact-number"
             />
           )}
-        </form.Field>
-        <form.Field name="email">
+        </form.AppField>
+        <form.AppField name="email">
           {(field) => (
-            <InputField
+            <field.InputField
               id="candidate-email"
               label="E-mail"
-              error={
-                field.state.meta.isTouched
-                  ? field.state.meta.errors?.[0]?.message
-                  : undefined
-              }
-              value={field.state.value}
+              data-cy="candidate-email"
               isRequired={
                 !(CandidateSchema.shape.email instanceof z.ZodOptional)
               }
-              onChange={(e) => field.handleChange(e.target.value)}
-              data-cy="candidate-email"
             />
           )}
-        </form.Field>
-        <form.Field name="skills">
+        </form.AppField>
+        <form.AppField name="skills">
           {(field) => (
-            <TagsInput
-              id="candidate-skills"
+            <field.TagsInputField
+              id="skills"
               label="Skills"
-              error={
-                field.state.meta.isTouched
-                  ? field.state.meta.errors?.[0]?.message
-                  : undefined
-              }
-              tags={field.state.value}
               isRequired={
                 !(CandidateSchema.shape.skills instanceof z.ZodOptional)
               }
-              onRemove={field.removeValue}
-              onAdd={(value) => {
-                if (
-                  field.state.value.some((tag) => tag.value === value.value)
-                ) {
-                  return;
-                }
-                field.pushValue(value);
-              }}
-              data-cy="candidate-skills"
             />
           )}
-        </form.Field>
+        </form.AppField>
         <div className="mt-4 flex justify-center gap-4">
           <Button
             type="button"
@@ -199,25 +153,19 @@ export default function CandidateForm({
           >
             Cancel
           </Button>
-          <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
-          >
-            {([canSubmit, isSubmitting]) => (
-              <Button
-                type="submit"
-                disabled={!canSubmit || isSubmitting}
-                data-cy="submit-btn"
-              >
-                {isSubmitting
+          <form.AppForm>
+            <form.SubmitButton
+              childrenRenderer={(isSubmitting) =>
+                isSubmitting
                   ? candidate
                     ? "Saving..."
                     : "Adding..."
                   : candidate
                     ? "Save"
-                    : "Add"}
-              </Button>
-            )}
-          </form.Subscribe>
+                    : "Add"
+              }
+            />
+          </form.AppForm>
         </div>
       </form>
     </Dialog>

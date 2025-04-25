@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
-interface IProps {
+interface MainMenuProps {
   onAddNewCandidate: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchInput: string;
@@ -15,7 +15,7 @@ export default function MainMenu({
   onAddNewCandidate,
   onChange,
   searchInput,
-}: IProps) {
+}: MainMenuProps) {
   return (
     <motion.div
       variants={{

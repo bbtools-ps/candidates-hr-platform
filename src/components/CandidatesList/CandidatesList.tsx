@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Virtuoso } from "react-virtuoso";
 import CandidateItem from "./CandidateItem";
 
-interface IProps {
+interface CandidatesListProps {
   candidates: Candidate[];
   isLoading: boolean;
   onRemoveCandidate: (candidateId: string) => void;
@@ -15,7 +15,7 @@ export default function CandidatesList({
   isLoading,
   onRemoveCandidate,
   onEditCandidate,
-}: IProps) {
+}: CandidatesListProps) {
   return (
     <section className="flex flex-1 flex-col">
       {isLoading && <p>Loading...</p>}

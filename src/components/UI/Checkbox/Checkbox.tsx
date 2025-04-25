@@ -1,7 +1,7 @@
 import { convertToKebabCase } from "@/utils";
 import type { ComponentPropsWithoutRef } from "react";
 
-interface IProps
+interface CheckboxProps
   extends Omit<
     ComponentPropsWithoutRef<"input">,
     "type" | "value" | "defaultValue"
@@ -9,7 +9,11 @@ interface IProps
   label?: string;
 }
 
-export default function Checkbox({ label, id: idProp, ...rest }: IProps) {
+export default function Checkbox({
+  label,
+  id: idProp,
+  ...rest
+}: CheckboxProps) {
   const id = idProp || convertToKebabCase(label);
 
   return (

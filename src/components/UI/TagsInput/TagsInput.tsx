@@ -7,12 +7,12 @@ import { motion } from "motion/react";
 import { useCallback, useState } from "react";
 import { v4 as uuid } from "uuid";
 
-interface IProps {
+interface TagsInputProps {
   id?: string;
   placeholder?: string;
-  label: string;
+  label?: string;
   tags: Tag[] | undefined;
-  error?: string;
+  hasError?: boolean;
   isRequired?: boolean;
   onAdd: (value: Tag) => void;
   onRemove: (index: number) => void;
@@ -23,11 +23,11 @@ export default function TagsInput({
   id: idProp,
   tags,
   placeholder = "Press comma to add tags",
-  error,
+  hasError,
   isRequired,
   onAdd,
   onRemove,
-}: IProps) {
+}: TagsInputProps) {
   const id = idProp || convertToKebabCase(label);
 
   const [value, setValue] = useState("");
@@ -65,7 +65,7 @@ export default function TagsInput({
   };
 
   return (
-    <div className="w-full">
+    <>
       {label && (
         <label htmlFor={id}>
           {label}
@@ -78,8 +78,8 @@ export default function TagsInput({
       )}
       <div
         className={cn(
-          "mt-2 flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400",
-          error && "bg-rose-300"
+          "flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400",
+          hasError && "bg-rose-300"
         )}
       >
         <motion.ul
@@ -122,7 +122,7 @@ export default function TagsInput({
           placeholder={placeholder}
           className={cn(
             "flex-1 bg-transparent p-2 focus:outline-none",
-            error && "placeholder:text-black"
+            hasError && "placeholder:text-black"
           )}
           value={value}
           onChange={onChange}
@@ -139,11 +139,6 @@ export default function TagsInput({
           readOnly
         />
       </div>
-      {error && (
-        <p className="text-red dark:text-rose-400" data-cy={`${id}-error`}>
-          {error}
-        </p>
-      )}
-    </div>
+    </>
   );
 }

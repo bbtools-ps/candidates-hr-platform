@@ -1,8 +1,8 @@
-interface IProps {
+interface FooterProps {
   copyrightLabel: string;
 }
 
-export default function Footer({ copyrightLabel }: IProps) {
+export default function Footer({ copyrightLabel }: FooterProps) {
   const getCurrentYear = () => {
     const date = new Date();
     return date.getFullYear();

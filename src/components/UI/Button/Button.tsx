@@ -16,7 +16,7 @@ const buttonVariant = {
   green: "bg-green text-white hover:opacity-80",
 } as const;
 
-interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   icon?: "add" | "remove" | "edit";
   variant?: keyof typeof buttonVariant;
@@ -28,7 +28,7 @@ export default function Button({
   variant = "default",
   icon,
   ...rest
-}: IProps) {
+}: ButtonProps) {
   const buttonIcon = {
     add: faUserPlus,
     edit: faEdit,
