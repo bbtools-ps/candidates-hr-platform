@@ -20,5 +20,5 @@ export const CANDIDATE_SCHEMA = z.object({
       })
     )
     .min(1, { message: "Skills are required" }),
-  notes: z.string(),
+  notes: z.string().optional(),
 });
