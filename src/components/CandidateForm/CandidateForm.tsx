@@ -81,7 +81,7 @@ export default function CandidateForm({
       }}
     >
       <h2 data-cy="heading">{title}</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
         <form.AppField name="name">
           {(field) => (
             <field.InputField
