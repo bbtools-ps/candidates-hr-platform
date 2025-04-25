@@ -29,6 +29,7 @@ export default function TextField({
           field.state.meta.isTouched && field.state.meta.errors.length > 0
         }
         isRequired={isRequired}
+        value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
       />
       <FieldError meta={field.state.meta} />
