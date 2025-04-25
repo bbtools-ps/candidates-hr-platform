@@ -1,6 +1,6 @@
 import type { Candidate } from "@/models";
 import { motion } from "motion/react";
-import { Virtuoso } from "react-virtuoso";
+import VirtualList from "../VirtualList/VirtualList";
 import CandidateItem from "./CandidateItem";
 
 interface CandidatesListProps {
@@ -35,15 +35,15 @@ export default function CandidatesList({
           animate={{ opacity: 1 }}
           className="flex-1"
         >
-          <Virtuoso
-            style={{ height: "100%" }}
+          <VirtualList
             data={candidates}
-            itemContent={(_, item) => (
-              <div className="flex justify-center">
+            className="h-full"
+            itemRenderer={(item) => (
+              <div className="flex w-full justify-center">
                 <CandidateItem
                   candidate={item}
-                  onRemoveCandidate={onRemoveCandidate}
                   onEditCandidate={onEditCandidate}
+                  onRemoveCandidate={onRemoveCandidate}
                 />
               </div>
             )}
