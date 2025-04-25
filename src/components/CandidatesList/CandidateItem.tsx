@@ -43,6 +43,7 @@ export default function CandidateItem({
             </span>
           ))}
         </p>
+        {candidate.notes && <p>{candidate.notes}</p>}
       </div>
       <div className="flex gap-4 self-end lg:flex-row">
         <Button

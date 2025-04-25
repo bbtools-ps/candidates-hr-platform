@@ -1,33 +1,11 @@
+import { CANDIDATE_SCHEMA } from "@/constants";
 import type { Candidate } from "@/models";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
-import { z } from "zod";
 import { useAppForm } from "../Form/hooks";
 import Button from "../UI/Button/Button";
 import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";
-
-const CandidateSchema = z.object({
-  name: z.string().trim().min(1, { message: "Name is required" }),
-  dateOfBirth: z.string().date("Invalid date format"),
-  contactNumber: z
-    .string()
-    .trim()
-    .min(1, { message: "Contact number is required" }),
-  email: z
-    .string()
-    .trim()
-    .min(1, { message: "Email is required" })
-    .email({ message: "Invalid email address" }),
-  skills: z
-    .array(
-      z.object({
-        id: z.string(),
-        value: z.string().trim().min(1, { message: "Skill is required" }),
-      })
-    )
-    .min(1, { message: "Skills are required" }),
-});
 
 interface CandidateFormProps {
   title: React.ReactNode;
@@ -52,8 +30,9 @@ export default function CandidateForm({
       contactNumber: candidate?.contactNumber || "",
       email: candidate?.email || "",
       skills: candidate?.skills || [],
+      notes: candidate?.notes || "",
     },
-    validators: { onSubmit: CandidateSchema },
+    validators: { onSubmit: CANDIDATE_SCHEMA },
     onSubmit: ({ value }) => {
       onSubmitProp({ ...value, id: candidate?.id || uuid() });
     },
@@ -84,9 +63,7 @@ export default function CandidateForm({
             <field.InputField
               id="candidate-name"
               label="Name"
-              isRequired={
-                !(CandidateSchema.shape.name instanceof z.ZodOptional)
-              }
+              isRequired
               data-cy="candidate-name"
             />
           )}
@@ -97,9 +74,7 @@ export default function CandidateForm({
               id="candidate-date-of-birth"
               label="Date of birth"
               type="date"
-              isRequired={
-                !(CandidateSchema.shape.dateOfBirth instanceof z.ZodOptional)
-              }
+              isRequired
               data-cy="candidate-date-of-birth"
             />
           )}
@@ -110,9 +85,7 @@ export default function CandidateForm({
               id="candidate-contact-number"
               label="Contact number"
               data-cy="candidate-contact-number"
-              isRequired={
-                !(CandidateSchema.shape.contactNumber instanceof z.ZodOptional)
-              }
+              isRequired
             />
           )}
         </form.AppField>
@@ -122,20 +95,21 @@ export default function CandidateForm({
               id="candidate-email"
               label="E-mail"
               data-cy="candidate-email"
-              isRequired={
-                !(CandidateSchema.shape.email instanceof z.ZodOptional)
-              }
+              isRequired
             />
           )}
         </form.AppField>
         <form.AppField name="skills">
           {(field) => (
-            <field.TagsInputField
-              id="skills"
-              label="Skills"
-              isRequired={
-                !(CandidateSchema.shape.skills instanceof z.ZodOptional)
-              }
+            <field.TagsInputField id="skills" label="Skills" isRequired />
+          )}
+        </form.AppField>
+        <form.AppField name="notes">
+          {(field) => (
+            <field.TextAreaField
+              id="notes"
+              label="Notes"
+              data-cy="candidate-notes"
             />
           )}
         </form.AppField>
