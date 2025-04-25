@@ -3,7 +3,6 @@ import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 import TagsInputField from "../components/TagsInputField";
 
-// export useFieldContext for use in your custom components
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
   createFormHookContexts();
 

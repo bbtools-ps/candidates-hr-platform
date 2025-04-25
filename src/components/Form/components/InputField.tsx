@@ -1,27 +1,27 @@
-import InputField from "@/components/UI/InputField/InputField";
+import InputFieldDefault from "@/components/UI/InputField/InputField";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface TextFieldProps extends React.ComponentPropsWithoutRef<"input"> {
+interface InputFieldProps extends React.ComponentPropsWithoutRef<"input"> {
   id?: string;
   label?: string;
   isRequired?: boolean;
 }
 
-export default function TextField({
+export default function InputField({
   id: idProp,
   label,
   isRequired,
   ...rest
-}: TextFieldProps) {
+}: InputFieldProps) {
   const [id] = useState(idProp ?? uuid());
   const field = useFieldContext<string>();
 
   return (
     <div>
-      <InputField
+      <InputFieldDefault
         {...rest}
         label={label}
         id={id}
@@ -30,7 +30,9 @@ export default function TextField({
         }
         isRequired={isRequired}
         value={field.state.value}
-        onChange={(e) => field.handleChange(e.target.value)}
+        onChange={(e) => {
+          field.handleChange(e.target.value);
+        }}
       />
       <FieldError meta={field.state.meta} />
     </div>

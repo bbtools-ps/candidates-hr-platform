@@ -7,18 +7,9 @@ import { useAppForm } from "../Form/hooks";
 import Button from "../UI/Button/Button";
 import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";
 
-interface CandidateFormProps {
-  title: React.ReactNode;
-  candidate?: Candidate;
-  onSubmit: (payload: Candidate) => void;
-}
-
 const CandidateSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }),
-  dateOfBirth: z
-    .string()
-    .trim()
-    .min(1, { message: "Date of birth is required" }),
+  dateOfBirth: z.string().date("Invalid date format"),
   contactNumber: z
     .string()
     .trim()
@@ -37,6 +28,12 @@ const CandidateSchema = z.object({
     )
     .min(1, { message: "Skills are required" }),
 });
+
+interface CandidateFormProps {
+  title: React.ReactNode;
+  candidate?: Candidate;
+  onSubmit: (payload: Candidate) => void;
+}
 
 export default function CandidateForm({
   title,

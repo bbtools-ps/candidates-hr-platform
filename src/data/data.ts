@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 export const DUMMY_CANDIDATES = [
   {
     name: "Maggie Frank",
-    dateOfBirth: "03/12/1990",
+    dateOfBirth: "1990-03-12",
     contactNumber: "+381662312123",
     email: "maggie.frank@gmail.com",
     skills: [
@@ -14,7 +14,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Ruby Elliott",
-    dateOfBirth: "06/18/1995",
+    dateOfBirth: "1995-06-18",
     contactNumber: "+381662312123",
     email: "ruby.elliott@gmail.com",
     skills: [
@@ -25,7 +25,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Raphael Ward",
-    dateOfBirth: "05/15/1989",
+    dateOfBirth: "1989-05-15",
     contactNumber: "+381662312123",
     email: "raphael.ward@gmail.com",
     skills: [{ id: uuid(), value: "Adobe Illustrator" }],
@@ -33,7 +33,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Robbie Waters",
-    dateOfBirth: "12/31/1992",
+    dateOfBirth: "1992-12-31",
     contactNumber: "+381662312123",
     email: "robbie.waters@gmail.com",
     skills: [
@@ -44,7 +44,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Liam Kirk",
-    dateOfBirth: "08/07/1990",
+    dateOfBirth: "1990-08-07",
     contactNumber: "+381662312123",
     email: "liam.kirk@gmail.com",
     skills: [{ id: uuid(), value: "JavaScript" }],
@@ -52,7 +52,7 @@ export const DUMMY_CANDIDATES = [
   },
   {
     name: "Rob Frank",
-    dateOfBirth: "05/19/1985",
+    dateOfBirth: "1985-05-19",
     contactNumber: "+381662312123",
     email: "rob.frank@gmail.com",
     skills: [

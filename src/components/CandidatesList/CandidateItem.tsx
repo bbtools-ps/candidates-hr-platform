@@ -1,4 +1,5 @@
 import type { Candidate } from "@/models";
+import dayjs from "dayjs";
 import Button from "../UI/Button/Button";
 
 interface CandidateItemProps {
@@ -21,7 +22,7 @@ export default function CandidateItem({
       <div className="mb-2 flex flex-1 flex-col gap-2">
         <p>
           <strong className="mr-2 dark:text-sky-400">Date of birth:</strong>
-          <span>{candidate.dateOfBirth}</span>
+          <span>{dayjs(candidate.dateOfBirth).format("MM/DD/YYYY")}</span>
         </p>
         <p>
           <strong className="mr-2 dark:text-sky-400">Contact number:</strong>
