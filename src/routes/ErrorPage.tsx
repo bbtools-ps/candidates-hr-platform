@@ -1,10 +1,13 @@
 import Button from "@/components/UI/Button/Button";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 import { Link, isRouteErrorResponse, useRouteError } from "react-router";
 
 export default function ErrorPage() {
   const error = useRouteError();
+
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6 text-white">
@@ -12,7 +15,7 @@ export default function ErrorPage() {
         <span>
           <FontAwesomeIcon icon={faTriangleExclamation} />
         </span>
-        <span>Error</span>
+        <span>{t("Error_Label")}</span>
       </h1>
       {isRouteErrorResponse(error) && (
         <p>
@@ -25,7 +28,7 @@ export default function ErrorPage() {
           className="rounded-full bg-blue px-4 py-2 font-bold text-white duration-100 hover:opacity-80"
           to="/"
         >
-          Go back home
+          {t("GoBackHome_Label")}
         </Link>
       ) : (
         <Button
@@ -33,7 +36,7 @@ export default function ErrorPage() {
             window.location.reload();
           }}
         >
-          Reload
+          {t("ReloadPage_Label")}
         </Button>
       )}
     </div>

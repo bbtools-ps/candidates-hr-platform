@@ -33,5 +33,10 @@
   "ContactNumberRequired_Label": "Broj telefona je obavezan",
   "EmailRequired_Label": "E-mail je obavezan",
   "SkillsRequired_Label": "Veštine su obavezne",
-  "SkillsFormPlaceholder_Label": "Unesite veštine odvojene zarezima"
+  "SkillsFormPlaceholder_Label": "Unesite veštine odvojene zarezima",
+  "EditCandidate_Label": "Izmeni kandidata",
+  "NewCandidate_Label": "Novi kandidat",
+  "GoBackHome_Label": "Vrati se na početnu stranu",
+  "ReloadPage_Label": "Osveži stranicu",
+  "Error_Label": "Greška"
 }

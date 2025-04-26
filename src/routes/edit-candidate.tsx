@@ -3,10 +3,13 @@ import Protected from "@/components/Protected";
 import { useCandidatesStore } from "@/store/candidates";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 export function Component() {
   const { allCandidates, editCandidate } = useCandidatesStore();
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,7 +22,7 @@ export function Component() {
             <span style={{ marginRight: "1rem" }}>
               <FontAwesomeIcon icon={faEdit} />
             </span>
-            Edit candidate
+            {t("EditCandidate_Label")}
           </>
         }
         onSubmit={(candidate) => {

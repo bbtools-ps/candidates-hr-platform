@@ -33,5 +33,10 @@
   "EmailRequired_Label": "E-mail is required",
   "InvalidEmail_Label": "Invalid E-mail",
   "SkillsRequired_Label": "Skills are required",
-  "SkillsFormPlaceholder_Label": "Enter skills separated by commas"
+  "SkillsFormPlaceholder_Label": "Enter skills separated by commas",
+  "EditCandidate_Label": "Edit Candidate",
+  "NewCandidate_Label": "New Candidate",
+  "GoBackHome_Label": "Go Back Home",
+  "ReloadPage_Label": "Reload Page",
+  "Error_Label": "Error"
 }
