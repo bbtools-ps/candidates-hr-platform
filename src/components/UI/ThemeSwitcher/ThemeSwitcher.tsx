@@ -1,10 +1,13 @@
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState<"dark" | "light">("light");
   const isDarkTheme = theme === "dark";
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (
@@ -32,13 +35,10 @@ export default function ThemeSwitcher() {
     <div className="relative flex h-8 w-8">
       <label
         htmlFor="theme-switch"
-        className="absolute z-10 flex h-full w-full items-center justify-center rounded-full border-2 border-solid border-blue duration-100 hover:cursor-pointer hover:bg-slate-200 dark:bg-blue dark:hover:opacity-80"
+        className="absolute z-10 flex h-full w-full items-center justify-center rounded-full border-2 border-solid border-blue text-blue duration-100 hover:cursor-pointer hover:bg-slate-200 dark:bg-blue dark:text-white dark:hover:opacity-80"
       >
-        <FontAwesomeIcon
-          className="text-blue dark:text-white"
-          icon={isDarkTheme ? faSun : faMoon}
-        />
-        <span className="sr-only">Theme Switch</span>
+        <FontAwesomeIcon icon={isDarkTheme ? faSun : faMoon} />
+        <span className="sr-only">{t("ThemeSwitch_Label")}</span>
       </label>
       <input
         id="theme-switch"

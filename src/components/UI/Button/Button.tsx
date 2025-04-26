@@ -27,6 +27,7 @@ export default function Button({
   type = "button",
   variant = "default",
   icon,
+  className,
   ...rest
 }: ButtonProps) {
   const buttonIcon = {
@@ -43,7 +44,8 @@ export default function Button({
       aria-label={children?.toString()}
       className={cn(
         "flex items-center gap-2 rounded-full px-6 py-2 text-base font-bold uppercase duration-100 disabled:bg-gray",
-        buttonVariant[variant]
+        buttonVariant[variant],
+        className
       )}
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement> & MotionProps)}
     >

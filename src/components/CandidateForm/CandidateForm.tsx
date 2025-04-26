@@ -1,6 +1,7 @@
 import { CANDIDATE_SCHEMA } from "@/constants";
 import type { Candidate } from "@/models";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
 import { ZodOptional } from "zod";
@@ -21,6 +22,8 @@ export default function CandidateForm({
 }: CandidateFormProps) {
   const navigate = useNavigate();
   const dialog = useRef<DialogActions>(null);
+
+  const { t } = useTranslation();
 
   const form = useAppForm({
     defaultValues: {
@@ -63,7 +66,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextField
               id="candidate-name"
-              label="Name"
+              label={t("Name_Label")}
               isRequired={!(CANDIDATE_SCHEMA.shape.name instanceof ZodOptional)}
             />
           )}
@@ -72,7 +75,7 @@ export default function CandidateForm({
           {(field) => (
             <field.DateField
               id="candidate-date-of-birth"
-              label="Date of birth"
+              label={t("DateOfBirthForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.dateOfBirth instanceof ZodOptional)
               }
@@ -83,7 +86,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextField
               id="candidate-contact-number"
-              label="Contact number"
+              label={t("ContactNumberForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.contactNumber instanceof ZodOptional)
               }
@@ -94,7 +97,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextField
               id="candidate-email"
-              label="E-mail"
+              label={t("EmailForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.email instanceof ZodOptional)
               }
@@ -105,7 +108,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TagsField
               id="skills"
-              label="Skills"
+              label={t("SkillsForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.skills instanceof ZodOptional)
               }
@@ -116,7 +119,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextAreaField
               id="notes"
-              label="Notes"
+              label={t("NotesForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.notes instanceof ZodOptional)
               }
@@ -131,18 +134,18 @@ export default function CandidateForm({
             }}
             variant="outlined"
           >
-            Cancel
+            {t("Cancel_Label")}
           </Button>
           <form.AppForm>
             <form.SubmitButton
               childrenRenderer={(isSubmitting) =>
                 isSubmitting
                   ? candidate
-                    ? "Saving..."
-                    : "Adding..."
+                    ? t("Saving_Label")
+                    : t("Adding_Label")
                   : candidate
-                    ? "Save"
-                    : "Add"
+                    ? t("Save_Label")
+                    : t("Add_Label")
               }
             />
           </form.AppForm>
