@@ -1,40 +1,39 @@
-import TagsInput from "@/components/UI/TagsInput/TagsInput";
-import type { Tag } from "@/models";
+import InputField from "@/components/UI/InputField/InputField";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface TagsInputFieldProps {
+interface DateFieldProps {
   id?: string;
   label?: string;
   isRequired?: boolean;
+  placeholder?: string;
 }
 
-export default function TagsInputField({
+export default function DateField({
   id: idProp,
   label,
   isRequired,
-}: TagsInputFieldProps) {
+  placeholder,
+}: DateFieldProps) {
   const [id] = useState(idProp ?? uuid());
-  const field = useFieldContext<Tag[]>();
+  const field = useFieldContext<string>();
 
   return (
     <div>
-      <TagsInput
+      <InputField
+        type="date"
         id={id}
         label={label}
+        isRequired={isRequired}
+        placeholder={placeholder}
         hasError={
           field.state.meta.isTouched && field.state.meta.errors.length > 0
         }
-        tags={field.state.value}
-        isRequired={isRequired}
-        onRemove={field.removeValue}
-        onAdd={(value) => {
-          if (field.state.value.some((tag) => tag.value === value.value)) {
-            return;
-          }
-          field.pushValue(value);
+        value={field.state.value}
+        onChange={(e) => {
+          field.handleChange(e.target.value);
         }}
       />
       <FieldError meta={field.state.meta} />

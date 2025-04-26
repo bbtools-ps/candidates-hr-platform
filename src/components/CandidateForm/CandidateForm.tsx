@@ -61,33 +61,29 @@ export default function CandidateForm({
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
         <form.AppField name="name">
           {(field) => (
-            <field.InputField
+            <field.TextField
               id="candidate-name"
               label="Name"
               isRequired={!(CANDIDATE_SCHEMA.shape.name instanceof ZodOptional)}
-              data-cy="candidate-name"
             />
           )}
         </form.AppField>
         <form.AppField name="dateOfBirth">
           {(field) => (
-            <field.InputField
+            <field.DateField
               id="candidate-date-of-birth"
               label="Date of birth"
-              type="date"
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.dateOfBirth instanceof ZodOptional)
               }
-              data-cy="candidate-date-of-birth"
             />
           )}
         </form.AppField>
         <form.AppField name="contactNumber">
           {(field) => (
-            <field.InputField
+            <field.TextField
               id="candidate-contact-number"
               label="Contact number"
-              data-cy="candidate-contact-number"
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.contactNumber instanceof ZodOptional)
               }
@@ -96,10 +92,9 @@ export default function CandidateForm({
         </form.AppField>
         <form.AppField name="email">
           {(field) => (
-            <field.InputField
+            <field.TextField
               id="candidate-email"
               label="E-mail"
-              data-cy="candidate-email"
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.email instanceof ZodOptional)
               }
@@ -108,7 +103,7 @@ export default function CandidateForm({
         </form.AppField>
         <form.AppField name="skills">
           {(field) => (
-            <field.TagsInputField
+            <field.TagsField
               id="skills"
               label="Skills"
               isRequired={
@@ -122,7 +117,6 @@ export default function CandidateForm({
             <field.TextAreaField
               id="notes"
               label="Notes"
-              data-cy="candidate-notes"
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.notes instanceof ZodOptional)
               }
@@ -135,7 +129,6 @@ export default function CandidateForm({
             onClick={() => {
               navigate("..");
             }}
-            data-cy="cancel-btn"
             variant="outlined"
           >
             Cancel

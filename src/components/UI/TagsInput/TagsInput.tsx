@@ -9,8 +9,8 @@ import { v4 as uuid } from "uuid";
 
 interface TagsInputProps {
   id?: string;
-  placeholder?: string;
   label?: string;
+  placeholder?: string;
   tags: Tag[] | undefined;
   hasError?: boolean;
   isRequired?: boolean;

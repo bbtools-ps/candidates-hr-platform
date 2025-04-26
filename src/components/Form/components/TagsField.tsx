@@ -1,39 +1,40 @@
-import TextAreaFieldComponent from "@/components/UI/TextAreaField/TextAreaField";
+import TagsInput from "@/components/UI/TagsInput/TagsInput";
+import type { Tag } from "@/models";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface TextAreaFieldProps
-  extends React.ComponentPropsWithoutRef<"textarea"> {
+interface TagsFieldProps {
   id?: string;
   label?: string;
   isRequired?: boolean;
-  placeholder?: string;
 }
 
-export default function TextAreaField({
+export default function TagsField({
   id: idProp,
   label,
   isRequired,
-  placeholder,
-}: TextAreaFieldProps) {
+}: TagsFieldProps) {
   const [id] = useState(idProp ?? uuid());
-  const field = useFieldContext<string>();
+  const field = useFieldContext<Tag[]>();
 
   return (
     <div>
-      <TextAreaFieldComponent
+      <TagsInput
         id={id}
         label={label}
-        isRequired={isRequired}
-        placeholder={placeholder}
         hasError={
           field.state.meta.isTouched && field.state.meta.errors.length > 0
         }
-        value={field.state.value}
-        onChange={(e) => {
-          field.handleChange(e.target.value);
+        tags={field.state.value}
+        isRequired={isRequired}
+        onRemove={field.removeValue}
+        onAdd={(value) => {
+          if (field.state.value.some((tag) => tag.value === value.value)) {
+            return;
+          }
+          field.pushValue(value);
         }}
       />
       <FieldError meta={field.state.meta} />
