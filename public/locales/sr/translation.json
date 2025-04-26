@@ -26,5 +26,12 @@
   "Adding_Label": "Dodavanje...",
   "Saving_Label": "Čuvanje...",
   "Add_Label": "Dodaj",
-  "LanguageSwitch_Label": "Promeni jezik"
+  "LanguageSwitch_Label": "Promeni jezik",
+  "NameRequired_Label": "Ime je obavezno",
+  "DateOfBirthRequired_Label": "Datum rođenja je obavezan",
+  "InvalidEmail_Label": "Nevažeći E-mail",
+  "ContactNumberRequired_Label": "Broj telefona je obavezan",
+  "EmailRequired_Label": "E-mail je obavezan",
+  "SkillsRequired_Label": "Veštine su obavezne",
+  "SkillsFormPlaceholder_Label": "Unesite veštine odvojene zarezima"
 }

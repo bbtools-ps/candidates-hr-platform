@@ -9,12 +9,14 @@ interface TagsFieldProps {
   id?: string;
   label?: string;
   isRequired?: boolean;
+  placeholder?: string;
 }
 
 export default function TagsField({
   id: idProp,
   label,
   isRequired,
+  placeholder,
 }: TagsFieldProps) {
   const [id] = useState(idProp ?? uuid());
   const field = useFieldContext<Tag[]>();
@@ -24,6 +26,7 @@ export default function TagsField({
       <TagsInput
         id={id}
         label={label}
+        placeholder={placeholder}
         hasError={
           field.state.meta.isTouched && field.state.meta.errors.length > 0
         }

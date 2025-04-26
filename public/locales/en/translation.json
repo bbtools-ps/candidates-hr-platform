@@ -26,5 +26,12 @@
   "Adding_Label": "Adding...",
   "Saving_Label": "Saving...",
   "Add_Label": "Add",
-  "LanguageSwitch_Label": "Switch Language"
+  "LanguageSwitch_Label": "Switch Language",
+  "NameRequired_Label": "Name is required",
+  "DateOfBirthRequired_Label": "Date of Birth is required",
+  "ContactNumberRequired_Label": "Contact Number is required",
+  "EmailRequired_Label": "E-mail is required",
+  "InvalidEmail_Label": "Invalid E-mail",
+  "SkillsRequired_Label": "Skills are required",
+  "SkillsFormPlaceholder_Label": "Enter skills separated by commas"
 }

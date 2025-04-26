@@ -109,6 +109,7 @@ export default function CandidateForm({
             <field.TagsField
               id="skills"
               label={t("SkillsForm_Label")}
+              placeholder={t("SkillsFormPlaceholder_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.skills instanceof ZodOptional)
               }
