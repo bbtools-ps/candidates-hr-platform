@@ -13,10 +13,11 @@ const dummyCandidate = {
     { id: "2", value: "MySql" },
   ],
   id: "1",
+  notes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 };
 
 describe("<CandidateItem/>", () => {
-  it("should render the text fields for Date of birth, Contact number, E-mail, Skills, and the Edit and Remove buttons", () => {
+  it("should render the text fields for Date of birth, Contact number, E-mail, Skills, Notes, and the Edit and Remove buttons", () => {
     render(
       <CandidateItem
         candidate={dummyCandidate}
@@ -25,11 +26,13 @@ describe("<CandidateItem/>", () => {
       />
     );
 
-    expect(screen.getByText(/date of birth/i)).toBeInTheDocument();
-    expect(screen.getByText(/contact number/i)).toBeInTheDocument();
-    expect(screen.getByText(/e-mail/i)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /edit/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /remove/i })).toBeInTheDocument();
+    expect(screen.getByTestId("date-of-birth")).toBeInTheDocument();
+    expect(screen.getByTestId("contact-number")).toBeInTheDocument();
+    expect(screen.getByTestId("email")).toBeInTheDocument();
+    expect(screen.getByTestId("skills")).toBeInTheDocument();
+    expect(screen.getByTestId("notes")).toBeInTheDocument();
+    expect(screen.getByTestId("edit-button")).toBeInTheDocument();
+    expect(screen.getByTestId("remove-button")).toBeInTheDocument();
   });
 
   it("should render the values from the props into the appropriate text fields for Name, Date of birth, Contact number, E-mail, and Skills", () => {
@@ -61,7 +64,7 @@ describe("<CandidateItem/>", () => {
       />
     );
 
-    await userEvent.click(screen.getByRole("button", { name: /edit/i }));
+    await userEvent.click(screen.getByTestId("edit-button"));
 
     expect(testEdit).toHaveBeenCalled();
     expect(testRemove).not.toHaveBeenCalled();
@@ -78,7 +81,7 @@ describe("<CandidateItem/>", () => {
       />
     );
 
-    await userEvent.click(screen.getByRole("button", { name: /remove/i }));
+    await userEvent.click(screen.getByTestId("remove-button"));
 
     expect(testEdit).not.toHaveBeenCalled();
     expect(testRemove).toHaveBeenCalled();

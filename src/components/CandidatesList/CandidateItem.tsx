@@ -23,23 +23,23 @@ export default function CandidateItem({
     >
       <h2 className="mb-4">{candidate.name}</h2>
       <div className="mb-2 flex flex-1 flex-col gap-2">
-        <p>
+        <p data-testid="date-of-birth">
           <strong className="mr-2 dark:text-sky-400">
             {t("DateOfBirth_Label")}
           </strong>
           <span>{dayjs(candidate.dateOfBirth).format("MM/DD/YYYY")}</span>
         </p>
-        <p>
+        <p data-testid="contact-number">
           <strong className="mr-2 dark:text-sky-400">
             {t("ContactNumber_Label")}
           </strong>
           <span>{candidate.contactNumber}</span>
         </p>
-        <p>
+        <p data-testid="email">
           <strong className="mr-2 dark:text-sky-400">{t("Email_Label")}</strong>
           <span>{candidate.email}</span>
         </p>
-        <p className="flex flex-wrap gap-2">
+        <p data-testid="skills" className="flex flex-wrap gap-2">
           <strong className="dark:text-sky-400">{t("Skills_Label")}</strong>
           {candidate.skills?.map(({ value, id }) => (
             <span
@@ -51,7 +51,7 @@ export default function CandidateItem({
           ))}
         </p>
         {candidate.notes && (
-          <p>
+          <p data-testid="notes">
             <strong className="mr-2 dark:text-sky-400">
               {t("Notes_Label")}
             </strong>
@@ -66,6 +66,7 @@ export default function CandidateItem({
             onEditCandidate(candidate);
           }}
           data-cy="edit-candidate-btn"
+          data-testid="edit-button"
           variant="outlined"
         >
           {t("Edit_Label")}
@@ -78,6 +79,7 @@ export default function CandidateItem({
             onRemoveCandidate(candidate.id);
           }}
           data-cy="remove-candidate-btn"
+          data-testid="remove-button"
           variant="red"
         >
           {t("Delete_Label")}
