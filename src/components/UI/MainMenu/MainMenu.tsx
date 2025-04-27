@@ -73,6 +73,7 @@ export default function MainMenu() {
             <FontAwesomeIcon icon={faSearch} />
           </span>
           <SearchForm
+            key={searchTerm}
             label={t("Candidates_Label")}
             placeholder={t("SearchCandidatesPlaceholder_Label")}
             defaultValue={searchTerm}

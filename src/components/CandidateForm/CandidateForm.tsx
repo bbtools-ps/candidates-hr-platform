@@ -136,7 +136,7 @@ export default function CandidateForm({
           <Button
             type="button"
             onClick={() => {
-              navigate("..");
+              navigate(-1);
             }}
             variant="outlined"
           >

@@ -27,7 +27,7 @@ export function Component() {
         }
         onSubmit={(candidate) => {
           editCandidate(candidate);
-          navigate("..");
+          navigate(-1);
         }}
         candidate={location.state?.candidate}
       />

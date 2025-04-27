@@ -26,11 +26,11 @@ export default function SearchForm({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value.trim();
+    const newValue = e.target.value;
     setValue(newValue);
 
     debounce(() => {
-      onChange(newValue);
+      onChange(newValue.trim());
     });
   };
 
