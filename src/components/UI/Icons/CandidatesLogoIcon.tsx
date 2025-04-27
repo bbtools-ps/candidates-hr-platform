@@ -6,6 +6,7 @@ export default function CandidatesLogoIcon(
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 293.71 202.57"
       {...props}
+      aria-hidden="true"
     >
       <circle cx="146.72" cy="56.97" r="29.19" />
       <path
