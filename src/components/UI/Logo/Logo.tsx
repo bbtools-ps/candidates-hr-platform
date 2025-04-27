@@ -15,7 +15,7 @@ export default function Logo() {
     >
       <CandidatesLogoIcon className="mr-2 w-[3.125rem] duration-100 group-hover:fill-blue dark:fill-white dark:group-hover:fill-sky-400" />
       <div className="hidden flex-col duration-100 group-hover:text-blue dark:text-white dark:group-hover:text-sky-400 md:flex">
-        <h1 className="hidden text-3xl font-bold uppercase lg:block">
+        <h1 className="-z-10 text-3xl font-bold uppercase lg:z-0 lg:block">
           {t("Candidates_Label")}
         </h1>
         <p className="hidden text-base lg:block">
