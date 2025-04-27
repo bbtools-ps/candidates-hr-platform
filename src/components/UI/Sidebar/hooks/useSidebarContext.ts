@@ -4,6 +4,7 @@ import { createContext, useContext } from "react";
 interface SidebarContext {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  triggerRef?: React.MutableRefObject<HTMLElement | null>;
 }
 
 export const SidebarContext = createContext<SidebarContext | undefined>(

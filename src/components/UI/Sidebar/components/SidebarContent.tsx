@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSidebarContext } from "../hooks";
 
@@ -16,7 +16,28 @@ export default function SidebarContent({
   closeSidebarLabel = "Close sidebar",
   children,
 }: SidebarContentProps) {
-  const { isOpen, setIsOpen } = useSidebarContext();
+  const { isOpen, setIsOpen, triggerRef } = useSidebarContext();
+
+  const handleClose = useCallback(() => {
+    if (triggerRef?.current && triggerRef.current instanceof HTMLElement) {
+      triggerRef.current.focus();
+      setIsOpen(false);
+    }
+  }, [setIsOpen, triggerRef]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   return (
     <>
@@ -24,7 +45,7 @@ export default function SidebarContent({
         <>
           {isOpen && (
             <div
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="fixed inset-0 z-40 bg-black bg-opacity-50"
             />
           )}
@@ -37,7 +58,7 @@ export default function SidebarContent({
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-xl font-bold">{title}</h2>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={handleClose}
                 className="bg-red-500 h-8 w-8 rounded"
                 aria-label={closeSidebarLabel}
               >

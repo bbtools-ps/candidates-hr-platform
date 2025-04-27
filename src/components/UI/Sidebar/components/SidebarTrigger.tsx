@@ -7,9 +7,12 @@ interface SidebarTriggerProps {
 }
 
 export default function SidebarTrigger({ children }: SidebarTriggerProps) {
-  const { setIsOpen } = useSidebarContext();
+  const { setIsOpen, triggerRef } = useSidebarContext();
 
   const toggleIsOpen = () => {
+    if (triggerRef?.current !== undefined) {
+      triggerRef.current = document.activeElement as HTMLElement;
+    }
     setIsOpen((prevState) => !prevState);
   };
 
