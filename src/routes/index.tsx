@@ -41,7 +41,9 @@ export default function HomePage() {
         onRemoveCandidate={removeCandidate}
         onToggleFavorite={(candidateId) => {
           toggleFavorite(candidateId);
-          filterByFavorite(isFavorite);
+          if (isFavorite) {
+            filterByFavorite(true);
+          }
         }}
         isLoading={isLoading}
       />
