@@ -1,7 +1,7 @@
 import { DUMMY_CANDIDATES } from "@/data/data";
 import { useCandidatesStore } from "@/store/candidates";
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet } from "react-router";
 import CandidatesList from "../components/CandidatesList/CandidatesList";
 
 export default function HomePage() {
@@ -22,8 +22,6 @@ export default function HomePage() {
 
   const initialRender = useRef(true);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (!initialRender.current || !searchTerm || isLoading) return;
 
@@ -36,9 +34,6 @@ export default function HomePage() {
       <CandidatesList
         candidates={filteredCandidates}
         onRemoveCandidate={removeCandidate}
-        onEditCandidate={(candidate) =>
-          navigate("/edit-candidate", { state: candidate })
-        }
         isLoading={isLoading}
       />
       <Outlet />
