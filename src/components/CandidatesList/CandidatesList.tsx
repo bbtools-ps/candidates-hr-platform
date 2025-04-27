@@ -7,14 +7,12 @@ interface CandidatesListProps {
   candidates: Candidate[];
   isLoading: boolean;
   onRemoveCandidate: (candidateId: string) => void;
-  onEditCandidate: (candidate: Candidate) => void;
 }
 
 export default function CandidatesList({
   candidates,
   isLoading,
   onRemoveCandidate,
-  onEditCandidate,
 }: CandidatesListProps) {
   return (
     <section className="flex flex-1 flex-col">
@@ -42,7 +40,6 @@ export default function CandidatesList({
               <div className="flex w-full justify-center">
                 <CandidateItem
                   candidate={item}
-                  onEditCandidate={onEditCandidate}
                   onRemoveCandidate={onRemoveCandidate}
                 />
               </div>

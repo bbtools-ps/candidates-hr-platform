@@ -1,18 +1,19 @@
 import type { Candidate } from "@/models";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import Button from "../UI/Button/Button";
 
 interface CandidateItemProps {
   candidate: Candidate;
   onRemoveCandidate: (payload: string) => void;
-  onEditCandidate: (payload: Candidate) => void;
 }
 
 export default function CandidateItem({
   candidate,
   onRemoveCandidate,
-  onEditCandidate,
 }: CandidateItemProps) {
   const { t } = useTranslation();
 
@@ -60,17 +61,16 @@ export default function CandidateItem({
         )}
       </div>
       <div className="flex gap-4 self-end lg:flex-row">
-        <Button
-          icon="edit"
-          onClick={() => {
-            onEditCandidate(candidate);
-          }}
+        <Link
+          to="/edit-candidate"
+          state={{ candidate }}
+          className="link-button-outlined"
           data-cy="edit-candidate-btn"
           data-testid="edit-button"
-          variant="outlined"
         >
+          <FontAwesomeIcon icon={faEdit} />
           {t("Edit_Label")}
-        </Button>
+        </Link>
         <Button
           icon="remove"
           onClick={() => {

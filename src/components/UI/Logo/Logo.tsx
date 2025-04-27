@@ -9,7 +9,7 @@ export default function Logo() {
     <motion.a
       variants={{ hidden: { opacity: 0, y: -30 }, show: { opacity: 1, y: 0 } }}
       href="./"
-      className="group hidden md:flex"
+      className="group flex"
       data-cy="candidates-logo"
     >
       <CandidatesLogoIcon className="mr-2 w-[3.125rem] duration-100 group-hover:fill-blue dark:fill-white dark:group-hover:fill-sky-400" />

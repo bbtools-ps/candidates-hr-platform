@@ -13,6 +13,15 @@
   }
 }
 
+@layer components {
+  .link-button {
+    @apply flex h-10 items-center justify-center gap-2 rounded-full bg-blue px-6 font-medium uppercase text-white duration-100 hover:bg-blue/80;
+  }
+  .link-button-outlined {
+    @apply flex h-10 items-center justify-center gap-2 rounded-full border-2 border-solid border-blue bg-transparent px-6 font-medium uppercase text-blue duration-100 hover:bg-slate-200 dark:border-sky-400 dark:text-sky-400 dark:hover:bg-transparent dark:hover:opacity-80;
+  }
+}
+
 html {
   box-sizing: border-box;
 }

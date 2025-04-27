@@ -15,7 +15,7 @@ export function Component() {
   const location = useLocation();
 
   return (
-    <Protected condition={location.state && !!allCandidates.length}>
+    <Protected condition={location.state?.candidate && !!allCandidates.length}>
       <CandidateForm
         title={
           <>
@@ -29,7 +29,7 @@ export function Component() {
           editCandidate(candidate);
           navigate("..");
         }}
-        candidate={location.state}
+        candidate={location.state?.candidate}
       />
     </Protected>
   );

@@ -1,12 +1,10 @@
 import Footer from "@/components/UI/Footer/Footer";
 import MainMenu from "@/components/UI/MainMenu/MainMenu";
 import { useCandidatesStore } from "@/store/candidates";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet } from "react-router";
 
 export default function RootLayout() {
   const { searchTerm, searchCandidate } = useCandidatesStore();
-
-  const navigate = useNavigate();
 
   return (
     <>
@@ -15,9 +13,6 @@ export default function RootLayout() {
           searchInput={searchTerm}
           onChange={(e) => {
             searchCandidate(e.target.value);
-          }}
-          onAddNewCandidate={() => {
-            navigate("/new-candidate");
           }}
         />
       </header>
