@@ -7,12 +7,10 @@ import CandidatesList from "../components/CandidatesList/CandidatesList";
 export default function HomePage() {
   const {
     searchCandidate,
-    searchTerm,
     filteredCandidates,
     removeCandidate,
     setCandidates,
     toggleFavorite,
-    filterByFavorite,
   } = useCandidatesStore();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +24,7 @@ export default function HomePage() {
 
   const [searchParams] = useSearchParams();
   const isFavorite = searchParams.get("isFavorite") === "true";
+  const searchTerm = searchParams.get("q") || "";
 
   useEffect(() => {
     if (!initialRender.current || !searchTerm || isLoading) return;
@@ -42,7 +41,7 @@ export default function HomePage() {
         onToggleFavorite={(candidateId) => {
           toggleFavorite(candidateId);
           if (isFavorite) {
-            filterByFavorite(true);
+            searchCandidate(searchTerm, true);
           }
         }}
         isLoading={isLoading}

@@ -5,7 +5,6 @@ import { devtools } from "zustand/middleware";
 type State = {
   allCandidates: Candidate[];
   filteredCandidates: Candidate[];
-  searchTerm: string;
 };
 
 type Actions = {
@@ -15,7 +14,6 @@ type Actions = {
   removeCandidate: (candidateId: string) => void;
   searchCandidate: (searchTerm: string, isFavorite: boolean) => void;
   toggleFavorite: (candidateId: string) => void;
-  filterByFavorite: (isFavorite: boolean) => void;
   reset: () => void;
 };
 
@@ -24,7 +22,6 @@ export const useCandidatesStore = create<State & Actions>()(
     (set) => ({
       allCandidates: [],
       filteredCandidates: [],
-      searchTerm: "",
       setCandidates: (candidates) =>
         set({
           allCandidates: candidates,
@@ -65,7 +62,7 @@ export const useCandidatesStore = create<State & Actions>()(
             const filteredCandidates = isFavorite
               ? state.allCandidates.filter((candidate) => candidate.isFavorite)
               : state.allCandidates;
-            return { filteredCandidates, searchTerm };
+            return { filteredCandidates };
           }
 
           const searchTerms = [
@@ -89,7 +86,7 @@ export const useCandidatesStore = create<State & Actions>()(
               (!isFavorite || candidate.isFavorite)
           );
 
-          return { filteredCandidates, searchTerm };
+          return { filteredCandidates };
         }),
       toggleFavorite: (candidateId) =>
         set((state) => {
@@ -106,21 +103,11 @@ export const useCandidatesStore = create<State & Actions>()(
             }),
           };
         }),
-      filterByFavorite: (isFavorite) =>
-        set((state) => {
-          const filteredCandidates = isFavorite
-            ? state.filteredCandidates.filter(
-                (candidate) => candidate.isFavorite
-              )
-            : state.allCandidates;
-          return { filteredCandidates };
-        }),
       reset: () =>
         set((state) => {
           return {
             allCandidates: [...state.allCandidates],
             filteredCandidates: [...state.allCandidates],
-            searchTerm: "",
           };
         }),
     }),

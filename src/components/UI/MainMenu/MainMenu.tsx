@@ -1,4 +1,5 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
+import SearchForm from "@/components/SearchForm/SearchForm";
 import { useCandidatesStore } from "@/store/candidates";
 import {
   faGear,
@@ -16,24 +17,35 @@ import Sidebar from "../Sidebar/Sidebar";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import ToggleFavoriteButton from "../ToggleFavoriteButton/ToggleFavoriteButton";
 
-interface MainMenuProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchInput: string;
-}
-
-export default function MainMenu({ onChange, searchInput }: MainMenuProps) {
+export default function MainMenu() {
   const { t } = useTranslation();
-  const { filterByFavorite } = useCandidatesStore();
+  const { searchCandidate } = useCandidatesStore();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const isFavorite = searchParams.get("isFavorite") === "true";
+  const searchTerm = searchParams.get("q") || "";
 
   useEffect(() => {
-    filterByFavorite(isFavorite);
-  }, [isFavorite, filterByFavorite]);
+    searchCandidate(searchTerm, isFavorite);
+  }, [searchTerm, isFavorite, searchCandidate]);
 
   const handleToggleFavorite = () => {
-    setSearchParams({ isFavorite: String(!isFavorite) });
+    if (searchTerm) {
+      setSearchParams({ q: searchTerm, isFavorite: String(!isFavorite) });
+    } else {
+      setSearchParams({ isFavorite: String(!isFavorite) });
+    }
+  };
+
+  const updateSearchParams = (newSearchTerm: string) => {
+    if (newSearchTerm) {
+      setSearchParams({
+        q: newSearchTerm,
+        isFavorite: String(isFavorite),
+      });
+    } else {
+      setSearchParams({ isFavorite: String(isFavorite) });
+    }
   };
 
   return (
@@ -60,21 +72,12 @@ export default function MainMenu({ onChange, searchInput }: MainMenuProps) {
           <span className="absolute left-4 flex h-full items-center text-gray">
             <FontAwesomeIcon icon={faSearch} />
           </span>
-          <form
-            role="search"
-            aria-label={t("Candidates_Label")}
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              aria-label={t("Candidates_Label")}
-              id="search-candidates"
-              className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg duration-200 hover:border-blue focus:w-full dark:border-slate-600 dark:text-white dark:hover:border-sky-400 xl:w-1/2"
-              placeholder={t("SearchCandidatesPlaceholder_Label")}
-              data-cy="search-candidates"
-              onChange={onChange}
-              value={searchInput}
-            />
-          </form>
+          <SearchForm
+            label={t("Candidates_Label")}
+            placeholder={t("SearchCandidatesPlaceholder_Label")}
+            defaultValue={searchTerm}
+            onChange={updateSearchParams}
+          />
         </div>
         <Sidebar>
           <div className="flex w-full items-center justify-between gap-4 lg:w-auto">
