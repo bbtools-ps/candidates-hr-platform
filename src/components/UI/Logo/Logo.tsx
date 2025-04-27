@@ -11,6 +11,7 @@ export default function Logo() {
       href="./"
       className="group flex"
       data-cy="candidates-logo"
+      aria-label={t("Candidates_Label")}
     >
       <CandidatesLogoIcon className="mr-2 w-[3.125rem] duration-100 group-hover:fill-blue dark:fill-white dark:group-hover:fill-sky-400" />
       <div className="hidden flex-col duration-100 group-hover:text-blue dark:text-white dark:group-hover:text-sky-400 md:flex">

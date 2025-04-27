@@ -33,20 +33,14 @@ export default function ThemeSwitcher() {
 
   return (
     <div className="relative flex h-8 w-8">
-      <label
-        htmlFor="theme-switch"
-        className="absolute z-10 flex h-full w-full items-center justify-center rounded-full border-2 border-solid border-blue text-blue duration-100 hover:cursor-pointer hover:bg-slate-200 dark:bg-blue dark:text-white dark:hover:opacity-80"
+      <button
+        aria-label={t("ThemeSwitch_Label")}
+        className="absolute z-10 h-full w-full rounded-full border-2 border-solid border-blue text-blue duration-100 hover:bg-slate-200 dark:bg-blue dark:text-white dark:hover:opacity-80"
+        onClick={handleChange}
+        aria-pressed={!isDarkTheme}
       >
         <FontAwesomeIcon icon={isDarkTheme ? faSun : faMoon} />
-        <span className="sr-only">{t("ThemeSwitch_Label")}</span>
-      </label>
-      <input
-        id="theme-switch"
-        className="opacity-0"
-        type="checkbox"
-        checked={isDarkTheme}
-        onChange={handleChange}
-      />
+      </button>
     </div>
   );
 }

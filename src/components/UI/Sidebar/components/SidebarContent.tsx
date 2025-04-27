@@ -1,9 +1,10 @@
 import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useCallback, useEffect } from "react";
+import { Fragment, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useSidebarContext } from "../hooks";
+import { useFocusTrap } from "../hooks/useFocusTrap";
 
 interface SidebarContentProps {
   title?: string;
@@ -26,18 +27,28 @@ export default function SidebarContent({
   }, [setIsOpen, triggerRef]);
 
   useEffect(() => {
+    const modal = modalRef.current;
+
+    if (!modal || !isOpen) return;
+
+    modal.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    modal.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      modal.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, [isOpen, handleClose]);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap({ ref: modalRef });
 
   return (
     <>
@@ -50,8 +61,10 @@ export default function SidebarContent({
             />
           )}
           <aside
+            ref={modalRef}
+            tabIndex={-1}
             className={cn(
-              "fixed right-0 top-0 z-50 h-full w-full max-w-sm transform bg-white p-4 text-black shadow-lg transition-transform duration-300 ease-in-out dark:bg-slate-900 dark:text-white",
+              "fixed right-0 top-0 z-50 h-full w-full max-w-sm transform bg-white p-4 text-black shadow-lg outline-none transition-transform duration-300 ease-in-out dark:bg-slate-900 dark:text-white",
               isOpen ? "translate-x-0" : "translate-x-full"
             )}
           >
