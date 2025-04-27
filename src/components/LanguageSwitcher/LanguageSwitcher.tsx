@@ -27,6 +27,7 @@ export default function LanguageSwitcher() {
         id="language-switcher"
         className="bg-transparent p-2 dark:text-white"
         defaultValue={i18next.resolvedLanguage}
+        key={i18next.resolvedLanguage}
         onChange={handleChange}
       >
         {LANGUAGES.map(({ code, name }) => (
