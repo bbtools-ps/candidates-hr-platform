@@ -1,4 +1,3 @@
-import { convertToKebabCase } from "@/utils";
 import type { ComponentPropsWithoutRef } from "react";
 
 interface CheckboxProps
@@ -7,19 +6,28 @@ interface CheckboxProps
     "type" | "value" | "defaultValue"
   > {
   label?: string;
+  isRequired?: boolean;
 }
 
 export default function Checkbox({
   label,
-  id: idProp,
+  id,
+  isRequired,
   ...rest
 }: CheckboxProps) {
-  const id = idProp || convertToKebabCase(label);
-
   return (
     <div className="flex gap-3">
       <input type="checkbox" id={id} {...rest} />
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && (
+        <label htmlFor={id}>
+          {label}
+          {isRequired && (
+            <span aria-hidden="true" className="ml-1">
+              *
+            </span>
+          )}
+        </label>
+      )}
     </div>
   );
 }

@@ -39,5 +39,7 @@
   "GoBackHome_Label": "Go Back Home",
   "ReloadPage_Label": "Reload Page",
   "Error_Label": "Error",
-  "RemoveSkill_Label": "Remove skill"
+  "RemoveSkill_Label": "Remove skill",
+  "AddToFavorites_Label": "Add to favorites",
+  "ShowFavorites_Label": "Show favorites"
 }

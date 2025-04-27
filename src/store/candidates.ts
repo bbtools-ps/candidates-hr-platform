@@ -13,7 +13,9 @@ type Actions = {
   addCandidate: (candidate: Candidate) => void;
   editCandidate: (candidate: Candidate) => void;
   removeCandidate: (candidateId: string) => void;
-  searchCandidate: (searchTerm: string) => void;
+  searchCandidate: (searchTerm: string, isFavorite: boolean) => void;
+  toggleFavorite: (candidateId: string) => void;
+  filterByFavorite: (isFavorite: boolean) => void;
   reset: () => void;
 };
 
@@ -25,80 +27,45 @@ export const useCandidatesStore = create<State & Actions>()(
       searchTerm: "",
       setCandidates: (candidates) =>
         set({
-          allCandidates: candidates.map((item) => ({
-            ...item,
-            skills: item.skills?.map((item) => ({ ...item })),
-          })),
-          filteredCandidates: candidates.map((item) => ({
-            ...item,
-            skills: item.skills?.map((item) => ({ ...item })),
-          })),
+          allCandidates: candidates,
+          filteredCandidates: candidates,
         }),
       addCandidate: (candidate) =>
         set((state) => {
           return {
-            allCandidates: [
-              candidate,
-              ...state.allCandidates.map((item) => ({
-                ...item,
-                skills: item.skills?.map((item) => ({ ...item })),
-              })),
-            ],
-            filteredCandidates: [
-              candidate,
-              ...state.filteredCandidates.map((item) => ({
-                ...item,
-                skills: item.skills?.map((item) => ({ ...item })),
-              })),
-            ],
+            allCandidates: [candidate, ...state.allCandidates],
+            filteredCandidates: [candidate, ...state.filteredCandidates],
           };
         }),
       editCandidate: (candidate) =>
         set((state) => {
-          const editedCandidateAll = state.allCandidates.map((item) => {
-            return item.id === candidate.id
-              ? {
-                  ...candidate,
-                  skills: candidate.skills?.map((item) => ({ ...item })),
-                }
-              : { ...item, skills: item.skills?.map((item) => ({ ...item })) };
-          });
-          const editedCandidateFilter = state.filteredCandidates.map((item) => {
-            return item.id === candidate.id
-              ? {
-                  ...candidate,
-                  skills: candidate.skills?.map((item) => ({ ...item })),
-                }
-              : { ...item, item: item.skills?.map((item) => ({ ...item })) };
-          });
-
           return {
-            allCandidates: editedCandidateAll,
-            filteredCandidates: editedCandidateFilter,
+            allCandidates: state.allCandidates.map((item) => {
+              return item.id === candidate.id ? candidate : item;
+            }),
+            filteredCandidates: state.filteredCandidates.map((item) => {
+              return item.id === candidate.id ? candidate : item;
+            }),
           };
         }),
       removeCandidate: (candidateId) =>
         set((state) => {
-          const removedCandidateAll = state.allCandidates.filter(
-            (candidate) => {
-              return candidate.id !== candidateId;
-            }
-          );
-          const removedCandidateFilter = state.filteredCandidates.filter(
-            (candidate) => {
-              return candidate.id !== candidateId;
-            }
-          );
-
           return {
-            allCandidates: removedCandidateAll,
-            filteredCandidates: removedCandidateFilter,
+            allCandidates: state.allCandidates.filter((candidate) => {
+              return candidate.id !== candidateId;
+            }),
+            filteredCandidates: state.filteredCandidates.filter((candidate) => {
+              return candidate.id !== candidateId;
+            }),
           };
         }),
-      searchCandidate: (searchTerm) =>
+      searchCandidate: (searchTerm, isFavorite) =>
         set((state) => {
           if (!searchTerm.trim().length) {
-            return { filteredCandidates: state.allCandidates, searchTerm };
+            const filteredCandidates = isFavorite
+              ? state.allCandidates.filter((candidate) => candidate.isFavorite)
+              : state.allCandidates;
+            return { filteredCandidates, searchTerm };
           }
 
           const searchTerms = [
@@ -118,22 +85,41 @@ export const useCandidatesStore = create<State & Actions>()(
                   term.test(candidate.name ?? "") ||
                   candidate.skills?.find((skill) => term.test(skill.value))
                 );
-              }) && candidate
+              }) &&
+              (!isFavorite || candidate.isFavorite)
           );
 
           return { filteredCandidates, searchTerm };
         }),
+      toggleFavorite: (candidateId) =>
+        set((state) => {
+          return {
+            allCandidates: state.allCandidates.map((candidate) => {
+              return candidate.id === candidateId
+                ? { ...candidate, isFavorite: !candidate.isFavorite }
+                : candidate;
+            }),
+            filteredCandidates: state.filteredCandidates.map((candidate) => {
+              return candidate.id === candidateId
+                ? { ...candidate, isFavorite: !candidate.isFavorite }
+                : candidate;
+            }),
+          };
+        }),
+      filterByFavorite: (isFavorite) =>
+        set((state) => {
+          const filteredCandidates = isFavorite
+            ? state.filteredCandidates.filter(
+                (candidate) => candidate.isFavorite
+              )
+            : state.allCandidates;
+          return { filteredCandidates };
+        }),
       reset: () =>
         set((state) => {
           return {
-            allCandidates: state.allCandidates.map((item) => ({
-              ...item,
-              skills: item.skills?.map((item) => ({ ...item })),
-            })),
-            filteredCandidates: state.allCandidates.map((item) => ({
-              ...item,
-              skills: item.skills?.map((item) => ({ ...item })),
-            })),
+            allCandidates: [...state.allCandidates],
+            filteredCandidates: [...state.allCandidates],
             searchTerm: "",
           };
         }),

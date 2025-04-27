@@ -1,4 +1,5 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
+import { useCandidatesStore } from "@/store/candidates";
 import {
   faGear,
   faSearch,
@@ -6,9 +7,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import Button from "../Button/Button";
+import FavoriteToggleButton from "../FavoriteToggleButton/FavoriteToggleButton";
 import Logo from "../Logo/Logo";
 import Sidebar from "../Sidebar/Sidebar";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
@@ -20,6 +23,18 @@ interface MainMenuProps {
 
 export default function MainMenu({ onChange, searchInput }: MainMenuProps) {
   const { t } = useTranslation();
+  const { filterByFavorite } = useCandidatesStore();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isFavorite = searchParams.get("isFavorite") === "true";
+
+  useEffect(() => {
+    filterByFavorite(isFavorite);
+  }, [isFavorite, filterByFavorite]);
+
+  const handleToggleFavorite = () => {
+    setSearchParams({ isFavorite: String(!isFavorite) });
+  };
 
   return (
     <motion.div
@@ -45,7 +60,11 @@ export default function MainMenu({ onChange, searchInput }: MainMenuProps) {
           <span className="absolute left-4 flex h-full items-center text-gray">
             <FontAwesomeIcon icon={faSearch} />
           </span>
-          <form role="search" aria-label={t("Candidates_Label")}>
+          <form
+            role="search"
+            aria-label={t("Candidates_Label")}
+            onSubmit={(e) => e.preventDefault()}
+          >
             <input
               aria-label={t("Candidates_Label")}
               id="search-candidates"
@@ -63,6 +82,12 @@ export default function MainMenu({ onChange, searchInput }: MainMenuProps) {
               <Logo />
             </div>
             <div className="flex items-center gap-4">
+              <FavoriteToggleButton
+                className="h-7 w-7 p-0"
+                label={t("ShowFavorites_Label")}
+                isFavorite={isFavorite}
+                onToggleFavorite={handleToggleFavorite}
+              />
               <Link
                 to="/new-candidate"
                 data-cy="add-candidate-btn"

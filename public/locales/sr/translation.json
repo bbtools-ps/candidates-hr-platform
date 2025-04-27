@@ -39,5 +39,7 @@
   "GoBackHome_Label": "Vrati se na početnu stranu",
   "ReloadPage_Label": "Osveži stranicu",
   "Error_Label": "Greška",
-  "RemoveSkill_Label": "Ukloni veštinu"
+  "RemoveSkill_Label": "Ukloni veštinu",
+  "AddToFavorites_Label": "Dodaj u omiljene",
+  "ShowFavorites_Label": "Prikaži omiljene"
 }

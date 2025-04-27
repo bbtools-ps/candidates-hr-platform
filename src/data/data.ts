@@ -11,6 +11,7 @@ export const DUMMY_CANDIDATES = [
       { id: uuid(), value: "MySql" },
     ],
     id: "1",
+    isFavorite: false,
   },
   {
     name: "Ruby Elliott",
@@ -22,6 +23,7 @@ export const DUMMY_CANDIDATES = [
       { id: uuid(), value: "Adobe XD" },
     ],
     id: "2",
+    isFavorite: false,
   },
   {
     name: "Raphael Ward",
@@ -30,6 +32,7 @@ export const DUMMY_CANDIDATES = [
     email: "raphael.ward@gmail.com",
     skills: [{ id: uuid(), value: "Adobe Illustrator" }],
     id: "3",
+    isFavorite: false,
   },
   {
     name: "Robbie Waters",
@@ -41,6 +44,7 @@ export const DUMMY_CANDIDATES = [
       { id: uuid(), value: "CSS" },
     ],
     id: "4",
+    isFavorite: false,
   },
   {
     name: "Liam Kirk",
@@ -49,6 +53,7 @@ export const DUMMY_CANDIDATES = [
     email: "liam.kirk@gmail.com",
     skills: [{ id: uuid(), value: "JavaScript" }],
     id: "5",
+    isFavorite: false,
   },
   {
     name: "Rob Frank",
@@ -61,5 +66,6 @@ export const DUMMY_CANDIDATES = [
       { id: uuid(), value: "JavaScript" },
     ],
     id: "6",
+    isFavorite: false,
   },
 ];

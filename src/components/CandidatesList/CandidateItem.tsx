@@ -5,14 +5,17 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import Button from "../UI/Button/Button";
+import FavoriteToggleButton from "../UI/FavoriteToggleButton/FavoriteToggleButton";
 
 interface CandidateItemProps {
   candidate: Candidate;
-  onRemoveCandidate: (payload: string) => void;
+  onToggleFavorite: (candidateId: string) => void;
+  onRemoveCandidate: (candidateId: string) => void;
 }
 
 export default function CandidateItem({
   candidate,
+  onToggleFavorite,
   onRemoveCandidate,
 }: CandidateItemProps) {
   const { t } = useTranslation();
@@ -22,7 +25,14 @@ export default function CandidateItem({
       className="m-2 flex w-full flex-col rounded bg-white p-4 text-black shadow-sm dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-900 dark:text-white md:w-1/2 xl:w-1/3"
       data-cy={candidate.name}
     >
-      <h2 className="mb-4">{candidate.name}</h2>
+      <div className="mb-4 flex items-center">
+        <h2 className="flex-1 text-center">{candidate.name}</h2>
+        <FavoriteToggleButton
+          isFavorite={candidate.isFavorite}
+          onToggleFavorite={onToggleFavorite.bind(null, candidate.id)}
+          label={t("AddToFavorites_Label")}
+        />
+      </div>
       <div className="mb-2 flex flex-1 flex-col gap-2">
         <p data-testid="date-of-birth">
           <strong className="mr-2 dark:text-sky-400">
@@ -73,11 +83,7 @@ export default function CandidateItem({
         </Link>
         <Button
           icon="remove"
-          onClick={() => {
-            if (!candidate.id) return;
-
-            onRemoveCandidate(candidate.id);
-          }}
+          onClick={onRemoveCandidate.bind(null, candidate.id)}
           data-cy="remove-candidate-btn"
           data-testid="remove-button"
           variant="red"

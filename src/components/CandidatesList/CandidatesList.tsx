@@ -6,12 +6,14 @@ import CandidateItem from "./CandidateItem";
 interface CandidatesListProps {
   candidates: Candidate[];
   isLoading: boolean;
+  onToggleFavorite: (candidateId: string) => void;
   onRemoveCandidate: (candidateId: string) => void;
 }
 
 export default function CandidatesList({
   candidates,
   isLoading,
+  onToggleFavorite,
   onRemoveCandidate,
 }: CandidatesListProps) {
   return (
@@ -41,6 +43,7 @@ export default function CandidatesList({
                 <CandidateItem
                   candidate={item}
                   onRemoveCandidate={onRemoveCandidate}
+                  onToggleFavorite={onToggleFavorite}
                 />
               </div>
             )}

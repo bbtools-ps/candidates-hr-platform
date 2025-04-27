@@ -1,7 +1,7 @@
 import { DUMMY_CANDIDATES } from "@/data/data";
 import { useCandidatesStore } from "@/store/candidates";
 import { useEffect, useRef, useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useSearchParams } from "react-router";
 import CandidatesList from "../components/CandidatesList/CandidatesList";
 
 export default function HomePage() {
@@ -11,6 +11,8 @@ export default function HomePage() {
     filteredCandidates,
     removeCandidate,
     setCandidates,
+    toggleFavorite,
+    filterByFavorite,
   } = useCandidatesStore();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -22,18 +24,25 @@ export default function HomePage() {
 
   const initialRender = useRef(true);
 
+  const [searchParams] = useSearchParams();
+  const isFavorite = searchParams.get("isFavorite") === "true";
+
   useEffect(() => {
     if (!initialRender.current || !searchTerm || isLoading) return;
 
-    searchCandidate(searchTerm);
+    searchCandidate(searchTerm, isFavorite);
     initialRender.current = false;
-  }, [searchCandidate, searchTerm, isLoading]);
+  }, [searchCandidate, searchTerm, isLoading, isFavorite]);
 
   return (
     <>
       <CandidatesList
         candidates={filteredCandidates}
         onRemoveCandidate={removeCandidate}
+        onToggleFavorite={(candidateId) => {
+          toggleFavorite(candidateId);
+          filterByFavorite(isFavorite);
+        }}
         isLoading={isLoading}
       />
       <Outlet />
