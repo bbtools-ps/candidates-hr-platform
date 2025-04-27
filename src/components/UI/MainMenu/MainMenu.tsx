@@ -11,10 +11,10 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router";
 import Button from "../Button/Button";
-import FavoriteToggleButton from "../FavoriteToggleButton/FavoriteToggleButton";
 import Logo from "../Logo/Logo";
 import Sidebar from "../Sidebar/Sidebar";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import ToggleFavoriteButton from "../ToggleFavoriteButton/ToggleFavoriteButton";
 
 interface MainMenuProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -82,7 +82,7 @@ export default function MainMenu({ onChange, searchInput }: MainMenuProps) {
               <Logo />
             </div>
             <div className="flex items-center gap-4">
-              <FavoriteToggleButton
+              <ToggleFavoriteButton
                 className="h-7 w-7 p-0"
                 label={t("ShowFavorites_Label")}
                 isFavorite={isFavorite}
