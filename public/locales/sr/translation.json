@@ -38,5 +38,6 @@
   "NewCandidate_Label": "Novi kandidat",
   "GoBackHome_Label": "Vrati se na početnu stranu",
   "ReloadPage_Label": "Osveži stranicu",
-  "Error_Label": "Greška"
+  "Error_Label": "Greška",
+  "RemoveSkill_Label": "Ukloni veštinu"
 }

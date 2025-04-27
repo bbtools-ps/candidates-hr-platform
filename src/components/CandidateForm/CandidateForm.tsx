@@ -110,6 +110,7 @@ export default function CandidateForm({
               id="skills"
               label={t("SkillsForm_Label")}
               placeholder={t("SkillsFormPlaceholder_Label")}
+              removeTagLabel={t("RemoveSkill_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.skills instanceof ZodOptional)
               }

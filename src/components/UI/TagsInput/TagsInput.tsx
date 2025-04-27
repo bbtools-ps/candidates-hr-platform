@@ -14,6 +14,7 @@ interface TagsInputProps {
   tags: Tag[] | undefined;
   hasError?: boolean;
   isRequired?: boolean;
+  removeTagLabel?: string;
   onAdd: (value: Tag) => void;
   onRemove: (index: number) => void;
 }
@@ -25,6 +26,7 @@ export default function TagsInput({
   placeholder = "Press comma to add tags",
   hasError,
   isRequired,
+  removeTagLabel,
   onAdd,
   onRemove,
 }: TagsInputProps) {
@@ -110,6 +112,7 @@ export default function TagsInput({
                 type="button"
                 onClick={removeTag.bind(null, id)}
                 className="px-2"
+                aria-label={removeTagLabel ?? "Remove tag"}
               >
                 <FontAwesomeIcon icon={faClose} />
               </button>

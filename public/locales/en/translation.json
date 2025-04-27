@@ -38,5 +38,6 @@
   "NewCandidate_Label": "New Candidate",
   "GoBackHome_Label": "Go Back Home",
   "ReloadPage_Label": "Reload Page",
-  "Error_Label": "Error"
+  "Error_Label": "Error",
+  "RemoveSkill_Label": "Remove skill"
 }
