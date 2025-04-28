@@ -94,9 +94,10 @@ export default function MainMenu() {
                 to="/new-candidate"
                 data-cy="add-candidate-btn"
                 className="link-button"
+                aria-label={t("AddCandidate_Label")}
               >
                 <FontAwesomeIcon icon={faUserPlus} className="lg:mr-2" />
-                <span className="hidden sm:inline-block">
+                <span className="hidden sm:inline-block" aria-hidden="true">
                   {t("AddCandidate_Label")}
                 </span>
               </Link>
