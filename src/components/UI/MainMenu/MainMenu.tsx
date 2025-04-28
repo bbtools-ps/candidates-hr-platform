@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router";
 import Button from "../Button/Button";
@@ -48,6 +48,14 @@ export default function MainMenu() {
     }
   };
 
+  const [isLogoClicked, setIsLogoClicked] = useState(false);
+
+  const handleLogoClick = () => {
+    searchParams.delete("q");
+    setSearchParams(searchParams);
+    setIsLogoClicked((prev) => !prev);
+  };
+
   return (
     <motion.div
       variants={{
@@ -59,7 +67,7 @@ export default function MainMenu() {
       className="flex w-full items-center justify-center gap-4 bg-white px-4 py-4 dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900 lg:gap-6 lg:px-6"
     >
       <div className="hidden lg:block">
-        <Logo />
+        <Logo onClick={handleLogoClick} />
       </div>
       <motion.div
         variants={{
@@ -73,7 +81,7 @@ export default function MainMenu() {
             <FontAwesomeIcon icon={faSearch} />
           </span>
           <SearchForm
-            key={searchTerm}
+            key={isLogoClicked ? "logo-clicked" : "logo-not-clicked"}
             label={t("Candidates_Label")}
             placeholder={t("SearchCandidatesPlaceholder_Label")}
             defaultValue={searchTerm}
@@ -83,7 +91,7 @@ export default function MainMenu() {
         <Sidebar>
           <div className="flex w-full items-center justify-between gap-4 lg:w-auto">
             <div className="block lg:hidden">
-              <Logo />
+              <Logo onClick={handleLogoClick} />
             </div>
             <div className="flex items-center gap-4">
               <ToggleFavoriteButton

@@ -56,7 +56,7 @@ export default function SearchForm({
         {value.length > 0 && (
           <button
             type="button"
-            className="absolute right-4 top-0 h-6 w-6 translate-y-[50%] rounded-full bg-blue text-black dark:text-white"
+            className="absolute right-4 top-0 h-6 w-6 translate-y-[50%] rounded-full bg-blue text-white"
             onClick={handleClear}
             aria-label="Clear search input"
           >
