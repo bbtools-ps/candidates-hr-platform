@@ -38,8 +38,9 @@ export default function CandidateForm({
     },
     validators: { onSubmit: CANDIDATE_SCHEMA },
     onSubmit: ({ value }) => {
+      const result = CANDIDATE_SCHEMA.parse(value);
       onSubmitProp({
-        ...value,
+        ...result,
         id: candidate?.id || uuid(),
         isFavorite: candidate?.isFavorite || false,
       });
