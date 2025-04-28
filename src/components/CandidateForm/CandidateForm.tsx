@@ -99,7 +99,7 @@ export default function CandidateForm({
         </form.AppField>
         <form.AppField name="email">
           {(field) => (
-            <field.TextField
+            <field.EmailField
               id="candidate-email"
               label={t("EmailForm_Label")}
               isRequired={
