@@ -22,8 +22,8 @@ export default function SearchForm({
   debounceTimeout = DEBOUNCE_TIMEOUT,
   defaultValue,
   clearButtonLabel = "Clear search input",
-  className,
   onChange,
+  className,
 }: SearchFormProps) {
   const debounce = useDebounce(debounceTimeout);
 
