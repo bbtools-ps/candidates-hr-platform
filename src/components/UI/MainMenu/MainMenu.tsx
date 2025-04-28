@@ -23,7 +23,8 @@ export default function MainMenu() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const isFavorite = searchParams.get("isFavorite") === "true";
-  const searchTerm = searchParams.get("q") || "";
+  const [defaultSearchTerm, setDefaultSearchTerm] = useState<string>();
+  const searchTerm = defaultSearchTerm ?? (searchParams.get("q") || "");
 
   useEffect(() => {
     searchCandidate(searchTerm, isFavorite);
@@ -51,8 +52,7 @@ export default function MainMenu() {
   const [isLogoClicked, setIsLogoClicked] = useState(false);
 
   const handleLogoClick = () => {
-    searchParams.delete("q");
-    setSearchParams(searchParams);
+    setDefaultSearchTerm("");
     setIsLogoClicked((prev) => !prev);
   };
 
