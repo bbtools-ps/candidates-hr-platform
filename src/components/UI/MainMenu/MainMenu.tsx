@@ -1,6 +1,5 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
 import SearchForm from "@/components/SearchForm/SearchForm";
-import { useCandidatesStore } from "@/store/candidates";
 import {
   faGear,
   faSearch,
@@ -8,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router";
 import Button from "../Button/Button";
@@ -19,34 +18,24 @@ import ToggleFavoriteButton from "../ToggleFavoriteButton/ToggleFavoriteButton";
 
 export default function MainMenu() {
   const { t } = useTranslation();
-  const { searchCandidate } = useCandidatesStore();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const isFavorite = searchParams.get("isFavorite") === "true";
   const [defaultSearchTerm, setDefaultSearchTerm] = useState<string>();
   const searchTerm = defaultSearchTerm ?? (searchParams.get("q") || "");
 
-  useEffect(() => {
-    searchCandidate(searchTerm, isFavorite);
-  }, [searchTerm, isFavorite, searchCandidate]);
-
   const handleToggleFavorite = () => {
-    if (searchTerm) {
-      setSearchParams({ q: searchTerm, isFavorite: String(!isFavorite) });
-    } else {
-      setSearchParams({ isFavorite: String(!isFavorite) });
-    }
+    setSearchParams((prevParams) => ({
+      ...Object.fromEntries(prevParams.entries()),
+      isFavorite: String(!isFavorite),
+    }));
   };
 
   const updateSearchParams = (newSearchTerm: string) => {
-    if (newSearchTerm) {
-      setSearchParams({
-        q: newSearchTerm,
-        isFavorite: String(isFavorite),
-      });
-    } else {
-      setSearchParams({ isFavorite: String(isFavorite) });
-    }
+    setSearchParams({
+      ...(newSearchTerm ? { q: newSearchTerm } : {}),
+      isFavorite: String(isFavorite),
+    });
   };
 
   const [isLogoClicked, setIsLogoClicked] = useState(false);
