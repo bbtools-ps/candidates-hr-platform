@@ -1,10 +1,6 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
 import SearchForm from "@/components/SearchForm/SearchForm";
-import {
-  faGear,
-  faSearch,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faGear, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -65,19 +61,14 @@ export default function MainMenu() {
         }}
         className="flex w-full flex-1 flex-col-reverse items-center justify-between gap-4 lg:flex-row"
       >
-        <div className="relative w-full flex-1 lg:w-auto">
-          <span className="absolute left-4 flex h-full items-center text-gray">
-            <FontAwesomeIcon icon={faSearch} />
-          </span>
-          <SearchForm
-            key={isLogoClicked ? "logo-clicked" : "logo-not-clicked"}
-            label={t("Candidates_Label")}
-            placeholder={t("SearchCandidatesPlaceholder_Label")}
-            clearButtonLabel={t("ClearSearchInput_Label")}
-            defaultValue={searchTerm}
-            onChange={updateSearchParams}
-          />
-        </div>
+        <SearchForm
+          key={isLogoClicked ? "logo-clicked" : "logo-not-clicked"}
+          label={t("Candidates_Label")}
+          placeholder={t("SearchCandidatesPlaceholder_Label")}
+          clearButtonLabel={t("ClearSearchInput_Label")}
+          defaultValue={searchTerm}
+          onChange={updateSearchParams}
+        />
         <Sidebar>
           <div className="flex w-full items-center justify-between gap-4 lg:w-auto">
             <div className="block lg:hidden">
