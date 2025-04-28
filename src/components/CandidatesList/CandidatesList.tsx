@@ -1,5 +1,6 @@
 import type { Candidate } from "@/models";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import VirtualList from "../VirtualList/VirtualList";
 import CandidateItem from "./CandidateItem";
 
@@ -16,6 +17,8 @@ export default function CandidatesList({
   onToggleFavorite,
   onRemoveCandidate,
 }: CandidatesListProps) {
+  const { t } = useTranslation();
+
   return (
     <section className="flex flex-1 flex-col">
       {isLoading && <p>Loading...</p>}
@@ -26,7 +29,7 @@ export default function CandidatesList({
           className="flex flex-1 items-center justify-center text-2xl text-white"
           data-cy="no-results"
         >
-          No candidates found.
+          {t("NoCandidatesFound_Label")}
         </motion.div>
       )}
       {candidates.length > 0 && (

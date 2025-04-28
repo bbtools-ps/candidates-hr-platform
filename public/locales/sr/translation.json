@@ -41,5 +41,7 @@
   "Error_Label": "Greška",
   "RemoveSkill_Label": "Ukloni veštinu",
   "AddToFavorites_Label": "Dodaj u omiljene",
-  "ShowFavorites_Label": "Prikaži omiljene"
+  "ShowFavorites_Label": "Prikaži omiljene",
+  "ClearSearchInput_Label": "Obriši pretragu",
+  "NoCandidatesFound_Label": "Nema kandidata"
 }

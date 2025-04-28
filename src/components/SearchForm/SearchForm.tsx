@@ -10,6 +10,7 @@ interface SearchFormProps {
   placeholder?: string;
   debounceTimeout?: number;
   defaultValue: string;
+  clearButtonLabel?: string;
   onChange: (value: string) => void;
 }
 
@@ -18,6 +19,7 @@ export default function SearchForm({
   placeholder,
   debounceTimeout = DEBOUNCE_TIMEOUT,
   defaultValue,
+  clearButtonLabel = "Clear search input",
   onChange,
 }: SearchFormProps) {
   const debounce = useDebounce(debounceTimeout);
@@ -58,7 +60,7 @@ export default function SearchForm({
             type="button"
             className="absolute right-4 top-0 h-6 w-6 translate-y-[50%] rounded-full bg-blue text-white"
             onClick={handleClear}
-            aria-label="Clear search input"
+            aria-label={clearButtonLabel}
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>

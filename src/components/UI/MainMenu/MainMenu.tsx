@@ -84,6 +84,7 @@ export default function MainMenu() {
             key={isLogoClicked ? "logo-clicked" : "logo-not-clicked"}
             label={t("Candidates_Label")}
             placeholder={t("SearchCandidatesPlaceholder_Label")}
+            clearButtonLabel={t("ClearSearchInput_Label")}
             defaultValue={searchTerm}
             onChange={updateSearchParams}
           />

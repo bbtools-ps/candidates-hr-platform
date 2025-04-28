@@ -41,5 +41,7 @@
   "Error_Label": "Error",
   "RemoveSkill_Label": "Remove skill",
   "AddToFavorites_Label": "Add to favorites",
-  "ShowFavorites_Label": "Show favorites"
+  "ShowFavorites_Label": "Show favorites",
+  "ClearSearchInput_Label": "Clear search input",
+  "NoCandidatesFound_Label": "No candidates found"
 }
