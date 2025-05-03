@@ -13,6 +13,7 @@ export default function VirtualList<T>({
   className,
   itemRenderer,
 }: VirtualListProps<T>) {
+  "use no memo";
   const parentRef = useRef<HTMLDivElement>(null);
 
   const count = data.length;
