@@ -12,7 +12,7 @@ type Actions = {
   addCandidate: (candidate: Candidate) => void;
   editCandidate: (candidate: Candidate) => void;
   removeCandidate: (candidateId: string) => void;
-  searchCandidate: (searchTerm: string, isFavorite: boolean) => void;
+  filterCandidates: (searchTerm: string, isFavorite: boolean) => void;
   toggleFavorite: (candidateId: string) => void;
   reset: () => void;
 };
@@ -56,7 +56,7 @@ export const useCandidatesStore = create<State & Actions>()(
             }),
           };
         }),
-      searchCandidate: (searchTerm, isFavorite) =>
+      filterCandidates: (searchTerm, isFavorite) =>
         set((state) => {
           if (!searchTerm.trim().length) {
             const filteredCandidates = isFavorite

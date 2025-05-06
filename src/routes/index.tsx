@@ -6,7 +6,7 @@ import CandidatesList from "../components/CandidatesList/CandidatesList";
 
 export default function HomePage() {
   const {
-    searchCandidate,
+    filterCandidates,
     filteredCandidates,
     removeCandidate,
     setCandidates,
@@ -25,8 +25,8 @@ export default function HomePage() {
   const searchTerm = searchParams.get("q") || "";
 
   useEffect(() => {
-    searchCandidate(searchTerm, isFavorite);
-  }, [searchTerm, isFavorite, searchCandidate]);
+    filterCandidates(searchTerm, isFavorite);
+  }, [filterCandidates, isFavorite, searchTerm]);
 
   return (
     <>
