@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type MotionProps, motion } from "motion/react";
+import type { ComponentPropsWithoutRef } from "react";
 import { type ButtonHTMLAttributes } from "react";
 
 const buttonVariant = {
@@ -16,7 +17,7 @@ const buttonVariant = {
   green: "bg-green text-white hover:opacity-80",
 } as const;
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: React.ReactNode;
   icon?: "add" | "remove" | "edit";
   variant?: keyof typeof buttonVariant;
