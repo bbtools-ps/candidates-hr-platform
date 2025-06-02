@@ -35,6 +35,7 @@ export default function EmailField({
         onChange={(e) => {
           field.handleChange(e.target.value);
         }}
+        onBlur={field.handleBlur}
       />
       <FieldError meta={field.state.meta} />
     </div>
