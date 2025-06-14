@@ -5,12 +5,14 @@ import { useRef } from "react";
 interface VirtualListProps<T> {
   data: T[];
   className?: string;
+  estimatedItemSize?: number;
   itemRenderer: (item: T, index: number) => React.ReactNode;
 }
 
 export default function VirtualList<T>({
   data,
   className,
+  estimatedItemSize = 275,
   itemRenderer,
 }: VirtualListProps<T>) {
   "use no memo";
@@ -20,7 +22,7 @@ export default function VirtualList<T>({
   const virtualizer = useVirtualizer({
     count,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 275,
+    estimateSize: () => estimatedItemSize,
   });
 
   const items = virtualizer.getVirtualItems();
