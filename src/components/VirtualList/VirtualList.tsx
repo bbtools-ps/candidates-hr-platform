@@ -3,22 +3,22 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef } from "react";
 
 interface VirtualListProps<T> {
-  data: T[];
+  items: T[];
   className?: string;
   estimatedItemSize?: number;
-  itemRenderer: (item: T, index: number) => React.ReactNode;
+  children: (item: T, index: number) => React.ReactNode;
 }
 
 export default function VirtualList<T>({
-  data,
+  items: itemsProp,
   className,
   estimatedItemSize = 275,
-  itemRenderer,
+  children,
 }: VirtualListProps<T>) {
   "use no memo";
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const count = data.length;
+  const count = itemsProp.length;
   const virtualizer = useVirtualizer({
     count,
     getScrollElement: () => parentRef.current,
@@ -46,7 +46,7 @@ export default function VirtualList<T>({
               data-index={item.index}
               ref={virtualizer.measureElement}
             >
-              {itemRenderer(data[item.index], item.index)}
+              {children(itemsProp[item.index], item.index)}
             </div>
           ))}
         </div>

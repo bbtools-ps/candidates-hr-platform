@@ -38,10 +38,8 @@ export default function CandidatesList({
           animate={{ opacity: 1 }}
           className="flex-1"
         >
-          <VirtualList
-            data={candidates}
-            className="h-full"
-            itemRenderer={(item) => (
+          <VirtualList items={candidates} className="h-full">
+            {(item) => (
               <div className="flex w-full justify-center">
                 <CandidateItem
                   candidate={item}
@@ -50,7 +48,7 @@ export default function CandidatesList({
                 />
               </div>
             )}
-          />
+          </VirtualList>
         </motion.div>
       )}
     </section>
