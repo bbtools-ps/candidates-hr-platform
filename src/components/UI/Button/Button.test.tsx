@@ -11,10 +11,11 @@ describe("<Button/>", () => {
   });
 
   it("should call the handler function when clicking on the button", async () => {
+    const user = userEvent.setup();
     const testFn = vi.fn();
     render(<Button onClick={testFn}>test</Button>);
 
-    await userEvent.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button"));
 
     expect(testFn).toHaveBeenCalled();
   });

@@ -19,10 +19,11 @@ describe("<InputField/>", () => {
   });
 
   it("should call the onChange handler function when typing into the input field", async () => {
+    const user = userEvent.setup();
     const testFn = vi.fn();
     render(<InputField onChange={testFn} />);
 
-    await userEvent.type(screen.getByRole("textbox"), "test");
+    await user.type(screen.getByRole("textbox"), "test");
 
     expect(testFn).toHaveBeenCalled();
   });
