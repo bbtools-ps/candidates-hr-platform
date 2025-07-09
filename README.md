@@ -29,6 +29,33 @@ This repository includes a GitHub Action workflow that automatically:
 4. Deploys to Netlify (on main/master branch)
 5. Creates preview deployments for pull requests
 
+## Netlify Configuration
+
+### Disable Auto-Build
+
+To prevent Netlify from building automatically and only deploy from GitHub Actions:
+
+#### Option 1: Netlify Dashboard
+
+1. Go to **Site settings** → **Build & deploy**
+2. In **Continuous Deployment**:
+   - Build command: `# Build disabled - deployed from CI`
+   - Publish directory: `build`
+3. In **Deploy contexts**:
+   - Disable **Production branch** auto-deploy
+   - Disable **Deploy previews** and **Branch deploys**
+
+#### Option 2: netlify.toml (Already configured)
+
+The `netlify.toml` file includes:
+
+```toml
+[build]
+  command = "# Build disabled - deployed from CI"
+  publish = "build"
+  ignore = "exit 1"  # Always skip auto-builds
+```
+
 ## Security Considerations
 
 ### GitHub Secrets Safety
@@ -42,14 +69,7 @@ This repository includes a GitHub Action workflow that automatically:
 - 🔒 **Fork protection**: Preview deployments only run for PRs from the same repository
 - 🔒 **Branch protection**: Production deployments only from main/master branches
 - 🔒 **Limited scope**: Netlify tokens have minimal required permissions
-
-### Additional Recommendations
-
-1. **Enable branch protection** on main/master branches
-2. **Require PR reviews** before merging
-3. **Use environment protection rules** for production deployments
-4. **Regularly rotate** Netlify tokens
-5. **Monitor deployment logs** for suspicious activity
+- 🔒 **Manual deploy only**: Netlify auto-build disabled
 
 ## Required Secrets
 
@@ -85,6 +105,7 @@ To enable Netlify deployment, you need to add the following secrets to your GitH
 - **On pull request**: Runs tests, builds, and creates a preview deployment
 - **Test failure**: Stops the workflow and prevents deployment
 - **Build failure**: Stops the workflow and prevents deployment
+- **Netlify auto-build**: Disabled - only GitHub Actions can deploy
 
 ## Manual Deployment
 
@@ -114,5 +135,6 @@ If the deployment fails:
 
 1. Check that your Netlify secrets are correctly set
 2. Verify your Netlify site is properly configured
-3. Ensure all tests pass locally
-4. Check the build logs in the GitHub Actions tab
+3. Ensure Netlify auto-build is disabled
+4. Ensure all tests pass locally
+5. Check the build logs in the GitHub Actions tab
