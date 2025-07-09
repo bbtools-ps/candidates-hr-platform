@@ -120,7 +120,7 @@ describe("candidates", () => {
     cy.get("@candidateSkills").type("Photoshop");
     cy.get("@candidateSkills").blur();
 
-    cy.get("@invalidName").should("be.empty");
+    cy.get("@invalidName").should("not.exist");
     cy.get("@invalidDate").should("be.empty");
     cy.get("@invalidPhone").should("be.empty");
     cy.get("@invalidEmail").should("be.empty");
