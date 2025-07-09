@@ -37,14 +37,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
+
       - name: Install dependencies
         run: pnpm install
+
+      - name: Install Cypress binary
+        run: npx cypress install
 
       - name: Run linting
         run: pnpm run fix
 
       - name: Run unit tests
         run: pnpm run test:unit
+
+      - name: Verify Cypress installation
+        run: npx cypress verify
 
       - name: Run e2e tests
         run: pnpm run test:e2e
