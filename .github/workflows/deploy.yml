@@ -61,7 +61,23 @@ jobs:
         run: npx cypress verify
 
       - name: Run e2e tests
-        uses: cypress-io/github-action@v6
+        run: |
+          # Start Vite dev server in background
+          pnpm run dev &
+          DEV_PID=$!
+
+          # Wait for server to be ready (simple check)
+          sleep 10
+
+          # Run Cypress tests
+          npx cypress run
+          CYPRESS_EXIT_CODE=$?
+
+          # Kill the dev server
+          kill $DEV_PID
+
+          # Exit with Cypress exit code
+          exit $CYPRESS_EXIT_CODE
 
       - name: Build project
         run: pnpm run build
