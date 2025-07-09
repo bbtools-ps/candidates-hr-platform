@@ -61,7 +61,7 @@ jobs:
         run: npx cypress verify
 
       - name: Run e2e tests
-        run: pnpm run test:e2e
+        uses: cypress-io/github-action@v6
 
       - name: Build project
         run: pnpm run build
