@@ -1,3 +1,9 @@
+[build]
+  # Disable auto-build - only deploy from GitHub Actions
+  command = "# Build disabled - deployed from CI"
+  publish = "build"
+  ignore = "exit 1"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
