@@ -1,23 +1,19 @@
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import { forwardRef } from "react";
 
-interface CheckboxProps
-  extends Omit<
-    ComponentPropsWithoutRef<"input">,
-    "type" | "value" | "defaultValue"
-  > {
+export interface CheckboxProps
+  extends Omit<ComponentPropsWithRef<"input">, "type"> {
   label?: string;
   isRequired?: boolean;
 }
 
-export default function Checkbox({
-  label,
-  id,
-  isRequired,
-  ...rest
-}: CheckboxProps) {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
+  { label, id, isRequired, ...rest },
+  ref
+) {
   return (
     <div className="flex gap-3">
-      <input type="checkbox" id={id} {...rest} />
+      <input ref={ref} type="checkbox" id={id} {...rest} />
       {label && (
         <label htmlFor={id}>
           {label}
@@ -30,4 +26,6 @@ export default function Checkbox({
       )}
     </div>
   );
-}
+});
+
+export default Checkbox;

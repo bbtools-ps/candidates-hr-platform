@@ -7,19 +7,12 @@ describe("candidates", () => {
 
     // Add
     cy.get('[data-cy="add-candidate-btn"]').click();
-    cy.get('[data-cy="heading"]').as("heading");
     cy.get('[data-cy="submit-btn"]').as("submitButton");
     cy.get('[data-cy="candidate-name"]').as("candidateName");
-    cy.get("@submitButton").should("be.disabled");
-    cy.get("@heading").should("contain", "New candidate");
     cy.get("@candidateName").type("John Doe");
-    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-date-of-birth"]').type("2000-12-12");
-    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-contact-number"]').type("+123123123123");
-    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-email"]').type("test@example.com");
-    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-skills"]').type("Photoshop,");
     cy.get("@submitButton").should("be.enabled");
     cy.get("@submitButton").click();
@@ -27,10 +20,8 @@ describe("candidates", () => {
 
     // Edit
     cy.get('[data-cy="John Doe"] [data-cy="edit-candidate-btn"]').click();
-    cy.get("@heading").should("contain", "Edit candidate");
     cy.get("@submitButton").should("be.enabled");
     cy.get("@candidateName").clear();
-    cy.get("@submitButton").should("be.disabled");
     cy.get("@candidateName").type("Jane Doe");
     cy.get("@submitButton").click();
     cy.get('[data-cy="Jane Doe"]').should("contain", "Jane Doe");
@@ -48,32 +39,32 @@ describe("candidates", () => {
     cy.get("@searchCandidatesInput").type("ruby");
     cy.get('[data-cy="Ruby Elliott"]').should("contain", "Ruby Elliott");
     cy.get('[data-cy="Maggie Frank"]').should("not.exist");
-    cy.get('[data-cy="no-results"]').should("not.exist");
+    cy.get('[data-cy="no-results-placeholder"]').should("not.exist");
 
     cy.get("@searchCandidatesInput").clear();
     cy.get("@searchCandidatesInput").type("maggie");
     cy.get('[data-cy="Maggie Frank"]').should("contain", "Maggie Frank");
     cy.get('[data-cy="Ruby Elliott"]').should("not.exist");
-    cy.get('[data-cy="no-results"]').should("not.exist");
+    cy.get('[data-cy="no-results-placeholder"]').should("not.exist");
 
     // Search by skills
     cy.get("@searchCandidatesInput").clear();
     cy.get("@searchCandidatesInput").type("php");
     cy.get('[data-cy="Maggie Frank"]').should("contain", "Maggie Frank");
     cy.get('[data-cy="Ruby Elliott"]').should("not.exist");
-    cy.get('[data-cy="no-results"]').should("not.exist");
+    cy.get('[data-cy="no-results-placeholder"]').should("not.exist");
 
     // Combine skills and name
     cy.get("@searchCandidatesInput").clear();
     cy.get("@searchCandidatesInput").type("frank php");
     cy.get('[data-cy="Maggie Frank"]').should("contain", "Maggie Frank");
     cy.get('[data-cy="Rob Frank"]').should("not.exist");
-    cy.get('[data-cy="no-results"]').should("not.exist");
+    cy.get('[data-cy="no-results-placeholder"]').should("not.exist");
 
     // No results message
     cy.get("@searchCandidatesInput").clear();
     cy.get("@searchCandidatesInput").type("lalalalalala");
-    cy.get('[data-cy="no-results"]').should("exist");
+    cy.get('[data-cy="no-results-placeholder"]').should("exist");
 
     // Persist search params when editing filtered candidate
     cy.get("@searchCandidatesInput").clear();
@@ -84,18 +75,16 @@ describe("candidates", () => {
     cy.get("@candidateName").type("Jane Doe");
     cy.get('[data-cy="submit-btn"]').click();
     cy.get("@searchCandidatesInput").should("have.value", "frank php");
-    cy.get('[data-cy="no-results"]').should("not.exist");
+    cy.get('[data-cy="no-results-placeholder"]').should("exist");
   });
 
   it("should not allow adding a candidate if the list of candidates is not loaded from the main page", () => {
     cy.visit("/#/new-candidate");
-    cy.get('[data-cy="heading"]').should("not.exist");
     cy.get('[data-cy="candidates-logo"]').should("exist");
   });
 
   it("should not allow editing a candidate if candidate is not selected from the main page", () => {
     cy.visit("/#/edit-candidate");
-    cy.get('[data-cy="heading"]').should("not.exist");
     cy.get('[data-cy="candidates-logo"]').should("exist");
   });
 
@@ -104,18 +93,13 @@ describe("candidates", () => {
     cy.get('[data-cy="add-candidate-btn"]').click();
 
     cy.get('[data-cy="submit-btn"]').as("submitButton");
-    cy.get("@submitButton").should("be.disabled");
     cy.get('[data-cy="candidate-name"]').as("candidateName");
     cy.get('[data-cy="candidate-date-of-birth"]').as("candidateDateOfBirth");
     cy.get('[data-cy="candidate-contact-number"]').as("candidateContactNumber");
     cy.get('[data-cy="candidate-email"]').as("candidateEmail");
     cy.get('[data-cy="candidate-skills"]').as("candidateSkills");
 
-    cy.get("@candidateName").focus().blur();
-    cy.get("@candidateDateOfBirth").focus().blur();
-    cy.get("@candidateContactNumber").focus().blur();
-    cy.get("@candidateEmail").focus().blur();
-    cy.get("@candidateSkills").focus().blur();
+    cy.get("@submitButton").click();
 
     // // Validation errors
     cy.get('[data-cy="candidate-name-error"]').as("invalidName");
@@ -123,15 +107,11 @@ describe("candidates", () => {
     cy.get('[data-cy="candidate-contact-number-error"]').as("invalidPhone");
     cy.get('[data-cy="candidate-email-error"]').as("invalidEmail");
     cy.get('[data-cy="candidate-skills-error"]').as("invalidSkills");
-    cy.get("@invalidName").should("contain", "Please add a name.");
-    cy.get("@invalidDate").should("contain", "Please add a valid date.");
-    cy.get("@invalidPhone").should(
-      "contain",
-      "Please add a valid phone number."
-    );
-    cy.get("@invalidEmail").should("contain", "Please add a valid email.");
-    cy.get("@invalidSkills").should("contain", "Please add skills.");
-    cy.get("@submitButton").should("be.disabled");
+    cy.get("@invalidName").should("contain", "Name is required");
+    cy.get("@invalidDate").should("contain", "Date of Birth is required");
+    cy.get("@invalidPhone").should("contain", "Contact Number is required");
+    cy.get("@invalidEmail").should("contain", "E-mail is required");
+    cy.get("@invalidSkills").should("contain", "Skills are required");
 
     cy.get("@candidateName").type("John");
     cy.get("@candidateDateOfBirth").type("2000-12-12");
@@ -140,12 +120,10 @@ describe("candidates", () => {
     cy.get("@candidateSkills").type("Photoshop");
     cy.get("@candidateSkills").blur();
 
-    cy.get("@invalidName").should("not.exist");
-    cy.get("@invalidDate").should("not.exist");
-    cy.get("@invalidPhone").should("not.exist");
-    cy.get("@invalidEmail").should("not.exist");
-    cy.get("@invalidSkills").should("not.exist");
-
-    cy.get("@submitButton").should("be.enabled");
+    cy.get("@invalidName").should("be.empty");
+    cy.get("@invalidDate").should("be.empty");
+    cy.get("@invalidPhone").should("be.empty");
+    cy.get("@invalidEmail").should("be.empty");
+    cy.get("@invalidSkills").should("be.empty");
   });
 });

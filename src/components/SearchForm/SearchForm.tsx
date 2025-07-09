@@ -61,6 +61,7 @@ export default function SearchForm({
           <input
             ref={inputRef}
             aria-label={label}
+            data-cy="search-candidates"
             className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg hover:border-blue dark:border-slate-600 dark:text-white dark:hover:border-sky-400"
             placeholder={placeholder}
             onChange={handleChange}

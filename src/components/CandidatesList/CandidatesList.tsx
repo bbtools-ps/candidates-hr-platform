@@ -27,7 +27,7 @@ export default function CandidatesList({
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-1 items-center justify-center text-2xl text-white"
-          data-cy="no-results"
+          data-cy="no-results-placeholder"
         >
           {t("NoCandidatesFound_Label")}
         </motion.div>

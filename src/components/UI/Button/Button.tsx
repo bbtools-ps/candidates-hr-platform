@@ -5,9 +5,9 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type MotionProps, motion } from "motion/react";
-import type { ComponentPropsWithoutRef } from "react";
-import { type ButtonHTMLAttributes } from "react";
+import { motion, type MotionProps } from "motion/react";
+import type { ComponentPropsWithRef } from "react";
+import { forwardRef, type ButtonHTMLAttributes } from "react";
 
 const buttonVariant = {
   default: "bg-blue text-white hover:opacity-80",
@@ -17,20 +17,23 @@ const buttonVariant = {
   green: "bg-green text-white hover:opacity-80",
 } as const;
 
-interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
+export interface ButtonProps extends ComponentPropsWithRef<"button"> {
   children: React.ReactNode;
   icon?: "add" | "remove" | "edit";
   variant?: keyof typeof buttonVariant;
 }
 
-export default function Button({
-  children,
-  type = "button",
-  variant = "default",
-  icon,
-  className,
-  ...rest
-}: ButtonProps) {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    children,
+    type = "button",
+    variant = "default",
+    icon,
+    className,
+    ...rest
+  }: ButtonProps,
+  ref
+) {
   const buttonIcon = {
     add: faUserPlus,
     edit: faEdit,
@@ -39,6 +42,7 @@ export default function Button({
 
   return (
     <motion.button
+      ref={ref}
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       type={type}
@@ -56,4 +60,6 @@ export default function Button({
       </span>
     </motion.button>
   );
-}
+});
+
+export default Button;

@@ -1,21 +1,22 @@
+import type { InputFieldProps } from "@/components/UI/InputField/InputField";
 import InputField from "@/components/UI/InputField/InputField";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface EmailFieldProps {
-  id?: string;
-  label?: string;
-  isRequired?: boolean;
-  placeholder?: string;
+interface EmailFieldProps
+  extends Omit<
+    InputFieldProps,
+    "ref" | "type" | "value" | "onChange" | "onBlur"
+  > {
+  "data-cy"?: string;
 }
 
 export default function EmailField({
   id: idProp,
-  label,
-  isRequired,
-  placeholder,
+  "data-cy": dataCy,
+  ...rest
 }: EmailFieldProps) {
   const [id] = useState(idProp ?? uuid());
   const field = useFieldContext<string>();
@@ -25,9 +26,6 @@ export default function EmailField({
       <InputField
         type="email"
         id={id}
-        label={label}
-        isRequired={isRequired}
-        placeholder={placeholder}
         hasError={
           field.state.meta.isTouched && field.state.meta.errors.length > 0
         }
@@ -36,8 +34,10 @@ export default function EmailField({
           field.handleChange(e.target.value);
         }}
         onBlur={field.handleBlur}
+        data-cy={dataCy}
+        {...rest}
       />
-      <FieldError meta={field.state.meta} />
+      <FieldError meta={field.state.meta} data-cy={dataCy} />
     </div>
   );
 }

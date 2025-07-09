@@ -1,33 +1,27 @@
-import TextAreaFieldComponent from "@/components/UI/TextAreaField/TextAreaField";
+import type { TextAreaProps } from "@/components/UI/TextArea/TextArea";
+import TextArea from "@/components/UI/TextArea/TextArea";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
 interface TextAreaFieldProps
-  extends React.ComponentPropsWithoutRef<"textarea"> {
-  id?: string;
-  label?: string;
-  isRequired?: boolean;
-  placeholder?: string;
+  extends Omit<TextAreaProps, "ref" | "value" | "onChange" | "onBlur"> {
+  "data-cy"?: string;
 }
 
 export default function TextAreaField({
   id: idProp,
-  label,
-  isRequired,
-  placeholder,
+  "data-cy": dataCy,
+  ...rest
 }: TextAreaFieldProps) {
   const [id] = useState(idProp ?? uuid());
   const field = useFieldContext<string>();
 
   return (
     <div>
-      <TextAreaFieldComponent
+      <TextArea
         id={id}
-        label={label}
-        isRequired={isRequired}
-        placeholder={placeholder}
         hasError={
           field.state.meta.isTouched && field.state.meta.errors.length > 0
         }
@@ -36,8 +30,10 @@ export default function TextAreaField({
           field.handleChange(e.target.value);
         }}
         onBlur={field.handleBlur}
+        data-cy={dataCy}
+        {...rest}
       />
-      <FieldError meta={field.state.meta} />
+      <FieldError meta={field.state.meta} data-cy={dataCy} />
     </div>
   );
 }

@@ -4,13 +4,16 @@ import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
+import type { ComponentPropsWithoutRef } from "react";
 import { useCallback, useState } from "react";
 import { v4 as uuid } from "uuid";
 
-interface TagsInputProps {
-  id?: string;
+export interface TagsInputProps
+  extends Omit<
+    ComponentPropsWithoutRef<"input">,
+    "value" | "onChange" | "onBlur"
+  > {
   label?: string;
-  placeholder?: string;
   tags: Tag[] | undefined;
   hasError?: boolean;
   isRequired?: boolean;
@@ -29,6 +32,7 @@ export default function TagsInput({
   removeTagLabel,
   onAdd,
   onRemove,
+  ...rest
 }: TagsInputProps) {
   const id = idProp || convertToKebabCase(label);
 
@@ -131,6 +135,7 @@ export default function TagsInput({
           onChange={onChange}
           onBlur={onBlur}
           data-testid="tags-input"
+          {...rest}
         />
         <input
           className="hidden"

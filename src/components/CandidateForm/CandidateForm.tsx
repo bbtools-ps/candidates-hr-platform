@@ -71,6 +71,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextField
               id="candidate-name"
+              data-cy="candidate-name"
               label={t("Name_Label")}
               isRequired={!(CANDIDATE_SCHEMA.shape.name instanceof ZodOptional)}
             />
@@ -80,6 +81,7 @@ export default function CandidateForm({
           {(field) => (
             <field.DateField
               id="candidate-date-of-birth"
+              data-cy="candidate-date-of-birth"
               label={t("DateOfBirthForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.dateOfBirth instanceof ZodOptional)
@@ -91,6 +93,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextField
               id="candidate-contact-number"
+              data-cy="candidate-contact-number"
               label={t("ContactNumberForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.contactNumber instanceof ZodOptional)
@@ -102,6 +105,7 @@ export default function CandidateForm({
           {(field) => (
             <field.EmailField
               id="candidate-email"
+              data-cy="candidate-email"
               label={t("EmailForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.email instanceof ZodOptional)
@@ -113,6 +117,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TagsField
               id="skills"
+              data-cy="candidate-skills"
               label={t("SkillsForm_Label")}
               placeholder={t("SkillsFormPlaceholder_Label")}
               removeTagLabel={t("RemoveSkill_Label")}
@@ -140,11 +145,13 @@ export default function CandidateForm({
               navigate(-1);
             }}
             variant="outlined"
+            data-cy="cancel-btn"
           >
             {t("Cancel_Label")}
           </Button>
           <form.AppForm>
             <form.SubmitButton
+              data-cy="submit-btn"
               childrenRenderer={(isSubmitting) =>
                 isSubmitting
                   ? candidate
