@@ -110,7 +110,7 @@ describe("candidates", () => {
     cy.get("@invalidName").should("contain", "Name is required");
     cy.get("@invalidDate").should("contain", "Date of Birth is required");
     cy.get("@invalidPhone").should("contain", "Contact Number is required");
-    cy.get("@invalidEmail").should("contain", "E-mail is required");
+    cy.get("@invalidEmail").should("contain", "Invalid E-mail");
     cy.get("@invalidSkills").should("contain", "Skills are required");
 
     cy.get("@candidateName").type("John");
