@@ -16,12 +16,9 @@ export const CANDIDATE_SCHEMA = z.object({
     .array(
       z.object({
         id: z.string(),
-        value: z
-          .string()
-          .trim()
-          .min(1, { error: t("SkillRequired_Label") }),
+        value: z.string().trim(),
       })
     )
-    .min(1, { error: t("SkillsRequired_Label") }),
+    .nonempty({ error: t("SkillsRequired_Label") }),
   notes: z.string().trim().optional(),
 });
