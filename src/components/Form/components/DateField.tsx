@@ -18,7 +18,7 @@ export default function DateField({
   "data-cy": dataCy,
   ...rest
 }: DateFieldProps) {
-  const [id] = useState(idProp ?? uuid());
+  const [id] = useState(() => idProp ?? uuid());
   const field = useFieldContext<string>();
 
   return (

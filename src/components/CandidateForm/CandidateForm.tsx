@@ -41,7 +41,7 @@ export default function CandidateForm({
       const result = CANDIDATE_SCHEMA.parse(value);
       onSubmitProp({
         ...result,
-        id: candidate?.id || uuid(),
+        id: candidate?.id ?? uuid(),
         isFavorite: candidate?.isFavorite || false,
       });
     },

@@ -17,7 +17,7 @@ export default function CheckboxField({
   "data-cy": dataCy,
   ...rest
 }: CheckboxFieldProps) {
-  const [id] = useState(idProp ?? uuid());
+  const [id] = useState(() => idProp ?? uuid());
   const field = useFieldContext<boolean>();
 
   return (

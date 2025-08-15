@@ -18,7 +18,7 @@ export default function TextField({
   "data-cy": dataCy,
   ...rest
 }: TextFieldProps) {
-  const [id] = useState(idProp ?? uuid());
+  const [id] = useState(() => idProp ?? uuid());
   const field = useFieldContext<string>();
 
   return (

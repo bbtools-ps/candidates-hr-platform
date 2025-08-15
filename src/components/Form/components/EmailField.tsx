@@ -18,7 +18,7 @@ export default function EmailField({
   "data-cy": dataCy,
   ...rest
 }: EmailFieldProps) {
-  const [id] = useState(idProp ?? uuid());
+  const [id] = useState(() => idProp ?? uuid());
   const field = useFieldContext<string>();
 
   return (

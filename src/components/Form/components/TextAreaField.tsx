@@ -15,7 +15,7 @@ export default function TextAreaField({
   "data-cy": dataCy,
   ...rest
 }: TextAreaFieldProps) {
-  const [id] = useState(idProp ?? uuid());
+  const [id] = useState(() => idProp ?? uuid());
   const field = useFieldContext<string>();
 
   return (

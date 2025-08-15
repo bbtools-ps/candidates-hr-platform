@@ -16,7 +16,7 @@ export default function TagsField({
   "data-cy": dataCy,
   ...rest
 }: TagsFieldProps) {
-  const [id] = useState(idProp ?? uuid());
+  const [id] = useState(() => idProp ?? uuid());
   const field = useFieldContext<Tag[]>();
 
   return (
