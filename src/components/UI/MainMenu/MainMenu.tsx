@@ -98,7 +98,7 @@ export default function MainMenu() {
               </div>
               <Sidebar.Trigger>
                 <Button
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-solid border-blue bg-transparent p-0 text-blue dark:border-none dark:bg-blue dark:text-white lg:hidden"
+                  className="flex items-center justify-center rounded-full border-2 border-solid border-blue bg-transparent px-4 py-1 text-blue dark:border-sky-400 dark:text-sky-400 lg:hidden"
                   aria-label={t("Settings_Label")}
                 >
                   <FontAwesomeIcon icon={faGear} />
