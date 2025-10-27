@@ -8,10 +8,10 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 
-export type DialogActions = {
+export interface DialogActions {
   open: () => void;
   close: () => void;
-};
+}
 
 const Dialog = forwardRef<DialogActions, ComponentPropsWithoutRef<"dialog">>(
   function Dialog({ children, ...rest }, ref) {
