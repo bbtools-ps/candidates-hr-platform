@@ -21,7 +21,7 @@ export default function CandidatesList({
 
   return (
     <section className="flex flex-1 flex-col">
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p>{t("Loading_Label")}</p>}
       {candidates.length === 0 && (
         <motion.div
           initial={{ opacity: 0, y: -30 }}

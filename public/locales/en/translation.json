@@ -42,5 +42,10 @@
   "AddToFavorites_Label": "Add to favorites",
   "ShowFavorites_Label": "Show favorites",
   "ClearSearchInput_Label": "Clear search input",
-  "NoCandidatesFound_Label": "No candidates found"
+  "NoCandidatesFound_Label": "No candidates found",
+  "Loading_Label": "Loading...",
+  "CloseSidebarFallback_Label": "Close sidebar",
+  "RemoveTagFallback_Label": "Remove tag",
+  "ClearSearchInputFallback_Label": "Clear search input",
+  "PressCommaToAddTags_Label": "Press comma to add tags"
 }

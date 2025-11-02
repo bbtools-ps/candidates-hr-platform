@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
 import type { ComponentPropsWithoutRef } from "react";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 
 export interface TagsInputProps
@@ -26,7 +27,7 @@ export default function TagsInput({
   label,
   id: idProp,
   tags,
-  placeholder = "Press comma to add tags",
+  placeholder,
   hasError,
   isRequired,
   removeTagLabel,
@@ -34,6 +35,7 @@ export default function TagsInput({
   onRemove,
   ...rest
 }: TagsInputProps) {
+  const { t } = useTranslation();
   const id = idProp || convertToKebabCase(label);
 
   const [value, setValue] = useState("");
@@ -116,7 +118,7 @@ export default function TagsInput({
                 type="button"
                 onClick={removeTag.bind(null, id)}
                 className="px-2"
-                aria-label={removeTagLabel ?? "Remove tag"}
+                aria-label={removeTagLabel ?? t("RemoveTagFallback_Label")}
               >
                 <FontAwesomeIcon icon={faClose} />
               </button>
@@ -126,7 +128,7 @@ export default function TagsInput({
         <input
           id={id}
           type="text"
-          placeholder={placeholder}
+          placeholder={placeholder ?? t("PressCommaToAddTags_Label")}
           className={cn(
             "flex-1 bg-transparent p-2 focus:outline-none",
             hasError && "placeholder:text-black"

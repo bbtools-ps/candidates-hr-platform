@@ -3,6 +3,7 @@ import { cn } from "@/utils/cn";
 import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const DEBOUNCE_TIMEOUT = 500;
 
@@ -21,10 +22,11 @@ export default function SearchForm({
   placeholder,
   debounceTimeout = DEBOUNCE_TIMEOUT,
   defaultValue,
-  clearButtonLabel = "Clear search input",
+  clearButtonLabel,
   onChange,
   className,
 }: SearchFormProps) {
+  const { t } = useTranslation();
   const debounce = useDebounce(debounceTimeout);
 
   const [value, setValue] = useState(defaultValue);
@@ -72,7 +74,9 @@ export default function SearchForm({
               type="button"
               className="absolute right-4 top-0 h-6 w-6 translate-y-[50%] rounded-full bg-blue text-white"
               onClick={handleClear}
-              aria-label={clearButtonLabel}
+              aria-label={
+                clearButtonLabel ?? t("ClearSearchInputFallback_Label")
+              }
             >
               <FontAwesomeIcon icon={faXmark} />
             </button>

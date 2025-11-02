@@ -3,6 +3,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import { useSidebarContext } from "../hooks";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 
@@ -14,9 +15,10 @@ interface SidebarContentProps {
 
 export default function SidebarContent({
   title,
-  closeSidebarLabel = "Close sidebar",
+  closeSidebarLabel,
   children,
 }: SidebarContentProps) {
+  const { t } = useTranslation();
   const { isOpen, setIsOpen, triggerRef } = useSidebarContext();
 
   const handleClose = useCallback(() => {
@@ -73,7 +75,9 @@ export default function SidebarContent({
               <button
                 onClick={handleClose}
                 className="bg-red-500 h-8 w-8 rounded"
-                aria-label={closeSidebarLabel}
+                aria-label={
+                  closeSidebarLabel ?? t("CloseSidebarFallback_Label")
+                }
               >
                 <FontAwesomeIcon icon={faClose} />
               </button>

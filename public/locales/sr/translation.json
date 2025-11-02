@@ -42,5 +42,10 @@
   "AddToFavorites_Label": "Dodaj u omiljene",
   "ShowFavorites_Label": "Prikaži omiljene",
   "ClearSearchInput_Label": "Obriši pretragu",
-  "NoCandidatesFound_Label": "Nema kandidata"
+  "NoCandidatesFound_Label": "Nema kandidata",
+  "Loading_Label": "Učitavanje...",
+  "CloseSidebarFallback_Label": "Zatvori sidebar",
+  "RemoveTagFallback_Label": "Ukloni tag",
+  "ClearSearchInputFallback_Label": "Obriši pretragu",
+  "PressCommaToAddTags_Label": "Pritisnite zarez za dodavanje tagova"
 }
