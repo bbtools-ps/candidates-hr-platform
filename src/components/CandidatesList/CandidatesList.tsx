@@ -1,7 +1,7 @@
 import { DUMMY_CANDIDATES } from "@/data/data";
 import { useCandidatesStore } from "@/store/candidates";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 import VirtualList from "../VirtualList/VirtualList";
@@ -16,11 +16,8 @@ export default function CandidatesList() {
     toggleFavorite,
   } = useCandidatesStore();
 
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     setCandidates(DUMMY_CANDIDATES);
-    setIsLoading(false);
   }, [setCandidates]);
 
   const [searchParams] = useSearchParams();
@@ -35,7 +32,6 @@ export default function CandidatesList() {
 
   return (
     <section className="flex flex-1 flex-col">
-      {isLoading && <p>{t("Loading_Label")}</p>}
       {filteredCandidates.length === 0 && (
         <motion.div
           initial={{ opacity: 0, y: -30 }}
