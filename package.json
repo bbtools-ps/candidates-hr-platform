@@ -33,6 +33,7 @@
     "test:cypress": "concurrently \"vite\" \"npx cypress open\"",
     "test:e2e": "concurrently \"vite\" \"npx cypress run\"",
     "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
+    "lint": "eslint src",
     "fix": "eslint --fix src",
     "preinstall": "npx only-allow pnpm"
   },

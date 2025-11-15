@@ -16,6 +16,7 @@ export default function ThemeSwitcher() {
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.documentElement.classList.add("dark");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme("dark");
     } else {
       document.documentElement.classList.remove("dark");

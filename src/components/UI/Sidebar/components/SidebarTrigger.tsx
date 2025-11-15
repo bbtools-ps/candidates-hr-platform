@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 import type { ReactElement } from "react";
 import { cloneElement, isValidElement } from "react";
 import { useSidebarContext } from "../hooks";
