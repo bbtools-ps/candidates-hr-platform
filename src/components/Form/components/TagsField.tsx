@@ -1,22 +1,20 @@
 import type { TagsInputProps } from "@/components/UI/TagsInput/TagsInput";
 import TagsInput from "@/components/UI/TagsInput/TagsInput";
 import type { Tag } from "@/models";
-import { useState } from "react";
-import { v4 as uuid } from "uuid";
+import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
 interface TagsFieldProps
-  extends Omit<TagsInputProps, "ref" | "tags" | "onAdd" | "onRemove"> {
+  extends Omit<TagsInputProps, "ref" | "tags" | "onAdd" | "onRemove" | "id"> {
   "data-cy"?: string;
 }
 
 export default function TagsField({
-  id: idProp,
   "data-cy": dataCy,
   ...rest
 }: TagsFieldProps) {
-  const [id] = useState(() => idProp ?? uuid());
+  const id = useId();
   const field = useFieldContext<Tag[]>();
 
   return (

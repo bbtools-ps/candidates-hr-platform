@@ -70,7 +70,6 @@ export default function CandidateForm({
         <form.AppField name="name">
           {(field) => (
             <field.TextField
-              id="candidate-name"
               data-cy="candidate-name"
               label={t("Name_Label")}
               isRequired={!(CANDIDATE_SCHEMA.shape.name instanceof ZodOptional)}
@@ -80,7 +79,6 @@ export default function CandidateForm({
         <form.AppField name="dateOfBirth">
           {(field) => (
             <field.DateField
-              id="candidate-date-of-birth"
               data-cy="candidate-date-of-birth"
               label={t("DateOfBirthForm_Label")}
               isRequired={
@@ -92,7 +90,6 @@ export default function CandidateForm({
         <form.AppField name="contactNumber">
           {(field) => (
             <field.TextField
-              id="candidate-contact-number"
               data-cy="candidate-contact-number"
               label={t("ContactNumberForm_Label")}
               isRequired={
@@ -104,7 +101,6 @@ export default function CandidateForm({
         <form.AppField name="email">
           {(field) => (
             <field.EmailField
-              id="candidate-email"
               data-cy="candidate-email"
               label={t("EmailForm_Label")}
               isRequired={
@@ -116,7 +112,6 @@ export default function CandidateForm({
         <form.AppField name="skills">
           {(field) => (
             <field.TagsField
-              id="skills"
               data-cy="candidate-skills"
               label={t("SkillsForm_Label")}
               placeholder={t("SkillsFormPlaceholder_Label")}
@@ -130,7 +125,6 @@ export default function CandidateForm({
         <form.AppField name="notes">
           {(field) => (
             <field.TextAreaField
-              id="notes"
               label={t("NotesForm_Label")}
               isRequired={
                 !(CANDIDATE_SCHEMA.shape.notes instanceof ZodOptional)

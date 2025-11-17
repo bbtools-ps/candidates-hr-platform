@@ -1,23 +1,24 @@
-import { useState } from "react";
-import { v4 as uuid } from "uuid";
+import { useId } from "react";
 import type { CheckboxProps } from "../../UI/Checkbox/Checkbox";
 import Checkbox from "../../UI/Checkbox/Checkbox";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
 interface CheckboxFieldProps
-  extends Omit<CheckboxProps, "ref" | "checked" | "onChange" | "onBlur"> {
+  extends Omit<
+    CheckboxProps,
+    "ref" | "checked" | "onChange" | "onBlur" | "id"
+  > {
   "data-cy"?: string;
 }
 
 export default function CheckboxField({
-  id: idProp,
   isRequired,
   label,
   "data-cy": dataCy,
   ...rest
 }: CheckboxFieldProps) {
-  const [id] = useState(() => idProp ?? uuid());
+  const id = useId();
   const field = useFieldContext<boolean>();
 
   return (
