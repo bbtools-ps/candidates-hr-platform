@@ -35,7 +35,8 @@
     "format": "prettier --write '**/*.{js,ts,tsx,jsx}'",
     "lint": "eslint src",
     "fix": "eslint --fix src",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky"
   },
   "browserslist": {
     "production": [
@@ -68,7 +69,9 @@
     "eslint-plugin-react-hooks": "7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^15.9.0",
+    "husky": "^9.1.7",
     "jsdom": "^21.1.2",
+    "lint-staged": "^16.2.6",
     "postcss": "^8.4.32",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
