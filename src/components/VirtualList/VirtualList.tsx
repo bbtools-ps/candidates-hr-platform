@@ -19,6 +19,7 @@ export default function VirtualList<T>({
   const parentRef = useRef<HTMLDivElement>(null);
 
   const count = itemsProp.length;
+  // eslint-disable-next-line react-hooks/incompatible-library
   const virtualizer = useVirtualizer({
     count,
     getScrollElement: () => parentRef.current,
