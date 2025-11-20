@@ -29,6 +29,10 @@ export default function MainMenu() {
 
   const handleUpdateSearchTerm = (newSearchTerm: string) => {
     setSearchParams((searchParams) => {
+      if (newSearchTerm === "") {
+        searchParams.delete("q");
+        return searchParams;
+      }
       searchParams.set("q", newSearchTerm);
       return searchParams;
     });
