@@ -21,16 +21,16 @@ export default function MainMenu() {
   const searchTerm = defaultSearchTerm ?? (searchParams.get("q") || "");
 
   const handleToggleFavorite = () => {
-    setSearchParams((prevParams) => ({
-      ...Object.fromEntries(prevParams.entries()),
-      isFavorite: String(!isFavorite),
-    }));
+    setSearchParams((searchParams) => {
+      searchParams.set("isFavorite", String(!isFavorite));
+      return searchParams;
+    });
   };
 
-  const updateSearchParams = (newSearchTerm: string) => {
-    setSearchParams({
-      ...(newSearchTerm ? { q: newSearchTerm } : {}),
-      isFavorite: String(isFavorite),
+  const handleUpdateSearchTerm = (newSearchTerm: string) => {
+    setSearchParams((searchParams) => {
+      searchParams.set("q", newSearchTerm);
+      return searchParams;
     });
   };
 
@@ -67,7 +67,7 @@ export default function MainMenu() {
           placeholder={t("SearchCandidatesPlaceholder_Label")}
           clearButtonLabel={t("ClearSearchInput_Label")}
           defaultValue={searchTerm}
-          onChange={updateSearchParams}
+          onChange={handleUpdateSearchTerm}
         />
         <Sidebar>
           <div className="flex w-full items-center justify-between gap-4 lg:w-auto">
