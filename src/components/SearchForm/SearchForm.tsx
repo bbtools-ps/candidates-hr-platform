@@ -51,7 +51,7 @@ export default function SearchForm({
 
   return (
     <div className={cn("relative w-full flex-1 lg:w-auto", className)}>
-      <span className="absolute left-4 flex h-full items-center text-gray">
+      <span className="text-gray absolute left-4 flex h-full items-center">
         <FontAwesomeIcon icon={faSearch} />
       </span>
       <form
@@ -64,7 +64,7 @@ export default function SearchForm({
             ref={inputRef}
             aria-label={label}
             data-cy="search-candidates"
-            className="w-full truncate rounded-full border-2 border-solid border-gray bg-transparent py-2 pl-10 pr-4 text-lg hover:border-blue dark:border-slate-600 dark:text-white dark:hover:border-sky-400"
+            className="border-gray hover:border-blue w-full truncate rounded-full border-2 border-solid bg-transparent py-2 pr-4 pl-10 text-lg dark:border-slate-600 dark:text-white dark:hover:border-sky-400"
             placeholder={placeholder}
             onChange={handleChange}
             value={value}
@@ -72,7 +72,7 @@ export default function SearchForm({
           {value.length > 0 && (
             <button
               type="button"
-              className="absolute right-4 top-0 h-6 w-6 translate-y-[50%] rounded-full bg-blue text-white"
+              className="bg-blue absolute top-0 right-4 h-6 w-6 translate-y-[50%] rounded-full text-white"
               onClick={handleClear}
               aria-label={
                 clearButtonLabel ?? t("ClearSearchInputFallback_Label")

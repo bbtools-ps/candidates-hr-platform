@@ -36,7 +36,7 @@ export default function ThemeSwitcher() {
     <div className="relative flex h-8 w-8">
       <button
         aria-label={t("ThemeSwitch_Label")}
-        className="absolute z-10 h-full w-full rounded-full border-2 border-solid border-blue text-blue duration-100 hover:bg-slate-200 dark:bg-blue dark:text-white dark:hover:opacity-80"
+        className="border-blue text-blue dark:bg-blue absolute z-10 h-full w-full rounded-full border-2 border-solid duration-100 hover:bg-slate-200 dark:text-white dark:hover:opacity-80"
         onClick={handleChange}
         aria-pressed={!isDarkTheme}
       >

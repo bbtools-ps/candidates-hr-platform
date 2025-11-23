@@ -25,7 +25,7 @@ export default function ErrorPage() {
       )}
       {isRouteErrorResponse(error) ? (
         <Link
-          className="rounded-full bg-blue px-4 py-2 font-bold text-white duration-100 hover:opacity-80"
+          className="bg-blue rounded-full px-4 py-2 font-bold text-white duration-100 hover:opacity-80"
           to="/"
         >
           {t("GoBackHome_Label")}
