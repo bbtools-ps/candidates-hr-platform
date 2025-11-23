@@ -58,7 +58,16 @@ export default function SidebarContent({
         <>
           {isOpen && (
             <div
+              role="button"
+              tabIndex={0}
               onClick={handleClose}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleClose();
+                }
+              }}
+              aria-label={closeSidebarLabel ?? t("CloseSidebarFallback_Label")}
               className="fixed inset-0 z-40 bg-black bg-opacity-50"
             />
           )}
