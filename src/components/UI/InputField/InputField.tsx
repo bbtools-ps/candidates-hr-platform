@@ -32,7 +32,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           id={idProp}
           type={type}
           className={cn(
-            "w-full flex-1 truncate rounded border-2 border-solid border-gray px-4 py-2 text-base duration-100 hover:border-blue dark:border-slate-600 dark:hover:border-sky-400",
+            "border-gray hover:border-blue w-full flex-1 truncate rounded-sm border-2 border-solid px-4 py-2 text-base duration-100 dark:border-slate-600 dark:hover:border-sky-400",
             hasError ? "border-red bg-rose-300" : "bg-transparent",
             type === "date" && "date-input"
           )}

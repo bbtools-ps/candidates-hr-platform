@@ -20,8 +20,8 @@ export default function Logo({ onClick }: LogoProps) {
         data-cy="candidates-logo"
         onClick={onClick}
       >
-        <CandidatesLogoIcon className="mr-2 w-[3.125rem] duration-100 group-hover:fill-blue dark:fill-white dark:group-hover:fill-sky-400" />
-        <div className="flex-col duration-100 group-hover:text-blue dark:text-white dark:group-hover:text-sky-400 md:flex">
+        <CandidatesLogoIcon className="group-hover:fill-blue mr-2 w-12.5 duration-100 dark:fill-white dark:group-hover:fill-sky-400" />
+        <div className="group-hover:text-blue flex-col duration-100 md:flex dark:text-white dark:group-hover:text-sky-400">
           <h1 className="relative w-0 overflow-hidden text-3xl font-bold uppercase lg:w-auto">
             {t("Candidates_Label")}
           </h1>

@@ -53,7 +53,7 @@ export default function MainMenu() {
       }}
       initial="hidden"
       animate="show"
-      className="flex w-full items-center justify-center gap-4 bg-white px-4 py-4 dark:border dark:border-solid dark:border-b-slate-600 dark:bg-slate-900 lg:gap-6 lg:px-6"
+      className="flex w-full items-center justify-center gap-4 bg-white px-4 py-4 lg:gap-6 lg:px-6 dark:border-b dark:border-solid dark:border-b-slate-600 dark:bg-slate-900"
     >
       <div className="hidden lg:block">
         <Logo onClick={handleLogoClick} />
@@ -102,7 +102,7 @@ export default function MainMenu() {
               </div>
               <Sidebar.Trigger>
                 <Button
-                  className="flex items-center justify-center rounded-full border-2 border-solid border-blue bg-transparent px-4 py-1 text-blue dark:border-sky-400 dark:text-sky-400 lg:hidden"
+                  className="border-blue text-blue flex items-center justify-center rounded-full border-2 border-solid bg-transparent px-4 py-1 lg:hidden dark:border-sky-400 dark:text-sky-400"
                   aria-label={t("Settings_Label")}
                 >
                   <FontAwesomeIcon icon={faGear} />

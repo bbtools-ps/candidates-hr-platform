@@ -86,7 +86,7 @@ export default function TagsInput({
       )}
       <div
         className={cn(
-          "flex max-h-20 flex-wrap items-center overflow-auto rounded border-2 border-solid border-gray p-2 duration-100 focus-within:outline focus-within:outline-2 focus-within:outline-black hover:border-blue dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400",
+          "border-gray hover:border-blue flex max-h-20 flex-wrap items-center overflow-auto rounded-sm border-2 border-solid p-2 duration-100 focus-within:outline-2 focus-within:outline-black focus-within:outline-solid dark:border-slate-600 dark:focus-within:border-black dark:focus-within:outline-white dark:hover:border-sky-400",
           hasError && "bg-rose-300"
         )}
       >
@@ -111,7 +111,7 @@ export default function TagsInput({
                 hidden: { opacity: 0, scale: 0.5 },
                 show: { opacity: 1, scale: 1 },
               }}
-              className="group flex items-center justify-center rounded bg-blue px-2 py-1 text-base font-bold text-white"
+              className="group bg-blue flex items-center justify-center rounded-sm px-2 py-1 text-base font-bold text-white"
             >
               <span>{value}</span>
               <button
@@ -130,7 +130,7 @@ export default function TagsInput({
           type="text"
           placeholder={placeholder ?? t("PressCommaToAddTags_Label")}
           className={cn(
-            "flex-1 bg-transparent p-2 focus:outline-none",
+            "flex-1 bg-transparent p-2 focus:outline-hidden",
             hasError && "placeholder:text-black"
           )}
           value={value}

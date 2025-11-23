@@ -1,8 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap")
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-blue-dark: #2c2c2c;
+  --color-blue: #095aba;
+  --color-red: #dc2626;
+  --color-orange: #e68619;
+  --color-green: #2d9d78;
+  --color-gray: #ccc;
+
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility link-button {
+  @apply bg-blue hover:bg-blue/80 flex h-10 items-center justify-center gap-2 rounded-full px-6 font-medium text-white uppercase duration-100;
+}
+
+@utility link-button-outlined {
+  @apply border-blue text-blue flex h-10 items-center justify-center gap-2 rounded-full border-2 border-solid bg-transparent px-6 font-medium uppercase duration-100 hover:bg-slate-200 dark:border-sky-400 dark:text-sky-400 dark:hover:bg-transparent dark:hover:opacity-80;
+}
 
 @layer base {
   h1 {
@@ -10,15 +50,6 @@
   }
   h2 {
     @apply text-center text-xl font-bold uppercase;
-  }
-}
-
-@layer components {
-  .link-button {
-    @apply flex h-10 items-center justify-center gap-2 rounded-full bg-blue px-6 font-medium uppercase text-white duration-100 hover:bg-blue/80;
-  }
-  .link-button-outlined {
-    @apply flex h-10 items-center justify-center gap-2 rounded-full border-2 border-solid border-blue bg-transparent px-6 font-medium uppercase text-blue duration-100 hover:bg-slate-200 dark:border-sky-400 dark:text-sky-400 dark:hover:bg-transparent dark:hover:opacity-80;
   }
 }
 

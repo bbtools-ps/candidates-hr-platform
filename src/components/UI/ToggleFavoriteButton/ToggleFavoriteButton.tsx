@@ -19,7 +19,7 @@ export default function ToggleFavoriteButton({
   return (
     <button
       className={cn(
-        "flex h-9 w-9 items-center justify-center p-2 text-blue duration-100 hover:text-blue/80 dark:text-sky-400 dark:hover:text-sky-400/80",
+        "text-blue hover:text-blue/80 flex h-9 w-9 items-center justify-center p-2 duration-100 dark:text-sky-400 dark:hover:text-sky-400/80",
         className
       )}
       aria-label={label}

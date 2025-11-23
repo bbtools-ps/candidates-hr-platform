@@ -35,7 +35,7 @@ const Dialog = forwardRef<DialogActions, ComponentPropsWithoutRef<"dialog">>(
         ref={dialog as React.Ref<HTMLDialogElement>}
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full rounded p-4 shadow-sm backdrop:bg-slate-800/70 dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:backdrop:bg-slate-900/80 md:w-1/2 lg:w-1/3"
+        className="fixed inset-0 m-auto rounded-sm p-4 shadow-xs backdrop:bg-slate-800/70 md:w-1/2 lg:w-1/3 dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:backdrop:bg-slate-900/80"
         {...(rest as DialogHTMLAttributes<HTMLDialogElement> & MotionProps)}
       >
         {children}

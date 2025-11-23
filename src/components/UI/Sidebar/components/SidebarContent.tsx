@@ -68,14 +68,14 @@ export default function SidebarContent({
                 }
               }}
               aria-label={closeSidebarLabel ?? t("CloseSidebarFallback_Label")}
-              className="fixed inset-0 z-40 bg-black bg-opacity-50"
+              className="fixed inset-0 z-40 bg-black/50"
             />
           )}
           <aside
             ref={modalRef}
             tabIndex={-1}
             className={cn(
-              "fixed right-0 top-0 z-50 h-full w-full max-w-sm transform bg-white p-4 text-black shadow-lg outline-none transition-transform duration-300 ease-in-out dark:bg-slate-900 dark:text-white",
+              "fixed top-0 right-0 z-50 h-full w-full max-w-sm transform bg-white p-4 text-black shadow-lg outline-hidden transition-transform duration-300 ease-in-out dark:bg-slate-900 dark:text-white",
               isOpen ? "translate-x-0" : "translate-x-full"
             )}
           >
@@ -83,7 +83,7 @@ export default function SidebarContent({
               <h2 className="text-xl font-bold">{title}</h2>
               <button
                 onClick={handleClose}
-                className="bg-red-500 h-8 w-8 rounded"
+                className="h-8 w-8 rounded-sm"
                 aria-label={
                   closeSidebarLabel ?? t("CloseSidebarFallback_Label")
                 }

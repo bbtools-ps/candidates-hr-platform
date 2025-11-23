@@ -22,7 +22,7 @@ export default function CandidateItem({
 
   return (
     <article
-      className="m-2 flex w-full flex-col rounded bg-white p-4 text-black shadow-sm dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-900 dark:text-white md:w-1/2 xl:w-1/3"
+      className="m-2 flex w-full flex-col rounded-sm bg-white p-4 text-black shadow-xs md:w-1/2 xl:w-1/3 dark:border dark:border-solid dark:border-slate-600 dark:bg-slate-900 dark:text-white"
       data-cy={candidate.name}
     >
       <div className="mb-4 flex items-center">
@@ -55,7 +55,7 @@ export default function CandidateItem({
           {candidate.skills?.map(({ value, id }) => (
             <span
               key={id}
-              className="rounded border border-solid border-blue px-2 py-1 dark:border-sky-600"
+              className="border-blue rounded-sm border border-solid px-2 py-1 dark:border-sky-600"
             >
               {value}
             </span>
