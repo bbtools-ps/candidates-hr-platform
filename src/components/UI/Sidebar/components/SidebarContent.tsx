@@ -68,14 +68,14 @@ export default function SidebarContent({
                 }
               }}
               aria-label={closeSidebarLabel ?? t("CloseSidebarFallback_Label")}
-              className="fixed inset-0 z-40 bg-black/50"
+              className="fixed inset-0 z-40 bg-black/50 lg:hidden"
             />
           )}
           <aside
             ref={modalRef}
             tabIndex={-1}
             className={cn(
-              "fixed top-0 right-0 z-50 h-full w-full max-w-sm transform bg-white p-4 text-black shadow-lg outline-hidden transition-transform duration-300 ease-in-out dark:bg-slate-900 dark:text-white",
+              "fixed top-0 right-0 z-50 h-full w-full max-w-sm transform bg-white p-4 text-black shadow-lg outline-hidden transition-transform duration-300 ease-in-out lg:hidden dark:bg-slate-900 dark:text-white",
               isOpen ? "translate-x-0" : "translate-x-full"
             )}
           >
