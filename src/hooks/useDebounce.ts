@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export const useDebounce = (timeout: number = 500) => {
-  const lastChange = useRef<NodeJS.Timeout | null>(null);
+  const lastChange = useRef<number | null>(null);
 
   useEffect(() => {
     return () => {
