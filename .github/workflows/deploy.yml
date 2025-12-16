@@ -38,7 +38,7 @@ jobs:
         run: pnpm run test:unit
 
       - name: Verify Cypress installation
-        run: npx cypress verify
+        run: pnpx cypress verify
 
       - name: Run e2e tests
         run: |
