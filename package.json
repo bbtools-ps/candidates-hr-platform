@@ -28,7 +28,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "prebuild": "vitest run",
     "preview": "vite preview",
     "test:unit": "vitest --reporter=verbose",
     "test:cypress": "concurrently \"vite\" \"npx cypress open\"",
