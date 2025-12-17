@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install Netlify CLI
+        run: pnpm add -g netlify-cli
+
       - name: Install Cypress binary
         run: pnpx cypress install
 
@@ -38,7 +41,7 @@ jobs:
         run: pnpm run test:unit
 
       - name: Verify Cypress installation
-        run: npx cypress verify
+        run: pnpx cypress verify
 
       - name: Run e2e tests
         run: |
@@ -59,32 +62,8 @@ jobs:
           # Exit with Cypress exit code
           exit $CYPRESS_EXIT_CODE
 
-      - name: Build project
-        run: pnpm run build
-
       - name: Deploy to Netlify
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: "./build"
-          production-branch: ${{ github.ref_name }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-      - name: Deploy Preview to Netlify
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: "./build"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy preview from GitHub Actions"
-          alias: deploy-preview-${{ github.event.number }}
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: netlify deploy --prod --dir=build
