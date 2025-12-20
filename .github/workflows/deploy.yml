@@ -14,16 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
         with:
-          node-version: "22"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+          build: npm run build
+          start: npm start
 
       - name: Run linting
         run: npm run fix
@@ -31,11 +26,8 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
 
-      - name: Run e2e tests
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
 
       - name: Deploy to Netlify
         env:
