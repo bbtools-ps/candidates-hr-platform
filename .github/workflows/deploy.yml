@@ -14,20 +14,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Cypress tests
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          cache: true
+
+      - name: Run Cypress
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
-          start: npm start
+          build: pnpm run build
 
       - name: Run linting
-        run: npm run fix
+        run: pnpm run fix
 
       - name: Run unit tests
-        run: npm run test:unit
+        run: pnpm run test:unit
 
       - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+        run: pnpm add -g netlify-cli
 
       - name: Deploy to Netlify
         env:
