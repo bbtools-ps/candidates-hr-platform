@@ -14,16 +14,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
           cache: true
 
-      - name: Run Cypress
-        uses: cypress-io/github-action@v6
-        with:
-          build: pnpm run build
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install Netlify CLI
+        run: pnpm add -g netlify-cli
 
       - name: Run linting
         run: pnpm run fix
@@ -31,8 +37,27 @@ jobs:
       - name: Run unit tests
         run: pnpm run test:unit
 
-      - name: Install Netlify CLI
-        run: pnpm add -g netlify-cli
+      - name: Install Cypress binary
+        run: pnpx cypress install
+
+      - name: Run e2e tests
+        run: |
+          # Start Vite dev server in background
+          pnpm run dev &
+          DEV_PID=$!
+
+          # Wait for server to be ready (simple check)
+          sleep 10
+
+          # Run Cypress tests
+          npx cypress run
+          CYPRESS_EXIT_CODE=$?
+
+          # Kill the dev server
+          kill $DEV_PID
+
+          # Exit with Cypress exit code
+          exit $CYPRESS_EXIT_CODE
 
       - name: Deploy to Netlify
         env:
