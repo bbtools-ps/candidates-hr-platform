@@ -2,8 +2,15 @@ import { render, screen } from "@testing-library/react";
 import Checkbox from "./Checkbox";
 
 describe("<Checkbox />", () => {
-  it("renders with label", () => {
+  it("doesn't render label without id", () => {
     render(<Checkbox label="Test Label" />);
+
+    expect(screen.queryByText("Test Label")).not.toBeInTheDocument();
+    expect(screen.getByRole("checkbox")).toBeInTheDocument();
+  });
+
+  it("renders label with id", () => {
+    render(<Checkbox label="Test Label" id="custom-id" />);
 
     expect(screen.getByText("Test Label")).toBeInTheDocument();
     expect(screen.getByRole("checkbox")).toBeInTheDocument();
