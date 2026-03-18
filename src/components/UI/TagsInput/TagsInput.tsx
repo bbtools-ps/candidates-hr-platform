@@ -1,5 +1,4 @@
 import type { Tag } from "@/models";
-import { convertToKebabCase } from "@/utils";
 import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,11 +8,10 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 
-export interface TagsInputProps
-  extends Omit<
-    ComponentPropsWithoutRef<"input">,
-    "value" | "onChange" | "onBlur"
-  > {
+export interface TagsInputProps extends Omit<
+  ComponentPropsWithoutRef<"input">,
+  "value" | "onChange" | "onBlur"
+> {
   label?: string;
   tags: Tag[] | undefined;
   hasError?: boolean;
@@ -25,7 +23,6 @@ export interface TagsInputProps
 
 export default function TagsInput({
   label,
-  id: idProp,
   tags,
   placeholder,
   hasError,
@@ -33,10 +30,10 @@ export default function TagsInput({
   removeTagLabel,
   onAdd,
   onRemove,
+  id,
   ...rest
 }: TagsInputProps) {
   const { t } = useTranslation();
-  const id = idProp || convertToKebabCase(label);
 
   const [value, setValue] = useState("");
 
@@ -74,7 +71,7 @@ export default function TagsInput({
 
   return (
     <>
-      {label && (
+      {label && id && (
         <label htmlFor={id}>
           {label}
           {isRequired && (

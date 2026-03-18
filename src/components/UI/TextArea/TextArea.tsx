@@ -10,20 +10,13 @@ export interface TextAreaProps extends ComponentPropsWithRef<"textarea"> {
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   function TextArea(
-    {
-      label,
-      id: idProp,
-      rows = 3,
-      hasError,
-      isRequired,
-      ...rest
-    }: TextAreaProps,
+    { label, id, rows = 3, hasError, isRequired, ...rest }: TextAreaProps,
     ref
   ) {
     return (
       <>
-        {label && (
-          <label htmlFor={idProp}>
+        {label && id && (
+          <label htmlFor={id}>
             {label}
             {isRequired && (
               <span aria-hidden="true" className="ml-1">
@@ -34,8 +27,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         )}
         <textarea
           ref={ref}
+          id={id}
           rows={rows}
-          id={idProp}
           className={cn(
             "border-gray hover:border-blue w-full flex-1 truncate rounded-sm border-2 border-solid px-4 py-2 text-base duration-100 dark:border-slate-600 dark:hover:border-sky-400",
             hasError ? "border-red bg-rose-300" : "bg-transparent"

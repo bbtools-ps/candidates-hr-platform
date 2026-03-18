@@ -8,18 +8,14 @@ export interface InputFieldProps extends ComponentPropsWithRef<"input"> {
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  function InputField({
-    label,
-    id: idProp,
-    type = "text",
-    hasError,
-    isRequired,
-    ...rest
-  }: InputFieldProps) {
+  function InputField(
+    { label, id, type = "text", hasError, isRequired, ...rest },
+    ref
+  ) {
     return (
       <>
-        {label && (
-          <label htmlFor={idProp}>
+        {label && id && (
+          <label htmlFor={id}>
             {label}
             {isRequired && (
               <span aria-hidden="true" className="ml-1">
@@ -29,7 +25,8 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           </label>
         )}
         <input
-          id={idProp}
+          ref={ref}
+          id={id}
           type={type}
           className={cn(
             "border-gray hover:border-blue w-full flex-1 truncate rounded-sm border-2 border-solid px-4 py-2 text-base duration-100 dark:border-slate-600 dark:hover:border-sky-400",
