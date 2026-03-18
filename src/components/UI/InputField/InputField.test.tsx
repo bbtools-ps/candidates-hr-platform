@@ -7,7 +7,9 @@ describe("<InputField/>", () => {
   it("should render the the label and the value that are comming from the props", () => {
     const testLabel = "label";
     const testValue = "value";
-    render(<InputField label={testLabel} defaultValue={testValue} />);
+    render(
+      <InputField label={testLabel} id="test-id" defaultValue={testValue} />
+    );
 
     expect(
       screen.getByRole("textbox", { name: testLabel })

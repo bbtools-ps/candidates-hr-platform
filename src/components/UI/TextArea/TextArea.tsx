@@ -2,11 +2,14 @@ import { cn } from "@/utils/cn";
 import type { ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 
-export interface TextAreaProps extends ComponentPropsWithRef<"textarea"> {
+export interface TextAreaBaseProps extends ComponentPropsWithRef<"textarea"> {
   label?: string;
   hasError?: boolean;
   isRequired?: boolean;
 }
+
+export type TextAreaProps = TextAreaBaseProps &
+  ({ label: string; id: string } | { label?: undefined; id?: string });
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   function TextArea(

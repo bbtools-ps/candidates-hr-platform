@@ -8,11 +8,10 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 
-export interface TagsInputProps extends Omit<
+interface TagsInputBaseProps extends Omit<
   ComponentPropsWithoutRef<"input">,
   "value" | "onChange" | "onBlur"
 > {
-  label?: string;
   tags: Tag[] | undefined;
   hasError?: boolean;
   isRequired?: boolean;
@@ -20,6 +19,9 @@ export interface TagsInputProps extends Omit<
   onAdd: (value: Tag) => void;
   onRemove: (index: number) => void;
 }
+
+export type TagsInputProps = TagsInputBaseProps &
+  ({ label: string; id: string } | { label?: undefined; id?: string });
 
 export default function TagsInput({
   label,
