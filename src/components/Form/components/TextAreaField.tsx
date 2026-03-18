@@ -4,8 +4,10 @@ import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface TextAreaFieldProps
-  extends Omit<TextAreaProps, "ref" | "value" | "onChange" | "onBlur" | "id"> {
+interface TextAreaFieldProps extends Omit<
+  TextAreaProps,
+  "ref" | "value" | "onChange" | "onBlur" | "id"
+> {
   "data-cy"?: string;
 }
 
@@ -13,8 +15,8 @@ export default function TextAreaField({
   "data-cy": dataCy,
   ...rest
 }: TextAreaFieldProps) {
-  const id = useId();
   const field = useFieldContext<string>();
+  const id = useId();
 
   return (
     <div>

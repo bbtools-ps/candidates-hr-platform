@@ -4,11 +4,10 @@ import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface DateFieldProps
-  extends Omit<
-    InputFieldProps,
-    "ref" | "type" | "value" | "onChange" | "onBlur" | "id"
-  > {
+interface DateFieldProps extends Omit<
+  InputFieldProps,
+  "ref" | "type" | "value" | "onChange" | "onBlur" | "id"
+> {
   "data-cy"?: string;
 }
 
@@ -16,8 +15,8 @@ export default function DateField({
   "data-cy": dataCy,
   ...rest
 }: DateFieldProps) {
-  const id = useId();
   const field = useFieldContext<string>();
+  const id = useId();
 
   return (
     <div>

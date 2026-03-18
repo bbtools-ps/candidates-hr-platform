@@ -4,11 +4,10 @@ import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface EmailFieldProps
-  extends Omit<
-    InputFieldProps,
-    "ref" | "type" | "value" | "onChange" | "onBlur" | "id"
-  > {
+interface EmailFieldProps extends Omit<
+  InputFieldProps,
+  "ref" | "type" | "value" | "onChange" | "onBlur" | "id"
+> {
   "data-cy"?: string;
 }
 
@@ -16,8 +15,8 @@ export default function EmailField({
   "data-cy": dataCy,
   ...rest
 }: EmailFieldProps) {
-  const id = useId();
   const field = useFieldContext<string>();
+  const id = useId();
 
   return (
     <div>

@@ -4,11 +4,10 @@ import Checkbox from "../../UI/Checkbox/Checkbox";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface CheckboxFieldProps
-  extends Omit<
-    CheckboxProps,
-    "ref" | "checked" | "onChange" | "onBlur" | "id"
-  > {
+interface CheckboxFieldProps extends Omit<
+  CheckboxProps,
+  "ref" | "checked" | "onChange" | "onBlur" | "id"
+> {
   "data-cy"?: string;
 }
 
@@ -18,8 +17,8 @@ export default function CheckboxField({
   "data-cy": dataCy,
   ...rest
 }: CheckboxFieldProps) {
-  const id = useId();
   const field = useFieldContext<boolean>();
+  const id = useId();
 
   return (
     <div>

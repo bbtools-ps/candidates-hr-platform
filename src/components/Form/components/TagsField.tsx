@@ -5,8 +5,10 @@ import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
 
-interface TagsFieldProps
-  extends Omit<TagsInputProps, "ref" | "tags" | "onAdd" | "onRemove" | "id"> {
+interface TagsFieldProps extends Omit<
+  TagsInputProps,
+  "ref" | "tags" | "onAdd" | "onRemove" | "id"
+> {
   "data-cy"?: string;
 }
 
@@ -14,8 +16,8 @@ export default function TagsField({
   "data-cy": dataCy,
   ...rest
 }: TagsFieldProps) {
-  const id = useId();
   const field = useFieldContext<Tag[]>();
+  const id = useId();
 
   return (
     <div>
