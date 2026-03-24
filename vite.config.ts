@@ -1,10 +1,14 @@
-import react from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [
-    react({ babel: { plugins: ["babel-plugin-react-compiler"] } }),
+    react(),
+    babel({
+      presets: [reactCompilerPreset()],
+    }),
     tsconfigPaths(),
   ],
   build: { outDir: "build" },
