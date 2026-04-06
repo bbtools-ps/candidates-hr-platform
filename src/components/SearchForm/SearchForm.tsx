@@ -27,7 +27,7 @@ export default function SearchForm({
   className,
 }: SearchFormProps) {
   const { t } = useTranslation();
-  const debounce = useDebounce(debounceTimeout);
+  const debounce = useDebounce({ timeout: debounceTimeout });
 
   const [value, setValue] = useState(defaultValue);
   const inputRef = useRef<HTMLInputElement>(null);
