@@ -1,4 +1,4 @@
-import CandidateForm from "@/components/CandidateForm/CandidateForm";
+import CandidateForm from "@/components/CandidateForm";
 import Protected from "@/components/Protected";
 import { useCandidatesStore } from "@/store/candidates";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";

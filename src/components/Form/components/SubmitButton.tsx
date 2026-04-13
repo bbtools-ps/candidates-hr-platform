@@ -1,9 +1,11 @@
-import type { ButtonProps } from "@/components/UI/Button/Button";
-import Button from "@/components/UI/Button/Button";
+import type { ButtonProps } from "@/components/UI/Button";
+import Button from "@/components/UI/Button";
 import { useFormContext } from "../hooks";
 
-interface SubmitButtonProps
-  extends Omit<ButtonProps, "ref" | "type" | "children" | "disabled"> {
+interface SubmitButtonProps extends Omit<
+  ButtonProps,
+  "ref" | "type" | "children" | "disabled"
+> {
   label?: string;
   childrenRenderer?: (isSubmitting: boolean) => React.ReactNode;
 }

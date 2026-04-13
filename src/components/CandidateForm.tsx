@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
 import { ZodOptional } from "zod";
-import { useAppForm } from "../Form/hooks";
-import Button from "../UI/Button/Button";
-import Dialog, { type DialogActions } from "../UI/Dialog/Dialog";
+import { useAppForm } from "./Form/hooks";
+import Button from "./UI/Button";
+import Dialog, { type DialogActions } from "./UI/Dialog";
 
 interface CandidateFormProps {
   title: React.ReactNode;

@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import CandidatesLogoIcon from "../Icons/CandidatesLogoIcon";
+import CandidatesLogoIcon from "./CandidatesLogoIcon";
 
 interface LogoProps {
   onClick?: () => void;

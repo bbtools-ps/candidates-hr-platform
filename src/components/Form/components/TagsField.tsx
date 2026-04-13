@@ -1,5 +1,5 @@
-import type { TagsInputProps } from "@/components/UI/TagsInput/TagsInput";
-import TagsInput from "@/components/UI/TagsInput/TagsInput";
+import type { TagsInputProps } from "@/components/UI/TagsInput";
+import TagsInput from "@/components/UI/TagsInput";
 import type { Tag } from "@/models";
 import { useId } from "react";
 import { useFieldContext } from "../hooks";

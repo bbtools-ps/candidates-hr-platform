@@ -1,5 +1,5 @@
-import type { TextAreaProps } from "@/components/UI/TextArea/TextArea";
-import TextArea from "@/components/UI/TextArea/TextArea";
+import type { TextAreaProps } from "@/components/UI/TextArea";
+import TextArea from "@/components/UI/TextArea";
 import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";

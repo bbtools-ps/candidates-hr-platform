@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
-import VirtualList from "../VirtualList/VirtualList";
+import VirtualList from "../VirtualList";
 import CandidateItem from "./CandidateItem";
 
 export default function CandidatesList() {

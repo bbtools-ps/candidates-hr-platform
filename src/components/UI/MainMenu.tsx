@@ -1,16 +1,16 @@
-import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
-import SearchForm from "@/components/SearchForm/SearchForm";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import SearchForm from "@/components/SearchForm";
 import { faGear, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router";
-import Button from "../Button/Button";
-import Logo from "../Logo/Logo";
-import Sidebar from "../Sidebar/Sidebar";
-import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
-import ToggleFavoriteButton from "../ToggleFavoriteButton/ToggleFavoriteButton";
+import Button from "./Button";
+import Logo from "./Logo";
+import Sidebar from "./Sidebar/Sidebar";
+import ThemeSwitcher from "./ThemeSwitcher";
+import ToggleFavoriteButton from "./ToggleFavoriteButton";
 
 export default function MainMenu() {
   const { t } = useTranslation();

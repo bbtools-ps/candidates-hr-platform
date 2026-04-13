@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import Button from "../UI/Button/Button";
-import ToggleFavoriteButton from "../UI/ToggleFavoriteButton/ToggleFavoriteButton";
+import Button from "../UI/Button";
+import ToggleFavoriteButton from "../UI/ToggleFavoriteButton";
 
 interface CandidateItemProps {
   candidate: Candidate;

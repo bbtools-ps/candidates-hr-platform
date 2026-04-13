@@ -1,4 +1,4 @@
-import Button from "@/components/UI/Button/Button";
+import Button from "@/components/UI/Button";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";

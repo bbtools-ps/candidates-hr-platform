@@ -1,5 +1,5 @@
-import Footer from "@/components/UI/Footer/Footer";
-import MainMenu from "@/components/UI/MainMenu/MainMenu";
+import Footer from "@/components/UI/Footer";
+import MainMenu from "@/components/UI/MainMenu";
 import { Outlet } from "react-router";
 
 export default function RootLayout() {

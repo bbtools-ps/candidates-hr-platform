@@ -1,5 +1,5 @@
-import type { InputFieldProps } from "@/components/UI/InputField/InputField";
-import InputField from "@/components/UI/InputField/InputField";
+import type { InputFieldProps } from "@/components/UI/InputField";
+import InputField from "@/components/UI/InputField";
 import { useId } from "react";
 import { useFieldContext } from "../hooks";
 import FieldError from "./FieldError";
