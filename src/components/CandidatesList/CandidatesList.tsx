@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
+import { useShallow } from "zustand/shallow";
 import VirtualList from "../VirtualList";
 import CandidateItem from "./CandidateItem";
 
@@ -14,7 +15,15 @@ export default function CandidatesList() {
     removeCandidate,
     setCandidates,
     toggleFavorite,
-  } = useCandidatesStore();
+  } = useCandidatesStore(
+    useShallow((state) => ({
+      filterCandidates: state.filterCandidates,
+      filteredCandidates: state.filteredCandidates,
+      removeCandidate: state.removeCandidate,
+      setCandidates: state.setCandidates,
+      toggleFavorite: state.toggleFavorite,
+    }))
+  );
 
   useEffect(() => {
     setCandidates(DUMMY_CANDIDATES);

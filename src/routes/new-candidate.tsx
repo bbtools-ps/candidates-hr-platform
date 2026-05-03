@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 export function Component() {
-  const { addCandidate } = useCandidatesStore();
+  const addCandidate = useCandidatesStore((state) => state.addCandidate);
 
   const { t } = useTranslation();
 

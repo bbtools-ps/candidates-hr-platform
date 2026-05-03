@@ -24,7 +24,7 @@
     "tailwind-merge": "^2.6.0",
     "uuid": "^11.0.3",
     "zod": "^4.0.14",
-    "zustand": "^5.0.2"
+    "zustand": "^5.0.12"
   },
   "scripts": {
     "dev": "vite",

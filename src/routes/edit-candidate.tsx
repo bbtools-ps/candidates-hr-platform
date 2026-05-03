@@ -5,9 +5,15 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
+import { useShallow } from "zustand/shallow";
 
 export function Component() {
-  const { allCandidates, editCandidate } = useCandidatesStore();
+  const { allCandidates, editCandidate } = useCandidatesStore(
+    useShallow((state) => ({
+      allCandidates: state.allCandidates,
+      editCandidate: state.editCandidate,
+    }))
+  );
 
   const { t } = useTranslation();
 
