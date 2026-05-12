@@ -15,7 +15,7 @@ export const useDebounce = ({
   timeout = 500,
   executeOnUnmount = false,
 }: { timeout?: number; executeOnUnmount?: boolean } = {}) => {
-  const lastChange = useRef<number | null>(null);
+  const lastChange = useRef<ReturnType<typeof setTimeout> | null>(null);
   const callbackRef = useRef<() => void | undefined>(undefined);
 
   useEffect(() => {
