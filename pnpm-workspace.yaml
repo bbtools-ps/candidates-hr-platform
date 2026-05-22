@@ -2,3 +2,6 @@ minimumReleaseAge: 10080
 ignoredBuiltDependencies:
   - cypress
   - esbuild
+allowBuilds:
+  cypress: true
+  esbuild: true

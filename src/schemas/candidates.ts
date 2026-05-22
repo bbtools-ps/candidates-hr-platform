@@ -1,7 +1,7 @@
 import { t } from "i18next";
 import { z } from "zod";
 
-export const CANDIDATE_SCHEMA = z.object({
+export const candidateSchema = z.object({
   name: z
     .string()
     .trim()

@@ -1,5 +1,5 @@
-import { CANDIDATE_SCHEMA } from "@/constants";
 import type { Candidate } from "@/models";
+import { candidateSchema } from "@/schemas";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -36,9 +36,9 @@ export default function CandidateForm({
       skills: candidate?.skills || [],
       ...(candidate?.notes && { notes: candidate.notes }),
     },
-    validators: { onSubmit: CANDIDATE_SCHEMA },
+    validators: { onSubmit: candidateSchema },
     onSubmit: ({ value }) => {
-      const result = CANDIDATE_SCHEMA.parse(value);
+      const result = candidateSchema.parse(value);
       onSubmitProp({
         ...result,
         id: candidate?.id ?? uuid(),
@@ -72,7 +72,7 @@ export default function CandidateForm({
             <field.TextField
               data-cy="candidate-name"
               label={t("Name_Label")}
-              isRequired={!(CANDIDATE_SCHEMA.shape.name instanceof ZodOptional)}
+              isRequired={!(candidateSchema.shape.name instanceof ZodOptional)}
             />
           )}
         </form.AppField>
@@ -82,7 +82,7 @@ export default function CandidateForm({
               data-cy="candidate-date-of-birth"
               label={t("DateOfBirthForm_Label")}
               isRequired={
-                !(CANDIDATE_SCHEMA.shape.dateOfBirth instanceof ZodOptional)
+                !(candidateSchema.shape.dateOfBirth instanceof ZodOptional)
               }
             />
           )}
@@ -93,7 +93,7 @@ export default function CandidateForm({
               data-cy="candidate-contact-number"
               label={t("ContactNumberForm_Label")}
               isRequired={
-                !(CANDIDATE_SCHEMA.shape.contactNumber instanceof ZodOptional)
+                !(candidateSchema.shape.contactNumber instanceof ZodOptional)
               }
             />
           )}
@@ -103,9 +103,7 @@ export default function CandidateForm({
             <field.EmailField
               data-cy="candidate-email"
               label={t("EmailForm_Label")}
-              isRequired={
-                !(CANDIDATE_SCHEMA.shape.email instanceof ZodOptional)
-              }
+              isRequired={!(candidateSchema.shape.email instanceof ZodOptional)}
             />
           )}
         </form.AppField>
@@ -117,7 +115,7 @@ export default function CandidateForm({
               placeholder={t("SkillsFormPlaceholder_Label")}
               removeTagLabel={t("RemoveSkill_Label")}
               isRequired={
-                !(CANDIDATE_SCHEMA.shape.skills instanceof ZodOptional)
+                !(candidateSchema.shape.skills instanceof ZodOptional)
               }
             />
           )}
@@ -126,9 +124,7 @@ export default function CandidateForm({
           {(field) => (
             <field.TextAreaField
               label={t("NotesForm_Label")}
-              isRequired={
-                !(CANDIDATE_SCHEMA.shape.notes instanceof ZodOptional)
-              }
+              isRequired={!(candidateSchema.shape.notes instanceof ZodOptional)}
             />
           )}
         </form.AppField>

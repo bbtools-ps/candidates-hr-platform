@@ -8,7 +8,6 @@
     "types": ["vitest/globals"],
     "skipLibCheck": true,
 
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "bundler",

@@ -1,7 +1,7 @@
-import type { CANDIDATE_SCHEMA } from "@/constants";
+import type { candidateSchema } from "@/schemas";
 import type { z } from "zod";
 
-export type Candidate = z.infer<typeof CANDIDATE_SCHEMA> & {
+export type Candidate = z.infer<typeof candidateSchema> & {
   id: string;
   isFavorite: boolean;
 };
