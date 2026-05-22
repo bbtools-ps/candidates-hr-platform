@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe("candidates", () => {
   it("should add/edit/remove a candidate", () => {
     cy.visit("/");

@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe("navigation", () => {
   it("should go back from Edit and Add new candidate page", () => {
     cy.visit("/");
