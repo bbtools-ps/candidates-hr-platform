@@ -140,9 +140,8 @@ export default function CandidateForm({
             {t("Cancel_Label")}
           </Button>
           <form.AppForm>
-            <form.SubmitButton
-              data-cy="submit-btn"
-              childrenRenderer={(isSubmitting) =>
+            <form.SubmitButton data-cy="submit-btn">
+              {(isSubmitting) =>
                 isSubmitting
                   ? candidate
                     ? t("Saving_Label")
@@ -151,7 +150,7 @@ export default function CandidateForm({
                     ? t("Save_Label")
                     : t("Add_Label")
               }
-            />
+            </form.SubmitButton>
           </form.AppForm>
         </div>
       </form>

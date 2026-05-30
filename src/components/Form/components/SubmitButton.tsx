@@ -6,22 +6,17 @@ interface SubmitButtonProps extends Omit<
   ButtonProps,
   "ref" | "type" | "children" | "disabled"
 > {
-  label?: string;
-  childrenRenderer?: (isSubmitting: boolean) => React.ReactNode;
+  children: (isSubmitting: boolean) => React.ReactNode;
 }
 
-export default function SubmitButton({
-  label,
-  childrenRenderer,
-  ...rest
-}: SubmitButtonProps) {
+export default function SubmitButton({ children, ...rest }: SubmitButtonProps) {
   const form = useFormContext();
 
   return (
     <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
       {([canSubmit, isSubmitting]) => (
         <Button type="submit" disabled={!canSubmit || isSubmitting} {...rest}>
-          {label ?? childrenRenderer?.(isSubmitting) ?? "Submit"}
+          {children(isSubmitting)}
         </Button>
       )}
     </form.Subscribe>
