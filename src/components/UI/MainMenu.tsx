@@ -7,10 +7,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router";
 import Button from "./Button";
+import FavoriteButton from "./FavoriteButton";
 import Logo from "./Logo";
 import Sidebar from "./Sidebar/Sidebar";
 import ThemeSwitcher from "./ThemeSwitcher";
-import ToggleFavoriteButton from "./ToggleFavoriteButton";
 
 export default function MainMenu() {
   const { t } = useTranslation();
@@ -79,11 +79,11 @@ export default function MainMenu() {
               <Logo onClick={handleLogoClick} />
             </div>
             <div className="flex items-center gap-4">
-              <ToggleFavoriteButton
+              <FavoriteButton
                 className="h-7 w-7 p-0"
                 label={t("ShowFavorites_Label")}
                 isFavorite={isFavorite}
-                onToggleFavorite={handleToggleFavorite}
+                onClick={handleToggleFavorite}
               />
               <Link
                 to="/new-candidate"

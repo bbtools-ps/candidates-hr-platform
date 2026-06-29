@@ -3,19 +3,19 @@ import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface ToggleFavoriteButtonProps {
+interface FavoriteButtonProps {
   isFavorite?: boolean;
   className?: string;
   label?: string;
-  onToggleFavorite: () => void;
+  onClick: () => void;
 }
 
-export default function ToggleFavoriteButton({
+export default function FavoriteButton({
   isFavorite = false,
   className,
   label = "Add to favorite",
-  onToggleFavorite,
-}: ToggleFavoriteButtonProps) {
+  onClick,
+}: FavoriteButtonProps) {
   return (
     <button
       className={cn(
@@ -24,7 +24,7 @@ export default function ToggleFavoriteButton({
       )}
       aria-label={label}
       aria-pressed={isFavorite}
-      onClick={onToggleFavorite}
+      onClick={onClick}
     >
       <FontAwesomeIcon
         icon={isFavorite ? faStar : faStarOutline}

@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import Button from "../UI/Button";
-import ToggleFavoriteButton from "../UI/ToggleFavoriteButton";
+import FavoriteButton from "../UI/FavoriteButton";
 
 interface CandidateItemProps {
   candidate: Candidate;
@@ -27,9 +27,9 @@ export default function CandidateItem({
     >
       <div className="mb-4 flex items-center">
         <h2 className="flex-1 text-center">{candidate.name}</h2>
-        <ToggleFavoriteButton
+        <FavoriteButton
           isFavorite={candidate.isFavorite}
-          onToggleFavorite={onToggleFavorite.bind(null, candidate.id)}
+          onClick={onToggleFavorite.bind(null, candidate.id)}
           label={t("AddToFavorites_Label")}
         />
       </div>
