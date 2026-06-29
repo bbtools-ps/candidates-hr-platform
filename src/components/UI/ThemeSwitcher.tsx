@@ -37,10 +37,10 @@ export default function ThemeSwitcher() {
       <button
         type="button"
         role="switch"
+        aria-checked={isDarkTheme}
         aria-label={t("DarkTheme_Label")}
         className="border-blue text-blue dark:bg-blue absolute z-10 h-full w-full rounded-full border-2 border-solid duration-100 hover:bg-slate-200 dark:text-white dark:hover:opacity-80"
         onClick={handleChange}
-        aria-checked={isDarkTheme}
       >
         <FontAwesomeIcon icon={isDarkTheme ? faMoon : faSun} />
       </button>
