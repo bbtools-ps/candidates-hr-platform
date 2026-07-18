@@ -32,7 +32,7 @@ jobs:
         run: pnpx oxlint --max-warnings=0
 
       - name: Run unit tests
-        run: pnpxvitest --run
+        run: pnpx vitest --run
 
       - name: Install Cypress binary
         run: npx cypress install
