@@ -33,3 +33,8 @@
 - The create/edit flows are modal-style routes handled by React Router.
 - Candidate filtering and favorites are driven by the store and should be updated through the existing store actions.
 - If you need context for the app’s intent or deployment setup, start with README.md.
+
+## Plan Mode
+
+- Make the plan extremely concise. Sacrifice grammar for the sake of concision.
+- At the end of each plan, give me a list of unresolved questions to answer, if any.
