@@ -29,10 +29,10 @@ jobs:
         run: pnpm install
 
       - name: Run linting
-        run: oxlint --max-warnings=0
+        run: pnpx oxlint --max-warnings=0
 
       - name: Run unit tests
-        run: vitest --run
+        run: pnpxvitest --run
 
       - name: Install Cypress binary
         run: npx cypress install
