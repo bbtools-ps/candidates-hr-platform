@@ -55,6 +55,7 @@ export default function SearchForm({
         <FontAwesomeIcon icon={faSearch} />
       </span>
       <form
+        // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
         role="search"
         aria-label={label}
         onSubmit={(e) => e.preventDefault()}

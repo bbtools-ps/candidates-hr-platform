@@ -58,6 +58,7 @@ export default function SidebarContent({
         <>
           {isOpen && (
             <div
+              // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
               role="button"
               tabIndex={0}
               onClick={handleClose}
