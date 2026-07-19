@@ -29,7 +29,7 @@ jobs:
         run: pnpm install
 
       - name: Run linting
-        run: npx oxlint --max-warnings=0
+        run: npx oxlint --deny-warnings
 
       - name: Run unit tests
         run: npx vitest --run
