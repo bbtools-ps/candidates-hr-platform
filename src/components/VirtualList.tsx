@@ -34,7 +34,6 @@ function VirtualListInner<T>(
   "use no memo";
   const parentRef = useRef<HTMLDivElement>(null);
 
-  // eslint-disable-next-line react-hooks/incompatible-library
   const virtualizer = useVirtualizer({
     count: hasNextPage ? itemsProp.length + 1 : itemsProp.length,
     getScrollElement: () => parentRef.current,
