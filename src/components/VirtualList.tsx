@@ -17,6 +17,7 @@ export interface VirtualListActions {
   scrollToIndex: (index: number) => void;
 }
 
+// oxlint-disable-next-line react/react-compiler
 function VirtualListInner<T>(
   {
     items: itemsProp,

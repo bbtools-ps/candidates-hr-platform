@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/refs */
 import type { ReactElement } from "react";
 import { cloneElement, isValidElement } from "react";
 import { useSidebarContext } from "../hooks";
@@ -19,6 +18,7 @@ export default function SidebarTrigger({ children }: SidebarTriggerProps) {
 
   if (!isValidElement(children)) return null;
 
+  // oxlint-disable-next-line react/react-compiler
   return cloneElement(children as ReactElement, {
     ...children.props,
     onClick: () => {
