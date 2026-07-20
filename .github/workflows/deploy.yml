@@ -7,58 +7,32 @@ on:
     branches: [main, master]
 
 jobs:
-  lint:
+  test-build-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: npx oxlint --deny-warnings
 
-  typecheck:
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  unit-tests:
-    runs-on: ubuntu-latest
-    needs: [lint, typecheck]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: npx vitest --run
+          node-version: "22"
 
-  e2e-tests:
-    runs-on: ubuntu-latest
-    needs: [lint, typecheck]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 10
-      - uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          cache: true
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linting
+        run: npx oxlint --deny-warnings
+
+      - name: Run unit tests
+        run: npx vitest --run
 
       - name: Install Cypress binary
         run: npx cypress install
@@ -81,19 +55,6 @@ jobs:
 
           # Exit with Cypress exit code
           exit $CYPRESS_EXIT_CODE
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [unit-tests, e2e-tests]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
 
       - name: Install Netlify CLI
         run: pnpm add -g netlify-cli
