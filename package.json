@@ -54,7 +54,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "babel-plugin-react-compiler": "1.0.0",
     "concurrently": "^8.2.2",
-    "cypress": "^15.8.1",
+    "cypress": "^15.18.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "husky": "^9.1.7",
     "jsdom": "^21.1.2",
@@ -64,7 +64,7 @@
     "postcss": "^8.4.32",
     "resize-observer-polyfill": "^1.5.1",
     "tailwindcss": "^4.1.17",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "vite": "^8.0.2",
     "vitest": "^4.0.15"
   },
