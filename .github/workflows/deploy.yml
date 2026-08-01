@@ -37,6 +37,9 @@ jobs:
       - name: Run unit tests
         run: npx vitest --run
 
+      - name: Build app
+        run: pnpm run build
+
       - name: Install Cypress binary
         run: npx cypress install
 
@@ -60,9 +63,11 @@ jobs:
           exit $CYPRESS_EXIT_CODE
 
       - name: Install Netlify CLI
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         run: pnpm add -g netlify-cli
 
       - name: Deploy to Netlify
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

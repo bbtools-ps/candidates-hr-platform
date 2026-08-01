@@ -27,7 +27,6 @@ This repository includes a GitHub Action workflow that automatically:
 2. Executes unit tests
 3. Builds the project
 4. Deploys to Netlify (on main/master branch)
-5. Creates preview deployments for pull requests
 
 ## Netlify Configuration
 
@@ -66,7 +65,7 @@ The `netlify.toml` file includes:
 
 ### Security Measures Implemented
 
-- 🔒 **Fork protection**: Preview deployments only run for PRs from the same repository
+- 🔒 **Secrets protection**: Pull request checks do not use Netlify deployment secrets
 - 🔒 **Branch protection**: Production deployments only from main/master branches
 - 🔒 **Limited scope**: Netlify tokens have minimal required permissions
 - 🔒 **Manual deploy only**: Netlify auto-build disabled
@@ -102,7 +101,7 @@ To enable Netlify deployment, you need to add the following secrets to your GitH
 ## Workflow Behavior
 
 - **On push to main/master**: Runs tests, builds, and deploys to production
-- **On pull request**: Runs tests, builds, and creates a preview deployment
+- **On pull request**: Runs tests and builds without deploying
 - **Test failure**: Stops the workflow and prevents deployment
 - **Build failure**: Stops the workflow and prevents deployment
 - **Netlify auto-build**: Disabled - only GitHub Actions can deploy
