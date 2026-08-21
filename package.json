@@ -16,7 +16,7 @@
     "fix": "oxlint --fix",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc -b"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",
