@@ -17,7 +17,6 @@ export interface VirtualListActions {
   scrollToIndex: (index: number) => void;
 }
 
-// oxlint-disable-next-line react/react-compiler
 function VirtualListInner<T>(
   {
     items: itemsProp,
@@ -34,6 +33,7 @@ function VirtualListInner<T>(
   "use no memo";
   const parentRef = useRef<HTMLDivElement>(null);
 
+  // oxlint-disable-next-line react/incompatible-library
   const virtualizer = useVirtualizer({
     count: hasNextPage ? itemsProp.length + 1 : itemsProp.length,
     getScrollElement: () => parentRef.current,
