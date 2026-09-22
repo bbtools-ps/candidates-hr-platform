@@ -18,7 +18,7 @@ export default function SidebarTrigger({ children }: SidebarTriggerProps) {
 
   if (!isValidElement(children)) return null;
 
-  // oxlint-disable-next-line react/react-compiler
+  // oxlint-disable-next-line react/refs
   return cloneElement(children as ReactElement, {
     ...children.props,
     onClick: () => {

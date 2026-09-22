@@ -16,7 +16,7 @@ export default function ThemeSwitcher() {
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.documentElement.classList.add("dark");
-      // oxlint-disable-next-line react/react-compiler
+      // oxlint-disable-next-line react/set-state-in-effect
       setTheme("dark");
     } else {
       document.documentElement.classList.remove("dark");
