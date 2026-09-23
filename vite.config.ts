@@ -1,6 +1,6 @@
 import babel from "@rolldown/plugin-babel";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [
@@ -12,5 +12,11 @@ export default defineConfig({
   build: { outDir: "build" },
   resolve: {
     tsconfigPaths: true,
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
+    pool: "vmThreads",
   },
 });
