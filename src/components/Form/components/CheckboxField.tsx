@@ -1,7 +1,7 @@
 import { useId } from "react";
 import type { CheckboxProps } from "../../UI/Checkbox";
 import Checkbox from "../../UI/Checkbox";
-import { useFieldContext } from "../hooks";
+import { useFieldContext } from "../contexts";
 import FieldError from "./FieldError";
 
 interface CheckboxFieldProps extends Omit<

@@ -1,6 +1,6 @@
 import type { ButtonProps } from "@/components/UI/Button";
 import Button from "@/components/UI/Button";
-import { useFormContext } from "../hooks";
+import { useFormContext } from "../contexts";
 
 interface SubmitButtonProps extends Omit<
   ButtonProps,
