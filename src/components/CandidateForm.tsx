@@ -1,5 +1,5 @@
-import type { Candidate } from "@/models";
-import { candidateSchema } from "@/schemas";
+import type { Candidate } from "@/models/Candidate";
+import { candidateSchema } from "@/schemas/candidates";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";

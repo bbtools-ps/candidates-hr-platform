@@ -1,8 +1,8 @@
 import type { TagsInputProps } from "@/components/UI/TagsInput";
 import TagsInput from "@/components/UI/TagsInput";
-import type { Tag } from "@/models";
+import type { Tag } from "@/models/Tag";
 import { useId } from "react";
-import { useFieldContext } from "../hooks";
+import { useFieldContext } from "../contexts";
 import FieldError from "./FieldError";
 
 interface TagsFieldProps extends Omit<

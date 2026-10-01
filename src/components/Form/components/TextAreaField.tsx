@@ -1,7 +1,7 @@
 import type { TextAreaProps } from "@/components/UI/TextArea";
 import TextArea from "@/components/UI/TextArea";
 import { useId } from "react";
-import { useFieldContext } from "../hooks";
+import { useFieldContext } from "../contexts";
 import FieldError from "./FieldError";
 
 interface TextAreaFieldProps extends Omit<

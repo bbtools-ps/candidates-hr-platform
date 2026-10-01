@@ -1,7 +1,7 @@
 import type { InputFieldProps } from "@/components/UI/InputField";
 import InputField from "@/components/UI/InputField";
 import { useId } from "react";
-import { useFieldContext } from "../hooks";
+import { useFieldContext } from "../contexts";
 import FieldError from "./FieldError";
 
 interface TextFieldProps extends Omit<

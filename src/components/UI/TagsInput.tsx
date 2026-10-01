@@ -1,4 +1,4 @@
-import type { Tag } from "@/models";
+import type { Tag } from "@/models/Tag";
 import { cn } from "@/utils/cn";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

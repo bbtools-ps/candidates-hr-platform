@@ -1,4 +1,4 @@
-import type { candidateSchema } from "@/schemas";
+import type { candidateSchema } from "@/schemas/candidates";
 import type { z } from "zod";
 
 export type Candidate = z.infer<typeof candidateSchema> & {
