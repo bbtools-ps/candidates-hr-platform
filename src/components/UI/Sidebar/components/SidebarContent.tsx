@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { useSidebarContext } from "../hooks";
 import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useSidebarContext } from "../hooks/useSidebarContext";
 
 interface SidebarContentProps {
   title?: string;

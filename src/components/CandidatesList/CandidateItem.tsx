@@ -1,4 +1,4 @@
-import type { Candidate } from "@/models";
+import type { Candidate } from "@/models/Candidate";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";

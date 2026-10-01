@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import { cloneElement, isValidElement } from "react";
-import { useSidebarContext } from "../hooks";
+import { useSidebarContext } from "../hooks/useSidebarContext";
 
 interface SidebarTriggerProps {
   children: React.ReactNode;

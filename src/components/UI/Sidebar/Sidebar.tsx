@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import SidebarContent from "./components/SidebarContent";
 import SidebarTrigger from "./components/SidebarTrigger";
-import { SidebarContext } from "./hooks";
+import { SidebarContext } from "./hooks/useSidebarContext";
 
 interface SidebarProps {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-import { useDebounce } from "@/hooks";
+import { useDebounce } from "@/hooks/useDebounce";
 import { cn } from "@/utils/cn";
 import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
