@@ -61,9 +61,12 @@ jobs:
           kill $DEV_PID || true
           exit $CYPRESS_EXIT_CODE
 
+      - name: Install Netlify CLI
+        run: pnpm add -g netlify-cli
+
       - name: Deploy to Netlify
         if: github.event_name == 'push'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: pnpm exec netlify deploy --prod --dir=build
+        run: netlify deploy --prod --dir=build
