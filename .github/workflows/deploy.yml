@@ -61,6 +61,9 @@ jobs:
           kill $DEV_PID || true
           exit $CYPRESS_EXIT_CODE
 
+      - name: Install Netlify CLI
+        run: pnpm add -g netlify-cli
+
       - name: Deploy to Netlify
         if: github.event_name == 'push'
         env:
