@@ -33,7 +33,7 @@ export function Component() {
         }
         onSubmit={(candidate) => {
           editCandidate(candidate);
-          navigate(-1);
+          void navigate(-1);
         }}
         candidate={location.state?.candidate}
       />

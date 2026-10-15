@@ -46,7 +46,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       type={type}
-      aria-label={children?.toString()}
+      aria-label={
+        typeof children === "string" || typeof children === "number"
+          ? String(children)
+          : undefined
+      }
       className={cn(
         "disabled:bg-gray flex items-center gap-2 rounded-full px-6 py-2 text-base font-medium uppercase duration-100",
         buttonVariant[variant],

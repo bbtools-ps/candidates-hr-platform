@@ -51,9 +51,9 @@ The `netlify.toml` file includes:
 
 ```toml
 [build]
-  command = "# Build disabled - deployed from CI"
-  publish = "build"
-  ignore = "exit 1"  # Always skip auto-builds
+command = "# Build disabled - deployed from CI"
+publish = "build"
+ignore = "exit 1" # Always skip auto-builds
 ```
 
 ## Security Considerations

@@ -1,5 +1,5 @@
 import { render, waitFor } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import VirtualList from "./VirtualList";
 
 let virtualItems: Array<{ index: number; key: string; start: number }> = [];

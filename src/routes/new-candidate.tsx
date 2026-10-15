@@ -24,7 +24,7 @@ export function Component() {
       }
       onSubmit={(candidate) => {
         addCandidate(candidate);
-        navigate("..");
+        void navigate("..");
       }}
     />
   );
