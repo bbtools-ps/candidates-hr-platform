@@ -26,44 +26,44 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Typecheck
-        run: npx tsc -b
+        run: pnpm run typecheck
 
       - name: Run linting
-        run: npx oxlint --deny-warnings
+        run: pnpm run lint
 
       - name: Run unit tests
-        run: npx vitest --run
+        run: pnpm run test:unit
+
+      - name: Build app
+        run: pnpm run build
 
       - name: Install Cypress binary
-        run: npx cypress install
+        run: pnpm exec cypress install
 
       - name: Run e2e tests
         run: |
-          # Start Vite dev server in background
-          pnpm run dev &
+          pnpm run dev --host 127.0.0.1 --port 4173 &
           DEV_PID=$!
 
-          # Wait for server to be ready (simple check)
-          sleep 10
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173 >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
 
-          # Run Cypress tests
-          npx cypress run
+          pnpm exec cypress run
           CYPRESS_EXIT_CODE=$?
 
-          # Kill the dev server
-          kill $DEV_PID
-
-          # Exit with Cypress exit code
+          kill $DEV_PID || true
           exit $CYPRESS_EXIT_CODE
 
-      - name: Install Netlify CLI
-        run: pnpm add -g netlify-cli
-
       - name: Deploy to Netlify
+        if: github.event_name == 'push'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: netlify deploy --prod --dir=build
+        run: pnpm exec netlify deploy --prod --dir=build
