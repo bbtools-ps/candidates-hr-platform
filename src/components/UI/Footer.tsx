@@ -2,15 +2,12 @@ interface FooterProps {
   copyrightLabel: string;
 }
 
-export default function Footer({ copyrightLabel }: FooterProps) {
-  const getCurrentYear = () => {
-    const date = new Date();
-    return date.getFullYear();
-  };
+const CURRENT_YEAR = new Date().getFullYear();
 
+export default function Footer({ copyrightLabel }: FooterProps) {
   return (
     <p className="flex gap-2">
-      &copy; {getCurrentYear()}.
+      &copy; {CURRENT_YEAR}.
       <a
         className="text-gray hover:text-blue font-bold duration-100 dark:hover:text-sky-400"
         href="https://bogdan-bogdanovic.com/"

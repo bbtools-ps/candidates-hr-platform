@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
   }, [i18n.language]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(e.target.value);
+    void i18n.changeLanguage(e.target.value);
   };
 
   return (

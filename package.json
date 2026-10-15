@@ -5,17 +5,17 @@
   "description": "Candidates HR Platform",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test:unit": "vitest --reporter=verbose",
+    "dev": "vp dev",
+    "build": "vp build",
+    "preview": "vp preview",
+    "test:unit": "vp test --reporter=verbose",
     "test:cypress": "concurrently \"vite\" \"npx cypress open\"",
     "test:e2e": "concurrently \"vite\" \"npx cypress run\"",
-    "format": "oxfmt",
-    "lint": "oxlint",
-    "fix": "oxlint --fix",
+    "format": "vp fmt",
+    "lint": "vp lint",
+    "fix": "vp lint --fix",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky",
+    "prepare": "vp config",
     "typecheck": "tsc -b"
   },
   "dependencies": {
@@ -55,18 +55,14 @@
     "babel-plugin-react-compiler": "1.0.0",
     "concurrently": "^8.2.2",
     "cypress": "^15.18.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "husky": "^9.1.7",
     "jsdom": "^21.1.2",
-    "lint-staged": "^17.4.1",
-    "oxfmt": "^0.58.0",
-    "oxlint": "^1.83.0",
     "postcss": "^8.4.32",
     "resize-observer-polyfill": "^1.5.1",
     "tailwindcss": "^4.1.17",
     "typescript": "^6.0.3",
-    "vite": "^8.0.2",
-    "vitest": "^5.0.0"
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:"
   },
   "browserslist": {
     "production": [

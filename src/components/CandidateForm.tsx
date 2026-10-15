@@ -55,14 +55,14 @@ export default function CandidateForm({
     e.preventDefault();
     e.stopPropagation();
 
-    form.handleSubmit();
+    void form.handleSubmit();
   };
 
   return (
     <Dialog
       ref={dialog}
       onClose={() => {
-        navigate("..");
+        void navigate("..");
       }}
     >
       <h2 data-cy="heading">{title}</h2>
@@ -132,7 +132,7 @@ export default function CandidateForm({
           <Button
             type="button"
             onClick={() => {
-              navigate(-1);
+              void navigate(-1);
             }}
             variant="outlined"
             data-cy="cancel-btn"

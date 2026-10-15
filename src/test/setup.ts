@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import ResizeObserver from "resize-observer-polyfill";
-import { afterEach, vi } from "vitest";
+import { afterEach, vi } from "vite-plus/test";
 
 afterEach(() => {
   cleanup();
