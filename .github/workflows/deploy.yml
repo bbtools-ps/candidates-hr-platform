@@ -45,11 +45,11 @@ jobs:
 
       - name: Run e2e tests
         run: |
-          pnpm run dev --host 127.0.0.1 --port 4173 &
+          pnpm run dev &
           DEV_PID=$!
 
           for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:4173 >/dev/null; then
+            if curl -fsS http://localhost:5173 >/dev/null; then
               break
             fi
             sleep 1
