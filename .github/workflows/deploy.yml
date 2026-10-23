@@ -18,7 +18,7 @@ jobs:
           cache: true
 
       - name: Typecheck & Lint
-        run: vp check
+        run: vp check --fix
 
       - name: Tests
         run: vp test
