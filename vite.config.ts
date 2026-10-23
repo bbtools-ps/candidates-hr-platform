@@ -51,7 +51,6 @@ export default defineConfig({
       presets: [reactCompilerPreset()],
     }),
   ]),
-  build: { outDir: "build" },
   resolve: {
     tsconfigPaths: true,
   },

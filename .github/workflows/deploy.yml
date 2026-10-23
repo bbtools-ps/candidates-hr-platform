@@ -12,13 +12,15 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - uses: actions/checkout@v6
+
       - uses: voidzero-dev/setup-vp@v1.22.0
         with:
           node-version: "24"
           cache: true
 
       - name: Typecheck & Lint
-        run: vp check --fix
+        run: vp check
 
       - name: Tests
         run: vp test
@@ -43,4 +45,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: vp dlx netlify deploy --prod --dir=build
+        run: vp dlx netlify-cli deploy --prod --dir=dist
