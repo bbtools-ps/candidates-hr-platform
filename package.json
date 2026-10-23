@@ -11,11 +11,7 @@
     "test:unit": "vp test --reporter=verbose",
     "test:cypress": "concurrently \"vp dev\" \"pnpm exec cypress open\"",
     "test:e2e": "concurrently \"vp dev\" \"pnpm exec cypress run\"",
-    "format": "vp fmt",
-    "lint": "vp lint",
-    "fix": "vp lint --fix",
-    "prepare": "vp config",
-    "typecheck": "tsc -b"
+    "prepare": "vp config"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",
