@@ -13,6 +13,7 @@
     "test:e2e": "concurrently \"vp dev\" \"pnpm exec cypress run\"",
     "prepare": "vp config",
     "sandbox:create": "sbx run copilot --clone --kit ./sandbox/vite-plus .",
+    "sandbox:remove": "sbx rm copilot-candidates-hr-platform",
     "sandbox:run": "sbx run --name copilot-candidates-hr-platform",
     "sandbox:stop": "sbx stop copilot-candidates-hr-platform"
   },
