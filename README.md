@@ -131,6 +131,8 @@ vp build
 
 ## Docker sandbox commands
 
+Before using the Docker sandbox commands in this repository, install the `sbx` CLI on your system by following the official Docker guide: https://docs.docker.com/ai/sandboxes/install/
+
 This project includes local Docker sandbox setup for development and agent-based workflows. These sandboxes are configured for the Docker Copilot AI agent template because the project uses `sbx run copilot` to create the environment. If you want to switch to a different agent template, you can follow the Docker sandbox guides: https://docs.docker.com/ai/sandboxes/agents/
 
 These sandboxes are meant for local development only and run in an isolated local Docker environment.
