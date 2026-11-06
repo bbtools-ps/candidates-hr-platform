@@ -123,7 +123,7 @@ vp install
 vpr test:unit
 
 # Build project
-vpr build
+vp build
 ```
 
 ## Vite Plus usage
