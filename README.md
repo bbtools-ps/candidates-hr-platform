@@ -135,6 +135,8 @@ This project includes local Docker sandbox setup for development and agent-based
 
 These sandboxes are meant for local development only and run in an isolated local Docker environment.
 
+The sandbox definition lives in `sandbox/vite-plus/spec.yaml` and is used to run the app in an isolated Docker environment.
+
 ```bash
 # Create the sandbox for this project
 vpr sandbox:create
@@ -149,7 +151,17 @@ vpr sandbox:stop
 vpr sandbox:remove
 ```
 
-The sandbox definition lives in `sandbox/vite-plus/spec.yaml` and is used to run the app in an isolated Docker environment.
+When the sandbox is created from a cloned project, it starts with the repository contents but not the git-ignored install artifacts such as `node_modules` or other generated local environment files. It also does not yet include the Vite Plus-managed Node environment. In the sandbox project root, run:
+
+```bash
+# Enable Vite Plus-managed Node and package manager
+vp env on
+
+# Install project dependencies inside the sandbox
+vp install
+```
+
+This should be done before running the app or project scripts inside the sandbox because those local dependencies are not included in the cloned repository snapshot.
 
 ## Troubleshooting
 
