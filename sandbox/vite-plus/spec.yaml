@@ -1,0 +1,38 @@
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: mixin
+displayName: Vite Plus
+description: Vite+ (vp CLI) with Node managed by vp
+
+build: |
+  # syntax=docker/dockerfile:1
+  FROM scratch
+  ENV PATH="/home/agent/.local/share/vite-plus/bin:/home/agent/.local/share/vite-plus/fallback-bin:${PATH}"
+
+capabilities:
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      install:
+        allow:
+          - vite.plus
+          - viteplus.dev
+          - registry.npmjs.org
+          - nodejs.org
+      runtime:
+        allow:
+          - vite.plus
+          - viteplus.dev
+          - registry.npmjs.org
+          - nodejs.org
+          - localhost:54322 # host Supabase Postgres
+          - localhost:54321 # host Supabase API, if your app uses it
+
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      install:
+        - description: Install Vite+ (vp CLI) and manage Node via vp
+          user: "1000"
+          command: |
+            set -eu
+            export HOME=/home/agent
+            curl -fsSL https://vite.plus | bash
