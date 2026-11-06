@@ -113,24 +113,7 @@ You can also trigger the workflow manually from the GitHub Actions tab if needed
 
 ## Local Development
 
-The workflow uses the same commands as your local development. Since this project uses Vite Plus, the script runner is `vpr` instead of `pnpm run`:
-
-```bash
-# Install dependencies
-vp install
-
-# Run tests
-vpr test:unit
-
-# Build project
-vp build
-```
-
-## Vite Plus usage
-
-This project uses Vite Plus to manage Node and pnpm internally. When running project scripts, use `vpr` instead of `pnpm run`.
-
-Examples:
+This project uses Vite Plus to manage Node and pnpm internally. Use `vp` or `vpr` for project scripts instead of `pnpm run` (vpr is used only for custom script names like "test:unit", "sandbox:create", etc.):
 
 ```bash
 # Install dependencies
@@ -139,16 +122,18 @@ vp install
 # Start the app in development mode
 vp dev
 
-# Run unit tests
+# Run tests
 vpr test:unit
 
-# Build the project
+# Build project
 vp build
 ```
 
 ## Docker sandbox commands
 
-This project includes a Docker sandbox setup for local development using the Vite+ sandbox kit.
+This project includes local Docker sandbox setup for development and agent-based workflows. These sandboxes are configured for the Docker Copilot AI agent template because the project uses `sbx run copilot` to create the environment. If you want to switch to a different agent template, you can follow the Docker sandbox guides: https://docs.docker.com/ai/sandboxes/agents/
+
+These sandboxes are meant for local development only and run in an isolated local Docker environment.
 
 ```bash
 # Create the sandbox for this project
