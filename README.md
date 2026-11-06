@@ -113,21 +113,58 @@ You can also trigger the workflow manually from the GitHub Actions tab if needed
 
 ## Local Development
 
-The workflow uses the same commands as your local development:
+The workflow uses the same commands as your local development. Since this project uses Vite Plus, the script runner is `vpr` instead of `pnpm run`:
 
 ```bash
 # Install dependencies
-pnpm install
-
-# Run linting
-pnpm run fix
+vp install
 
 # Run tests
-pnpm run test:unit
+vpr test:unit
 
 # Build project
-pnpm run build
+vpr build
 ```
+
+## Vite Plus usage
+
+This project uses Vite Plus to manage Node and pnpm internally. When running project scripts, use `vpr` instead of `pnpm run`.
+
+Examples:
+
+```bash
+# Install dependencies
+vp install
+
+# Start the app in development mode
+vp dev
+
+# Run unit tests
+vpr test:unit
+
+# Build the project
+vp build
+```
+
+## Docker sandbox commands
+
+This project includes a Docker sandbox setup for local development using the Vite+ sandbox kit.
+
+```bash
+# Create the sandbox for this project
+vpr sandbox:create
+
+# Start the sandbox
+vpr sandbox:run
+
+# Stop the sandbox
+vpr sandbox:stop
+
+# Remove the sandbox when no longer needed
+vpr sandbox:remove
+```
+
+The sandbox definition lives in `sandbox/vite-plus/spec.yaml` and is used to run the app in an isolated Docker environment.
 
 ## Troubleshooting
 
