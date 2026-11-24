@@ -1,36 +1,12 @@
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import { useTranslation } from "react-i18next";
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<"dark" | "light">("light");
-  const isDarkTheme = theme === "dark";
-
   const { t } = useTranslation();
-
-  useEffect(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-      // oxlint-disable-next-line react/set-state-in-effect
-      setTheme("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const handleChange = () => {
-    setTheme((prevTheme) => {
-      const result = prevTheme === "dark" ? "light" : "dark";
-      localStorage.setItem("theme", result);
-      return result;
-    });
-    document.documentElement.classList.toggle("dark");
-  };
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+  const isDarkTheme = colorScheme === "dark";
 
   return (
     <div className="relative flex h-8 w-8">
@@ -38,9 +14,11 @@ export default function ThemeSwitcher() {
         type="button"
         role="switch"
         aria-checked={isDarkTheme}
-        aria-label={t("DarkTheme_Label")}
+        aria-label={t(
+          isDarkTheme ? "SwitchToLightTheme_Label" : "SwitchToDarkTheme_Label"
+        )}
         className="border-blue text-blue dark:bg-blue absolute z-10 h-full w-full rounded-full border-2 border-solid duration-100 hover:bg-slate-200 dark:text-white dark:hover:opacity-80"
-        onClick={handleChange}
+        onClick={toggleColorScheme}
       >
         <FontAwesomeIcon icon={isDarkTheme ? faMoon : faSun} />
       </button>

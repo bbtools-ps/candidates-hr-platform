@@ -2,6 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      (() => {
+        const colorSchemeMeta = document.querySelector(
+          'meta[name="color-scheme"]'
+        );
+        let storedColorScheme = null;
+
+        try {
+          storedColorScheme = localStorage.getItem("theme");
+        } catch (error) {
+          console.warn("Unable to read the color-scheme preference.", error);
+        }
+
+        const preference =
+          storedColorScheme === "light" || storedColorScheme === "dark"
+            ? storedColorScheme
+            : "system";
+        const colorScheme =
+          preference === "system"
+            ? matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
+            : preference;
+
+        colorSchemeMeta.content =
+          preference === "system" ? "light dark" : preference;
+        document.documentElement.classList.toggle(
+          "dark",
+          colorScheme === "dark"
+        );
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
